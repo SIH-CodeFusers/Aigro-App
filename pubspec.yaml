@@ -1,0 +1,57 @@
+name: aigro
+description: "A new Flutter project."
+
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+  pie_chart: ^5.3.2
+  provider: ^6.0.5
+  velocity_x: ^4.1.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  google_fonts: ^6.1.0
+  geocoding: ^2.2.0
+  geolocator: ^11.0.0
+  permission_handler: ^11.3.0
+  shimmer: ^3.0.0
+  audioplayers: ^5.2.1
+  lottie: ^3.1.0
+  font_awesome_flutter: ^10.7.0
+  google_nav_bar: ^5.0.6
+  image_picker: ^1.1.2
+  google_generative_ai: ^0.4.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/images/Food_Images/
+    - assets/icons/
+    - assets/others/
+
+  fonts:
+    - family: FontMain
+      fonts:
+        - asset: assets/google_fonts/WorkSans-Italic-VariableFont_wght.ttf
+        - asset: assets/google_fonts/WorkSans-VariableFont_wght.ttf
+
+    - family: Anta
+      fonts:
+        - asset: assets/google_fonts/Anta-Regular.ttf
