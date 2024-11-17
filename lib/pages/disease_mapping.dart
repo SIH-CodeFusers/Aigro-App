@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +30,16 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
   late double long;
 
   bool isLoading = true;
+
+  final infobox = Hive.box("BasicInfo-db");
+  BasicDB bdb = BasicDB();
+
+   @override
+  void initState() {
+    super.initState();
+    bdb.loadDataInfo(); 
+    getLatLongFromPincode(bdb.userPin);
+  }
 
   Future<void> getLatLongFromPincode(String pincode) async {
     final String apiUrl =
@@ -75,12 +87,6 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
     } else {
       print('Failed to fetch data.');
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getLatLongFromPincode('700042');
   }
 
 

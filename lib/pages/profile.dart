@@ -25,7 +25,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    bdb.loadDataInfo(); // Load the user's data when the profile page is initialized
+    bdb.loadDataInfo(); 
   }
 
   saveForm() {
@@ -41,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView( // Wrap the entire body in a SingleChildScrollView
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(

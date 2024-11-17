@@ -124,6 +124,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
       bdb.userName = _namecontroller.text;
       bdb.userPhn = _phonecontroller.text;
       bdb.userCountry = selectedCountry ?? "";
+      bdb.userPin=_pincontroller.text;
       bdb.userState = selectedState ?? ""; 
       bdb.userDistrict = selectedDistrict ?? "";
       bdb.userBlock = selectedBlock ?? ""; 
