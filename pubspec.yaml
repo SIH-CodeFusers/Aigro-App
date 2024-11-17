@@ -30,6 +30,8 @@ dependencies:
   google_nav_bar: ^5.0.6
   image_picker: ^1.1.2
   google_generative_ai: ^0.4.6
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
 
 dev_dependencies:
   flutter_test:

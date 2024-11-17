@@ -1,14 +1,12 @@
 import 'package:aigro/local_db/db.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:aigro/utils/routes.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
-import 'package:aigro/utils/food_list.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:aigro/widgets/sparkling_animation.dart';
 import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
-
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -54,31 +52,34 @@ class _HomePageState extends State<HomePage> {
       'color': Colors.blueAccent,
       'text': 'Disease Forecasting',
       'image': 'assets/images/image1.png',
+      'route': Myroutes.profileRoute,
     },
     {
       'color': Colors.greenAccent,
       'text': 'Weather Report',
       'image': 'assets/images/image2.png',
+      'route': Myroutes.profileRoute,
     },
     {
       'color': Colors.orangeAccent,
-      'text': 'Community',
+      'text': 'Disease Mapping',
       'image': 'assets/images/image3.png',
+      'route': Myroutes.diseaseMapRoute,
     },
     {
       'color': Colors.purpleAccent,
       'text': 'Learning Resources',
       'image': 'assets/images/image4.png',
+      'route': Myroutes.profileRoute,
     },
   ];
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.canvasColor,   
       appBar: AppBar(
-         automaticallyImplyLeading: false,
+        automaticallyImplyLeading: false,
         toolbarHeight: 80,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween, 
@@ -93,27 +94,24 @@ class _HomePageState extends State<HomePage> {
                 child: CircleAvatar(
                   radius: 20,
                   backgroundColor: context.theme.cardColor,
-                  child: Container(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.asset(
-                          width: 30,
-                          height: 30,
-                          "assets/images/boy.png",
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    )
-        
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.asset(
+                      width: 30,
+                      height: 30,
+                      "assets/images/boy.png",
+                      fit: BoxFit.cover,
+                    ),
+                  )
                 ),
               ),
             ),
             Row(
               children: [
-                Icon(Icons.location_on, color: Colors.black,size: 16,),
+                Icon(Icons.location_on, color: Colors.black, size: 16,),
                 Text(
                   "$userDist, $userState",
-                  style: TextStyle(color: Colors.black,fontSize: 16), 
+                  style: TextStyle(color: Colors.black, fontSize: 16), 
                 ),
               ],
             ),
@@ -124,7 +122,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Icon(CupertinoIcons.bell, color: Colors.black,size: 22,),
+                child: Icon(CupertinoIcons.bell, color: Colors.black, size: 22,),
               ), 
             ),
           ],
@@ -133,13 +131,11 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-                SizedBox(height: 10,),
-               
+                SizedBox(height: 10),
                 Container(
                   width: double.infinity,
                   height: 175,
@@ -221,52 +217,54 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-          
-
-                const SizedBox(height: 20,),
+                const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 5),                  
-                    child: GridView.builder(    
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, 
-                        crossAxisSpacing: 2,
-                        mainAxisSpacing: 2,
-                        childAspectRatio: 1, 
-                      ),
-                      itemCount: 4, 
-                      itemBuilder: (context, index) {
-                        final dashboardInfo = dashboardData[index];
-                        return Container(
+                  child: GridView.builder(    
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, 
+                      crossAxisSpacing: 2,
+                      mainAxisSpacing: 2,
+                      childAspectRatio: 1, 
+                    ),
+                    itemCount: 4, 
+                    itemBuilder: (context, index) {
+                      final dashboardInfo = dashboardData[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, dashboardInfo['route']);
+                        },
+                        child: Container(
                           decoration: BoxDecoration(
                             color: dashboardInfo['color'], 
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          child: Center(
-                            child: Text(
-                              dashboardInfo['text'],
-                              style: TextStyle(color: Colors.white, fontSize: 18),
-                            ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                dashboardInfo['text'],
+                                style: TextStyle(color: Colors.white, fontSize: 18),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
-                        );
-                      },
-                      shrinkWrap: true,
-                      physics: BouncingScrollPhysics(), 
-                    ),   
-                  ), 
-
+                        ),
+                      );
+                    },
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                  ),
+                ),
               ],
             ),
           ),
-        )
+        ),
       ),
       bottomNavigationBar: BottomNav(
-          pages: pages,
-          selectedInd: 0,
+        pages: pages,
+        selectedInd: 0,
       ),
     );
   }
 }
-
-
-
-

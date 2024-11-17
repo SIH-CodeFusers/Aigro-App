@@ -1,3 +1,4 @@
+import 'package:aigro/pages/disease_mapping.dart';
 import 'package:aigro/pages/user_onbaording.dart';
 import 'package:aigro/utils/authenticate.dart';
 import 'package:flutter/material.dart';
@@ -68,12 +69,14 @@ class _MyAppState extends State<MyApp> {
       routes: {                                       
        "/": (context) => Authenticate(),                  
         Myroutes.getStartedRoute: (context) => GetStarted(),
-         Myroutes.onbaordingRoute: (context) => UserOnboarding(),
+        Myroutes.onbaordingRoute: (context) => UserOnboarding(),
         Myroutes.homeRoute: (context) => HomePage(),
         Myroutes.aboutUsRoute: (context) => AboutUs(),
         Myroutes.recipesRoute: (context) => RecipesPage(),
         Myroutes.profileRoute: (context) => ProfilePage(),
-        Myroutes.recipeDetailsRoute: (context) => RecipeDetails()
+        Myroutes.recipeDetailsRoute: (context) => RecipeDetails(),
+
+        Myroutes.diseaseMapRoute: (context) => DiseaseMapping()
       },
     );   
   }

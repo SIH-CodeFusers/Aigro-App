@@ -6,4 +6,6 @@ class Myroutes{
   static String recipeDetailsRoute = "/recipeDetails";
   static String aboutUsRoute = "/aboutus";
   static String profileRoute = "/profile";
+
+  static String diseaseMapRoute = "/diseaseMap";
 }
