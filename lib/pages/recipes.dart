@@ -1,11 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:aigro/utils/bottom_pages_list.dart';
-import 'package:aigro/utils/food_list.dart';
-import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:velocity_x/velocity_x.dart';
-
-
+import 'package:aigro/widgets/bottom_nav.dart';
+import 'package:aigro/utils/bottom_pages_list.dart';
 
 class RecipesPage extends StatefulWidget {
   const RecipesPage({super.key});
@@ -15,198 +11,194 @@ class RecipesPage extends StatefulWidget {
 }
 
 class _RecipesPageState extends State<RecipesPage> {
-  TextEditingController _searchController = TextEditingController();
-  String _searchQuery = "";
+ 
+  final List<Map<String, String>> cropDiseases = [
+    {
+      "diseaseName": "Corn Leaf Blight",
+      "category": "Fungus",
+      "image": "assets/images/corn-blight-3.jpg",
+    },
+    {
+      "diseaseName": "Common Rust",
+      "category": "Fungus",
+      "image": "assets/images/corn-common-rust-1.jpg",
+    },
+    {
+      "diseaseName": "Leaf Spot",
+      "category": "Fungus",
+      "image": "assets/images/corn-gray-leaf-spot-3.jpeg",
+    },
+    {
+      "diseaseName": "Corn Rot",
+      "category": "Fungus",
+      "image": "assets/images/corn_rot_3.jpg",
+    },
+  ];
 
-   @override
-  void initState() {
-    super.initState();
-    _searchController.addListener(() {
-      setState(() {
-        _searchQuery = _searchController.text.toLowerCase(); 
-      });
-    });
-  }
+  
+  String selectedCrop = "Crops";
+  String selectedCategory = "Category";
 
-  @override
-  void dispose() {
-    _searchController.dispose(); 
-    super.dispose();
-  }
+  
+  final List<String> cropOptions = ["Crops", "Corn", "Tomato", "Wheat"];
+  final List<String> categoryOptions = ["Category", "Fungus", "Virus", "Bacteria"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
-      body: SafeArea(  
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Column(
-              children: [
-                SizedBox(height: 20,),
-                TextField(
-                  controller: _searchController,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search),
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: CircleAvatar(
-                        radius: 20,
-                        backgroundColor: context.theme.canvasColor,
-                        child: Icon(
-                          Icons.filter_list,
-                          color: context.theme.splashColor,
-                        ),
-                      ),
-                    ),
-                    hintText: 'Search by food name',
-                    hintStyle: TextStyle(fontSize: 14),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide:
-                          BorderSide(width: 1.5, color: context.theme.cardColor),
-                    ),
-                    filled: true,
-                    fillColor: context.theme.highlightColor,
-                  ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+
+              Text(
+                "Crop Pests and Diseases 🌱",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFF004D3F),
                 ),
-                SizedBox(height: 20,),
-                // Align(
-                //   alignment: Alignment.topLeft,
-                //   child: Text("View All Recipes",
-                //   style: TextStyle(fontWeight: FontWeight.w400,fontSize: 24),)
-                // ),
+              ).centered(),
+              const SizedBox(height: 20),
 
 
-                Expanded(
-                  child: ListView.builder(                         
-                    itemCount: filterChips.length,
-                    itemBuilder: (context, index) {
-                      final category = filterChips.keys.elementAt(index);
-                      final foodMap = _getFoodMap(category);
-                      final filteredFoodMap = foodMap.entries.where((entry) =>entry.key.toLowerCase().contains(_searchQuery)).toList();
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                  DropdownButton<String>(
+                    value: selectedCrop,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedCrop = value!;
+                      });
+                    },
+                    items: cropOptions.map<DropdownMenuItem<String>>((String option) {
+                      return DropdownMenuItem<String>(
+                        value: option,
+                        child: Text(
+                          option,
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                      );
+                    }).toList(),
+                    borderRadius: BorderRadius.circular(8),
+                    dropdownColor: context.theme.highlightColor,
+                  ).expand(),
+
+                  const SizedBox(width: 10),
+
                   
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [           
-                          ListView.builder(
-                            shrinkWrap: true, 
-                            physics: NeverScrollableScrollPhysics(), 
-                            itemCount: filteredFoodMap.length,
-                            itemBuilder: (context, foodIndex) {
-                              final foodName = filteredFoodMap[foodIndex].key;
-                              final foodDetails = filteredFoodMap[foodIndex].value;             
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(context, '/recipeDetails');
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 5),
-                                  child: Container(
-                                    height: 140,
-                                    decoration: BoxDecoration(
-                                      color: context.theme.highlightColor,
-                                      borderRadius: BorderRadius.circular(10)
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 10),
-                                      child:Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Image.asset(
-                                            foodDetails[1],  
-                                            width: 130,
-                                            height: 130,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          SizedBox(width: 16),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                SizedBox(height: 15,),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      foodDetails[0],  
-                                                      style: TextStyle(fontSize: 16, color: context.theme.cardColor),
-                                                    ),
-                                                    SizedBox(width: 20),
-                                                    Text(
-                                                      foodDetails[2],  
-                                                      style: TextStyle(fontSize: 16, color: context.theme.cardColor),
-                                                    ),
-                                                  ],
-                                                ),
-                                                SizedBox(height: 4),
-                                                Text(
-                                                  foodName, 
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontFamily: 'FontMain'                                                
-                                                  ),
-                                                ),
-                                                SizedBox(height: 2),
-                                                Expanded(
-                                                  child: Text(
-                                                    foodDetails[3],  
-                                                    overflow: TextOverflow.ellipsis,  
-                                                    softWrap: true, 
-                                                    maxLines: 2, 
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      color: context.theme.splashColor
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                  DropdownButton<String>(
+                    value: selectedCategory,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedCategory = value!;
+                      });
+                    },
+                    items: categoryOptions.map<DropdownMenuItem<String>>((String option) {
+                      return DropdownMenuItem<String>(
+                        value: option,
+                        child: Text(
+                          option,
+                          style: const TextStyle(fontSize: 14),
+                        ),
+                      );
+                    }).toList(),
+                    borderRadius: BorderRadius.circular(8),
+                    dropdownColor: context.theme.highlightColor,
+                  ).expand(),
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 3 / 4,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemCount: cropDiseases.length,
+                  itemBuilder: (context, index) {
+                    final disease = cropDiseases[index];
+
+                    
+                    if ((selectedCrop != "Crops" &&
+                            !disease["diseaseName"]!.toLowerCase().contains(selectedCrop.toLowerCase())) ||
+                        (selectedCategory != "Category" &&
+                            disease["category"]!.toLowerCase() != selectedCategory.toLowerCase())) {
+                      return const SizedBox.shrink();
+                    }
+
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/recipeDetails');
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: context.theme.highlightColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(10),
+                              ),
+                              child: Image.asset(
+                                disease["image"]!,
+                                height: 120,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Disease Name: ${disease["diseaseName"]}",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFF004D3F),
                                     ),
                                   ),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    "Category: ${disease["category"]}",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: context.theme.splashColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
-              ],                      
-            ),
+              ),
+            ],
           ),
-        
+        ),
       ),
       bottomNavigationBar: BottomNav(
         pages: pages,
         selectedInd: 1,
       ),
     );
-  }
-
-  Map<String, List<String>> _getFoodMap(String category) {
-    switch (category) {
-      case "Recommended":
-        return recomFoods;
-      case "Breakfast":
-        return breakfastFoods;
-      case "Lunch":
-        return lunchFoods;
-      case "Appetizer":
-        return appetizerFoods;
-      case "Dinner":
-        return dinnerFoods;
-      default:
-        return {};
-    }
   }
 }
