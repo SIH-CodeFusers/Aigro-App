@@ -123,11 +123,16 @@ class _UserOnboardingState extends State<UserOnboarding> {
       db.startHome = true;
       bdb.userName = _namecontroller.text;
       bdb.userPhn = _phonecontroller.text;
-
+      bdb.userCountry = selectedCountry ?? "";
+      bdb.userState = selectedState ?? ""; 
+      bdb.userDistrict = selectedDistrict ?? "";
+      bdb.userBlock = selectedBlock ?? ""; 
+      bdb.userCrops = selectedCrops; 
     });
+    
     db.updateTheme();
-    bdb.updateDbInfo();
-    Navigator.pushNamed(context, Myroutes.homeRoute);
+    bdb.updateDbInfo(); 
+    Navigator.pushNamed(context, Myroutes.homeRoute); 
   }
 
   void _handleBackButtonPressed() {

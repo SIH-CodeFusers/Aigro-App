@@ -21,39 +21,41 @@ class StartPointer{
 
 }
 
-class BasicDB{
-
+class BasicDB {
   final infobox = Hive.box("BasicInfo-db");
 
   String userName = "";
-  String userPhn= "";
+  String userPhn = "";
   String userCountry = "";
-  String userState= "";
-  String userDistrict= "";
-  String userBlock= "";
-  String userPin= "";
+  String userState = "";
+  String userDistrict = "";
+  String userBlock = "";
+  String userPin = "";
+  List<String> userCrops = [];
 
 
   void createInitialInfo() {
     userName = "Admin";
-    userPhn="000000";
-    userCountry="";
-    userState= "";
-    userDistrict= "";
-    userBlock= "";
-    userPin= "";
+    userPhn = "000000";
+    userCountry = "";
+    userState = "";
+    userDistrict = "";
+    userBlock = "";
+    userPin = "";
+    userCrops = [];
   }
+
 
   void loadDataInfo() {
-    userName = infobox.get("NAMEDB");
-    userPhn=infobox.get("PHNDB");
-    userCountry = infobox.get("COUNTRYDB");
-    userState = infobox.get("STATEDB");
-    userDistrict = infobox.get("DISTRICTDB");
-    userBlock= infobox.get("BLOCKDB");
-    userPin= infobox.get("PINDB");
+    userName = infobox.get("NAMEDB") ?? "";
+    userPhn = infobox.get("PHNDB") ?? "";
+    userCountry = infobox.get("COUNTRYDB") ?? "";
+    userState = infobox.get("STATEDB") ?? "";
+    userDistrict = infobox.get("DISTRICTDB") ?? "";
+    userBlock = infobox.get("BLOCKDB") ?? "";
+    userPin = infobox.get("PINDB") ?? "";
+    userCrops = List<String>.from(infobox.get("CROPSDB") ?? []);
   }
-
 
   void updateDbInfo() {
     infobox.put("NAMEDB", userName);
@@ -63,21 +65,12 @@ class BasicDB{
     infobox.put("DISTRICTDB", userDistrict);
     infobox.put("BLOCKDB", userBlock);
     infobox.put("PINDB", userPin);
-
-
+    infobox.put("CROPSDB", userCrops); 
   }
 
-
-    //Profile Pic
-  // void createInitialImage() {
-  //   userimg = "";
-  // }
-
-  // void loadDataImage() {
-  //   userimg = infobox.get("PROFILE");
-  // }
-
-  // void updateDbImage() {
-  //   infobox.put("PROFILE", userimg);
+  // // Optional: Method to update crops data
+  // void updateCrops(List<String> crops) {
+  //   userCrops = crops;
+  //   updateDbInfo();  // Save updated crops info
   // }
 }

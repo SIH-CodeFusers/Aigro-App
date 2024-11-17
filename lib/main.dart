@@ -1,4 +1,5 @@
 import 'package:aigro/pages/user_onbaording.dart';
+import 'package:aigro/utils/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:aigro/pages/about_us.dart';
@@ -65,7 +66,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: "/",                             
       
       routes: {                                       
-        "/": (context) => GetStarted(),                   
+       "/": (context) => Authenticate(),                  
         Myroutes.getStartedRoute: (context) => GetStarted(),
          Myroutes.onbaordingRoute: (context) => UserOnboarding(),
         Myroutes.homeRoute: (context) => HomePage(),
