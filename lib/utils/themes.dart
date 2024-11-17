@@ -25,7 +25,7 @@ class MyThemes {
       appBarTheme: AppBarTheme(
         color: Color.fromRGBO(244, 244, 244, 1),
           elevation: 0.0,
-          iconTheme: IconThemeData(color: Colors.orange, size: 28),
+          iconTheme: IconThemeData(color: Colors.green, size: 28),
       ),
       // pageTransitionsTheme: PageTransitionsTheme(
       //     builders: {

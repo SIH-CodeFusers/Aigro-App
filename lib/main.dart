@@ -1,4 +1,5 @@
 import 'package:aigro/pages/disease_mapping.dart';
+import 'package:aigro/pages/offline_detection.dart';
 import 'package:aigro/pages/user_onbaording.dart';
 import 'package:aigro/utils/authenticate.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +77,8 @@ class _MyAppState extends State<MyApp> {
         Myroutes.profileRoute: (context) => ProfilePage(),
         Myroutes.recipeDetailsRoute: (context) => RecipeDetails(),
 
-        Myroutes.diseaseMapRoute: (context) => DiseaseMapping()
+        Myroutes.diseaseMapRoute: (context) => DiseaseMapping(),
+        Myroutes.offlineDetectionRoute: (context) => OfflineDetection()
       },
     );   
   }

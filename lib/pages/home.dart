@@ -68,9 +68,9 @@ class _HomePageState extends State<HomePage> {
     },
     {
       'color': Colors.purpleAccent,
-      'text': 'Learning Resources',
+      'text': 'Offline Model',
       'image': 'assets/images/image4.png',
-      'route': Myroutes.profileRoute,
+      'route': Myroutes.offlineDetectionRoute,
     },
   ];
 
