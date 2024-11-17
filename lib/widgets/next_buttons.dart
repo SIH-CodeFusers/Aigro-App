@@ -3,26 +3,31 @@ import 'package:velocity_x/velocity_x.dart';
 
 class NextButton extends StatelessWidget {
   final String text;
+
   NextButton({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
+    Color borderColor;
+    if (text == "Back") {
+      borderColor = Colors.white;
+    } else {
+      borderColor = Colors.transparent;
+    }
     return Container(
-      height: 60,
-        width: 200,
+        height: 45,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: context.cardColor,
+          borderRadius: BorderRadius.circular(8),
+          color: context.theme.primaryColorDark,
+          border: Border.all(color: borderColor, width: 0.5),
         ),
-      child: Center(
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(color: Colors.white, fontSize: 17),
           ),
         ),
-      ),
-    );
+      );
+    
   }
 }

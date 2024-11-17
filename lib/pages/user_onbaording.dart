@@ -66,15 +66,9 @@ class _UserOnboardingState extends State<UserOnboarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.canvasColor,
       body: SafeArea(
         child: Container(
-          // decoration: BoxDecoration(
-          //   image: DecorationImage(
-          //     image: AssetImage('assets/images/onboard-bg.png'),
-          //     fit: BoxFit
-          //         .cover, 
-          //   ),
-          // ),
           child: Builder(
             builder: (BuildContext context) {
               if (questionInd == 0) {
@@ -92,167 +86,184 @@ class _UserOnboardingState extends State<UserOnboarding> {
   }
 
   //User Name
-  Column NameSelect(BuildContext context) {
+  Widget NameSelect(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // ProgressIndicatorWidget(
-        //   questionInd: questionInd,
-        //   totalQuestions: totalQuestions,
-        //   onBackButtonPressed: _handleBackButtonPressed,
-        // ),
-        Spacer(),
-        Center(
-          child: Text(
-            "What is your name ?",
-            style: TextStyle(color: context.theme.splashColor, fontSize: 26),
-          ),
-        ),
-        SizedBox(height: 30),
-        Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(
-                  colors: [context.theme.cardColor, Colors.purple],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: context.theme.highlightColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
-                  style: TextStyle(color: context.theme.splashColor),
-                  controller: _namecontroller,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    hintText: 'Enter your name',
-                    hintStyle: TextStyle(color: context.theme.splashColor),
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        SizedBox(height: 50),
-        Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-          child: Row(
-            children: [
-              GestureDetector(
-                onTap: _handleBackButtonPressed,
-                child: NextButton(
-                  text: "Back"
-                ),
-              ),
-              SizedBox(width: 20),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    questionInd = questionInd + 1;
-                  });
-                },
-                child: NextButton(
-                  text: "Next",
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-
-  //Phone Number
-  Column PhoneSelect(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ProgressIndicatorWidget(
           questionInd: questionInd,
           totalQuestions: totalQuestions,
           onBackButtonPressed: _handleBackButtonPressed,
         ),
-        Spacer(),
-        Center(
-          child: Text(
-            "What is your contact number ?",
-            style: TextStyle(color: context.theme.splashColor, fontSize: 26),
-          ),
-        ),
-        SizedBox(height: 30),
-        Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Container(
-              width: double.infinity,
-              padding: EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: LinearGradient(
-                  colors: [context.theme.cardColor, Colors.purple],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
+        Spacer(), 
+       Center(
+        child: Container(
+          padding: EdgeInsets.all(16),
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            color: context.theme.highlightColor,
+            borderRadius: BorderRadius.circular(5),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1), 
+                blurRadius: 10, 
+                offset: Offset(0, 0), 
               ),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: context.theme.highlightColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: TextField(
-                  style: TextStyle(color: context.theme.splashColor),
-                  controller: _phonecontroller,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    prefixText: '+91 ',
-                    hintText: 'Enter your number',
-                    hintStyle: TextStyle(color: context.theme.splashColor),
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "What is your name?",
+                    style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
                   ),
                 ),
               ),
-            ),
-          ),
-        ),
-        SizedBox(height: 50),
-        Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-          child: Row(
-            children: [
-              GestureDetector(
-                onTap: _handleBackButtonPressed,
-                child: NextButton(
-                  text: "Back"
+              SizedBox(height: 20),
+              TextField(
+                controller: _namecontroller,
+                style: TextStyle(color: context.theme.primaryColorDark),
+                decoration: InputDecoration(
+                  hintText: 'Enter your name',
+                  hintStyle: TextStyle(color: context.theme.primaryColorDark),
+                  filled: true,
+                  fillColor: context.theme.highlightColor,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: context.theme.primaryColorDark, 
+                      width: 2.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: context.theme.primaryColorDark,
+                      width: 2.0,
+                    ),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 ),
               ),
-              SizedBox(width: 20),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    questionInd = questionInd + 1;
-                  });
-                },
-                child: NextButton(
-                  text: "Next",
-                ),
+              SizedBox(height: 30),
+              Row(
+                children: [
+                  Expanded( 
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          questionInd += 1;
+                        });
+                      },
+                      child: NextButton(
+                        text: "Next",
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
         ),
+      ),
+        Spacer(),
+      ],
+    );
+  }
+
+
+
+  //Phone Number
+  Column PhoneSelect(BuildContext context) {
+    return Column(
+      children: [
+        ProgressIndicatorWidget(
+          questionInd: questionInd,
+          totalQuestions: totalQuestions,
+          onBackButtonPressed: _handleBackButtonPressed,
+        ),
+        Spacer(), 
+       Center(
+        child: Container(
+          padding: EdgeInsets.all(16),
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            color: context.theme.highlightColor,
+            borderRadius: BorderRadius.circular(5),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1), 
+                blurRadius: 10, 
+                offset: Offset(0, 0), 
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "What is your contact number?",
+                    style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                controller: _phonecontroller,
+                keyboardType: TextInputType.number,
+                style: TextStyle(color: context.theme.primaryColorDark),
+                decoration: InputDecoration(
+                  hintText: 'Enter your number',
+                  hintStyle: TextStyle(color: context.theme.primaryColorDark),
+                  filled: true,
+                  fillColor: context.theme.highlightColor,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: context.theme.primaryColorDark, 
+                      width: 2.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: context.theme.primaryColorDark,
+                      width: 2.0,
+                    ),
+                  ),
+                  contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                ),
+              ),
+              SizedBox(height: 30),
+              Row(
+                children: [
+                  Expanded( 
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _saveForm();
+                        });
+                      },
+                      child: NextButton(
+                        text: "Next",
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+        Spacer(),
       ],
     );
   }

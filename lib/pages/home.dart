@@ -1,9 +1,11 @@
+import 'package:aigro/local_db/db.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
 import 'package:aigro/utils/food_list.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:aigro/widgets/sparkling_animation.dart';
+import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 
@@ -16,6 +18,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  final infobox = Hive.box("BasicInfo-db");
+  BasicDB bdb = BasicDB();
+  String userName = "User";
+  String userimg = "";
+  String first = "...";
+
+  @override
+  void initState() {
+    if (infobox.get("NAMEDB") == null) {
+      bdb.createInitialInfo();
+      userName = bdb.userName;
+      List<String> words = userName.split(' '); // Splitting the string by space
+      first = words[0];
+    } else {
+      bdb.loadDataInfo();
+      userName = bdb.userName;
+      List<String> words = userName.split(' '); // Splitting the string by space
+      first = words[0];
+    }
+
+    super.initState();
+  }
 
   final List<Map<String, dynamic>> dashboardData = [
     {
@@ -80,7 +105,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Icon(Icons.location_on, color: Colors.black,size: 16,),
                 Text(
-                  'Kolkata, India',
+                  userName,
                   style: TextStyle(color: Colors.black,fontSize: 16), 
                 ),
               ],

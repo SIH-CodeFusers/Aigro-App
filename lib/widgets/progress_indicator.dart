@@ -15,10 +15,10 @@ class ProgressIndicatorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int progressPercentage = ((questionInd + 1) / totalQuestions * 100).round();
+    // int progressPercentage = ((questionInd + 1) / totalQuestions * 100).round();
     final double segmentWidth =
         MediaQuery.of(context).size.width / totalQuestions;
-    double progressValue = (questionInd + 1) / totalQuestions;
+    // double progressValue = (questionInd + 1) / totalQuestions;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -28,44 +28,25 @@ class ProgressIndicatorWidget extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(width: 20),
-              Image.asset(
-                //top image
-                "assets/images/tbailogo.png",
-
-                fit: BoxFit.contain,
-                height: 23,
-                width: 23,
-              ),
-              SizedBox(width: 10),
               Expanded(
                 child: Row(
                   children: [
                     Text(
-                      "Techno",
+                      "AI",
                       style: TextStyle(
                         color: context.theme.splashColor,
-                        fontSize: 21,
+                        fontSize: 24,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     Text(
-                      "Billion",
+                      "gro",
                       style: TextStyle(
-                        // color: context.theme.splashColor,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 21,
+                        fontSize: 24,
                         foreground: Paint()
                           ..shader = LinearGradient(
-                            colors: <Color>[Colors.yellow, Colors.red],
+                            colors: <Color>[context.theme.cardColor, context.theme.primaryColorDark,],
                           ).createShader(Rect.fromLTWH(0, 0, 200, 70)),
-                      ),
-                    ),
-                    Text(
-                      " AI",
-                      style: TextStyle(
-                        color: context.theme.splashColor,
-                        fontSize: 21,
-                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
@@ -83,13 +64,13 @@ class ProgressIndicatorWidget extends StatelessWidget {
               return Expanded(
                 child: Container(
                   margin: EdgeInsets.symmetric(
-                      horizontal: 4), // Spacing between segments
+                      horizontal: 2), // Spacing between segments
                   decoration: BoxDecoration(
-                    color: isActive ? Colors.white : Colors.grey[800],
+                    color: isActive ? context.theme.cardColor : Colors.grey[300],
                     borderRadius: BorderRadius.circular(
-                        10), // Adjust the radius for rounded corners
+                        10), 
                   ),
-                  height: 4, // Adjust height as needed
+                  height: 4,
                   width: segmentWidth,
                 ),
               );
