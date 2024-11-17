@@ -17,19 +17,82 @@ class DiseaseMapping extends StatefulWidget {
 }
 
 class _DiseaseMappingState extends State<DiseaseMapping> {
-  // for testing
-  final List<LatLng> markersCoordinates = [
-    LatLng(22.54, 88.36),
-    LatLng(22.57, 88.33),
-    LatLng(22.59, 88.37),
-  ];
-
+  
   Marker? customMarker;
+  List<Marker> nearbyMarkers = []; // List to hold markers from the response
 
   late double lat;
   late double long;
-
   bool isLoading = true;
+
+  Future<void> getNearbyAlerts(String pincode) async {
+    const String apiUrl = 'https://aigro-backend-alpha.vercel.app/api/futurePred/fetchNearbyAlerts';
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({
+        "pincode": pincode,
+        "lat": "22.966",
+        "long": "88.2036",
+        "range": "100"
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      if (data['exists'] == true && data['nearbyAlerts'] != null) {
+        List<Marker> fetchedMarkers = [];
+
+        for (var alert in data['nearbyAlerts']) {
+          double alertLat = alert['lat'];
+          double alertLong = alert['lon'];
+          String cropName = alert['cropName'];
+
+          fetchedMarkers.add(
+            Marker(
+              point: LatLng(alertLat, alertLong),
+              width: 80,
+              height: 80,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(
+                  child: Text(
+                    cropName,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+
+        setState(() {
+          nearbyMarkers = fetchedMarkers;
+          isLoading = false;
+        });
+      } else {
+        print('No nearby alerts found for this pincode.');
+        setState(() {
+          isLoading = false;
+        });
+      }
+    } else {
+      print('Failed to fetch data from the API.');
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
 
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
@@ -39,6 +102,8 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
     super.initState();
     bdb.loadDataInfo(); 
     getLatLongFromPincode(bdb.userPin);
+    getLatLongFromPincode(bdb.userPin);
+    getNearbyAlerts('700105');
   }
 
   Future<void> getLatLongFromPincode(String pincode) async {
@@ -68,7 +133,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
               ),
               child: Center(
                 child: Text(
-                  'Custom Marker',
+                  'Me',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -113,19 +178,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
           ),
           MarkerLayer(
             markers: [
-              ...markersCoordinates.map((latLng) {
-                return Marker(
-                  width: 40,
-                  height: 40,
-                  point: latLng,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                );
-              }).toList(),
+                ...nearbyMarkers,
               if (customMarker != null) customMarker!, // Add custom marker conditionally
             ],
           ),
