@@ -99,7 +99,7 @@ class GetStarted extends StatelessWidget {
                 
                     GestureDetector(
                       onTap: (){
-                        Navigator.pushNamed(context, '/home');
+                        Navigator.pushNamed(context, '/onboarding');
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 40),

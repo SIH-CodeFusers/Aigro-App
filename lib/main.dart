@@ -1,3 +1,4 @@
+import 'package:aigro/pages/user_onbaording.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:aigro/pages/about_us.dart';
@@ -8,27 +9,32 @@ import 'package:aigro/pages/recipe_details.dart';
 import 'package:aigro/pages/recipes.dart';
 import 'package:aigro/utils/routes.dart';
 import 'package:aigro/utils/themes.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
-void main() async{
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox("Start_db");
+  await Hive.openBox("BasicInfo-db");
+
+  WidgetsFlutterBinding.ensureInitialized();
   
-  runApp( MyApp());
+  runApp(
+    
+    MyApp(),
+    
+  );
 }
 
-
-// ignore: must_be_immutable
 class MyApp extends StatefulWidget {
-  //const MyApp({super.key});
-
-  bool isSwitched;
-  MyApp({Key? key, this.isSwitched=false}) : super(key: key);
+  const MyApp({Key? key}) : super();
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
@@ -52,15 +58,16 @@ class _MyAppState extends State<MyApp> {
       themeMode: themeProvider.themeMode,
       theme: MyThemes.lightTheme,
       
-      //themeMode: ThemeMode.system,                       // setting the theme
+      //themeMode: ThemeMode.system,                      
 
-      debugShowCheckedModeBanner: false,              //removes debug banner
+      debugShowCheckedModeBanner: false,              
 
-      initialRoute: "/",                              //this route will open first
+      initialRoute: "/",                             
       
-      routes: {                                       //creating routes for different pages in app
-        "/": (context) => GetStarted(),                //main root 
+      routes: {                                       
+        "/": (context) => GetStarted(),                   
         Myroutes.getStartedRoute: (context) => GetStarted(),
+         Myroutes.onbaordingRoute: (context) => UserOnboarding(),
         Myroutes.homeRoute: (context) => HomePage(),
         Myroutes.aboutUsRoute: (context) => AboutUs(),
         Myroutes.recipesRoute: (context) => RecipesPage(),
