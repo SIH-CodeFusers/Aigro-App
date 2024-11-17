@@ -138,39 +138,11 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
-                // TextField(
-                //   decoration: InputDecoration(
-                //     prefixIcon: Icon(Icons.search),
-                //     suffixIcon: Padding(
-                //       padding: const EdgeInsets.only(right: 10),
-                //       child: CircleAvatar(
-                //         radius: 20,
-                //         backgroundColor: context.theme.canvasColor,
-                //         child: Icon(Icons.filter_list,color: context.theme.splashColor,)
-                //       ),
-                //     ),
-                //     hintText: 'Search by food name',
-                //     hintStyle: TextStyle(fontSize: 14),
-                //     border: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(20),
-                //       borderSide: BorderSide.none
-                //     ),
-         
-                //     focusedBorder: OutlineInputBorder(
-                //       borderRadius: BorderRadius.circular(20),
-                //       borderSide: BorderSide(width: 1.5, color: context.theme.cardColor)
-                //     ),
-                //     filled: true,
-                //     fillColor: context.theme.highlightColor
-                //   ),
-                // ),
-
-                // SizedBox(height: 20,),
                 SizedBox(height: 10,),
                
                 Container(
                   width: double.infinity,
-                  height: 155,
+                  height: 175,
                   decoration: BoxDecoration(
                     color: context.theme.cardColor,
                     borderRadius: BorderRadius.circular(10),
@@ -182,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                           right: 0,
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.5,
-                            height: 155,
+                            height: 175,
                             alignment: Alignment.centerRight,
                             decoration: BoxDecoration(
                               color: context.theme.focusColor,
@@ -213,7 +185,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 15),
+                                Spacer(),
                                 GestureDetector(
                                   onTap: () {
                                     // Navigator.pushNamed(context, '/findRecipe');
@@ -239,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                           Spacer(),
                           Image.asset(
                             width: MediaQuery.of(context).size.width * 0.3, // 30% of screen width
-                            height: 155,
+                            height: 175,
                             "assets/images/woman_chef.png",
                             fit: BoxFit.cover,
                           ),
