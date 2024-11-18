@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class RecipeDetails extends StatefulWidget {
-  const RecipeDetails({super.key});
+class CropDetails extends StatefulWidget {
+  const CropDetails({super.key});
 
   @override
-  State<RecipeDetails> createState() => _RecipeDetailsState();
+  State<CropDetails> createState() => _CropDetailsState();
 }
 
-class _RecipeDetailsState extends State<RecipeDetails> {
+class _CropDetailsState extends State<CropDetails> {
 
   final Map<IconData, String> iconTextMap = {
     FontAwesomeIcons.clock: "60 mins",

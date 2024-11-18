@@ -9,7 +9,7 @@ import 'package:aigro/pages/about_us.dart';
 import 'package:aigro/pages/get_started.dart';
 import 'package:aigro/pages/home.dart';
 import 'package:aigro/pages/profile.dart';
-import 'package:aigro/pages/recipe_details.dart';
+import 'package:aigro/pages/crop_details.dart';
 import 'package:aigro/pages/recipes.dart';
 import 'package:aigro/utils/routes.dart';
 import 'package:aigro/utils/themes.dart';
@@ -76,7 +76,7 @@ class _MyAppState extends State<MyApp> {
         Myroutes.aboutUsRoute: (context) => AboutUs(),
         Myroutes.recipesRoute: (context) => RecipesPage(),
         Myroutes.profileRoute: (context) => ProfilePage(),
-        Myroutes.recipeDetailsRoute: (context) => RecipeDetails(),
+        Myroutes.cropDetailsRoute: (context) => CropDetails(),
 
         Myroutes.diseaseMapRoute: (context) => DiseaseMapping(),
         Myroutes.offlineDetectionRoute: (context) => OfflineDetection(),

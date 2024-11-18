@@ -5,6 +5,7 @@ import 'package:aigro/utils/routes.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:aigro/widgets/sparkling_animation.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -49,27 +50,27 @@ class _HomePageState extends State<HomePage> {
 
   final List<Map<String, dynamic>> dashboardData = [
     {
-      'color': Colors.blueAccent,
+      'color':  Color.fromRGBO(190, 200, 249,1),
       'text': 'Disease Forecasting',
-      'image': 'assets/images/image1.png',
+      'image': 'assets/images/forecasting.png',
       'route': Myroutes.profileRoute,
     },
     {
-      'color': Colors.greenAccent,
+      'color': Color.fromRGBO(230, 238, 155,1),
       'text': 'Weather Report',
-      'image': 'assets/images/image2.png',
+      'image': 'assets/images/weather.png',
       'route': Myroutes.weatherReportRoute,
     },
     {
-      'color': Colors.orangeAccent,
+      'color': Color.fromRGBO(201, 223, 221,1),
       'text': 'Disease Mapping',
-      'image': 'assets/images/image3.png',
+      'image': 'assets/images/mapping.png',
       'route': Myroutes.diseaseMapRoute,
     },
     {
-      'color': Colors.purpleAccent,
+      'color': Color.fromRGBO(232, 213, 207,1),
       'text': 'Offline Model',
-      'image': 'assets/images/image4.png',
+      'image': 'assets/images/offline.png',
       'route': Myroutes.offlineDetectionRoute,
     },
   ];
@@ -135,7 +136,11 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10),
+                SizedBox(height: 5),
+                Text("Hello, ${first} 🌱",style: TextStyle(fontSize: 26,color: context.theme.primaryColorDark),),
+                SizedBox(height: 5),
+                Text("Welcome to your dashboard. Scroll to see amazing features we provide.",style: TextStyle(fontSize: 14,color: Colors.grey[600]),),
+                SizedBox(height: 15),
                 Container(
                   width: double.infinity,
                   height: 175,
@@ -208,7 +213,7 @@ class _HomePageState extends State<HomePage> {
                           Image.asset(
                             width: MediaQuery.of(context).size.width * 0.3, // 30% of screen width
                             height: 175,
-                            "assets/images/woman_chef.png",
+                            "assets/images/woman_farmer.png",
                             fit: BoxFit.cover,
                           ),
                           const SizedBox(width: 10),
@@ -217,7 +222,13 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20),
+
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Other Key Features of AIgro",style: TextStyle(fontSize: 16,color: Colors.grey[700]),),
+                ),
+                const SizedBox(height: 5),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 5),                  
                   child: GridView.builder(    
@@ -239,15 +250,44 @@ class _HomePageState extends State<HomePage> {
                             color: dashboardInfo['color'], 
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                dashboardInfo['text'],
-                                style: TextStyle(color: Colors.white, fontSize: 18),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 20),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    dashboardInfo['text'],
+                                    style: TextStyle(color: Colors.white, fontSize: 18),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                                Spacer(),
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      width: 70, 
+                                      height: 70,
+                                     dashboardInfo['image'],
+                                      fit: BoxFit.cover,
+                                    ),
+                                    Spacer(),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.black.withOpacity(0.1),
+                                        borderRadius: BorderRadius.circular(10)
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Icon(FeatherIcons.arrowUpRight, color: Colors.black, size: 22,),
+                                      ), 
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
