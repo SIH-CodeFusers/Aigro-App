@@ -33,8 +33,8 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         "pincode": pincode,
-        "lat": "22.966",
-        "long": "88.2036",
+        "lat": lat,   // to get error use: "22.966" & "88.2036"
+        "long": long, 
         "range": "100"
       }),
     );
@@ -48,6 +48,15 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
           double alertLat = alert['lat'];
           double alertLong = alert['lon'];
           String cropName = alert['cropName'];
+          
+
+          String diseaseName = '';
+          String diseaseLevel = '';
+          if (alert['diseaseDetails'] != null && alert['diseaseDetails'].isNotEmpty) {
+            diseaseName = alert['diseaseDetails'][0]['diseaseName'];
+            diseaseLevel = alert['diseaseDetails'][0]['alertLevel'];
+          }
+
 
           fetchedMarkers.add(
             Marker(
@@ -56,19 +65,37 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
               height: 80,
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: context.theme.hintColor,
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Center(
-                  child: Text(
-                    cropName,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      cropName,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
+                    if (diseaseName.isNotEmpty)
+                      Text(
+                        '$diseaseName',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
+                      ),
+                      Text(
+                        'Level: $diseaseLevel',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
+                      ),
+                  ],
                 ),
               ),
             ),
@@ -92,6 +119,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
       });
     }
   }
+
 
 
   final infobox = Hive.box("BasicInfo-db");
@@ -126,7 +154,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
             height: 80,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.green,
+                color:  context.theme.primaryColorDark,
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(8),
               ),

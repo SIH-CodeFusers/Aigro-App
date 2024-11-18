@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class AboutUs extends StatefulWidget {
   const AboutUs({super.key});
@@ -13,7 +14,7 @@ class _AboutUsState extends State<AboutUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 241, 241, 241), // Dark green background
+      backgroundColor: context.theme.canvasColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -69,7 +70,7 @@ class _AboutUsState extends State<AboutUs> {
   Widget _buildInfoCard({required String title, required String content}) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF004D3F), // Greenish background for cards
+        color: context.theme.primaryColorDark, 
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(

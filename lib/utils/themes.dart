@@ -18,6 +18,8 @@ class MyThemes {
       primarySwatch:Colors.green, // changes all colours with respect to given colour
       canvasColor: Color.fromRGBO(244, 244, 244, 1),
       highlightColor: Colors.white, //secondary background colour
+      primaryColorDark: const Color(0xFF004D3F),
+      hintColor: Color.fromRGBO(239, 183, 2, 1),
       cardColor: Color.fromRGBO(0, 229, 118, 1),
       focusColor: Color.fromRGBO(185, 246, 202, 1),
       splashColor: Color.fromARGB(255, 134, 132, 132),
@@ -35,14 +37,4 @@ class MyThemes {
       //   ),
     );
 
-  // static final darkTheme = ThemeData(
-  //     primarySwatch: Colors.deepOrange,
-  //     canvasColor: Color.fromRGBO(243,229,245, 1),
-  //     cardColor: Color.fromRGBO(116, 255, 172, 1),
-  //     appBarTheme: AppBarTheme(
-  //         color: Colors.black,
-  //         elevation: 0.0,
-  //         iconTheme: IconThemeData(color: Colors.red)
-  //     )
-  //   );
 }
