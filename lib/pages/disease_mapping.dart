@@ -19,7 +19,7 @@ class DiseaseMapping extends StatefulWidget {
 class _DiseaseMappingState extends State<DiseaseMapping> {
   
   Marker? customMarker;
-  List<Marker> nearbyMarkers = []; // List to hold markers from the response
+  List<Marker> nearbyMarkers = []; 
 
   late double lat;
   late double long;
@@ -101,7 +101,6 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
   void initState() {
     super.initState();
     bdb.loadDataInfo(); 
-    getLatLongFromPincode(bdb.userPin);
     getLatLongFromPincode(bdb.userPin);
     getNearbyAlerts('700105');
   }

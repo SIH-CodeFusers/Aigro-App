@@ -1,6 +1,9 @@
+import 'package:aigro/local_db/db.dart';
+import 'package:aigro/utils/get_lat_long.dart';
 import 'package:aigro/utils/weather_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class WeatherReport extends StatefulWidget {
@@ -14,23 +17,46 @@ class _WeatherReportState extends State<WeatherReport> {
   final WeatherService weatherService = WeatherService();
   List<String> daysOfWeek = [];
 
+  //default: lat lon of london
+  double lat = 51.50;
+  double lon = 0.12;
+
   void getDaysList() {
     DateTime now = DateTime.now();
 
-    List<String> daysOfWeekNames = [
-      'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
-    ];
+    List<String> daysOfWeekNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-    // Generate a list of day names for the next 7 days
     for (int i = 0; i < 7; i++) {
       daysOfWeek.add(daysOfWeekNames[(now.weekday + i) % 7]);
     }
   }
 
+  final infobox = Hive.box("BasicInfo-db");
+  BasicDB bdb = BasicDB();
+  String userDist = "abc";
+  //default pin
+  String userPin = "700042";
+
   @override
   void initState() {
-    getDaysList();
     super.initState();
+    if (infobox.get("NAMEDB") == null) {
+      bdb.createInitialInfo();
+      userPin = bdb.userPin;
+      userDist = bdb.userDistrict;
+    } else {
+      bdb.loadDataInfo();
+      userPin = bdb.userPin;
+      userDist = bdb.userDistrict;
+    }
+
+    getLatLongFromPincode(bdb.userPin).then((latLon) {
+      setState(() {
+        lat = latLon['lat']!;
+        lon = latLon['lon']!; 
+      });
+    });
+    getDaysList();
   }
 
   @override
@@ -39,7 +65,7 @@ class _WeatherReportState extends State<WeatherReport> {
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(title: Text('Weather Forecast')),
       body: FutureBuilder<List<WeatherData>>(
-        future: weatherService.fetchWeather(22.67,88.36),
+        future: weatherService.fetchWeather(lat, lon),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -56,17 +82,20 @@ class _WeatherReportState extends State<WeatherReport> {
                 child:Column(
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Weather at:"),
-                        Text(" Kolkata"),
+                        Text("Weather at: ",style: TextStyle(color: context.theme.primaryColorDark,fontSize: 20),),
+                        Text(userDist,style: TextStyle(color: context.theme.cardColor,fontSize: 20),),
                       ],
                     ),
                      Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Pincode:"),
-                        Text(" Kolkata"),
+                        Text("Pincode: ",style: TextStyle(color: context.theme.primaryColorDark,fontSize: 20),),
+                        Text(userPin,style: TextStyle(color: context.theme.cardColor,fontSize: 20),),
                       ],
                     ),
+                    SizedBox(height: 20,),
                     Container(
                       decoration: BoxDecoration(
                         color: context.theme.highlightColor,
