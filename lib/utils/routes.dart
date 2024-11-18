@@ -9,4 +9,5 @@ class Myroutes{
 
   static String diseaseMapRoute = "/diseaseMap";
   static String offlineDetectionRoute = "/offlineDetection";
+  static String weatherReportRoute = "/weatherReport";
 }

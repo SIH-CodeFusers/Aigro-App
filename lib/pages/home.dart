@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
       'color': Colors.greenAccent,
       'text': 'Weather Report',
       'image': 'assets/images/image2.png',
-      'route': Myroutes.profileRoute,
+      'route': Myroutes.weatherReportRoute,
     },
     {
       'color': Colors.orangeAccent,
