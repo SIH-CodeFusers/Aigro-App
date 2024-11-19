@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "872976564640",
+    "project_id": "aigro-d8009",
+    "storage_bucket": "aigro-d8009.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872976564640:android:3abd6f756f88de6750a4c5",
+        "android_client_info": {
+          "package_name": "com.example.AIGro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872976564640-nj3orocngonr60269f058ov8h7ji2p5t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrasknN1iLFw27-Tl474aDrTt2Suw_z9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "872976564640-nj3orocngonr60269f058ov8h7ji2p5t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

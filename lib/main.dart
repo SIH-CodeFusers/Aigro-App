@@ -1,10 +1,12 @@
 import 'package:aigro/pages/disease_forecasting.dart';
 import 'package:aigro/pages/disease_mapping.dart';
+import 'package:aigro/pages/image_analysis.dart';
 import 'package:aigro/pages/khetisathi.dart';
 import 'package:aigro/pages/offline_detection.dart';
 import 'package:aigro/pages/user_onbaording.dart';
 import 'package:aigro/pages/weather_report.dart';
 import 'package:aigro/utils/authenticate.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:aigro/pages/about_us.dart';
@@ -20,15 +22,16 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox("Start_db");
   await Hive.openBox("BasicInfo-db");
 
-  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   
   runApp(
     
-    MyApp(),
+    const MyApp(),
     
   );
 }
@@ -84,7 +87,8 @@ class _MyAppState extends State<MyApp> {
         Myroutes.diseaseMapRoute: (context) => DiseaseMapping(),
         Myroutes.offlineDetectionRoute: (context) => OfflineDetection(),
         Myroutes.weatherReportRoute: (context) => WeatherReport(),
-        Myroutes.diseaseForecastRoute: (context) => DiseaseForecasting()
+        Myroutes.diseaseForecastRoute: (context) => DiseaseForecasting(),
+        Myroutes.imageAnalysisRoute: (context) => ImageAnalysis()
       },
     );   
   }
