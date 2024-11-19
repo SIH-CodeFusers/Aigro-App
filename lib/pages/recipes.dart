@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:aigro/pages/crop_details.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
@@ -12,7 +13,7 @@ class RecipesPage extends StatefulWidget {
 }
 
 class _RecipesPageState extends State<RecipesPage> {
-  late Future<List<Map<String, String>>> cropDiseases;
+  late Future<List<Map<String, dynamic>>> cropDiseases;
 
   String selectedCrop = "Crops";
   String selectedCategory = "Category";
@@ -20,20 +21,26 @@ class _RecipesPageState extends State<RecipesPage> {
   final List<String> cropOptions = ["Crops", "Corn", "Tomato", "Wheat"];
   final List<String> categoryOptions = ["Category", "Fungus", "Virus", "Bacteria"];
 
-  Future<List<Map<String, String>>> loadCropDiseases() async {
+  Future<List<Map<String, dynamic>>> loadCropDiseases() async {
   final String data = await DefaultAssetBundle.of(context)
       .loadString('assets/others/crop_disease_18nov.json');
   final Map<String, dynamic> jsonResult = json.decode(data);
 
   return (jsonResult['cropDiseases'] as List)
-      .expand((crop) => (crop['diseaseDetails'] as List)
-          .map((disease) => {
-                "diseaseName": disease['diseaseName'] as String,
-                "category": disease['category'] as String,
-                "image": (disease['images'] as List).isNotEmpty
-                    ? disease['images'][0] as String
-                    : '',
-              }))
+      .expand((crop) => (crop['diseaseDetails'] as List).map((disease) {
+
+            return {
+              "diseaseName": disease['diseaseName'] as String,
+              "scientificName": disease['scientificName'] as String,
+              "category": disease['category'] as String,
+              "images": (disease['images'] as List).map((img) => img as String).toList(),
+              "symptoms": disease['symptoms'] as String? ?? '',
+              "causes": disease['causes'] as String? ?? '',
+              "remedies": (disease['remedies'] as List?)?.map((r) => r as String).toList() ?? [],
+              "chemicalControl": disease['chemicalControl'] as String? ?? '',
+              "cropName": crop['cropName'] as String,
+            };
+          }))
       .toList();
 }
 
@@ -55,7 +62,6 @@ class _RecipesPageState extends State<RecipesPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-
               Text(
                 "Crop Pests and Diseases 🌱",
                 style: TextStyle(
@@ -109,7 +115,7 @@ class _RecipesPageState extends State<RecipesPage> {
               const SizedBox(height: 20),
 
               Expanded(
-                child: FutureBuilder<List<Map<String, String>>>(
+                child: FutureBuilder<List<Map<String, dynamic>>>(
                   future: cropDiseases,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -123,11 +129,11 @@ class _RecipesPageState extends State<RecipesPage> {
                     final diseases = snapshot.data!
                         .where((disease) =>
                             (selectedCrop == "Crops" ||
-                                disease['diseaseName']!
+                                disease['cropName']
                                     .toLowerCase()
                                     .contains(selectedCrop.toLowerCase())) &&
                             (selectedCategory == "Category" ||
-                                disease['category']!
+                                disease['category']
                                     .toLowerCase()
                                     .contains(selectedCategory.toLowerCase())))
                         .toList();
@@ -145,7 +151,12 @@ class _RecipesPageState extends State<RecipesPage> {
 
                         return GestureDetector(
                           onTap: () {
-                            Navigator.pushNamed(context, '/recipeDetails');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CropDetails(disease: disease),
+                              ),
+                            );
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -160,7 +171,7 @@ class _RecipesPageState extends State<RecipesPage> {
                                     top: Radius.circular(10),
                                   ),
                                   child: Image.network(
-                                    disease['image']!,
+                                    disease['images'][0] as String,
                                     height: 120,
                                     width: double.infinity,
                                     fit: BoxFit.cover,

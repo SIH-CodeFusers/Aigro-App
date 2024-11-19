@@ -79,7 +79,7 @@ class _MyAppState extends State<MyApp> {
         Myroutes.recipesRoute: (context) => RecipesPage(),
         Myroutes.profileRoute: (context) => ProfilePage(),
         Myroutes.khetiSathiRoute: (context) => KhetiSathi(),
-        Myroutes.cropDetailsRoute: (context) => CropDetails(),
+        // Myroutes.cropDetailsRoute: (context) => CropDetails(),
 
         Myroutes.diseaseMapRoute: (context) => DiseaseMapping(),
         Myroutes.offlineDetectionRoute: (context) => OfflineDetection(),
