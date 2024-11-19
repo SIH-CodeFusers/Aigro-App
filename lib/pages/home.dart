@@ -56,10 +56,10 @@ class _HomePageState extends State<HomePage> {
       'route': Myroutes.profileRoute,
     },
     {
-      'color': Color.fromRGBO(230, 238, 155,1),
-      'text': 'Weather Report',
-      'image': 'assets/images/weather.png',
-      'route': Myroutes.weatherReportRoute,
+      'color': Color.fromRGBO(232, 213, 207,1),
+      'text': 'Offline Model',
+      'image': 'assets/images/offline.png',
+      'route': Myroutes.offlineDetectionRoute,
     },
     {
       'color': Color.fromRGBO(201, 223, 221,1),
@@ -68,10 +68,10 @@ class _HomePageState extends State<HomePage> {
       'route': Myroutes.diseaseMapRoute,
     },
     {
-      'color': Color.fromRGBO(232, 213, 207,1),
-      'text': 'Offline Model',
-      'image': 'assets/images/offline.png',
-      'route': Myroutes.offlineDetectionRoute,
+      'color': Color.fromRGBO(230, 238, 155,1),
+      'text': 'Weather Report',
+      'image': 'assets/images/weather.png',
+      'route': Myroutes.weatherReportRoute,
     },
   ];
 

@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -16,7 +17,9 @@ class _OfflineDetectionState extends State<OfflineDetection> {
   File? file;
   var _recognitions;
   var v = "";
-  // var dataList = [];
+
+  String diseaseName="";
+
   @override
   void initState() {
     super.initState();
@@ -57,11 +60,10 @@ class _OfflineDetectionState extends State<OfflineDetection> {
     setState(() {
       _recognitions = recognitions;
       v = recognitions.toString();
-      // dataList = List<Map<String, dynamic>>.from(jsonDecode(v));
+      diseaseName = recognitions?[0]['label'];
     });
     print("//////////////////////////////////////////////////");
     print(_recognitions);
-    // print(dataList);
     print("//////////////////////////////////////////////////");
     int endTime = new DateTime.now().millisecondsSinceEpoch;
     print("Inference took ${endTime - startTime}ms");
@@ -72,7 +74,7 @@ class _OfflineDetectionState extends State<OfflineDetection> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: Text('Flutter TFlite'),
+        title: Text('Offline Model'),
       ),
       body: Center(
         child: Column(
@@ -81,19 +83,66 @@ class _OfflineDetectionState extends State<OfflineDetection> {
             if (_image != null)
               Image.file(
                 File(_image!.path),
-                height: 200,
-                width: 200,
+                height: 250,
+                width: 250,
                 fit: BoxFit.cover,
               )
             else
-              Text('No image selected'),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _pickImage,
-              child: Text('Pick Image from Gallery'),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: GestureDetector(
+                onTap: _pickImage,
+                child: DottedBorder(
+                      color: context.theme.primaryColorDark,
+                      dashPattern: [8, 4],
+                      strokeWidth: 1,
+                  child: Container(
+                    width: double.infinity,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      color: context.theme.highlightColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),  
+                    child: Center(
+                      child: Text('Pick a Image from your Gallery')
+                    ),
+                  ),
+                ),
+              ),
             ),
-            SizedBox(height: 20),
-            Text(v),
+            SizedBox(height: 30),
+            if (_image == null)
+             Text('No image selected'),
+            if (_image != null) ...[
+              Text(
+                "Detected disease: $diseaseName",
+                style: TextStyle(color: context.theme.cardColor, fontSize: 26),
+              ),
+              SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: GestureDetector(
+                  onTap: () {
+                    
+                  },
+                  child: Container(
+                    width: 250,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: context.theme.primaryColorDark,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'View Remedy',
+                        style: TextStyle(color: context.theme.highlightColor, fontSize: 22),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ]
+           
           ],
         ),
       ),

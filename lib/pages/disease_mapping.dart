@@ -159,14 +159,13 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
-                child: Text(
-                  'Me',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                  ),
-                ),
+                child: Image.asset(
+                      width: 80,
+                      height: 80,
+                      "assets/images/woman_farmer_logo.png",
+                      fit: BoxFit.cover,
+                    ),
+                  
               ),
             ),
           );
