@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tflite_flutter/tflite_flutter.dart';
+import 'dart:io';
+import 'package:tflite_v2/tflite_v2.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class OfflineDetection extends StatefulWidget {
   @override
@@ -9,102 +11,89 @@ class OfflineDetection extends StatefulWidget {
 }
 
 class _OfflineDetectionState extends State<OfflineDetection> {
-  late Interpreter interpreter;
-  bool isModelLoaded = false;
-  int? modelResult;
-  Uint8List? inputImage;
-
+  final ImagePicker _picker = ImagePicker();
+  XFile? _image;
+  File? file;
+  var _recognitions;
+  var v = "";
+  // var dataList = [];
   @override
   void initState() {
     super.initState();
-    loadModel();
+    loadmodel().then((value) {
+      setState(() {});
+    });
   }
 
-  Future<void> loadModel() async {
+  loadmodel() async {
+    await Tflite.loadModel(
+      model: "assets/others/app_model.tflite",
+      labels: "assets/others/labels.txt",
+    );
+  }
+
+  Future<void> _pickImage() async {
     try {
-
-      interpreter = await Interpreter.fromAsset('assets/others/app_model.tflite');
+      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
       setState(() {
-        isModelLoaded = true;
+        _image = image;
+        file = File(image!.path);
       });
+      detectimage(file!);
     } catch (e) {
-      print("Failed to load model: $e");
+      print('Error picking image: $e');
     }
   }
 
-  Future<void> selectImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      final bytes = await pickedFile.readAsBytes();
-      setState(() {
-        inputImage = bytes;
-      });
-      // Automatically run the model after selecting an image
-      runModelOnImage(bytes);
-    }
-  }
-
-  Future<void> runModelOnImage(Uint8List input) async {
-    if (!isModelLoaded) return;
-
-    // Preprocess input if necessary (resize, normalize, etc.)
-    var output = List.filled(1, 0).reshape([1, 1]);
-
-    try {
-      interpreter.run(input, output); // Run the model on the input
-      setState(() {
-        modelResult = output[0][0]; // Update the result
-      });
-    } catch (e) {
-      print("Error running model: $e");
-    }
-  }
-
-  @override
-  void dispose() {
-    interpreter.close();
-    super.dispose();
+  Future detectimage(File image) async {
+    int startTime = new DateTime.now().millisecondsSinceEpoch;
+    var recognitions = await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 1,
+      threshold: 0.05,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    );
+    setState(() {
+      _recognitions = recognitions;
+      v = recognitions.toString();
+      // dataList = List<Map<String, dynamic>>.from(jsonDecode(v));
+    });
+    print("//////////////////////////////////////////////////");
+    print(_recognitions);
+    // print(dataList);
+    print("//////////////////////////////////////////////////");
+    int endTime = new DateTime.now().millisecondsSinceEpoch;
+    print("Inference took ${endTime - startTime}ms");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: Text('TFLite Model Example'),
+        title: Text('Flutter TFlite'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-
-            if (inputImage != null)
-              Image.memory(
-                inputImage!,
-                 height: 200,
+          children: <Widget>[
+            if (_image != null)
+              Image.file(
+                File(_image!.path),
+                height: 200,
                 width: 200,
                 fit: BoxFit.cover,
               )
             else
               Text('No image selected'),
-
             SizedBox(height: 20),
-
             ElevatedButton(
-              onPressed: selectImage,
-              child: Text('Select Image'),
+              onPressed: _pickImage,
+              child: Text('Pick Image from Gallery'),
             ),
-
             SizedBox(height: 20),
-
-            if (modelResult != null)
-              Text(
-                'Model Output: $modelResult',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              )
-            else
-              Text('Run the model to see output'),
+            Text(v),
           ],
         ),
       ),
