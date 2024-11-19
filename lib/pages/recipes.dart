@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
@@ -11,37 +12,37 @@ class RecipesPage extends StatefulWidget {
 }
 
 class _RecipesPageState extends State<RecipesPage> {
- 
-  final List<Map<String, String>> cropDiseases = [
-    {
-      "diseaseName": "Corn Leaf Blight",
-      "category": "Fungus",
-      "image": "assets/images/corn-blight-3.jpg",
-    },
-    {
-      "diseaseName": "Common Rust",
-      "category": "Fungus",
-      "image": "assets/images/corn-common-rust-1.jpg",
-    },
-    {
-      "diseaseName": "Leaf Spot",
-      "category": "Fungus",
-      "image": "assets/images/corn-gray-leaf-spot-3.jpeg",
-    },
-    {
-      "diseaseName": "Corn Rot",
-      "category": "Fungus",
-      "image": "assets/images/corn_rot_3.jpg",
-    },
-  ];
+  late Future<List<Map<String, String>>> cropDiseases;
 
-  
   String selectedCrop = "Crops";
   String selectedCategory = "Category";
 
-  
   final List<String> cropOptions = ["Crops", "Corn", "Tomato", "Wheat"];
   final List<String> categoryOptions = ["Category", "Fungus", "Virus", "Bacteria"];
+
+  Future<List<Map<String, String>>> loadCropDiseases() async {
+  final String data = await DefaultAssetBundle.of(context)
+      .loadString('assets/others/crop_disease_18nov.json');
+  final Map<String, dynamic> jsonResult = json.decode(data);
+
+  return (jsonResult['cropDiseases'] as List)
+      .expand((crop) => (crop['diseaseDetails'] as List)
+          .map((disease) => {
+                "diseaseName": disease['diseaseName'] as String,
+                "category": disease['category'] as String,
+                "image": (disease['images'] as List).isNotEmpty
+                    ? disease['images'][0] as String
+                    : '',
+              }))
+      .toList();
+}
+
+
+  @override
+  void initState() {
+    super.initState();
+    cropDiseases = loadCropDiseases();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +66,9 @@ class _RecipesPageState extends State<RecipesPage> {
               ).centered(),
               const SizedBox(height: 20),
 
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
                   DropdownButton<String>(
                     value: selectedCrop,
                     onChanged: (value) {
@@ -77,22 +76,18 @@ class _RecipesPageState extends State<RecipesPage> {
                         selectedCrop = value!;
                       });
                     },
-                    items: cropOptions.map<DropdownMenuItem<String>>((String option) {
-                      return DropdownMenuItem<String>(
-                        value: option,
-                        child: Text(
-                          option,
-                          style: const TextStyle(fontSize: 14),
-                        ),
-                      );
-                    }).toList(),
+                    items: cropOptions
+                        .map((option) => DropdownMenuItem<String>(
+                              value: option,
+                              child: Text(option, style: const TextStyle(fontSize: 14)),
+                            ))
+                        .toList(),
                     borderRadius: BorderRadius.circular(8),
                     dropdownColor: context.theme.highlightColor,
                   ).expand(),
 
                   const SizedBox(width: 10),
 
-                  
                   DropdownButton<String>(
                     value: selectedCategory,
                     onChanged: (value) {
@@ -100,15 +95,12 @@ class _RecipesPageState extends State<RecipesPage> {
                         selectedCategory = value!;
                       });
                     },
-                    items: categoryOptions.map<DropdownMenuItem<String>>((String option) {
-                      return DropdownMenuItem<String>(
-                        value: option,
-                        child: Text(
-                          option,
-                          style: const TextStyle(fontSize: 14),
-                        ),
-                      );
-                    }).toList(),
+                    items: categoryOptions
+                        .map((option) => DropdownMenuItem<String>(
+                              value: option,
+                              child: Text(option, style: const TextStyle(fontSize: 14)),
+                            ))
+                        .toList(),
                     borderRadius: BorderRadius.circular(8),
                     dropdownColor: context.theme.highlightColor,
                   ).expand(),
@@ -116,77 +108,96 @@ class _RecipesPageState extends State<RecipesPage> {
               ),
               const SizedBox(height: 20),
 
-              
               Expanded(
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 3 / 4,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                  ),
-                  itemCount: cropDiseases.length,
-                  itemBuilder: (context, index) {
-                    final disease = cropDiseases[index];
-
-                    
-                    if ((selectedCrop != "Crops" &&
-                            !disease["diseaseName"]!.toLowerCase().contains(selectedCrop.toLowerCase())) ||
-                        (selectedCategory != "Category" &&
-                            disease["category"]!.toLowerCase() != selectedCategory.toLowerCase())) {
-                      return const SizedBox.shrink();
+                child: FutureBuilder<List<Map<String, String>>>(
+                  future: cropDiseases,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
                     }
 
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/recipeDetails');
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: context.theme.highlightColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: const BorderRadius.vertical(
-                                top: Radius.circular(10),
-                              ),
-                              child: Image.asset(
-                                disease["image"]!,
-                                height: 120,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Disease Name: ${disease["diseaseName"]}",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: const Color(0xFF004D3F),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    "Category: ${disease["category"]}",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: context.theme.splashColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+                    if (snapshot.hasError) {
+                      return const Center(child: Text("Error loading data."));
+                    }
+
+                    final diseases = snapshot.data!
+                        .where((disease) =>
+                            (selectedCrop == "Crops" ||
+                                disease['diseaseName']!
+                                    .toLowerCase()
+                                    .contains(selectedCrop.toLowerCase())) &&
+                            (selectedCategory == "Category" ||
+                                disease['category']!
+                                    .toLowerCase()
+                                    .contains(selectedCategory.toLowerCase())))
+                        .toList();
+
+                    return GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 3 / 4,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
                       ),
+                      itemCount: diseases.length,
+                      itemBuilder: (context, index) {
+                        final disease = diseases[index];
+
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/recipeDetails');
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: context.theme.highlightColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(10),
+                                  ),
+                                  child: Image.network(
+                                    disease['image']!,
+                                    height: 120,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return const Icon(Icons.broken_image, size: 120);
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Disease Name: ${disease["diseaseName"]}",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color(0xFF004D3F),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        "Category: ${disease["category"]}",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: context.theme.splashColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     );
                   },
                 ),
