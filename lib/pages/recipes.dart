@@ -177,7 +177,7 @@ class _RecipesPageState extends State<RecipesPage> {
                                       Text(
                                         "Disease Name: ${disease["diseaseName"]}",
                                         style: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color: const Color(0xFF004D3F),
                                         ),
@@ -186,7 +186,7 @@ class _RecipesPageState extends State<RecipesPage> {
                                       Text(
                                         "Category: ${disease["category"]}",
                                         style: TextStyle(
-                                          fontSize: 14,
+                                          fontSize: 12,
                                           color: context.theme.splashColor,
                                         ),
                                       ),
