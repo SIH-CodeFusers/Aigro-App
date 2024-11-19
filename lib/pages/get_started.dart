@@ -28,13 +28,23 @@ class GetStarted extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 50,),
-                    Center(
-                      child: Image.asset(
-                        width: 350,
-                        height: 350,
-                        "assets/images/get_started.png",
-                        fit: BoxFit.cover,
+                  SizedBox(height: 60,),
+                   Center(
+                      child: ClipOval(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(190, 200, 249,1)
+                          ),
+                          padding: EdgeInsets.all(15),
+                          child: ClipOval(
+                            child: Image.asset(
+                              "assets/images/get_started.jpeg",
+                              width: 300,
+                              height: 300,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     Spacer(),

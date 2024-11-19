@@ -6,6 +6,7 @@ import 'package:aigro/utils/bottom_pages_list.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:aigro/widgets/sparkling_animation.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -73,6 +74,18 @@ class _HomePageState extends State<HomePage> {
       'image': 'assets/images/weather.png',
       'route': Myroutes.weatherReportRoute,
     },
+    {
+      'color': Color.fromRGBO(249, 187, 208,1),
+      'text': 'Recovery Time',
+      'image': 'assets/images/recovery_time.png',
+      'route': Myroutes.profileRoute,
+    },
+    {
+      'color': Color.fromRGBO(208, 196, 232,1),
+      'text': 'Learning Resources',
+      'image': 'assets/images/resources.png',
+      'route': Myroutes.profileRoute,
+    },
   ];
 
   @override
@@ -123,7 +136,7 @@ class _HomePageState extends State<HomePage> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Icon(CupertinoIcons.bell, color: Colors.black, size: 22,),
+                child: Icon(FontAwesomeIcons.comments, color: Colors.black, size: 22,),
               ), 
             ),
           ],
@@ -238,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSpacing: 2,
                       childAspectRatio: 1, 
                     ),
-                    itemCount: 4, 
+                    itemCount: 6, 
                     itemBuilder: (context, index) {
                       final dashboardInfo = dashboardData[index];
                       return GestureDetector(

@@ -62,11 +62,11 @@ class _OfflineDetectionState extends State<OfflineDetection> {
       v = recognitions.toString();
       diseaseName = recognitions?[0]['label'];
     });
-    print("//////////////////////////////////////////////////");
-    print(_recognitions);
-    print("//////////////////////////////////////////////////");
-    int endTime = new DateTime.now().millisecondsSinceEpoch;
-    print("Inference took ${endTime - startTime}ms");
+    // print("//////////////////////////////////////////////////");
+    // print(_recognitions);
+    // print("//////////////////////////////////////////////////");
+    // int endTime = new DateTime.now().millisecondsSinceEpoch;
+    // print("Inference took ${endTime - startTime}ms");
   }
 
   @override
@@ -114,9 +114,12 @@ class _OfflineDetectionState extends State<OfflineDetection> {
             if (_image == null)
              Text('No image selected'),
             if (_image != null) ...[
-              Text(
-                "Detected disease: $diseaseName",
-                style: TextStyle(color: context.theme.cardColor, fontSize: 26),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  "Detected disease: $diseaseName",
+                  style: TextStyle(color: context.theme.cardColor, fontSize: 26),
+                ),
               ),
               SizedBox(height: 30),
               Padding(

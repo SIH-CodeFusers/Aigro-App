@@ -150,8 +150,8 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
           long = newLong;
           customMarker = Marker(
             point: LatLng(lat, long),
-            width: 80,
-            height: 80,
+            width: 70,
+            height: 70,
             child: Container(
               decoration: BoxDecoration(
                 color:  context.theme.primaryColorDark,
@@ -160,8 +160,8 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
               ),
               child: Center(
                 child: Image.asset(
-                      width: 80,
-                      height: 80,
+                      width: 70,
+                      height: 70,
                       "assets/images/woman_farmer_logo.png",
                       fit: BoxFit.cover,
                     ),

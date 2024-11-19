@@ -40,6 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.canvasColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -92,24 +93,43 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _buildProfileInfo() {
-    return Column(
-      children: [
-        _buildListTile("Name", bdb.userName),
-        _buildListTile("Phone", bdb.userPhn),
-        _buildListTile("Country", bdb.userCountry),
-        _buildListTile("State", bdb.userState),
-        _buildListTile("District", bdb.userDistrict),
-        _buildListTile("Block", bdb.userBlock),
-        _buildListTile("Pin Code", bdb.userPin),
-        _buildListTile("Selected Crops", bdb.userCrops.join(", ")),
-      ],
-    );
-  }
+Widget _buildProfileInfo() {
+  return Column(
+    children: [
+      Row(
+        children: [
+          Expanded(child: _buildListTile("Name", bdb.userName)),
+          SizedBox(width: 10),
+          Expanded(child: _buildListTile("Phone", bdb.userPhn)),
+        ],
+      ),
+      SizedBox(height: 10),
+      Row(
+        children: [
+          Expanded(child: _buildListTile("Country", bdb.userCountry)),
+          SizedBox(width: 10),
+          Expanded(child: _buildListTile("State", bdb.userState)),
+        ],
+      ),
+      SizedBox(height: 10),
+      Row(
+        children: [
+          Expanded(child: _buildListTile("District", bdb.userDistrict)),
+          SizedBox(width: 10),
+          Expanded(child: _buildListTile("Block", bdb.userBlock)),
+        ],
+      ),
+      SizedBox(height: 10),
+      _buildListTile("Pin Code", bdb.userPin),
+      SizedBox(height: 10),
+      _buildListTile("Your Crops", bdb.userCrops.join(", ")),
+    ],
+  );
+}
 
   Widget _buildListTile(String title, String subtitle) {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(vertical: 8),
+      contentPadding: EdgeInsets.symmetric(vertical: 8,horizontal: 8),
       title: Text(
         title,
         style: TextStyle(
@@ -121,10 +141,6 @@ class _ProfilePageState extends State<ProfilePage> {
       tileColor: Colors.grey[200],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
-      ),
-      leading: Icon(
-        Icons.info_outline,
-        color: context.theme.cardColor,
       ),
     );
   }
