@@ -27,7 +27,9 @@ void main() async {
   await Hive.openBox("Start_db");
   await Hive.openBox("BasicInfo-db");
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+   
+);
   
   runApp(
     
