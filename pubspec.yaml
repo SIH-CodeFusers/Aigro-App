@@ -35,6 +35,7 @@ dependencies:
   http: ^1.2.2
   tflite_flutter: ^0.11.0
   flutter_feather_icons: ^2.0.0+1
+  tflite_v2: ^1.0.0
 
 
 dev_dependencies:
@@ -48,7 +49,6 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/images/Food_Images/
     - assets/icons/
     - assets/others/
 
