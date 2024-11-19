@@ -54,8 +54,8 @@ class _OfflineDetectionState extends State<OfflineDetection> {
       path: image.path,
       numResults: 1,
       threshold: 0.05,
-      imageMean: 127.5,
-      imageStd: 127.5,
+      imageMean: 120.5,
+      imageStd: 120.5,
     );
     setState(() {
       _recognitions = recognitions;
