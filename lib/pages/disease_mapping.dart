@@ -130,7 +130,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
     super.initState();
     bdb.loadDataInfo(); 
     getLatLongFromPincode(bdb.userPin);
-    getNearbyAlerts('700105');
+    getNearbyAlerts(bdb.userPin);
   }
 
   Future<void> getLatLongFromPincode(String pincode) async {
@@ -186,7 +186,9 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
     if (isLoading) {
       return Scaffold(
         appBar: AppBar(title: const Text('Disease Mapping')),
-        body: Center(child: CircularProgressIndicator()),
+        body: Center(child: CircularProgressIndicator(
+          color: context.theme.primaryColorDark,
+        )),
       );
     }
     return Scaffold(

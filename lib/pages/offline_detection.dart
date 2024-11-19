@@ -62,11 +62,6 @@ class _OfflineDetectionState extends State<OfflineDetection> {
       v = recognitions.toString();
       diseaseName = recognitions?[0]['label'];
     });
-    // print("//////////////////////////////////////////////////");
-    // print(_recognitions);
-    // print("//////////////////////////////////////////////////");
-    // int endTime = new DateTime.now().millisecondsSinceEpoch;
-    // print("Inference took ${endTime - startTime}ms");
   }
 
   @override

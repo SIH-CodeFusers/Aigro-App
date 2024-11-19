@@ -1,3 +1,4 @@
+import 'package:aigro/pages/disease_forecasting.dart';
 import 'package:aigro/pages/disease_mapping.dart';
 import 'package:aigro/pages/offline_detection.dart';
 import 'package:aigro/pages/user_onbaording.dart';
@@ -80,7 +81,8 @@ class _MyAppState extends State<MyApp> {
 
         Myroutes.diseaseMapRoute: (context) => DiseaseMapping(),
         Myroutes.offlineDetectionRoute: (context) => OfflineDetection(),
-         Myroutes.weatherReportRoute: (context) => WeatherReport()
+        Myroutes.weatherReportRoute: (context) => WeatherReport(),
+        Myroutes.diseaseForecastRoute: (context) => DiseaseForecasting()
       },
     );   
   }

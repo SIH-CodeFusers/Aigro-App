@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
       'color':  Color.fromRGBO(190, 200, 249,1),
       'text': 'Disease Forecasting',
       'image': 'assets/images/forecasting.png',
-      'route': Myroutes.profileRoute,
+      'route': Myroutes.diseaseForecastRoute,
     },
     {
       'color': Color.fromRGBO(232, 213, 207,1),
