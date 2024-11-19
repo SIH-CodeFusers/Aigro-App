@@ -20,9 +20,9 @@ class GridPatternPainter extends CustomPainter {
       final Paint gradientPaint = Paint()
         ..shader = RadialGradient(
           colors: [
-            Color.fromRGBO(255, 178, 0, 1).withOpacity(0.3), 
-            Color.fromRGBO(255, 178, 0, 1).withOpacity(0.1),  
-            Color.fromRGBO(255, 178, 0, 1).withOpacity(0.0),  
+            Color.fromRGBO(0, 229, 118, 1).withOpacity(0.3), 
+            Color.fromRGBO(0, 229, 118, 1).withOpacity(0.1),  
+            Color.fromRGBO(0, 229, 118, 1).withOpacity(0.0),  
           ],
           stops: [0.1,0.8, 1.0], 
         ).createShader(Rect.fromCircle(center: position, radius: 80.0));

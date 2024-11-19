@@ -134,9 +134,14 @@ class _HomePageState extends State<HomePage> {
                 color: context.theme.highlightColor,
                 borderRadius: BorderRadius.circular(10)
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(FontAwesomeIcons.comments, color: Colors.black, size: 22,),
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.pushNamed(context, '/khetiSathi');
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Icon(FontAwesomeIcons.comments, color: Colors.black, size: 20,),
+                ),
               ), 
             ),
           ],
@@ -247,8 +252,8 @@ class _HomePageState extends State<HomePage> {
                   child: GridView.builder(    
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, 
-                      crossAxisSpacing: 2,
-                      mainAxisSpacing: 2,
+                      crossAxisSpacing: 4,
+                      mainAxisSpacing: 4,
                       childAspectRatio: 1, 
                     ),
                     itemCount: 6, 

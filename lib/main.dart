@@ -1,5 +1,6 @@
 import 'package:aigro/pages/disease_forecasting.dart';
 import 'package:aigro/pages/disease_mapping.dart';
+import 'package:aigro/pages/khetisathi.dart';
 import 'package:aigro/pages/offline_detection.dart';
 import 'package:aigro/pages/user_onbaording.dart';
 import 'package:aigro/pages/weather_report.dart';
@@ -77,6 +78,7 @@ class _MyAppState extends State<MyApp> {
         Myroutes.aboutUsRoute: (context) => AboutUs(),
         Myroutes.recipesRoute: (context) => RecipesPage(),
         Myroutes.profileRoute: (context) => ProfilePage(),
+        Myroutes.khetiSathiRoute: (context) => KhetiSathi(),
         Myroutes.cropDetailsRoute: (context) => CropDetails(),
 
         Myroutes.diseaseMapRoute: (context) => DiseaseMapping(),
