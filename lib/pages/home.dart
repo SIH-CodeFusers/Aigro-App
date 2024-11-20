@@ -76,9 +76,9 @@ class _HomePageState extends State<HomePage> {
     },
     {
       'color': Color.fromRGBO(249, 187, 208,1),
-      'text': 'Recovery Time',
+      'text': 'Kheti Sathi',
       'image': 'assets/images/recovery_time.png',
-      'route': Myroutes.profileRoute,
+      'route': Myroutes.khetiSathiRoute,
     },
     {
       'color': Color.fromRGBO(208, 196, 232,1),

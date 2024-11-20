@@ -6,7 +6,6 @@ class WeatherService {
   final String apiKey = WEATHER_FORECAST_KEY;
   final String baseUrl = 'https://api.openweathermap.org/data/2.5/forecast/daily';
 
-
   Future<List<WeatherData>> fetchWeather(double lat, double lon) async {
     final response = await http.get(Uri.parse(
         '$baseUrl?lat=$lat&lon=$lon&cnt=7&appid=$apiKey&units=metric'));
@@ -14,7 +13,7 @@ class WeatherService {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       List<WeatherData> weatherList = [];
-      
+
       for (var day in data['list']) {
         weatherList.add(WeatherData.fromJson(day, data['city']['name']));
       }
@@ -31,7 +30,7 @@ class WeatherData {
   final double tempDay;
   final double tempMin;
   final double tempMax;
-  final int humidity;
+  final double humidity;
   final String description;
   final String icon;
 
@@ -48,10 +47,10 @@ class WeatherData {
   factory WeatherData.fromJson(Map<String, dynamic> json, String cityName) {
     return WeatherData(
       cityName: cityName,
-      tempDay: json['temp']['day'],
-      tempMin: json['temp']['min'],
-      tempMax: json['temp']['max'],
-      humidity: json['humidity'],
+      tempDay: (json['temp']['day'] as num).toDouble(),
+      tempMin: (json['temp']['min'] as num).toDouble(),
+      tempMax: (json['temp']['max'] as num).toDouble(),
+      humidity: (json['humidity'] as num).toDouble(), 
       description: json['weather'][0]['main'],
       icon: json['weather'][0]['icon'],
     );

@@ -18,7 +18,14 @@ class _CropListPageState extends State<CropListPage> {
   String selectedCrop = "Crops";
   String selectedCategory = "Category";
 
-  final List<String> cropOptions = ["Crops", "Corn", "Tomato", "Wheat"];
+  final List<String> cropOptions = ["Crops",  
+    "Corn",
+    "Tomato",
+    "Rice",
+    "Apple",
+    "Mango",
+    "Banana",
+    "Tea",];
   final List<String> categoryOptions = ["Category", "Fungus", "Virus", "Bacteria"];
 
   Future<List<Map<String, dynamic>>> loadCropDiseases() async {
@@ -119,7 +126,9 @@ class _CropListPageState extends State<CropListPage> {
                   future: cropDiseases,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator(
+                        color:Color(0xFF004D3F),
+                      ));
                     }
 
                     if (snapshot.hasError) {

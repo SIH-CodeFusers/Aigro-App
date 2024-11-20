@@ -221,7 +221,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(
-                                  color: context.theme.primaryColorDark,
+                                  color: context.theme.cardColor,
                                   width: 2.0,
                                 ),
                               ),
