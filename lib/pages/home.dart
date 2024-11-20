@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Icon(Icons.location_on, color: Colors.black, size: 16,),
                 Text(
-                  "$userDist, $userState, $userLang",
+                  "$userDist, $userState",
                   style: TextStyle(color: Colors.black, fontSize: 16), 
                 ),
               ],

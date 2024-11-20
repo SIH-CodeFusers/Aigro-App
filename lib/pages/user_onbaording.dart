@@ -19,6 +19,8 @@ class _UserOnboardingState extends State<UserOnboarding> {
 
   int questionInd = 0;
   int totalQuestions = 8;
+    // Add a flag to control the error state
+  bool _isError = false;
 
   bool olduser = false;
   late StreamSubscription<bool> keyboardSubscription;
@@ -767,15 +769,17 @@ class _UserOnboardingState extends State<UserOnboarding> {
   }
 
   Widget PinSelect(BuildContext context) {
-    return Column(
-      children: [
-        ProgressIndicatorWidget(
-          questionInd: questionInd,
-          totalQuestions: totalQuestions,
-          onBackButtonPressed: _handleBackButtonPressed,
-        ),
-        Spacer(), 
-       Center(
+
+
+  return Column(
+    children: [
+      ProgressIndicatorWidget(
+        questionInd: questionInd,
+        totalQuestions: totalQuestions,
+        onBackButtonPressed: _handleBackButtonPressed,
+      ),
+      Spacer(),
+      Center(
         child: Container(
           padding: EdgeInsets.all(16),
           margin: EdgeInsets.symmetric(horizontal: 20),
@@ -784,9 +788,9 @@ class _UserOnboardingState extends State<UserOnboarding> {
             borderRadius: BorderRadius.circular(5),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1), 
-                blurRadius: 10, 
-                offset: Offset(0, 0), 
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10,
+                offset: Offset(0, 0),
               ),
             ],
           ),
@@ -816,7 +820,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: context.theme.primaryColorDark, 
+                      color: context.theme.primaryColorDark,
                       width: 2.0,
                     ),
                   ),
@@ -831,14 +835,32 @@ class _UserOnboardingState extends State<UserOnboarding> {
                 ),
               ),
               SizedBox(height: 20),
+              // Display error message if input is invalid
+              if (_isError==true)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    "Please enter a valid 6-digit pincode.",
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
+                ),
+              SizedBox(height: 20),
               Row(
                 children: [
-                  Expanded( 
+                  Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        setState(() {
-                         questionInd+=1;
-                        });
+       
+                        if (_pincontroller.text.length == 6) {
+                          setState(() {
+                            questionInd += 1;
+                            _isError = false;  
+                          });
+                        } else {
+                          setState(() {
+                            _isError = true;  
+                          });
+                        }
                       },
                       child: NextButton(
                         text: "Next",
@@ -851,10 +873,11 @@ class _UserOnboardingState extends State<UserOnboarding> {
           ),
         ),
       ),
-        Spacer(),
-      ],
-    );
-  }
+      Spacer(),
+    ],
+  );
+}
+
 
 
   Widget CropSelect(BuildContext context) {
