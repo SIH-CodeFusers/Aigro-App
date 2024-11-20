@@ -2,7 +2,7 @@ class Myroutes{
   static String getStartedRoute = "/getStarted";
   static String onbaordingRoute = "/onboarding";
   static String homeRoute = "/home";
-  static String recipesRoute = "/recipes";
+  static String cropListRoute = "/cropList";
   static String cropDetailsRoute = "/recipeDetails";
   static String aboutUsRoute = "/aboutus";
   static String profileRoute = "/profile";
@@ -13,4 +13,5 @@ class Myroutes{
   static String weatherReportRoute = "/weatherReport";
   static String diseaseForecastRoute = "/diseaseForecast";
   static String imageAnalysisRoute = "/imageAnalysis";
+  static String uploadImageRoute = "/uploadImage";
 }

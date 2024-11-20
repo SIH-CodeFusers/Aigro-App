@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class ImageAnalysis extends StatefulWidget {
   @override
@@ -137,61 +138,82 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.canvasColor,
       appBar: AppBar(title: Text("Image Analysis")),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (_cropImage != null) Image.file(_cropImage!, height: 150),
-                SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: _pickImage,
-                  child: Text("Upload Crop Image"),
-                ),
-                SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: _uploadAndAnalyzeImage,
-                  child: Text("Submit for Analysis"),
-                ),
               SizedBox(height: 16),
-              _buildAnalysisResult(),
-              SizedBox(height: 16),
-              
+              Flexible(
+                child: _buildAnalysisResult(), // This will make the list scrollable within the available space
+              ),
+              // SizedBox(height: 16),
+              // if (_cropImage != null) 
+              //   Image.file(_cropImage!, height: 150),
+              // SizedBox(height: 16),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/uploadImage');
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: context.theme.primaryColorDark,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Analyse New Image',
+                        style: TextStyle(color: context.theme.highlightColor, fontSize: 22),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );
   }
 
-Widget _buildAnalysisResult() {
-  if (_analysisData == null) {
-    return Text("Loading data...");
-  }
+  Widget _buildAnalysisResult() {
+    if (_analysisData == null) {
+      return Center(child: Text("Loading data..."));
+    }
 
-  if (!_analysisData!['exists']) {
-    return Text("No analysis results found.");
-  }
+    if (!_analysisData!['exists']) {
+      return Center(child: Text("No analysis results found."));
+    }
 
-  final results = _analysisData!['results'];
-  if (results.isEmpty) {
-    return Text("No analysis details found.");
-  }
+    final results = _analysisData!['results'];
+    if (results.isEmpty) {
+      return Center(child: Text("No analysis details found."));
+    }
 
-  return Container(
-    height: 300,
-    child: ListView.builder(
-      shrinkWrap: true,
+    return ListView.builder(
       itemCount: results.length,
       itemBuilder: (context, index) {
         final result = results[index];
         final cropName = result['cropName'] ?? "Unknown";
         final status = result['status'] ?? "Unknown";
         final diseaseName = result['diseaseName'] ?? "Unknown";
-    
+
         return Card(
+          color: context.theme.highlightColor,
           margin: EdgeInsets.symmetric(vertical: 8.0),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -208,8 +230,6 @@ Widget _buildAnalysisResult() {
           ),
         );
       },
-    ),
-  );
+    );
+  }
 }
-}
-

@@ -71,77 +71,79 @@ class _OfflineDetectionState extends State<OfflineDetection> {
       appBar: AppBar(
         title: Text('Offline Model'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            if (_image != null)
-              Image.file(
-                File(_image!.path),
-                height: 250,
-                width: 250,
-                fit: BoxFit.cover,
-              )
-            else
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: GestureDetector(
-                onTap: _pickImage,
-                child: DottedBorder(
-                      color: context.theme.primaryColorDark,
-                      dashPattern: [8, 4],
-                      strokeWidth: 1,
-                  child: Container(
-                    width: double.infinity,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      color: context.theme.highlightColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),  
-                    child: Center(
-                      child: Text('Pick a Image from your Gallery')
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 30),
-            if (_image == null)
-             Text('No image selected'),
-            if (_image != null) ...[
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              if (_image != null)
+                Image.file(
+                  File(_image!.path),
+                  height: 250,
+                  width: 250,
+                  fit: BoxFit.cover,
+                )
+              else
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  "Detected disease: $diseaseName",
-                  style: TextStyle(color: context.theme.cardColor, fontSize: 26),
-                ),
-              ),
-              SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: GestureDetector(
-                  onTap: () {
-                    
-                  },
-                  child: Container(
-                    width: 250,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: context.theme.primaryColorDark,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'View Remedy',
-                        style: TextStyle(color: context.theme.highlightColor, fontSize: 22),
+                  onTap: _pickImage,
+                  child: DottedBorder(
+                        color: context.theme.primaryColorDark,
+                        dashPattern: [8, 4],
+                        strokeWidth: 1,
+                    child: Container(
+                      width: double.infinity,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        color: context.theme.highlightColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),  
+                      child: Center(
+                        child: Text('Pick a Image from your Gallery')
                       ),
                     ),
                   ),
                 ),
               ),
-            ]
-           
-          ],
+              SizedBox(height: 30),
+              if (_image == null)
+               Text('No image selected'),
+              if (_image != null) ...[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    "Detected disease: $diseaseName",
+                    style: TextStyle(color: context.theme.cardColor, fontSize: 26),
+                  ),
+                ),
+                SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: GestureDetector(
+                    onTap: () {
+                      
+                    },
+                    child: Container(
+                      width: 250,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: context.theme.primaryColorDark,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'View Remedy',
+                          style: TextStyle(color: context.theme.highlightColor, fontSize: 22),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ]
+             
+            ],
+          ),
         ),
       ),
     );

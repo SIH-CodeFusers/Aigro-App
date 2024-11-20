@@ -3,6 +3,7 @@ import 'package:aigro/pages/disease_mapping.dart';
 import 'package:aigro/pages/image_analysis.dart';
 import 'package:aigro/pages/khetisathi.dart';
 import 'package:aigro/pages/offline_detection.dart';
+import 'package:aigro/pages/upload_image.dart';
 import 'package:aigro/pages/user_onbaording.dart';
 import 'package:aigro/pages/weather_report.dart';
 import 'package:aigro/utils/authenticate.dart';
@@ -14,7 +15,7 @@ import 'package:aigro/pages/get_started.dart';
 import 'package:aigro/pages/home.dart';
 import 'package:aigro/pages/profile.dart';
 import 'package:aigro/pages/crop_details.dart';
-import 'package:aigro/pages/recipes.dart';
+import 'package:aigro/pages/crop_list.dart';
 import 'package:aigro/utils/routes.dart';
 import 'package:aigro/utils/themes.dart';
 import 'package:hive/hive.dart';
@@ -81,7 +82,7 @@ class _MyAppState extends State<MyApp> {
         Myroutes.onbaordingRoute: (context) => UserOnboarding(),
         Myroutes.homeRoute: (context) => HomePage(),
         Myroutes.aboutUsRoute: (context) => AboutUs(),
-        Myroutes.recipesRoute: (context) => RecipesPage(),
+        Myroutes.cropListRoute: (context) => CropListPage(),
         Myroutes.profileRoute: (context) => ProfilePage(),
         Myroutes.khetiSathiRoute: (context) => KhetiSathi(),
         // Myroutes.cropDetailsRoute: (context) => CropDetails(),
@@ -90,7 +91,8 @@ class _MyAppState extends State<MyApp> {
         Myroutes.offlineDetectionRoute: (context) => OfflineDetection(),
         Myroutes.weatherReportRoute: (context) => WeatherReport(),
         Myroutes.diseaseForecastRoute: (context) => DiseaseForecasting(),
-        Myroutes.imageAnalysisRoute: (context) => ImageAnalysis()
+        Myroutes.imageAnalysisRoute: (context) => ImageAnalysis(),
+         Myroutes.uploadImageRoute: (context) => UploadImage()
       },
     );   
   }

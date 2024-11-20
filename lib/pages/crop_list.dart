@@ -5,14 +5,14 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
 
-class RecipesPage extends StatefulWidget {
-  const RecipesPage({super.key});
+class CropListPage extends StatefulWidget {
+  const CropListPage({super.key});
 
   @override
-  State<RecipesPage> createState() => _RecipesPageState();
+  State<CropListPage> createState() => _CropListPageState();
 }
 
-class _RecipesPageState extends State<RecipesPage> {
+class _CropListPageState extends State<CropListPage> {
   late Future<List<Map<String, dynamic>>> cropDiseases;
 
   String selectedCrop = "Crops";
