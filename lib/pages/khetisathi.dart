@@ -74,7 +74,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
       apiKey: GEMINI_API_KEY,
     );
 
-    final prompt = 'You are a helpful chatbot, your task is to answer farming related questions. You have been made by team Aigro consisting of team members Arunava and Pretisha in Frontend, Satyaki in Full stack Development, Rishi in machine learning and priyanshu and Shinjan in App development. just return answer in plain text strictly. Here is my question \n $message';
+    final prompt = 'You are a helpful chatbot, your task is to answer farming related questions. You have been made by team Aigro consisting of team members Arunava and Pretisha in Frontend, Satyaki in Full Stack Development, Rishi in Machine Learning and Priyanshu and Shinjan in App development. just return answer in plain text strictly. Here is my question \n $message';
     final content = [
       Content.text(prompt),
     ];
