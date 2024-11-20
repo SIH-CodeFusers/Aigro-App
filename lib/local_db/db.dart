@@ -31,6 +31,7 @@ class BasicDB {
   String userDistrict = "";
   String userBlock = "";
   String userPin = "";
+  String userLang="en";
   List<String> userCrops = [];
 
 
@@ -43,6 +44,7 @@ class BasicDB {
     userBlock = "";
     userPin = "";
     userCrops = [];
+
   }
 
 
@@ -55,6 +57,7 @@ class BasicDB {
     userBlock = infobox.get("BLOCKDB") ?? "";
     userPin = infobox.get("PINDB") ?? "";
     userCrops = List<String>.from(infobox.get("CROPSDB") ?? []);
+
   }
 
   void updateDbInfo() {
@@ -66,11 +69,27 @@ class BasicDB {
     infobox.put("BLOCKDB", userBlock);
     infobox.put("PINDB", userPin);
     infobox.put("CROPSDB", userCrops); 
+
   }
 
-  // // Optional: Method to update crops data
-  // void updateCrops(List<String> crops) {
-  //   userCrops = crops;
-  //   updateDbInfo();  // Save updated crops info
-  // }
+}
+
+class LanguageDB{
+
+  final languageBox = Hive.box("Language_db");
+
+  String language="en";
+
+  void createLang() {
+    language="en";
+  }
+
+  void loadLang() {
+    language = languageBox.get("LANG");
+  }
+
+  void updateLang() {
+    languageBox.put("LANG", language);
+  }
+
 }

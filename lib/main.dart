@@ -27,15 +27,13 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox("Start_db");
   await Hive.openBox("BasicInfo-db");
-
+  await Hive.openBox("Language_db");
   await Firebase.initializeApp(
    
 );
   
   runApp(
-    
-    const MyApp(),
-    
+    const MyApp(), 
   );
 }
 

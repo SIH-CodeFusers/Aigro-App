@@ -24,9 +24,14 @@ class _HomePageState extends State<HomePage> {
 
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
+
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
+
   String userName = "User";
   String userDist = "abc";
   String userState= "abc";
+  String userLang="hello";
 
   String userimg = "";
   String first = "...";
@@ -50,6 +55,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+
     if (infobox.get("NAMEDB") == null) {
       bdb.createInitialInfo();
       userName = bdb.userName;
@@ -64,6 +70,15 @@ class _HomePageState extends State<HomePage> {
       userState = bdb.userState;
       List<String> words = userName.split(' '); // Splitting the string by space
       first = words[0];
+    }
+
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+      userLang = ldb.language;
+    }
+    else{
+      ldb.loadLang();
+      userLang = ldb.language;
     }
 
     super.initState();
@@ -145,7 +160,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Icon(Icons.location_on, color: Colors.black, size: 16,),
                 Text(
-                  "$userDist, $userState",
+                  "$userDist, $userState, $userLang",
                   style: TextStyle(color: Colors.black, fontSize: 16), 
                 ),
               ],
