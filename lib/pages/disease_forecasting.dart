@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:aigro/local_db/db.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -16,9 +18,13 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
   List alerts = [];
   String imageUrl = "";
 
+  final infobox = Hive.box("BasicInfo-db");
+  BasicDB bdb = BasicDB();
+
   @override
   void initState() {
     super.initState();
+    bdb.loadDataInfo(); 
     fetchAlerts();
   }
 
@@ -52,7 +58,7 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
   }
 
   Future<void> fetchAlerts() async {
-    final url = Uri.parse('https://api.thefuturetech.xyz/api/futurePred/fetchAlerts/700042');
+    final url = Uri.parse('https://api.thefuturetech.xyz/api/futurePred/fetchAlerts/700042'); // ${bdb.userPin}
     try {
       final response = await http.get(url);
 

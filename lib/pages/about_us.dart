@@ -40,7 +40,6 @@ class _AboutUsState extends State<AboutUs> {
     return; 
   }
 
-
   try {
     String aboutUsTitleResult = await translateText(aboutUsTitle, targetLanguage, apiKey);
     setState(() {
@@ -63,7 +62,6 @@ class _AboutUsState extends State<AboutUs> {
   } catch (e) {
     print("Error: $e");
   }
-
 
   try {
     String futurePlanningTitleResult = await translateText(futurePlanningTitle, targetLanguage, apiKey);

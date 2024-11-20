@@ -167,13 +167,13 @@ class _HomePageState extends State<HomePage> {
     {
       'color': Color.fromRGBO(249, 187, 208,1),
       'text': 'Kheti Sathi',
-      'image': 'assets/images/recovery_time.png',
+      'image': 'assets/images/ks.png',
       'route': Myroutes.khetiSathiRoute,
     },
     {
       'color': Color.fromRGBO(208, 196, 232,1),
       'text': 'Learning Resources',
-      'image': 'assets/images/resources.png',
+      'image': 'assets/images/lr.png',
       'route': Myroutes.profileRoute,
     },
   ];

@@ -154,7 +154,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
             height: 70,
             child: Container(
               decoration: BoxDecoration(
-                color:  context.theme.primaryColorDark,
+                // color:  context.theme.primaryColorDark,
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(8),
               ),
