@@ -36,21 +36,76 @@ class _HomePageState extends State<HomePage> {
   String userimg = "";
   String first = "...";
 
-  String translatedText="";
+  String welcomeText="Welcome to your dashboard. Scroll to see amazing features we provide.";
+  String detectAndTreat="Detect and Treat Diseases with a Simple Image Upload";
+  String analyzeNow="Analyze Now";
+  String otherFeatures="Other Key features of AIgro";
 
-  void translateWelcomeText() async {
-    String text = "Welcome to your dashboard. Scroll to see amazing features we provide.";
-    String targetLanguage = "bn";
+
+
+  void translateAllTexts() async {
+    String targetLanguage = userLang;
     String apiKey = GCP_API_KEY; 
 
+    if(targetLanguage=="en"){
+      welcomeText = welcomeText;
+      return;
+    }
+
     try {
-      String result = await translateText(text, targetLanguage, apiKey);
+      String welcomeTextresult = await translateText(welcomeText, targetLanguage, apiKey);
       setState(() {
-        translatedText = result; // Update the state to show translated text
+        welcomeText=welcomeTextresult;
       });
+     
     } catch (e) {
       print("Error: $e");
     }
+
+    try {
+      String detectAndTreatresult = await translateText(detectAndTreat, targetLanguage, apiKey);
+      setState(() {
+        detectAndTreat=detectAndTreatresult;
+      });
+     
+    } catch (e) {
+      print("Error: $e");
+    }
+
+    try {
+      String analyzeNowresult = await translateText(analyzeNow, targetLanguage, apiKey);
+      setState(() {
+        analyzeNow=analyzeNowresult;
+      });
+     
+    } catch (e) {
+      print("Error: $e");
+    }
+
+    try {
+      String otherFeaturesresult = await translateText(otherFeatures, targetLanguage, apiKey);
+      setState(() {
+        otherFeatures=otherFeaturesresult;
+      });
+     
+    } catch (e) {
+      print("Error: $e");
+    }
+
+    try {
+      for (int i = 0; i < dashboardData.length; i++) {
+        String text = dashboardData[i]['text'];
+        if (targetLanguage != "en") {
+          String translatedText = await translateText(text, targetLanguage, apiKey);
+          setState(() {
+            dashboardData[i]['text'] = translatedText;
+          });
+        }
+      }
+    } catch (e) {
+      print("Error translating dashboard data: $e");
+    }
+
   }
 
   @override
@@ -82,7 +137,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     super.initState();
-    translateWelcomeText();
+    translateAllTexts();
   }
 
   final List<Map<String, dynamic>> dashboardData = [
@@ -193,7 +248,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 5),
                 Text("Hello, ${first} 🌱",style: TextStyle(fontSize: 26,color: context.theme.primaryColorDark),),
                 SizedBox(height: 5),
-                Text(translatedText,style: TextStyle(fontSize: 14,color: Colors.grey[600]),),
+                Text(welcomeText,style: TextStyle(fontSize: 14,color: Colors.grey[600]),),
                 SizedBox(height: 15),
                 Container(
                   width: double.infinity,
@@ -233,7 +288,7 @@ class _HomePageState extends State<HomePage> {
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.45,
                                   child: Text(
-                                    "Detect and Treat Diseases with a Simple Image Upload",
+                                    detectAndTreat,
                                     style: TextStyle(
                                       color: context.theme.highlightColor,
                                       fontSize: 18,
@@ -254,7 +309,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     child: Center(
                                       child: Text(
-                                        "Analyse Now",
+                                        analyzeNow,
                                         style: TextStyle(color: context.theme.cardColor),
                                       ),
                                     ),
@@ -280,7 +335,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("Other Key Features of AIgro",style: TextStyle(fontSize: 16,color: Colors.grey[700]),),
+                  child: Text(otherFeatures,style: TextStyle(fontSize: 16,color: Colors.grey[700]),),
                 ),
                 const SizedBox(height: 5),
                 Padding(
