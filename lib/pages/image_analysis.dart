@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:aigro/pages/crop_details.dart';
+import 'package:aigro/secret.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -13,111 +15,37 @@ class ImageAnalysis extends StatefulWidget {
 }
 
 class _ImageAnalysisState extends State<ImageAnalysis> {
-  final ImagePicker _picker = ImagePicker();
-  File? _cropImage;
   Map<String, dynamic>? _analysisData;
+  List<Map<String, dynamic>> cropDiseaseList = [];
 
-    void _showAlert(String message) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text("OK"),
-          ),
-        ],
-      ),
-    );
+  // Load crop diseases from JSON
+  Future<void> loadCropDiseases() async {
+    final data = await DefaultAssetBundle.of(context)
+        .loadString('assets/others/crop_disease_18nov.json');
+    final Map<String, dynamic> jsonResult = json.decode(data);
+
+    setState(() {
+      cropDiseaseList = (jsonResult['cropDiseases'] as List)
+          .expand((crop) => (crop['diseaseDetails'] as List).map((disease) {
+                return {
+                  "diseaseName": disease['diseaseName'] as String,
+                  "scientificName": disease['scientificName'] as String,
+                  "category": disease['category'] as String,
+                  "images": (disease['images'] as List).map((img) => img as String).toList(),
+                  "symptoms": disease['symptoms'] as String? ?? '',
+                  "causes": disease['causes'] as String? ?? '',
+                  "remedies": (disease['remedies'] as List?)?.map((r) => r as String).toList() ?? [],
+                  "chemicalControl": disease['chemicalControl'] as String? ?? '',
+                  "cropName": crop['cropName'] as String,
+                };
+              }))
+          .toList();
+    });
   }
 
-  void _showSuccessMessage(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
-  }
-
-    Future<void> _pickImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      File file = File(image.path);
-      String? mimeType = lookupMimeType(file.path);
-      if (mimeType != null && (mimeType.contains("jpg") || mimeType.contains("jpeg") || mimeType.contains("png"))) {
-        if (await file.length() <= 500 * 1024) {
-          setState(() {
-            _cropImage = file;
-          });
-        } else {
-          _showAlert("File size exceeds 500kb limit.");
-        }
-      } else {
-        _showAlert("Please select a correct Image Format.");
-      }
-    }
-  }
-
-  Future<void> _uploadAndAnalyzeImage() async {
-    if (_cropImage == null) {
-      _showAlert("Please upload a crop image.");
-      return;
-    }
-
-    try {
-      String imgURL = await uploadImage(_cropImage!);
-      await _newAnalysis(imgURL);
-      await _fetchAnalysisData();
-    } catch (error) {
-      print("Error: $error");
-    }
-  }
-
-  Future<String> uploadImage(File file) async {
-    try {
-      final String fileName = 'Test/${DateTime.now().millisecondsSinceEpoch}_${file.path.split('/').last}';
-      final Reference storageRef = FirebaseStorage.instance.ref().child(fileName);
-      final UploadTask uploadTask = storageRef.putFile(file);
-
-      uploadTask.snapshotEvents.listen((TaskSnapshot snapshot) {
-        final progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        print('Upload is $progress% done');
-      });
-
-      final TaskSnapshot snapshot = await uploadTask.whenComplete(() => null);
-      final String downloadURL = await snapshot.ref.getDownloadURL();
-      return downloadURL;
-    } catch (error) {
-      throw Exception("Something went wrong: $error");
-    }
-  }
-
-  Future<void> _newAnalysis(String imgURL) async {
-    const analysisUrl = 'https://api.thefuturetech.xyz/api/imageAnalysis/newAnalysis';
-
-    final data = {
-      "useruid": "user_2ozYA1JorKYVMjC0kVNdnLTLevt",
-      "cropName": "Mango",
-      "cropImage": imgURL,
-      "block": "DHANIAKHALI",
-      "pinCode": "700042"
-    };
-
-    final response = await http.post(
-      Uri.parse(analysisUrl),
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode(data),
-    );
-
-    if (response.statusCode == 200) {
-      _showSuccessMessage("New Analysis added successfully!");
-    } else {
-      print("Error: ${response.body}");
-    }
-  }
-
+  // Fetch analysis data from API
   Future<void> _fetchAnalysisData() async {
-    const fetchUrl = 'https://api.thefuturetech.xyz/api/imageAnalysis/fetchDetailsByUid/user_2ozYA1JorKYVMjC0kVNdnLTLevt';
-
+    const fetchUrl = 'https://api.thefuturetech.xyz/api/imageAnalysis/fetchDetailsByUid/${BACKEND_UID}';
     final response = await http.get(Uri.parse(fetchUrl));
 
     if (response.statusCode == 200) {
@@ -132,7 +60,8 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   @override
   void initState() {
     super.initState();
-    _fetchAnalysisData();
+    loadCropDiseases();  // Load crop diseases data
+    _fetchAnalysisData(); // Fetch analysis data
   }
 
   @override
@@ -147,12 +76,8 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
             children: [
               SizedBox(height: 16),
               Flexible(
-                child: _buildAnalysisResult(), // This will make the list scrollable within the available space
+                child: _buildAnalysisResult(),
               ),
-              // SizedBox(height: 16),
-              // if (_cropImage != null) 
-              //   Image.file(_cropImage!, height: 150),
-              // SizedBox(height: 16),
             ],
           ),
         ),
@@ -163,33 +88,34 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/uploadImage');
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: context.theme.primaryColorDark,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Analyse New Image',
-                        style: TextStyle(color: context.theme.highlightColor, fontSize: 22),
-                      ),
+              padding: const EdgeInsets.symmetric(horizontal: 1),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/uploadImage');
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: context.theme.primaryColorDark,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Analyse New Image',
+                      style: TextStyle(color: context.theme.highlightColor, fontSize: 22),
                     ),
                   ),
                 ),
               ),
+            ),
           ],
         ),
       ),
     );
   }
 
+  // Build the analysis result
   Widget _buildAnalysisResult() {
     if (_analysisData == null) {
       return Center(child: Text("Loading data..."));
@@ -211,21 +137,76 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         final cropName = result['cropName'] ?? "Unknown";
         final status = result['status'] ?? "Unknown";
         final diseaseName = result['diseaseName'] ?? "Unknown";
+        final symptoms = result['symptoms'] ?? "Unknown";
+        final cropImage = result['cropImage'] ?? '';
 
-        return Card(
-          color: context.theme.highlightColor,
-          margin: EdgeInsets.symmetric(vertical: 8.0),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Crop Name: $cropName", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                SizedBox(height: 8),
-                Text("Status: $status", style: TextStyle(fontSize: 16)),
-                SizedBox(height: 8),
-                Text("Disease Name: $diseaseName", style: TextStyle(fontSize: 16)),
-              ],
+        return GestureDetector(
+onTap: () {
+    // Find the disease from cropDiseaseList based on the diseaseName
+    final selectedDisease = cropDiseaseList.firstWhere(
+      (disease) => disease['diseaseName'] == diseaseName, 
+      orElse: () => <String, Object>{} // Explicitly cast to Map<String, Object>
+    );
+
+    // Check if the disease was found
+    if (selectedDisease.isNotEmpty) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CropDetails(disease: selectedDisease),
+        ),
+      );
+    } else {
+      // Handle case when disease is not found, e.g., show a message
+      print("Disease not found: $diseaseName");
+    }
+  },
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 8.0),
+            decoration: BoxDecoration(
+              color: context.theme.highlightColor,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (cropImage.isNotEmpty)
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        cropImage,
+                        width: double.infinity,
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("$diseaseName in $cropName", style: TextStyle(fontSize: 20, )),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: context.theme.focusColor,
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        child: Text('$status'),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 15),
+                  Text(
+                    "$symptoms",
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -233,3 +214,4 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
     );
   }
 }
+

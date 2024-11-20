@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/image_analysis.dart';
+import 'package:aigro/secret.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:mime/mime.dart';
@@ -19,6 +22,26 @@ class _UploadImageState extends State<UploadImage> {
   File? _cropImage;
   bool uploaded=false;
   bool isAnalyzing=false;
+  String selectedCrop = "Corn";
+
+  final List<String> cropOptions = [
+    "Corn",
+    "Tomato",
+    "Rice",
+    "Apple",
+    "Mango",
+    "Banana",
+    "Tea",
+  ];
+
+  final infobox = Hive.box("BasicInfo-db");
+  BasicDB bdb = BasicDB();
+
+   @override
+  void initState() {
+    bdb.loadDataInfo(); 
+    super.initState();
+  }
 
   Future<void> _pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
@@ -76,11 +99,11 @@ class _UploadImageState extends State<UploadImage> {
     const analysisUrl = 'https://api.thefuturetech.xyz/api/imageAnalysis/newAnalysis';
 
     final data = {
-      "useruid": "user_2ozYA1JorKYVMjC0kVNdnLTLevt",
-      "cropName": "Rice",
+      "useruid":BACKEND_UID,
+      "cropName": selectedCrop,
       "cropImage": imgURL,
-      "block": "DHANIAKHALI",
-      "pinCode": "700042"
+      "block": bdb.userBlock,
+      "pinCode": bdb.userPin,
     };
 
     final response = await http.post(
@@ -123,13 +146,6 @@ class _UploadImageState extends State<UploadImage> {
     );
   }
 
-  @override
-  void initState() {
-      
-    // TODO: implement initState
-    super.initState();
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +172,7 @@ class _UploadImageState extends State<UploadImage> {
                 child: GestureDetector(
                   onTap: _pickImage,
                   child: DottedBorder(
-                        color: context.theme.primaryColorDark,
+                        color: context.theme.cardColor,
                         dashPattern: [8, 4],
                         strokeWidth: 1,
                     child: Container(
@@ -167,9 +183,49 @@ class _UploadImageState extends State<UploadImage> {
                         borderRadius: BorderRadius.circular(10),
                       ),  
                       child: Center(
-                        child: Text('Pick a Image from your Gallery')
+                        child: Text('Pick a Image from your Gallery',
+                          style: TextStyle(color: context.theme.primaryColorDark,fontSize: 16),
+                        )
                       ),
                     ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Container(
+                  width: double.infinity, 
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: context.theme.cardColor, 
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(8), 
+                  ),
+                  child: DropdownButton<String>(
+                    value: selectedCrop,
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedCrop = newValue!;
+                      });
+                    },
+                    items: cropOptions.map<DropdownMenuItem<String>>((String crop) {
+                      return DropdownMenuItem<String>(
+                        value: crop,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                          child: Text(crop),
+                        ),
+                      );
+                    }).toList(),
+                    isExpanded: true, 
+                    underline: SizedBox(), 
+                    style: TextStyle(
+                      fontSize: 16, 
+                      color: Colors.black, 
+                    ),
+                    icon: Icon(Icons.arrow_drop_down),
                   ),
                 ),
               ),
@@ -209,10 +265,10 @@ class _UploadImageState extends State<UploadImage> {
                   child: GestureDetector(
                     onTap: () {
                       // _uploadAndAnalyzeImage();
-                      Navigator.pushAndRemoveUntil(
+                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => ImageAnalysis()),
-                        (Route<dynamic> route) => true, 
+                        (Route<dynamic> route) => route.isFirst, 
                       );
                     },
                     child: Container(
