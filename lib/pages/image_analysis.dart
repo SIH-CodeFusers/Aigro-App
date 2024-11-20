@@ -60,8 +60,8 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   @override
   void initState() {
     super.initState();
-    loadCropDiseases();  // Load crop diseases data
-    _fetchAnalysisData(); // Fetch analysis data
+    loadCropDiseases();
+    _fetchAnalysisData(); 
   }
 
   @override

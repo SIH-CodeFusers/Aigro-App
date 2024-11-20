@@ -1,4 +1,5 @@
 import 'package:aigro/local_db/db.dart';
+import 'package:aigro/utils/translate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:aigro/utils/routes.dart';
@@ -9,6 +10,8 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../secret.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,6 +30,23 @@ class _HomePageState extends State<HomePage> {
 
   String userimg = "";
   String first = "...";
+
+  String translatedText="";
+
+  void translateWelcomeText() async {
+    String text = "Welcome to your dashboard. Scroll to see amazing features we provide.";
+    String targetLanguage = "bn";
+    String apiKey = GCP_API_KEY; 
+
+    try {
+      String result = await translateText(text, targetLanguage, apiKey);
+      setState(() {
+        translatedText = result; // Update the state to show translated text
+      });
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
 
   @override
   void initState() {
@@ -47,6 +67,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     super.initState();
+    translateWelcomeText();
   }
 
   final List<Map<String, dynamic>> dashboardData = [
@@ -157,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 5),
                 Text("Hello, ${first} 🌱",style: TextStyle(fontSize: 26,color: context.theme.primaryColorDark),),
                 SizedBox(height: 5),
-                Text("Welcome to your dashboard. Scroll to see amazing features we provide.",style: TextStyle(fontSize: 14,color: Colors.grey[600]),),
+                Text(translatedText,style: TextStyle(fontSize: 14,color: Colors.grey[600]),),
                 SizedBox(height: 15),
                 Container(
                   width: double.infinity,
