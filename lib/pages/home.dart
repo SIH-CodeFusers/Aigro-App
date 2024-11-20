@@ -48,7 +48,6 @@ class _HomePageState extends State<HomePage> {
     String apiKey = GCP_API_KEY; 
 
     if(targetLanguage=="en"){
-      welcomeText = welcomeText;
       return;
     }
 

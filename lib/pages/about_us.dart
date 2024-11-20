@@ -1,6 +1,10 @@
+import 'package:aigro/local_db/db.dart';
+import 'package:aigro/secret.dart';
+import 'package:aigro/utils/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
+import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AboutUs extends StatefulWidget {
@@ -11,6 +15,103 @@ class AboutUs extends StatefulWidget {
 }
 
 class _AboutUsState extends State<AboutUs> {
+
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
+  String userLang="hello";
+
+  String aboutUsTitle = '🌱 About Us';
+  String motiveTitle = "What's Our Motive";
+  String motiveContent =
+    "Our motive is to empower farmers by providing them with the necessary tools and resources to succeed in their agricultural endeavors.";
+  String futurePlanningTitle = 'Our Future Planning';
+  String futurePlanningContent =
+    "We are planning to expand our services to more regions, ensuring that every farmer has access to the support they need.";
+  String provideTitle = 'What We Provide';
+  String provideContent =
+    "We provide a wide range of agricultural products and services, tailored to meet the unique needs of each farmer.";
+
+  void translateAllTexts() async {
+  String targetLanguage = userLang;
+  String apiKey = GCP_API_KEY;
+
+  
+  if (targetLanguage == "en") {
+    return; 
+  }
+
+
+  try {
+    String aboutUsTitleResult = await translateText(aboutUsTitle, targetLanguage, apiKey);
+    setState(() {
+      aboutUsTitle = aboutUsTitleResult;
+    });
+  } catch (e) {
+    print("Error: $e");
+  }
+
+  try {
+    String motiveTitleResult = await translateText(motiveTitle, targetLanguage, apiKey);
+    setState(() {
+      motiveTitle = motiveTitleResult;
+    });
+
+    String motiveContentResult = await translateText(motiveContent, targetLanguage, apiKey);
+    setState(() {
+      motiveContent = motiveContentResult;
+    });
+  } catch (e) {
+    print("Error: $e");
+  }
+
+
+  try {
+    String futurePlanningTitleResult = await translateText(futurePlanningTitle, targetLanguage, apiKey);
+    setState(() {
+      futurePlanningTitle = futurePlanningTitleResult;
+    });
+
+    String futurePlanningContentResult = await translateText(futurePlanningContent, targetLanguage, apiKey);
+    setState(() {
+      futurePlanningContent = futurePlanningContentResult;
+    });
+  } catch (e) {
+    print("Error: $e");
+  }
+
+  try {
+    String provideTitleResult = await translateText(provideTitle, targetLanguage, apiKey);
+    setState(() {
+      provideTitle = provideTitleResult;
+    });
+
+    String provideContentResult = await translateText(provideContent, targetLanguage, apiKey);
+    setState(() {
+      provideContent = provideContentResult;
+    });
+  } catch (e) {
+    print("Error: $e");
+  }
+}
+
+
+  @override
+  void initState() {
+
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+      userLang = ldb.language;
+    }
+    else{
+      ldb.loadLang();
+      userLang = ldb.language;
+    }
+
+    super.initState();
+    translateAllTexts();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,36 +123,26 @@ class _AboutUsState extends State<AboutUs> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              const Text(
-                '🌱 About Us',
-                style: TextStyle(
+              Text(
+                aboutUsTitle,
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: const Color(0xFF004D3F),
+                  color: Color(0xFF004D3F),
                 ),
               ),
               const SizedBox(height: 24),
 
+
               Expanded(
                 child: ListView(
                   children: [
-                    _buildInfoCard(
-                      title: "What's Our Motive",
-                      content:
-                          "Our motive is to empower farmers by providing them with the necessary tools and resources to succeed in their agricultural endeavors.",
-                    ),
+                    _buildInfoCard(title: motiveTitle, content: motiveContent),
                     const SizedBox(height: 16),
                     _buildInfoCard(
-                      title: 'Our Future Planning',
-                      content:
-                          "We are planning to expand our services to more regions, ensuring that every farmer has access to the support they need.",
-                    ),
+                        title: futurePlanningTitle, content: futurePlanningContent),
                     const SizedBox(height: 16),
-                    _buildInfoCard(
-                      title: 'What We Provide',
-                      content:
-                          "We provide a wide range of agricultural products and services, tailored to meet the unique needs of each farmer.",
-                    ),
+                    _buildInfoCard(title: provideTitle, content: provideContent),
                   ],
                 ),
               ),
@@ -66,11 +157,10 @@ class _AboutUsState extends State<AboutUs> {
     );
   }
 
-  
   Widget _buildInfoCard({required String title, required String content}) {
     return Container(
       decoration: BoxDecoration(
-        color: context.theme.primaryColorDark, 
+        color: context.theme.primaryColorDark,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
