@@ -1,3 +1,4 @@
+import 'package:aigro/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -135,7 +136,11 @@ class _UserOnboardingState extends State<UserOnboarding> {
     
     db.updateTheme();
     bdb.updateDbInfo(); 
-    Navigator.pushNamed(context, Myroutes.homeRoute); 
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+      (Route<dynamic> route) => false, 
+    );
   }
 
   void _handleBackButtonPressed() {
