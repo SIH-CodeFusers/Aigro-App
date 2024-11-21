@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
       'color': Color.fromRGBO(208, 196, 232,1),
       'text': 'Learning Resources',
       'image': 'assets/images/lr.png',
-      'route': Myroutes.profileRoute,
+      'route': Myroutes.learningResourcesRoute,
     },
   ];
 
@@ -342,8 +342,8 @@ class _HomePageState extends State<HomePage> {
                   child: GridView.builder(    
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2, 
-                      crossAxisSpacing: 4,
-                      mainAxisSpacing: 4,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
                       childAspectRatio: 1, 
                     ),
                     itemCount: 6, 

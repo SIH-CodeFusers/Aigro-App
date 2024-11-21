@@ -2,6 +2,7 @@ import 'package:aigro/pages/disease_forecasting.dart';
 import 'package:aigro/pages/disease_mapping.dart';
 import 'package:aigro/pages/image_analysis.dart';
 import 'package:aigro/pages/khetisathi.dart';
+import 'package:aigro/pages/learning_resources.dart';
 import 'package:aigro/pages/offline_detection.dart';
 import 'package:aigro/pages/upload_image.dart';
 import 'package:aigro/pages/user_onbaording.dart';
@@ -31,7 +32,6 @@ void main() async {
   await Firebase.initializeApp(
    
 );
-  
   runApp(
     const MyApp(), 
   );
@@ -90,7 +90,8 @@ class _MyAppState extends State<MyApp> {
         Myroutes.weatherReportRoute: (context) => WeatherReport(),
         Myroutes.diseaseForecastRoute: (context) => DiseaseForecasting(),
         Myroutes.imageAnalysisRoute: (context) => ImageAnalysis(),
-         Myroutes.uploadImageRoute: (context) => UploadImage()
+        Myroutes.uploadImageRoute: (context) => UploadImage(),
+        Myroutes.learningResourcesRoute: (context) => LearningResources()
       },
     );   
   }

@@ -14,4 +14,5 @@ class Myroutes{
   static String diseaseForecastRoute = "/diseaseForecast";
   static String imageAnalysisRoute = "/imageAnalysis";
   static String uploadImageRoute = "/uploadImage";
+  static String learningResourcesRoute = "/learningResources";
 }
