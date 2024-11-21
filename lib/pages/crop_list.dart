@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
+import 'package:aigro/secret.dart';
+import 'package:aigro/utils/translate.dart';
+import 'package:hive/hive.dart';
+import 'package:aigro/local_db/db.dart';
 
 class CropListPage extends StatefulWidget {
   const CropListPage({super.key});
@@ -14,47 +18,90 @@ class CropListPage extends StatefulWidget {
 
 class _CropListPageState extends State<CropListPage> {
   late Future<List<Map<String, dynamic>>> cropDiseases;
-
   String selectedCrop = "Crops";
   String selectedCategory = "Category";
-
-  final List<String> cropOptions = ["Crops",  
+  final List<String> cropOptions = [
+    "Crops",
     "Corn",
     "Tomato",
     "Rice",
     "Apple",
     "Mango",
     "Banana",
-    "Tea",];
+    "Tea",
+  ];
   final List<String> categoryOptions = ["Category", "Fungus", "Virus", "Bacteria"];
 
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
+  String userLang = "en";
+
   Future<List<Map<String, dynamic>>> loadCropDiseases() async {
-  final String data = await DefaultAssetBundle.of(context)
-      .loadString('assets/others/crop_disease_18nov.json');
-  final Map<String, dynamic> jsonResult = json.decode(data);
+    final String data = await DefaultAssetBundle.of(context)
+        .loadString('assets/others/crop_disease_18nov.json');
+    final Map<String, dynamic> jsonResult = json.decode(data);
+    final diseases = (jsonResult['cropDiseases'] as List)
+        .expand((crop) => (crop['diseaseDetails'] as List).map((disease) {
+              return {
+                "diseaseName": disease['diseaseName'] as String,
+                "scientificName": disease['scientificName'] as String,
+                "category": disease['category'] as String,
+                "images": (disease['images'] as List).map((img) => img as String).toList(),
+                "symptoms": disease['symptoms'] as String? ?? '',
+                "causes": disease['causes'] as String? ?? '',
+                "remedies":
+                    (disease['remedies'] as List?)?.map((r) => r as String).toList() ?? [],
+                "chemicalControl": disease['chemicalControl'] as String? ?? '',
+                "cropName": crop['cropName'] as String,
+              };
+            }))
+        .toList();
 
-  return (jsonResult['cropDiseases'] as List)
-      .expand((crop) => (crop['diseaseDetails'] as List).map((disease) {
+    // Translate data if necessary
+    if (userLang != "en") {
+      return await translateCropDiseases(diseases);
+    }
+    return diseases;
+  }
 
-            return {
-              "diseaseName": disease['diseaseName'] as String,
-              "scientificName": disease['scientificName'] as String,
-              "category": disease['category'] as String,
-              "images": (disease['images'] as List).map((img) => img as String).toList(),
-              "symptoms": disease['symptoms'] as String? ?? '',
-              "causes": disease['causes'] as String? ?? '',
-              "remedies": (disease['remedies'] as List?)?.map((r) => r as String).toList() ?? [],
-              "chemicalControl": disease['chemicalControl'] as String? ?? '',
-              "cropName": crop['cropName'] as String,
-            };
-          }))
-      .toList();
-}
+  // Translation function
+  Future<List<Map<String, dynamic>>> translateCropDiseases(
+      List<Map<String, dynamic>> diseases) async {
+    List<Map<String, dynamic>> translatedDiseases = [];
+    String targetLanguage = userLang;
+    String apiKey = GCP_API_KEY;
 
+    try {
+      for (var disease in diseases) {
+        String translatedDiseaseName =
+            await translateText(disease['diseaseName'], targetLanguage, apiKey);
+        String translatedCategory =
+            await translateText(disease['category'], targetLanguage, apiKey);
+
+        translatedDiseases.add({
+          ...disease,
+          "diseaseName": translatedDiseaseName,
+          "category": translatedCategory,
+        });
+      }
+    } catch (e) {
+      print("Error translating diseases: $e");
+      return diseases; // Fallback to untranslated data
+    }
+
+    return translatedDiseases;
+  }
 
   @override
   void initState() {
     super.initState();
+    if (languageBox.get("LANG") == null) {
+      ldb.createLang();
+      userLang = ldb.language;
+    } else {
+      ldb.loadLang();
+      userLang = ldb.language;
+    }
     cropDiseases = loadCropDiseases();
   }
 
@@ -126,8 +173,9 @@ class _CropListPageState extends State<CropListPage> {
                   future: cropDiseases,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator(
-                        color:Color(0xFF004D3F),
+                      return const Center(
+                          child: CircularProgressIndicator(
+                        color: Color(0xFF004D3F),
                       ));
                     }
 
@@ -195,7 +243,7 @@ class _CropListPageState extends State<CropListPage> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Disease Name: ${disease["diseaseName"]}",
+                                        "${disease["diseaseName"]}",
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
