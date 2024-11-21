@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/utils/translate.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:hive/hive.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AboutUs extends StatefulWidget {
@@ -15,6 +18,7 @@ class AboutUs extends StatefulWidget {
 }
 
 class _AboutUsState extends State<AboutUs> {
+
   final languageBox = Hive.box("Language_db");
   LanguageDB ldb = LanguageDB();
   String userLang = "hello";
@@ -61,6 +65,60 @@ class _AboutUsState extends State<AboutUs> {
           "AIgro provides personalized weather updates and cultivation tips based on your location and crop type. Users can access these insights through the website's dedicated sections for weather forecasts and farming advice."
     },
   ];
+
+  
+  final PageController _controller = PageController(viewportFraction: 1.0);
+  int _currentIndex = 0;
+  Timer? _timer;
+
+  final List<Map<String, String>> teamMembers = [
+    {
+      "name": "Arunava Dutta", 
+      "role": "Frontend Developer", 
+      "image": "assets/images/arunava.jpeg",
+      "web": "https://meard.vercel.app/",
+    },
+    {
+      "name": "Pretisha Sahoo", 
+      "role": "Frontend Developer", 
+      "image": "assets/images/pretisha.jpeg",
+      "web": "https://meard.vercel.app/",
+    },
+    {
+      "name": "Satyaki Dey", 
+      "role": "Full Stack Developer", 
+      "image": "assets/images/satyaki.jpeg",
+      "web": "https://meard.vercel.app/",
+    },
+    {
+      "name": "Priyanshu Dutta", 
+      "role": "App Developer", 
+      "image": "assets/images/priyanshu.jpeg",
+       "web": "https://meard.vercel.app/",
+    },
+    {
+      "name": "Rishi Bhattasali", 
+      "role": "ML Engineer", 
+      "image": "assets/images/rishi.jpeg",
+       "web": "https://meard.vercel.app/",
+    },
+    {
+      "name": "Shinjan Saha", 
+      "role": "App Developer", 
+      "image": "assets/images/shinjan.jpeg",
+       "web": "https://meard.vercel.app/",
+    },
+  ];
+
+  void _launchURL() async {
+    const url = 'https://pub.dev/packages/url_launcher'; // Make sure URL is correct
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
 
   void translateAllTexts() async {
     String targetLanguage = userLang;
@@ -160,7 +218,27 @@ class _AboutUsState extends State<AboutUs> {
     }
 
     super.initState();
+
+    _timer = Timer.periodic(Duration(seconds: 3), (Timer timer) {
+      if (_currentIndex < 2) {
+        _currentIndex++;
+      } else {
+        _currentIndex = 0;
+      }
+      _controller.animateToPage(
+        _currentIndex,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    });
     translateAllTexts();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -192,7 +270,8 @@ class _AboutUsState extends State<AboutUs> {
                     const SizedBox(height: 16),
                     _buildInfoCard(title: provideTitle, content: provideContent),
                     const SizedBox(height: 32),
-                    _buildAccordionWidget(), // Accordion Widget added here
+                    _buildAccordionWidget(),
+                    _buildTeamWidget()
                   ],
                 ),
               ),
@@ -206,6 +285,97 @@ class _AboutUsState extends State<AboutUs> {
       ),
     );
   }
+
+Widget _buildTeamWidget() {
+    return SizedBox(
+      height: 180,
+      child: PageView.builder(
+        controller: _controller,
+        itemCount: 3,
+        itemBuilder: (context, index) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildContainer(index * 2),
+              _buildContainer(index * 2 + 1),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildContainer(int index) {
+    final member = teamMembers[index];
+
+    return Flexible(
+      child: GestureDetector(
+        onTap: (){
+          _launchURL();
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5)
+          ),
+          margin: EdgeInsets.symmetric(horizontal: 4),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: ColorFiltered(
+                    colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.3),  
+                      BlendMode.darken,
+                    ),
+                    child: Image.asset(
+                      member['image']!,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: 
+                  Container(
+                    margin: EdgeInsets.all(5),
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white.withOpacity(0.8),
+                    ),
+                    padding: EdgeInsets.all(8),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          member["name"]!,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          member["role"]!,
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
 
   Widget _buildInfoCard({required String title, required String content}) {
     return Container(
