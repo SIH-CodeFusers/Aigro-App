@@ -167,6 +167,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 DropdownMenuItem(value: 'en', child: Text('English')),
                 DropdownMenuItem(value: 'hi', child: Text('Hindi')),
                 DropdownMenuItem(value: 'bn', child: Text('Bengali')),
+                 DropdownMenuItem(value: 'te', child: Text('Telegu')),
               ],
               onChanged: (String? newValue) {
                 setState(() {

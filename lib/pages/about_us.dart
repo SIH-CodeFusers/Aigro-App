@@ -24,6 +24,8 @@ class _AboutUsState extends State<AboutUs> {
   String userLang = "hello";
 
   String aboutUsTitle = '🌱 About Us';
+  String ourTeamTitle = 'Meet Our Team 🌱';
+  String fnqTitle = 'Frequently Asked Questions';
   String motiveTitle = "What's Our Motive";
   String motiveContent =
       "Our motive is to empower farmers by providing them with the necessary tools and resources to succeed in their agricultural endeavors.";
@@ -34,93 +36,7 @@ class _AboutUsState extends State<AboutUs> {
   String provideContent =
       "We provide a wide range of agricultural products and services, tailored to meet the unique needs of each farmer.";
 
-  
-  List<Map<String, String>> accordionData = [
-    {
-      "title": "What is Aigro",
-      "content":
-          "AIgro, developed by the CodeFusers Team, is a website designed to assist farmers with various features such as disease prediction, image analysis, a farmers' community, crop health monitoring, an AI chat assistant, weather updates, cultivation tips, and farm resources."
-    },
-    {
-      "title": "How do the Dieases Prediction Work?",
-      "content":
-          "The disease prediction feature uses AI algorithms to analyze data and predict potential crop diseases based on historical and real-time information. This helps farmers take preventive measures early."
-    },
-    {
-      "title": "What does the Image Analysis Tool Do?",
-      "content":
-          "You can reach us via email, phone, or through our in-app support system.The image analysis tool allows farmers to upload images of their crops or plants. The AI then analyzes these images to detect signs of diseases, pests, or nutritional deficiencies, providing actionable insights."
-    },
-    {
-      "title": "How can i connect with other Farmers in Aigro",
-      "content":
-          "AIgro offers a farmers' community feature where users can join discussions, share experiences, and seek advice from other farmers. This platform fosters collaboration and knowledge sharing."
-    },{
-      "title": "What kind of Suppourt can I get from AI Chat Assistant",
-      "content":
-          "The AI chat assistant provides real-time support by answering farming-related questions, offering advice on crop management, and guiding users through the website's features. It aims to assist users with their queries efficiently."
-    },{
-      "title": "Who do I get Wheather Updates & Cultivtation Tips?",
-      "content":
-          "AIgro provides personalized weather updates and cultivation tips based on your location and crop type. Users can access these insights through the website's dedicated sections for weather forecasts and farming advice."
-    },
-  ];
-
-  
-  final PageController _controller = PageController(viewportFraction: 1.0);
-  int _currentIndex = 0;
-  Timer? _timer;
-
-  final List<Map<String, String>> teamMembers = [
-    {
-      "name": "Arunava Dutta", 
-      "role": "Frontend Developer", 
-      "image": "assets/images/arunava.jpeg",
-      "web": "https://meard.vercel.app/",
-    },
-    {
-      "name": "Pretisha Sahoo", 
-      "role": "Frontend Developer", 
-      "image": "assets/images/pretisha.jpeg",
-      "web": "https://meard.vercel.app/",
-    },
-    {
-      "name": "Satyaki Dey", 
-      "role": "Full Stack Developer", 
-      "image": "assets/images/satyaki.jpeg",
-      "web": "https://meard.vercel.app/",
-    },
-    {
-      "name": "Priyanshu Dutta", 
-      "role": "App Developer", 
-      "image": "assets/images/priyanshu.jpeg",
-       "web": "https://meard.vercel.app/",
-    },
-    {
-      "name": "Rishi Bhattasali", 
-      "role": "ML Engineer", 
-      "image": "assets/images/rishi.jpeg",
-       "web": "https://meard.vercel.app/",
-    },
-    {
-      "name": "Shinjan Saha", 
-      "role": "App Developer", 
-      "image": "assets/images/shinjan.jpeg",
-       "web": "https://meard.vercel.app/",
-    },
-  ];
-
-  void _launchURL() async {
-    const url = 'https://pub.dev/packages/url_launcher'; // Make sure URL is correct
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-
-  void translateAllTexts() async {
+    void translateAllTexts() async {
     String targetLanguage = userLang;
     String apiKey = GCP_API_KEY;
 
@@ -136,6 +52,43 @@ class _AboutUsState extends State<AboutUs> {
       });
     } catch (e) {
       print("Error: $e");
+    }
+
+    try {
+      String ourTeamTitleResult =
+          await translateText(ourTeamTitle, targetLanguage, apiKey);
+      setState(() {
+        ourTeamTitle = ourTeamTitleResult;
+      });
+    } catch (e) {
+      print("Error: $e");
+    }
+    try {
+      String fnqTitleResult =
+          await translateText(fnqTitle, targetLanguage, apiKey);
+      setState(() {
+        fnqTitle = fnqTitleResult;
+      });
+    } catch (e) {
+      print("Error: $e");
+    }
+
+    try {
+      List<Map<String, String>> translatedTeamMembers = [];
+      for (var item in teamMembers) {
+        String translatedRole = await translateText(item["role"] ?? "", targetLanguage, apiKey);        
+         translatedTeamMembers.add({
+          "name": item["name"] ?? "", 
+          "role": translatedRole,
+          "image": item["image"] ?? "", 
+          "web": item["web"] ?? "",
+        });
+      }
+      setState(() {
+        teamMembers = translatedTeamMembers;
+      });
+    } catch (e) {
+      print("Error translating team members: $e");
     }
 
     try {
@@ -186,6 +139,24 @@ class _AboutUsState extends State<AboutUs> {
       print("Error: $e");
     }
 
+    try {
+      List<Map<String, String>> translatedTeamMembers = [];
+      for (var item in teamMembers) {
+        String translatedRole = await translateText(item["role"] ?? "", targetLanguage, apiKey);        
+         translatedTeamMembers.add({
+          "name": item["name"] ?? "", 
+          "role": translatedRole,
+          "image": item["image"] ?? "", 
+          "web": item["web"] ?? "",
+        });
+      }
+      setState(() {
+        teamMembers = translatedTeamMembers;
+      });
+    } catch (e) {
+      print("Error translating team members: $e");
+    }
+
 
     try {
       List<Map<String, String>> translatedAccordionData = [];
@@ -205,7 +176,98 @@ class _AboutUsState extends State<AboutUs> {
     } catch (e) {
       print("Error translating accordion: $e");
     }
+
+
+
+
   }
+
+  
+  List<Map<String, String>> accordionData = [
+    {
+      "title": "What is Aigro",
+      "content":
+          "AIgro, developed by the CodeFusers Team, is a website designed to assist farmers with various features such as disease prediction, image analysis, a farmers' community, crop health monitoring, an AI chat assistant, weather updates, cultivation tips, and farm resources."
+    },
+    {
+      "title": "How do the Dieases Prediction Work?",
+      "content":
+          "The disease prediction feature uses AI algorithms to analyze data and predict potential crop diseases based on historical and real-time information. This helps farmers take preventive measures early."
+    },
+    {
+      "title": "What does the Image Analysis Tool Do?",
+      "content":
+          "You can reach us via email, phone, or through our in-app support system.The image analysis tool allows farmers to upload images of their crops or plants. The AI then analyzes these images to detect signs of diseases, pests, or nutritional deficiencies, providing actionable insights."
+    },
+    {
+      "title": "How can i connect with other Farmers in Aigro",
+      "content":
+          "AIgro offers a farmers' community feature where users can join discussions, share experiences, and seek advice from other farmers. This platform fosters collaboration and knowledge sharing."
+    },{
+      "title": "What kind of Suppourt can I get from AI Chat Assistant",
+      "content":
+          "The AI chat assistant provides real-time support by answering farming-related questions, offering advice on crop management, and guiding users through the website's features. It aims to assist users with their queries efficiently."
+    },{
+      "title": "Who do I get Wheather Updates & Cultivtation Tips?",
+      "content":
+          "AIgro provides personalized weather updates and cultivation tips based on your location and crop type. Users can access these insights through the website's dedicated sections for weather forecasts and farming advice."
+    },
+  ];
+
+  
+  final PageController _controller = PageController(viewportFraction: 1.0);
+  int _currentIndex = 0;
+  Timer? _timer;
+
+  List<Map<String, String>> teamMembers = [
+    {
+      "name": "Arunava Dutta", 
+      "role": "Frontend Developer", 
+      "image": "assets/images/arunava.jpeg",
+      "web": "https://meard.vercel.app/",
+    },
+    {
+      "name": "Pretisha Sahoo", 
+      "role": "Frontend Developer", 
+      "image": "assets/images/pretisha.jpeg",
+      "web": "https://pretisha-sahoo.vercel.app/",
+    },
+    {
+      "name": "Satyaki Dey", 
+      "role": "Full Stack Developer", 
+      "image": "assets/images/satyaki.jpeg",
+      "web": "https://satyaki-dey.vercel.app/",
+    },
+    {
+      "name": "Priyanshu Dutta", 
+      "role": "App Developer", 
+      "image": "assets/images/priyanshu.jpeg",
+      "web": "https://priyanshudutta.vercel.app/",
+    },
+    {
+      "name": "Rishi Bhattasali", 
+      "role": "ML Engineer", 
+      "image": "assets/images/rishi.jpeg",
+      "web": "https://rishibhattasali.vercel.app/",
+    },
+    {
+      "name": "Shinjan Saha", 
+      "role": "App Developer", 
+      "image": "assets/images/shinjan.jpeg",
+      "web": "https://shinjansaha02.me/",
+    },
+  ];
+
+  void _launchURL(String s) async {
+    final Uri url = Uri.parse(s);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+
 
   @override
   void initState() {
@@ -269,9 +331,32 @@ class _AboutUsState extends State<AboutUs> {
                         title: futurePlanningTitle, content: futurePlanningContent),
                     const SizedBox(height: 16),
                     _buildInfoCard(title: provideTitle, content: provideContent),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 30),
+                    Center(
+                      child: Text(
+                        ourTeamTitle,
+                        style: const TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF004D3F),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    _buildTeamWidget(),
+                    const SizedBox(height: 30),
+                    Center(
+                      child: Text(
+                        fnqTitle,
+                        style: const TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF004D3F),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
                     _buildAccordionWidget(),
-                    _buildTeamWidget()
                   ],
                 ),
               ),
@@ -286,7 +371,7 @@ class _AboutUsState extends State<AboutUs> {
     );
   }
 
-Widget _buildTeamWidget() {
+  Widget _buildTeamWidget() {
     return SizedBox(
       height: 180,
       child: PageView.builder(
@@ -311,18 +396,18 @@ Widget _buildTeamWidget() {
     return Flexible(
       child: GestureDetector(
         onTap: (){
-          _launchURL();
+          _launchURL(member['web']!);
         },
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5)
+            borderRadius: BorderRadius.circular(8)
           ),
           margin: EdgeInsets.symmetric(horizontal: 4),
           child: Stack(
             children: [
               Positioned.fill(
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(8),
                   child: ColorFiltered(
                     colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3),  
@@ -376,7 +461,6 @@ Widget _buildTeamWidget() {
     );
   }
 
-
   Widget _buildInfoCard({required String title, required String content}) {
     return Container(
       decoration: BoxDecoration(
@@ -422,25 +506,29 @@ Widget _buildTeamWidget() {
     );
   }
 
-  Widget _buildAccordionWidget() {
-    return Column(
-      children: accordionData.map((item) {
-        return ExpansionTile(
-          title: Text(
-            item["title"]!,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                item["content"]!,
-                style: const TextStyle(height: 1.5),
-              ),
+Widget _buildAccordionWidget() {
+  return Column(
+    children: accordionData.map((item) {
+      return ExpansionTile(
+        title: Text(
+          item["title"]!,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        iconColor: Color.fromRGBO(0, 229, 118, 1), 
+        collapsedBackgroundColor: Colors.grey.shade200, 
+        backgroundColor: Colors.green.shade100, 
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              item["content"]!,
+              style: const TextStyle(height: 1.5),
             ),
-          ],
-        );
-      }).toList(),
-    );
-  }
+          ),
+        ],
+      );
+    }).toList(),
+  );
+}
+
 }
