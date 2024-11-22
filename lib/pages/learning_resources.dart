@@ -1,3 +1,4 @@
+import 'package:aigro/pages/course_player.dart';
 import 'package:flutter/material.dart';
 
 import 'package:velocity_x/velocity_x.dart';
@@ -218,7 +219,8 @@ class _LearningResourcesState extends State<LearningResources> {
     String id, BuildContext context, Map<String, dynamic> courseData) {
     return GestureDetector(
       onTap: () async {
-       
+       Navigator.push
+       (context,MaterialPageRoute(builder: (context) => CoursesPlayer(coursetitle: 'hello',)),);
       },
       child: Container(
         margin: EdgeInsets.all(10),

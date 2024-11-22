@@ -1,3 +1,4 @@
+import 'package:aigro/pages/course_player.dart';
 import 'package:aigro/pages/disease_forecasting.dart';
 import 'package:aigro/pages/disease_mapping.dart';
 import 'package:aigro/pages/image_analysis.dart';
@@ -67,8 +68,7 @@ class _MyAppState extends State<MyApp> {
       
       themeMode: themeProvider.themeMode,
       theme: MyThemes.lightTheme,
-      
-      //themeMode: ThemeMode.system,                      
+                          
 
       debugShowCheckedModeBanner: false,              
 
@@ -91,7 +91,8 @@ class _MyAppState extends State<MyApp> {
         Myroutes.diseaseForecastRoute: (context) => DiseaseForecasting(),
         Myroutes.imageAnalysisRoute: (context) => ImageAnalysis(),
         Myroutes.uploadImageRoute: (context) => UploadImage(),
-        Myroutes.learningResourcesRoute: (context) => LearningResources()
+        Myroutes.learningResourcesRoute: (context) => LearningResources(),
+        Myroutes.coursesPlayerRoute: (context) => CoursesPlayer(coursetitle: '',),
       },
     );   
   }
