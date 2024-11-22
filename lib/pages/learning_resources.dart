@@ -1,5 +1,9 @@
+import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/course_player.dart';
+import 'package:aigro/secret.dart';
+import 'package:aigro/utils/translate.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 
@@ -10,7 +14,9 @@ class LearningResources extends StatefulWidget {
 
 class _LearningResourcesState extends State<LearningResources> {
 
-  final Map<String, Map<String, dynamic>> courseMap = {
+  String hint='Search for courses';
+
+  Map<String, Map<String, dynamic>> courseMap = {
     '1': {
       'title': 'Soil Health & Preparation',
       'domain': 'Basics',
@@ -65,10 +71,85 @@ class _LearningResourcesState extends State<LearningResources> {
       ],
     },
   };
+
+  List<String> categories = [
+    'Basics',
+    'Organic',
+    'Agroforestry',
+    'Mixed Farming',
+    'Hydroponics',
+    'Husbandry',
+  ];
     
 
   List<String> selectedCategories = [];
   String query = '';
+
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
+  String userLang = "hello";
+
+
+  void translateAllTexts() async {
+    String targetLanguage = userLang;
+    String apiKey = GCP_API_KEY;
+
+    if (targetLanguage == "en") {
+      return;
+    }
+
+    try {
+      String welcomeTextresult = await translateText(hint, targetLanguage, apiKey);
+
+      List<String> translatedCategories = await Future.wait(
+      categories.map((category) {
+        return translateText(category, targetLanguage, apiKey);
+      }).toList()
+    );
+
+      List<MapEntry<String, Map<String, dynamic>>> translatedCourses = [];
+      for (var entry in courseMap.entries) {
+        String key = entry.key;
+        var value = entry.value;
+        String translatedTitle = await translateText(value['title'], targetLanguage, apiKey);
+        String translatedDomain = await translateText(value['domain'], targetLanguage, apiKey);
+        List<String> translatedItems = await Future.wait(
+          (value['items'] as List<String>).map((item) {
+            return translateText(item, targetLanguage, apiKey);
+          }).toList()
+        );
+        translatedCourses.add(MapEntry(key, {
+          "title": translatedTitle,
+          "domain": translatedDomain,
+          "items": translatedItems,
+          "image": value['image'],
+        }));
+      }
+
+      setState(() {
+        hint=welcomeTextresult;
+        categories = translatedCategories;
+        courseMap = Map.fromEntries(translatedCourses);
+      });
+    } catch (e) {
+      print("Error translating course data: $e");
+    }
+  }
+
+
+  @override
+  void initState() {
+    if (languageBox.get("LANG") == null) {
+      ldb.createLang();
+      userLang = ldb.language;
+    } else {
+      ldb.loadLang();
+      userLang = ldb.language;
+    }
+    super.initState();
+    translateAllTexts();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,16 +161,7 @@ class _LearningResourcesState extends State<LearningResources> {
       return matchesCategory && matchesQuery;
     }).toList();
 
-    final List<String> categories = [
-      'Basics',
-      'Organic',
-      'Agroforestry',
-      'Mixed Farming',
-      'Hydroponics',
-      'Husbandry',
-    ];
-
-    return Scaffold(
+  return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
         title: Text(
@@ -135,7 +207,7 @@ class _LearningResourcesState extends State<LearningResources> {
                           hintStyle: TextStyle(
                             color: context.theme.primaryColorDark,
                           ),
-                          hintText: 'Search for courses',
+                          hintText: hint,
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.only(top: 12),
                           suffixIcon: Padding(

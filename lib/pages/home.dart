@@ -53,58 +53,32 @@ class _HomePageState extends State<HomePage> {
 
     try {
       String welcomeTextresult = await translateText(welcomeText, targetLanguage, apiKey);
+      String detectAndTreatresult = await translateText(detectAndTreat, targetLanguage, apiKey);
+      String analyzeNowresult = await translateText(analyzeNow, targetLanguage, apiKey);
+      String otherFeaturesresult = await translateText(otherFeatures, targetLanguage, apiKey);
+
+      List<Map<String, dynamic>> translatedDashboardData = [];
+      for (var item in dashboardData) {
+        String translatedText = await translateText(item['text'], targetLanguage, apiKey);
+        translatedDashboardData.add({
+          "color": item['color'],  
+          "text": translatedText,  
+          "image": item['image'],   
+          "route": item['route'],   
+        });
+      }
+
       setState(() {
         welcomeText=welcomeTextresult;
-      });
-     
-    } catch (e) {
-      print("Error: $e");
-    }
-
-    try {
-      String detectAndTreatresult = await translateText(detectAndTreat, targetLanguage, apiKey);
-      setState(() {
         detectAndTreat=detectAndTreatresult;
-      });
-     
-    } catch (e) {
-      print("Error: $e");
-    }
-
-    try {
-      String analyzeNowresult = await translateText(analyzeNow, targetLanguage, apiKey);
-      setState(() {
         analyzeNow=analyzeNowresult;
-      });
-     
-    } catch (e) {
-      print("Error: $e");
-    }
-
-    try {
-      String otherFeaturesresult = await translateText(otherFeatures, targetLanguage, apiKey);
-      setState(() {
         otherFeatures=otherFeaturesresult;
+        dashboardData = translatedDashboardData;
       });
      
     } catch (e) {
       print("Error: $e");
     }
-
-    try {
-      for (int i = 0; i < dashboardData.length; i++) {
-        String text = dashboardData[i]['text'];
-        if (targetLanguage != "en") {
-          String translatedText = await translateText(text, targetLanguage, apiKey);
-          setState(() {
-            dashboardData[i]['text'] = translatedText;
-          });
-        }
-      }
-    } catch (e) {
-      print("Error translating dashboard data: $e");
-    }
-
   }
 
   @override
@@ -139,7 +113,7 @@ class _HomePageState extends State<HomePage> {
     translateAllTexts();
   }
 
-  final List<Map<String, dynamic>> dashboardData = [
+  List<Map<String, dynamic>> dashboardData = [
     {
       'color':  Color.fromRGBO(190, 200, 249,1),
       'text': 'Disease Forecasting',
