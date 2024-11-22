@@ -220,7 +220,7 @@ class _LearningResourcesState extends State<LearningResources> {
     return GestureDetector(
       onTap: () async {
        Navigator.push
-       (context,MaterialPageRoute(builder: (context) => CoursesPlayer(coursetitle: 'hello',)),);
+       (context,MaterialPageRoute(builder: (context) => CoursesPlayer(coursetitle:courseData['title'],)),);
       },
       child: Container(
         margin: EdgeInsets.all(10),
