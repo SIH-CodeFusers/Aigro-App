@@ -1,10 +1,13 @@
 import 'dart:convert';
+import 'package:aigro/secret.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:velocity_x/velocity_x.dart';
+
 
 class Community extends StatefulWidget {
   const Community({super.key});
@@ -23,7 +26,7 @@ class _CommunityState extends State<Community> {
   }
 
   Future<List<dynamic>> fetchPosts() async {
-    final response = await http.get(Uri.parse('https://chat.thefuturetech.xyz/api/messages'));
+    final response = await http.get(Uri.parse('${CHAT_BACKEND}/api/messages'));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
@@ -42,7 +45,7 @@ class _CommunityState extends State<Community> {
         future: posts,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return  Center(child: CircularProgressIndicator(color: context.theme.primaryColorDark));
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -74,6 +77,38 @@ class PostWidget extends StatefulWidget {
 class _PostWidgetState extends State<PostWidget> {
   bool showComments = false;
   final TextEditingController _commentController = TextEditingController();
+  late final IO.Socket socket;
+
+  @override
+  void initState() {
+    super.initState();
+    initializeSocket();
+  }
+
+  void initializeSocket() {
+    socket = IO.io(
+      CHAT_BACKEND, 
+      IO.OptionBuilder()
+          .setTransports(['websocket'])
+          .disableAutoConnect()        
+          .build(),
+    );
+
+    socket.connect();
+
+    socket.onConnect((_) {
+      print('Socket connected');
+    });
+
+    socket.onConnectError((error) {
+      print('Connection Error: $error');
+    });
+
+    socket.onDisconnect((_) {
+      print('Socket disconnected');
+    });
+  }
+
 
   void toggleComments() {
     setState(() {
@@ -81,17 +116,21 @@ class _PostWidgetState extends State<PostWidget> {
     });
   }
 
-  void addComment(String commentText) {
-    if (commentText.isNotEmpty) {
-      setState(() {
-        widget.post['comments'] ??= [];
-        widget.post['comments'].add({
-          'commenterName': 'User', // Replace with actual username if available
-          'comment': commentText,
-          'createdAt': DateTime.now().toIso8601String(),
-        });
-      });
-      _commentController.clear();
+
+  Future<void> addComment(String postId, String commentText) async {
+    if (commentText.trim().isEmpty || postId.isEmpty) return;
+
+    final newCommentData = {
+      "messageId": postId,
+      "comment": commentText,
+      "commentImage": null,
+      "commenterName": "test user",
+    };
+
+    try {
+      socket.emit("addComment", newCommentData);
+    } catch (error) {
+      print("Error adding comment: $error");
     }
   }
 
@@ -101,34 +140,38 @@ class _PostWidgetState extends State<PostWidget> {
     super.dispose();
   }
 
-  // void showAddCommentDialog() {
-  //   showDialog(
-  //     context: context,
-  //     builder: (context) => AlertDialog(
-  //       title: const Text('Add a Comment'),
-  //       content: TextField(
-  //         controller: _commentController,
-  //         decoration: const InputDecoration(hintText: 'Enter your comment here'),
-  //       ),
-  //       actions: [
-  //         TextButton(
-  //           onPressed: () {
-  //             Navigator.of(context).pop();
-  //             addComment(_commentController.text);
-  //           },
-  //           child: const Text('Submit'),
-  //         ),
-  //         TextButton(
-  //           onPressed: () {
-  //             Navigator.of(context).pop();
-  //             _commentController.clear();
-  //           },
-  //           child: const Text('Cancel'),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  void showAddCommentDialog(String id) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Add a Comment'),
+        content: TextField(
+          controller: _commentController,
+          decoration: const InputDecoration(hintText: 'Enter your comment here'),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {   
+              addComment(id,_commentController.text,);
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => Community()),
+                (Route<dynamic> route) => route.isFirst, 
+              );      
+            },
+            child: const Text('Submit'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _commentController.clear();
+            },
+            child: const Text('Cancel'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -197,7 +240,7 @@ class _PostWidgetState extends State<PostWidget> {
               ),
             const SizedBox(height: 8),
             GestureDetector(
-              // onTap: showAddCommentDialog,
+              onTap:(){ showAddCommentDialog(widget.post['_id']);},
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
                 margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 2),
