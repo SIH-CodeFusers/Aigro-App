@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:aigro/local_db/db.dart';
-import 'package:aigro/utils/routes.dart';
 import 'package:aigro/widgets/next_buttons.dart';
 import 'package:aigro/widgets/progress_indicator.dart';
 import 'package:velocity_x/velocity_x.dart';

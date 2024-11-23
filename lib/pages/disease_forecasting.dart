@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:aigro/local_db/db.dart';
+import 'package:aigro/secret.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -58,7 +59,7 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
   }
 
   Future<void> fetchAlerts() async {
-    final url = Uri.parse('https://api.thefuturetech.xyz/api/futurePred/fetchAlerts/700042'); // ${bdb.userPin}
+    final url = Uri.parse('${BACKEND_URL}/api/futurePred/fetchAlerts/700042'); // ${bdb.userPin}
     try {
       final response = await http.get(url);
 

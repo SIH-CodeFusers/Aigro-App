@@ -1,12 +1,8 @@
-import 'dart:io';
 import 'dart:convert';
 import 'package:aigro/pages/crop_details.dart';
 import 'package:aigro/secret.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
-import 'package:mime/mime.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ImageAnalysis extends StatefulWidget {
@@ -45,7 +41,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
 
   // Fetch analysis data from API
   Future<void> _fetchAnalysisData() async {
-    const fetchUrl = 'https://api.thefuturetech.xyz/api/imageAnalysis/fetchDetailsByUid/${BACKEND_UID}';
+    const fetchUrl = '${BACKEND_URL}/api/imageAnalysis/fetchDetailsByUid/${BACKEND_UID}';
     final response = await http.get(Uri.parse(fetchUrl));
 
     if (response.statusCode == 200) {

@@ -16,8 +16,6 @@ class YourPosts extends StatefulWidget {
 
 class _YourPostsState extends State<YourPosts> {
   late Future<List<dynamic>> posts;
-  final TextEditingController _postController = TextEditingController();
-
 
   @override
   void initState() {

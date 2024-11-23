@@ -96,7 +96,7 @@ class _UploadImageState extends State<UploadImage> {
   }
 
   Future<void> _newAnalysis(String imgURL) async {
-    const analysisUrl = 'https://api.thefuturetech.xyz/api/imageAnalysis/newAnalysis';
+    const analysisUrl = '${BACKEND_URL}/api/imageAnalysis/newAnalysis';
 
     final data = {
       "useruid":BACKEND_UID,

@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -49,7 +48,7 @@ class _OfflineDetectionState extends State<OfflineDetection> {
   }
 
   Future detectimage(File image) async {
-    int startTime = new DateTime.now().millisecondsSinceEpoch;
+    // int startTime = new DateTime.now().millisecondsSinceEpoch;
     var recognitions = await Tflite.runModelOnImage(
       path: image.path,
       numResults: 1,

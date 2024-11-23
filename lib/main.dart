@@ -1,5 +1,4 @@
 import 'package:aigro/pages/community.dart';
-import 'package:aigro/pages/course_player.dart';
 import 'package:aigro/pages/disease_forecasting.dart';
 import 'package:aigro/pages/disease_mapping.dart';
 import 'package:aigro/pages/image_analysis.dart';
@@ -17,7 +16,6 @@ import 'package:aigro/pages/about_us.dart';
 import 'package:aigro/pages/get_started.dart';
 import 'package:aigro/pages/home.dart';
 import 'package:aigro/pages/profile.dart';
-import 'package:aigro/pages/crop_details.dart';
 import 'package:aigro/pages/crop_list.dart';
 import 'package:aigro/utils/routes.dart';
 import 'package:aigro/utils/themes.dart';
