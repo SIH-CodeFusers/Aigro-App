@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:aigro/local_db/db.dart';
+import 'package:aigro/pages/your_posts.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/widgets/posts.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -95,6 +96,7 @@ class _CommunityState extends State<Community> {
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setState) => AlertDialog(
+          backgroundColor: context.theme.canvasColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
@@ -107,9 +109,19 @@ class _CommunityState extends State<Community> {
               TextField(
                 controller: _postController,
                 decoration: InputDecoration(
-                  hintText: 'Enter your post content here...',
+                  hintText: 'Enter your post...',
+                  hintStyle: TextStyle(color: Colors.grey[400]),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(width: 1, color: context.theme.primaryColorDark),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(width: 1, color: context.theme.primaryColorDark),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(width: 1, color: context.theme.primaryColorDark), 
                   ),
                   contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 ),
@@ -135,7 +147,7 @@ class _CommunityState extends State<Community> {
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                     decoration: BoxDecoration(
-                      color: Colors.blueAccent,
+                      color: context.theme.cardColor,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -143,13 +155,13 @@ class _CommunityState extends State<Community> {
                       children: [
                         Icon(
                           Icons.upload_file,
-                          color: Colors.white,
+                          color: context.theme.highlightColor,
                         ),
                         SizedBox(width: 8),
                         Text(
                           "Upload Image",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: context.theme.highlightColor,
                             fontSize: 16,
                           ),
                         ),
@@ -161,27 +173,41 @@ class _CommunityState extends State<Community> {
             ],
           ),
           actions: [
-            TextButton(
-              onPressed: () async {
-                String imgURL = await uploadImage(_uploadedImagePath!);
-                handleCreatePost(_postController.text,imgURL);
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => Community()),
-                  (Route<dynamic> route) => route.isFirst, 
-                );   
-              },
-              child: Text('Post', style: TextStyle(color: Colors.blueAccent)),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 5,vertical: 0),
+              decoration: BoxDecoration(
+                color: context.theme.primaryColorDark,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextButton(
+                onPressed: () async {
+                  String imgURL = await uploadImage(_uploadedImagePath!);
+                  handleCreatePost(_postController.text,imgURL);
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => Community()),
+                    (Route<dynamic> route) => route.isFirst, 
+                  );   
+                },
+                child: Text('Post', style: TextStyle(color: context.theme.cardColor)),
+              ),
             ),
-            TextButton(
-              onPressed: () {
-                 Navigator.of(context).pop();
-                _postController.clear();
-                setState(() {
-                  _uploadedImagePath = null;
-                });
-              },
-              child: Text('Cancel', style: TextStyle(color: Colors.redAccent)),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 5,vertical: 0),
+              decoration: BoxDecoration(
+                color: Colors.redAccent,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextButton(
+                onPressed: () {
+                   Navigator.of(context).pop();
+                  _postController.clear();
+                  setState(() {
+                    _uploadedImagePath = null;
+                  });
+                },
+                child: Text('Cancel', style: TextStyle(color: context.theme.highlightColor)),
+              ),
             ),
           ],
         ),
@@ -324,7 +350,11 @@ class _CommunityState extends State<Community> {
                           padding: const EdgeInsets.symmetric(horizontal: 1),
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, '/uploadImage');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => YourPosts()),
+                                
+                              );  
                             },
                             child: Container(
                               height: 50,

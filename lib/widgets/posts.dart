@@ -71,7 +71,7 @@ class _PostWidgetState extends State<PostWidget> {
       "messageId": postId,
       "comment": commentText,
       "commentImage": null,
-      "commenterName": "test user",
+      "commenterName": bdb.userName,
     };
 
     try {
@@ -91,31 +91,63 @@ class _PostWidgetState extends State<PostWidget> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Add a Comment'),
-        content: TextField(
+        backgroundColor: context.theme.highlightColor,
+        title:  Center(child: Text('Add a Comment')),
+        content:  TextField(
           controller: _commentController,
-          decoration: const InputDecoration(hintText: 'Enter your comment here'),
+          decoration: InputDecoration(
+            hintText: 'Enter your post...',
+            hintStyle: TextStyle(color: Colors.grey[400]),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(width: 1, color: context.theme.primaryColorDark),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(width: 1, color: context.theme.primaryColorDark), 
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(width: 1, color: context.theme.primaryColorDark), 
+            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          ),
         ),
         actions: [
-          TextButton(
-            onPressed: () {   
-              addComment(id,_commentController.text,);
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => Community()),
-                (Route<dynamic> route) => route.isFirst, 
-              );      
-            },
-            child: const Text('Submit'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _commentController.clear();
-            },
-            child: const Text('Cancel'),
-          ),
-        ],
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 5,vertical: 0),
+              decoration: BoxDecoration(
+                color: context.theme.primaryColorDark,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextButton(
+                onPressed: () async {
+                  addComment(id,_commentController.text);
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => Community()),
+                    (Route<dynamic> route) => route.isFirst, 
+                  );   
+                },
+                child: Text('Comment', style: TextStyle(color: context.theme.cardColor)),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 5,vertical: 0),
+              decoration: BoxDecoration(
+                color: Colors.redAccent,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextButton(
+                onPressed: () {
+                   Navigator.of(context).pop();
+                  _commentController.clear();
+                  
+                },
+                child: Text('Cancel', style: TextStyle(color: context.theme.highlightColor)),
+              ),
+            ),
+          ],
       ),
     );
   }
@@ -227,7 +259,7 @@ class _PostWidgetState extends State<PostWidget> {
                 child: GestureDetector(
                   onTap: toggleComments,
                   child: Text(
-                    showComments ? 'View Less' : 'View Commnets',
+                    showComments ? 'View Less' : 'View Comments',
                     style: TextStyle(
                       color: context.theme.cardColor,
                       fontWeight: FontWeight.bold,
