@@ -142,13 +142,13 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
 
         return GestureDetector(
           onTap: () {
-            // Find the disease from cropDiseaseList based on the diseaseName
+          
             final selectedDisease = cropDiseaseList.firstWhere(
               (disease) => disease['diseaseName'] == diseaseName, 
               orElse: () => <String, Object>{} // Explicitly cast to Map<String, Object>
             );
 
-            // Check if the disease was found
+   
             if (selectedDisease.isNotEmpty) {
               Navigator.push(
                 context,
@@ -157,7 +157,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                 ),
               );
             } else {
-              // Handle case when disease is not found, e.g., show a message
+
               print("Disease not found: $diseaseName");
             }
           },
@@ -187,7 +187,16 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("$diseaseName in $cropName", style: TextStyle(fontSize: 20, )),
+                      Container(
+                        constraints: BoxConstraints(
+                          maxWidth: 200
+                        ),
+                        child: Text(
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          "$diseaseName in $cropName", style: TextStyle(fontSize: 20, )
+                        ),
+                      ),
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                         decoration: BoxDecoration(

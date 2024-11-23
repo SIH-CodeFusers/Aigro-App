@@ -150,6 +150,18 @@ class _HomePageState extends State<HomePage> {
       'image': 'assets/images/lr.png',
       'route': Myroutes.learningResourcesRoute,
     },
+    {
+      'color': Color.fromRGBO(255, 204, 128,1),
+      'text': 'Farmers Community',
+      'image': 'assets/images/cm.png',
+      'route': Myroutes.profileRoute,
+    },
+    {
+      'color': Color.fromRGBO(255, 204, 187,1),
+      'text': 'Government Schemes',
+      'image': 'assets/images/gv.png',
+      'route': Myroutes.profileRoute,
+    },
   ];
 
   @override
@@ -320,7 +332,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSpacing: 8,
                       childAspectRatio: 1, 
                     ),
-                    itemCount: 6, 
+                    itemCount: dashboardData.length, 
                     itemBuilder: (context, index) {
                       final dashboardInfo = dashboardData[index];
                       return GestureDetector(

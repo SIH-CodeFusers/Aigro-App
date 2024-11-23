@@ -161,26 +161,30 @@ class _ProfilePageState extends State<ProfilePage> {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
            
-            child: DropdownButton<String>(
-              value: selectedLanguageCode,
-              items: [
-                DropdownMenuItem(value: 'en', child: Text('English')),
-                DropdownMenuItem(value: 'hi', child: Text('Hindi')),
-                DropdownMenuItem(value: 'bn', child: Text('Bengali')),
-                 DropdownMenuItem(value: 'te', child: Text('Telegu')),
-              ],
-              onChanged: (String? newValue) {
-                setState(() {
-                  selectedLanguageCode = newValue!;
-                });
-              },
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black87, 
+            child: IgnorePointer(
+              ignoring: true,
+              child: DropdownButton<String>(
+                value: selectedLanguageCode,
+                items: [
+                  DropdownMenuItem(value: 'en', child: Text('English')),
+                  DropdownMenuItem(value: 'hi', child: Text('Hindi')),
+                  DropdownMenuItem(value: 'bn', child: Text('Bengali')),
+                  DropdownMenuItem(value: 'te', child: Text('Telegu')),
+                ],
+                onChanged: (String? newValue) {
+                  setState(() {
+                    selectedLanguageCode = newValue!;
+                  });
+                },
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black87, 
+                ),
+                underline: SizedBox(),
+                icon: Icon(Icons.arrow_drop_down, color: Colors.black87), 
               ),
-              underline: SizedBox(),
-              icon: Icon(Icons.arrow_drop_down, color: Colors.black87), 
             ),
+            
           ),
         ],
       ),
