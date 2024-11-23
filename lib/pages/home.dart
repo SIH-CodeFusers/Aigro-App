@@ -154,7 +154,7 @@ class _HomePageState extends State<HomePage> {
       'color': Color.fromRGBO(255, 204, 128,1),
       'text': 'Farmers Community',
       'image': 'assets/images/cm.png',
-      'route': Myroutes.profileRoute,
+      'route': Myroutes.communityRoute,
     },
     {
       'color': Color.fromRGBO(255, 204, 187,1),

@@ -15,4 +15,5 @@ class Myroutes{
   static String uploadImageRoute = "/uploadImage";
   static String learningResourcesRoute = "/learningResources";
   static String coursesPlayerRoute = "/coursesPlayer";
+  static String communityRoute = "/community";
 }

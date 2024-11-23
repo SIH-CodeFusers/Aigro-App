@@ -1,3 +1,4 @@
+import 'package:aigro/pages/community.dart';
 import 'package:aigro/pages/course_player.dart';
 import 'package:aigro/pages/disease_forecasting.dart';
 import 'package:aigro/pages/disease_mapping.dart';
@@ -92,7 +93,7 @@ class _MyAppState extends State<MyApp> {
         Myroutes.imageAnalysisRoute: (context) => ImageAnalysis(),
         Myroutes.uploadImageRoute: (context) => UploadImage(),
         Myroutes.learningResourcesRoute: (context) => LearningResources(),
-        Myroutes.coursesPlayerRoute: (context) => CoursesPlayer(coursetitle: '',),
+        Myroutes.communityRoute: (context) => Community(),
       },
     );   
   }
