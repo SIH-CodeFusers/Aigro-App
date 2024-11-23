@@ -115,7 +115,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
     );
   }
 
-  // Build the analysis result
+
   Widget _buildAnalysisResult() {
     if (_analysisData == null) {
       return Center(child: Text("Loading data..."));
