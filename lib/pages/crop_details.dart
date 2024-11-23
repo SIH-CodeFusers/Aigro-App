@@ -17,7 +17,7 @@ class CropDetails extends StatefulWidget {
 }
 
 class _CropDetailsState extends State<CropDetails> {
-  String userLang = "en"; // Default language
+  String userLang = "en";
   late Map<String, dynamic> diseaseDetails;
   final languageBox = Hive.box("Language_db");
   LanguageDB ldb = LanguageDB();
@@ -25,7 +25,6 @@ class _CropDetailsState extends State<CropDetails> {
   @override
   void initState() {
     super.initState();
-
     if (languageBox.get("LANG") == null) {
       ldb.createLang();
       userLang = ldb.language;
@@ -34,20 +33,16 @@ class _CropDetailsState extends State<CropDetails> {
       userLang = ldb.language;
     }
     diseaseDetails = widget.disease;
-
-
     if (userLang != "en") {
       translateDiseaseDetails(diseaseDetails);
     }
   }
 
-  // Function to translate the disease details
   Future<void> translateDiseaseDetails(Map<String, dynamic> disease) async {
     String targetLanguage = userLang;
     String apiKey = GCP_API_KEY;
 
     try {
-      // Translate disease name, category, symptoms, causes, and remedies
       String translatedDiseaseName = await translateText(disease['diseaseName'], targetLanguage, apiKey);
       String translatedCategory = await translateText(disease['category'], targetLanguage, apiKey);
       String translatedSymptoms = await translateText(disease['symptoms'], targetLanguage, apiKey);
@@ -60,7 +55,6 @@ class _CropDetailsState extends State<CropDetails> {
       }
 
       setState(() {
-
         disease['diseaseName'] = translatedDiseaseName;
         disease['category'] = translatedCategory;
         disease['symptoms'] = translatedSymptoms;
@@ -73,71 +67,149 @@ class _CropDetailsState extends State<CropDetails> {
     }
   }
 
+  Widget _buildInfoCard({
+    required String title,
+    required String content,
+    IconData? icon,
+    List<String>? bulletPoints,
+  }) {
+    return Card(
+      elevation: 2,
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                if (icon != null) ...[
+                  Icon(icon, color: const Color(0xFF004D3F), size: 24),
+                  const SizedBox(width: 8),
+                ],
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF004D3F),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            if (bulletPoints != null)
+              ...bulletPoints.map((point) => Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text("• ", style: TextStyle(fontSize: 16, color: Color(0xFF004D3F))),
+                        Expanded(
+                          child: Text(
+                            point,
+                            style: const TextStyle(fontSize: 15, height: 1.4),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ))
+            else
+              Text(
+                content,
+                style: const TextStyle(fontSize: 15, height: 1.4),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.canvasColor,
+      backgroundColor: const Color(0xFFF5F6F9),
       appBar: AppBar(
-        title: Text("${diseaseDetails["diseaseName"]} Details"),
-        backgroundColor: context.theme.primaryColor,
+        elevation: 0,
+        title: Text(
+          diseaseDetails["diseaseName"],
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: const Color(0xFF004D3F),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
-              Text(
-                "Disease Details",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF004D3F),
+              Card(
+                elevation: 3,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF004D3F), Color(0xFF00684A)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        diseaseDetails['diseaseName'],
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          diseaseDetails['category'],
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ).centered(),
-              const SizedBox(height: 20),
-
-
-              Text(
-                "Disease Name: ${diseaseDetails['diseaseName']}",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                "Category: ${diseaseDetails['category']}",
-                style: TextStyle(fontSize: 14, color: context.theme.splashColor),
               ),
               const SizedBox(height: 20),
-
-
-              Text(
-                "Symptoms: ${diseaseDetails['symptoms']}",
-                style: TextStyle(fontSize: 14),
+              _buildInfoCard(
+                title: 'Symptoms',
+                content: diseaseDetails['symptoms'],
+                icon: Icons.medical_information_outlined,
+              ),
+              _buildInfoCard(
+                title: 'Causes',
+                content: diseaseDetails['causes'],
+                icon: Icons.bug_report_outlined,
+              ),
+              _buildInfoCard(
+                title: 'Remedies',
+                content: '',
+                icon: Icons.healing_outlined,
+                bulletPoints: List<String>.from(diseaseDetails['remedies']),
+              ),
+              _buildInfoCard(
+                title: 'Chemical Control',
+                content: diseaseDetails['chemicalControl'],
+                icon: Icons.science_outlined,
               ),
               const SizedBox(height: 20),
-
-
-              Text(
-                "Causes: ${diseaseDetails['causes']}",
-                style: TextStyle(fontSize: 14),
-              ),
-              const SizedBox(height: 20),
-
-
-              Text(
-                "Remedies:",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              for (var remedy in diseaseDetails['remedies']) 
-                Text("• $remedy", style: TextStyle(fontSize: 14)),
-              const SizedBox(height: 20),
-
-
-              Text(
-                "Chemical Control: ${diseaseDetails['chemicalControl']}",
-                style: TextStyle(fontSize: 14),
-              ),
             ],
           ),
         ),
