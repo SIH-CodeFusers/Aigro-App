@@ -98,7 +98,9 @@ class _CommunityState extends State<Community> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
-          title: Text('Create Post'),
+          title: Center(
+            child: Text('Create Post')
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -123,21 +125,39 @@ class _CommunityState extends State<Community> {
                     fit: BoxFit.cover,
                   ),
                 ),
-              ElevatedButton.icon(
-                onPressed: () async {
-                  await _pickImage().then((_) {
-                    setState(() {});
-                  });
-                },
-                icon: Icon(Icons.upload_file),
-                label: Text("Upload Image"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                GestureDetector(
+                  onTap: () async {
+                    await _pickImage().then((_) {
+                      setState(() {});
+                    });
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.blueAccent,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.upload_file,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          "Upload Image",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
+
             ],
           ),
           actions: [
