@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:aigro/secret.dart';
 import 'package:aigro/widgets/grid_painter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class KhetiSathi extends StatefulWidget {
@@ -118,7 +116,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
                     itemCount: _messages.length,
                     itemBuilder: (context, index) {
                       final isUser = _messages[index]['sender'] == 'user';
-                      final isImage = _messages[index]['type'] == 'image';
+                      // final isImage = _messages[index]['type'] == 'image';
                       final name = isUser ? 'You' : 'KhetiSathi';
                       final time =
                           DateTime.now().toLocal().toString().substring(11, 16);

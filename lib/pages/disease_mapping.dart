@@ -17,13 +17,77 @@ class DiseaseMapping extends StatefulWidget {
 }
 
 class _DiseaseMappingState extends State<DiseaseMapping> {
+
+   Map<String, Object> data = {
+    "success": true,
+    "shops": [
+      {
+        "name": "S.R.NURSERY (K.C.KHANRA)",
+        "address": "Taki Rd, Kholapota, Mathurapur",
+        "location": {
+          "lat": 22.5929954,
+          "lon": 88.51164009999999
+        }
+      },
+      {
+        "name": "Biswas Fertilizer",
+        "address": "Ghoraras Ghona Road, Zafarpur",
+        "location": {
+          "lat": 22.605915,
+          "lon": 88.48249
+        }
+      },
+      {
+        "name": "Kanan Krishi Bhandar",
+        "address": "Bongaon - Basirhat Rd, Kholapota, Mathurapur",
+        "location": {
+          "lat": 22.6235377,
+          "lon": 88.31184850000001
+        }
+      },
+      {
+        "name": "Kabir Fertilizer",
+        "address": "JPJV+3F2, Madar Tala",
+        "location": {
+          "lat": 22.6301328,
+          "lon": 88.2436287
+        }
+      },
+      {
+        "name": "Hasan Fertilizer And Pesticide",
+        "address": "Gram Panchayat, Haroa Rd, near by Chaita, Chaita, Malotipur",
+        "location": {
+          "lat": 22.6420903,
+          "lon": 88.754969
+        }
+      },
+      {
+        "name": "Kabir Fertilizer",
+        "address": "JPJV+3F2, Madar Tala",
+        "location": {
+          "lat": 22.6301328,
+          "lon": 88.7436287
+        }
+      }
+    ]
+  };
   
   Marker? customMarker;
   List<Marker> nearbyMarkers = []; 
+  List<Marker> shopMarkers = [];
 
   late double lat;
   late double long;
   bool isLoading = true;
+
+ @override
+  void initState() {
+    super.initState();
+    bdb.loadDataInfo(); 
+    getLatLongFromPincode(bdb.userPin);
+    getNearbyAlerts(bdb.userPin);
+    addShopMarkers();
+  }
 
   Future<void> getNearbyAlerts(String pincode) async {
     const String apiUrl = 'https://aigro-backend-alpha.vercel.app/api/futurePred/fetchNearbyAlerts';
@@ -56,7 +120,6 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
             diseaseName = alert['diseaseDetails'][0]['diseaseName'];
             diseaseLevel = alert['diseaseDetails'][0]['alertLevel'];
           }
-
 
           fetchedMarkers.add(
             Marker(
@@ -120,18 +183,49 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
     }
   }
 
+   Future<void> addShopMarkers() async{
+    if (data['shops'] != null){
+    for (var shop in data['shops']as List) {
+      var shopLocation = shop['location'] as Map<String, double>;
+      shopMarkers.add(
+        Marker(
+          height: 100,
+          width: 100,
+          point: LatLng(shopLocation['lat']!, shopLocation['lon']!),
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  shop['name'] as String,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                Image(
+                  width: 40,
+                  height: 40,
+                  fit: BoxFit.cover,
+                  image: NetworkImage(       
+                    "https://static.vecteezy.com/system/resources/previews/035/321/928/non_2x/mini-cute-store-shop-merchant-building-3d-rendering-icon-illustration-concept-isolated-png.png",
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    }
+  }
 
 
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
 
-   @override
-  void initState() {
-    super.initState();
-    bdb.loadDataInfo(); 
-    getLatLongFromPincode(bdb.userPin);
-    getNearbyAlerts(bdb.userPin);
-  }
 
   Future<void> getLatLongFromPincode(String pincode) async {
     final String apiUrl =
@@ -150,18 +244,17 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
           long = newLong;
           customMarker = Marker(
             point: LatLng(lat, long),
-            width: 70,
-            height: 70,
+            width: 60,
+            height: 60,
             child: Container(
               decoration: BoxDecoration(
-                // color:  context.theme.primaryColorDark,
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
                 child: Image.asset(
-                      width: 70,
-                      height: 70,
+                      width: 60,
+                      height: 60,
                       "assets/images/woman_farmer_logo.png",
                       fit: BoxFit.cover,
                     ),
@@ -207,7 +300,8 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
           MarkerLayer(
             markers: [
                 ...nearbyMarkers,
-              if (customMarker != null) customMarker!, // Add custom marker conditionally
+              if (customMarker != null) customMarker!, 
+              ...shopMarkers, 
             ],
           ),
         ],

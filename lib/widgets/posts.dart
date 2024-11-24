@@ -172,14 +172,11 @@ class _PostWidgetState extends State<PostWidget> {
     );
   }
 
-
-
   Color getRandomColor() {
     final random = Random();
     String colorHex = colors[random.nextInt(colors.length)];
     return Color(int.parse('0xFF$colorHex'));
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -213,15 +210,21 @@ class _PostWidgetState extends State<PostWidget> {
                   child: Text(getInitials(widget.post['name'] ?? 'Unknown User'),style: TextStyle(color: context.theme.highlightColor),),
                   radius: 18,
                 ),
-                const SizedBox(width: 10),
-                Text(
-                  widget.post['name'] ?? 'Unknown User',
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  DateFormat('MMM dd, yyyy').format(DateTime.parse(widget.post['createdAt']).toLocal()),
-                  style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                const SizedBox(width: 8),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      widget.post['name'] ?? 'Unknown User',
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      DateFormat('MMM dd, yyyy h:mm a').format(DateTime.parse(widget.post['createdAt']).toLocal()),
+                      style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -351,7 +354,7 @@ class CommentWidget extends StatelessWidget {
                   style: const TextStyle(fontSize: 12),
                 ),
                 Text(
-                  'Commented at: ${DateFormat('MMM dd, yyyy h:mm a').format(DateTime.parse(comment['createdAt']).toLocal())}',
+                  '${DateFormat('MMM dd, yyyy h:mm a').format(DateTime.parse(comment['createdAt']).toLocal())}',
                   style: TextStyle(color: Colors.grey[600], fontSize: 10),
                 ),
               ],
