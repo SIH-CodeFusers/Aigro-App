@@ -30,7 +30,7 @@ class _LearningResourcesState extends State<LearningResources> {
     '2': {
       'title': 'Water Management Techniques',
       'domain': 'Basics',
-      'image': 'https://online.maryville.edu/wp-content/uploads/sites/97/2021/02/hands-in-soil.jpg?w=750',
+      'image': 'https://enterclimate.com/blog/wp-content/uploads/2023/01/Water-Management-Techniques-for-Businesses.png',
       'items': [
         "Irrigation Methods",
         "Water Conservation Practices",
@@ -40,7 +40,7 @@ class _LearningResourcesState extends State<LearningResources> {
     '3': {
       'title': 'Crop-Specific Courses',
       'domain': 'Basics',
-      'image': 'https://online.maryville.edu/wp-content/uploads/sites/97/2021/02/hands-in-soil.jpg?w=750',
+      'image': 'https://elearning.fao.org/pluginfile.php/506754/course/overviewfiles/Climate-smart-crop-production.jpg',
       'items': [
         "Rice Farming Techniques",
         "Corn Cultivation Methods",
@@ -53,7 +53,7 @@ class _LearningResourcesState extends State<LearningResources> {
     '4': {
       'title': 'Sustainable & Organic Farming',
       'domain': 'Organic',
-      'image': 'https://online.maryville.edu/wp-content/uploads/sites/97/2021/02/hands-in-soil.jpg?w=750',
+      'image': 'https://www.aromaticandallied.com/uploads/blog/202404/img_660be77949ffa7-73444220-84857755.jpg',
       'items': [
         "Basics of Organic Farming",
         "Composting Techniques",
@@ -63,7 +63,7 @@ class _LearningResourcesState extends State<LearningResources> {
     '5': {
       'title': 'Livestock Management',
       'domain': 'Husbandry',
-      'image': 'https://online.maryville.edu/wp-content/uploads/sites/97/2021/02/hands-in-soil.jpg?w=750',
+      'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTFEd8rHHJuVyGym9QqmEmu21u90LlSJGxCA&s',
       'items': [
         "Introduction to Livestock Farming",
         "Cattle Management",
@@ -334,7 +334,7 @@ class _LearningResourcesState extends State<LearningResources> {
             SizedBox(height: 20),
            
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Text(
                 courseData['title'] ?? '',
                 maxLines: 2,
@@ -350,7 +350,7 @@ class _LearningResourcesState extends State<LearningResources> {
             SizedBox(height: 10),
             
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Text(
                 courseData['domain'] ?? '',
                 style: TextStyle(
@@ -364,7 +364,7 @@ class _LearningResourcesState extends State<LearningResources> {
             SizedBox(height: 10),
            
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(

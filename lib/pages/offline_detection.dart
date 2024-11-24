@@ -76,11 +76,14 @@ class _OfflineDetectionState extends State<OfflineDetection> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               if (_image != null)
-                Image.file(
-                  File(_image!.path),
-                  height: 250,
-                  width: 250,
-                  fit: BoxFit.cover,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.file(
+                    File(_image!.path),
+                    height: 250,
+                    width: 250,
+                    fit: BoxFit.cover,
+                  ),
                 )
               else
               Padding(
@@ -109,11 +112,22 @@ class _OfflineDetectionState extends State<OfflineDetection> {
               if (_image == null)
                Text('No image selected'),
               if (_image != null) ...[
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Text(
-                    "Detected disease: $diseaseName",
-                    style: TextStyle(color: context.theme.cardColor, fontSize: 26),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Text(
+                      "Detected disease:",
+                      style: TextStyle(color: context.theme.cardColor, fontSize: 26),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Text(
+                      "$diseaseName",
+                      style: TextStyle(color: context.theme.cardColor, fontSize: 30),
+                    ),
                   ),
                 ),
                 SizedBox(height: 30),

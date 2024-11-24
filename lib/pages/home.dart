@@ -1,4 +1,5 @@
 import 'package:aigro/local_db/db.dart';
+import 'package:aigro/pages/profile.dart';
 import 'package:aigro/utils/translate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -174,25 +175,33 @@ class _HomePageState extends State<HomePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween, 
           children: [
-            Container(
-              decoration: BoxDecoration(
-                color: context.theme.highlightColor,
-                borderRadius: BorderRadius.circular(20)
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(6.0),
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: context.theme.cardColor,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: Image.asset(
-                      width: 30,
-                      height: 30,
-                      "assets/images/boy.png",
-                      fit: BoxFit.cover,
-                    ),
-                  )
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context)=>ProfilePage())
+                );
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: context.theme.highlightColor,
+                  borderRadius: BorderRadius.circular(20)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(6.0),
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: context.theme.cardColor,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.asset(
+                        width: 30,
+                        height: 30,
+                        "assets/images/boy.png",
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  ),
                 ),
               ),
             ),

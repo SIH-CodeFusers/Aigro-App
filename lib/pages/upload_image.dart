@@ -160,12 +160,15 @@ class _UploadImageState extends State<UploadImage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (_cropImage != null) 
-              Image.file(
-                  File(_cropImage!.path),
-                  height: 250,
-                  width: 250,
-                  fit: BoxFit.cover,
-                )
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.file(
+                    File(_cropImage!.path),
+                    height: 250,
+                    width: 250,
+                    fit: BoxFit.cover,
+                  ),
+              )
               else
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -191,7 +194,7 @@ class _UploadImageState extends State<UploadImage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 30,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
@@ -203,35 +206,42 @@ class _UploadImageState extends State<UploadImage> {
                     ),
                     borderRadius: BorderRadius.circular(8), 
                   ),
-                  child: DropdownButton<String>(
-                    value: selectedCrop,
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedCrop = newValue!;
-                      });
-                    },
-                    items: cropOptions.map<DropdownMenuItem<String>>((String crop) {
-                      return DropdownMenuItem<String>(
-                        value: crop,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: Text(crop),
-                        ),
-                      );
-                    }).toList(),
-                    isExpanded: true, 
-                    underline: SizedBox(), 
-                    style: TextStyle(
-                      fontSize: 16, 
-                      color: Colors.black, 
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: context.theme.highlightColor,
+                      borderRadius: BorderRadius.circular(7),
                     ),
-                    icon: Icon(Icons.arrow_drop_down),
+                    child: DropdownButton<String>(
+                      value: selectedCrop,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedCrop = newValue!;
+                        });
+                      },
+                      dropdownColor: context.theme.highlightColor,
+                      items: cropOptions.map<DropdownMenuItem<String>>((String crop) {
+                        return DropdownMenuItem<String>(
+                          value: crop,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Text(crop),
+                          ),
+                        );
+                      }).toList(),
+                      isExpanded: true, 
+                      underline: SizedBox(), 
+                      style: TextStyle(
+                        fontSize: 16, 
+                        color: Colors.black, 
+                      ),
+                      icon: Icon(Icons.arrow_drop_down),
+                    ),
                   ),
                 ),
               ),
               SizedBox(height: 40,),
 
-              if(uploaded==false)
+              if(uploaded==false && isAnalyzing==false)
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: GestureDetector(
@@ -257,7 +267,7 @@ class _UploadImageState extends State<UploadImage> {
                     ),
                   ),
                 ),
-                // SizedBox(height: 20,),
+
 
                 if(uploaded==true)
                 Padding(

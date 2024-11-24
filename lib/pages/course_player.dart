@@ -21,10 +21,29 @@ class _CoursesPlayerState extends State<CoursesPlayer> {
       {"title": "Soil Management Techniques", "url": "https://youtu.be/dtFS8s4gE54?si=xf8LUp1Tj9Gi-hwJ"},
     ],
     "Water Management Techniques": [
-      {"title": "Water Management Techniques", "url": "https://youtu.be/_dXGJooB0Qw?si=b_3A5WjhxXmeoRFe"},
-      {"title": "Soil Classification Methods", "url": "https://youtu.be/ilmXUhsHaZg?si=FbZrWGqkB0pdb5PD"},
-      {"title": "How to test soil", "url": "https://youtu.be/hDTwuO9PHp8?si=cMdSJ5unu3-w4RMZ"},
-      {"title": "Soil Management Techniques", "url": "https://youtu.be/dtFS8s4gE54?si=xf8LUp1Tj9Gi-hwJ"},
+      {"title": "Irrigation Methods", "url": "https://youtu.be/jDXGPw0VP6A?si=_BUht4Z59C_JJ25X"},
+      {"title": "Water Conservation Practices", "url": "https://youtu.be/1H7cABbXJ74?si=y76RLLg3M4xV9Ka3"},
+      {"title": "Sustainable Water Use", "url": "https://youtu.be/kngMC8AIRBI?si=L6VS_Zr-EAE-SSAC"},
+      {"title": "Introduction to Drip Irrigation", "url": "https://youtu.be/4ucbtnYIgjo?si=gAdhOQ9Y0pVtjiq7"},
+      {"title": "Setting Up Drip Irrigation Systems", "url": "https://youtu.be/05Ll3LuHZAs?si=O8Fpp5WZor6zkbuw"},
+    ],
+    "Crop-Specific Courses": [
+      {"title": "Growing Rice: A Beginner's Guide", "url": "https://youtu.be/FW_bw9jdrlQ?si=FIT4sAFQdPgoTdhP"},
+      {"title": "Corn Planting and Harvesting", "url": "https://youtu.be/UzLZ8jbZF4s?si=VAicBi1w5wPQluCq"},
+      {"title": "How to Grow Tomatoes", "url": "https://youtu.be/TGmYy7P80V8?si=WRma0Tvc3iHaLLa-"},
+      {"title": "Banana Farming Basics", "url": "https://youtu.be/bnRRrdW7gU0?si=LeVNGwfo3fgnip-5"},
+      {"title": "Mango Farming Basics", "url": "https://youtu.be/5sPn2FidZZw?si=AL9Mogo3ZGYYaXP-"},
+      {"title": "Starting a Tea Plantation", "url": "https://youtu.be/cjxX8NpS0No?si=6z1Odlo8qjVcFfbG"},
+    ],
+    "Sustainable & Organic Farming": [
+      {"title": "Introduction to Organic Farming", "url": "https://youtu.be/wougJaN_Ha0?si=1X8gtn1rWm_r-yoB"},
+      {"title": "Principles of Organic Agriculture", "url": "https://youtu.be/_RAzW23-kDA?si=USo7GwxSnatl08YR"},
+      {"title": "Composting for Sustainable Farming", "url": "https://youtu.be/1iEpSHQg9rk?si=wG1O5jUEMV7S8DaL"},
+      {"title": "How to Make Organic Compost", "url": "https://youtu.be/mDIVpJgjoXQ?si=MeyDdNhbqSoZkIJ6"},
+    ],
+    "Livestock Management": [
+      {"title": "Starting a Livestock Farm", "url": "https://youtu.be/YP_5owNtFuM?si=-fawsLqp9eXTv4ke"},
+      {"title": "Care and Management of Livestock", "url": "https://youtu.be/MBAlx3MExgM?si=i1eVDwSS7tCFVOU7"},
     ],
      "default": [
       {"title": "Default", "url": "https://youtu.be/_dXGJooB0Qw?si=b_3A5WjhxXmeoRFe"},
