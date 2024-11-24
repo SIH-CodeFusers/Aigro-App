@@ -8,6 +8,26 @@ import 'package:aigro/secret.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'dart:math';
+
+const colors = [
+  "FF5733",
+  "33FF57",
+  "3357FF",
+  "FF33A1",
+  "A133FF",
+  "33FFF5",
+  "FF8C33",
+  "FF3333",
+];
+
+String getInitials(String name) {
+  List<String> words = name.split(' ');
+  String initials = '';
+  if (words.isNotEmpty) initials += words[0][0];
+  if (words.length > 1) initials += words[1][0];
+  return initials.toUpperCase();
+}
 
 class PostWidget extends StatefulWidget {
   final Map<String, dynamic> post;
@@ -30,6 +50,12 @@ class _PostWidgetState extends State<PostWidget> {
     super.initState();
     initializeSocket();
     bdb.loadDataInfo(); 
+  }
+
+  @override
+  void dispose() {
+    _commentController.dispose();
+    super.dispose();
   }
 
   void initializeSocket() {
@@ -63,7 +89,6 @@ class _PostWidgetState extends State<PostWidget> {
     });
   }
 
-
   Future<void> addComment(String postId, String commentText) async {
     if (commentText.trim().isEmpty || postId.isEmpty) return;
 
@@ -81,11 +106,6 @@ class _PostWidgetState extends State<PostWidget> {
     }
   }
 
-  @override
-  void dispose() {
-    _commentController.dispose();
-    super.dispose();
-  }
 
   void showAddCommentDialog(String id) {
     showDialog(
@@ -153,26 +173,34 @@ class _PostWidgetState extends State<PostWidget> {
   }
 
 
+
+  Color getRandomColor() {
+    final random = Random();
+    String colorHex = colors[random.nextInt(colors.length)];
+    return Color(int.parse('0xFF$colorHex'));
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-       decoration: BoxDecoration(
-          color: context.theme.highlightColor,
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: context.theme.canvasColor,
-            width: 3,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Color.fromARGB(255, 57, 59, 57).withOpacity(0.2),
-              spreadRadius: 1,
-              blurRadius: 1,
-              offset: Offset(1, 1),
-            ),
-          ],
+      decoration: BoxDecoration(
+        color: context.theme.highlightColor,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: context.theme.canvasColor,
+          width: 3,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(255, 57, 59, 57).withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 1,
+            offset: Offset(1, 1),
+          ),
+        ],
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -181,16 +209,16 @@ class _PostWidgetState extends State<PostWidget> {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundColor: context.theme.focusColor,
-                  child: Text(widget.post['name'][0]),
+                  backgroundColor: getRandomColor(),
+                  child: Text(getInitials(widget.post['name'] ?? 'Unknown User'),style: TextStyle(color: context.theme.highlightColor),),
                   radius: 18,
                 ),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10),
                 Text(
                   widget.post['name'] ?? 'Unknown User',
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10),
                 Text(
                   DateFormat('MMM dd, yyyy').format(DateTime.parse(widget.post['createdAt']).toLocal()),
                   style: TextStyle(color: Colors.grey[600], fontSize: 12),
@@ -207,7 +235,7 @@ class _PostWidgetState extends State<PostWidget> {
             ),
             if (widget.post['image'] != null)
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
@@ -219,65 +247,68 @@ class _PostWidgetState extends State<PostWidget> {
                 ),
               ),
             const SizedBox(height: 8),
-            GestureDetector(
-              onTap:(){ showAddCommentDialog(widget.post['_id']);},
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-                margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 2),
-                decoration: BoxDecoration(
-                  color: context.theme.cardColor,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 6.0,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(FeatherIcons.plus, color: context.theme.highlightColor),
-                    SizedBox(width: 4,),
-                    Text("Add",style: TextStyle(color: context.theme.highlightColor),),
-                    SizedBox(width: 4,),
-                  ],
-                ),            
-              ),
+            Divider(
+              color: Colors.grey[300],
             ),
-
-            if (widget.post['comments'] != null && widget.post['comments'].isNotEmpty) ...[
-              SizedBox(height: 10,),
-              Divider(
-                indent: 10,
-                endIndent: 10,
-                color: Colors.grey[300],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-                child: GestureDetector(
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                if (widget.post['comments'] != null && widget.post['comments'].isNotEmpty)
+                GestureDetector(
                   onTap: toggleComments,
-                  child: Text(
-                    showComments ? 'View Less' : 'View Comments',
-                    style: TextStyle(
-                      color: context.theme.cardColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        FeatherIcons.eye,
+                        color: context.theme.cardColor,
+                        size: 12,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        showComments ? 'View Less' : 'View Comments',
+                        style: TextStyle(
+                          color: context.theme.cardColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      
+                    ],
                   ),
                 ),
-              ),
-              if (showComments) ...[
-                for (var comment in widget.post['comments']) CommentWidget(comment: comment),
+                SizedBox(width: 10,),
+                GestureDetector(
+                  onTap: () => showAddCommentDialog(widget.post['_id']),
+                child: Row(
+                    children: [
+                      Icon(
+                        FeatherIcons.plus,
+                        color: context.theme.cardColor,
+                        size: 12,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        'Add Comment',
+                        style: TextStyle(
+                          color: context.theme.cardColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      
+                    ],
+                  ),
+                ),
               ],
-            ],
+            ),
+            const SizedBox(height: 8),
+            if (showComments && widget.post['comments'] != null)
+              for (var comment in widget.post['comments']) CommentWidget(comment: comment),
           ],
         ),
       ),
     );
   }
-
 }
+
 
 class CommentWidget extends StatelessWidget {
   final Map<String, dynamic> comment;
@@ -293,7 +324,7 @@ class CommentWidget extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor: context.theme.focusColor,
-            child: Text(comment['commenterName'][0]),
+            child: Text(getInitials(comment['commenterName'] ?? 'Unknown User'),style: TextStyle(fontSize: 12),),
             radius: 15,
           ),
           const SizedBox(width: 8),
