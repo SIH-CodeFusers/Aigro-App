@@ -113,15 +113,15 @@ class _CommunityState extends State<Community> {
                   hintStyle: TextStyle(color: Colors.grey[400]),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(width: 1, color: context.theme.primaryColorDark),
+                    borderSide: BorderSide(width: 1, color: Colors.grey[400] ?? Colors.grey),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(width: 1, color: context.theme.primaryColorDark),
+                    borderSide: BorderSide(width: 1, color: Colors.grey[400] ?? Colors.grey),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
-                    borderSide: BorderSide(width: 1, color: context.theme.primaryColorDark), 
+                    borderSide: BorderSide(width: 1, color: Colors.grey[400] ?? Colors.grey), 
                   ),
                   contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 ),
@@ -189,7 +189,7 @@ class _CommunityState extends State<Community> {
                     (Route<dynamic> route) => route.isFirst, 
                   );   
                 },
-                child: Text('Post', style: TextStyle(color: context.theme.cardColor)),
+                child: Text('Post', style: TextStyle(color: context.theme.highlightColor)),
               ),
             ),
             Container(
@@ -206,7 +206,7 @@ class _CommunityState extends State<Community> {
                     _uploadedImagePath = null;
                   });
                 },
-                child: Text('Cancel', style: TextStyle(color: context.theme.highlightColor)),
+                child: Text('Close', style: TextStyle(color: context.theme.highlightColor)),
               ),
             ),
           ],

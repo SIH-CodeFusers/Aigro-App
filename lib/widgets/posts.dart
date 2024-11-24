@@ -112,7 +112,7 @@ class _PostWidgetState extends State<PostWidget> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: context.theme.highlightColor,
-        title:  Center(child: Text('Add a Comment')),
+        title:  Center(child: Text('Add Comment')),
         content:  TextField(
           controller: _commentController,
           decoration: InputDecoration(
@@ -120,15 +120,15 @@ class _PostWidgetState extends State<PostWidget> {
             hintStyle: TextStyle(color: Colors.grey[400]),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(width: 1, color: context.theme.primaryColorDark),
+              borderSide: BorderSide(width: 1, color: Colors.grey[400] ?? Colors.grey),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(width: 1, color: context.theme.primaryColorDark), 
+              borderSide: BorderSide(width: 1, color: Colors.grey[400] ?? Colors.grey),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: BorderSide(width: 1, color: context.theme.primaryColorDark), 
+              borderSide: BorderSide(width: 1, color: Colors.grey[400] ?? Colors.grey),
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           ),
@@ -149,7 +149,7 @@ class _PostWidgetState extends State<PostWidget> {
                     (Route<dynamic> route) => route.isFirst, 
                   );   
                 },
-                child: Text('Comment', style: TextStyle(color: context.theme.cardColor)),
+                child: Text('Comment', style: TextStyle(color: context.theme.highlightColor)),
               ),
             ),
             Container(
@@ -164,7 +164,7 @@ class _PostWidgetState extends State<PostWidget> {
                   _commentController.clear();
                   
                 },
-                child: Text('Cancel', style: TextStyle(color: context.theme.highlightColor)),
+                child: Text('Close', style: TextStyle(color: context.theme.highlightColor)),
               ),
             ),
           ],
@@ -225,17 +225,10 @@ class _PostWidgetState extends State<PostWidget> {
                 ),
               ],
             ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                widget.post['message'] ?? '',
-                style: const TextStyle(fontSize: 14),
-              ),
-            ),
+            const SizedBox(height: 10),    
             if (widget.post['image'] != null)
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
@@ -247,6 +240,23 @@ class _PostWidgetState extends State<PostWidget> {
                 ),
               ),
             const SizedBox(height: 8),
+             Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 0),
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '${widget.post['name']}: ',
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                    ),
+                    TextSpan(
+                      text: widget.post['message'] ?? '',
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Divider(
               color: Colors.grey[300],
             ),
