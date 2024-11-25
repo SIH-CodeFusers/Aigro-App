@@ -90,22 +90,38 @@ class _OfflineDetectionState extends State<OfflineDetection> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: GestureDetector(
                   onTap: _pickImage,
-                  child: DottedBorder(
-                        color: context.theme.primaryColorDark,
-                        dashPattern: [8, 4],
-                        strokeWidth: 1,
-                    child: Container(
-                      width: double.infinity,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: context.theme.highlightColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),  
-                      child: Center(
-                        child: Text('Pick a Image from your Gallery')
+                                    child: Container(
+                    width: double.infinity,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      color: context.theme.highlightColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),  
+                    child: DottedBorder(
+                      color: Colors.grey,
+                      dashPattern: [8, 4],
+                      strokeWidth: 1,
+                        borderType: BorderType.RRect, 
+                        radius: Radius.circular(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            width: 50,
+                            height: 50,
+                            "assets/images/upload_image.png",
+                            fit: BoxFit.cover,
+                          ),
+                          Center(
+                            child: Text('Pick a Image from your Gallery',
+                              style: TextStyle(color: context.theme.primaryColorDark,fontSize: 14),
+                            )
+                          ),
+                        ],
                       ),
                     ),
-                  ),
+                  ),  
                 ),
               ),
               SizedBox(height: 30),

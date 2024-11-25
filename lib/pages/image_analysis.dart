@@ -14,7 +14,6 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   Map<String, dynamic>? _analysisData;
   List<Map<String, dynamic>> cropDiseaseList = [];
 
-  // Load crop diseases from JSON
   Future<void> loadCropDiseases() async {
     final data = await DefaultAssetBundle.of(context)
         .loadString('assets/others/crop_disease_18nov.json');
@@ -39,7 +38,6 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
     });
   }
 
-  // Fetch analysis data from API
   Future<void> _fetchAnalysisData() async {
     const fetchUrl = '${BACKEND_URL}/api/imageAnalysis/fetchDetailsByUid/${BACKEND_UID}';
     final response = await http.get(Uri.parse(fetchUrl));
@@ -137,14 +135,12 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         final cropImage = result['cropImage'] ?? '';
 
         return GestureDetector(
-          onTap: () {
-          
+          onTap: () {    
             final selectedDisease = cropDiseaseList.firstWhere(
               (disease) => disease['diseaseName'] == diseaseName, 
               orElse: () => <String, Object>{} // Explicitly cast to Map<String, Object>
             );
 
-   
             if (selectedDisease.isNotEmpty) {
               Navigator.push(
                 context,
@@ -160,7 +156,9 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
           child: Container(
             margin: EdgeInsets.symmetric(vertical: 8.0),
             decoration: BoxDecoration(
-              color: context.theme.highlightColor,
+              color: diseaseName == "Unknown" 
+          ? context.theme.highlightColor.withOpacity(0.8)
+          : context.theme.highlightColor,
               borderRadius: BorderRadius.circular(10),
               boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))],
             ),

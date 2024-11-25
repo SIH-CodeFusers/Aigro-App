@@ -24,15 +24,30 @@ class _UploadImageState extends State<UploadImage> {
   bool isAnalyzing=false;
   String selectedCrop = "Corn";
 
-  final List<String> cropOptions = [
-    "Corn",
-    "Tomato",
-    "Rice",
-    "Apple",
-    "Mango",
+    final List<String> cropOptions = [
+      "Corn",
+      "Tomato",
+      "Rice",
+      "Apple",
+      "Mango",
+      "Banana",
+      "Tea",
+    ];
+
+
+  String selectedCropStage = "Vegetative Growth";
+
+  final List<String> cropStageOptions = [
+    "Vegetative Growth",
+    "Reproductive Stage",
+    "Seeding Stage",
+    "Sowing",
+    "Harvesting",
     "Banana",
     "Tea",
   ];
+
+
 
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
@@ -103,6 +118,7 @@ class _UploadImageState extends State<UploadImage> {
       "cropName": selectedCrop,
       "cropImage": imgURL,
       "block": bdb.userBlock,
+      "cropStage": selectedCropStage,
       "pinCode": bdb.userPin,
     };
 
@@ -174,26 +190,41 @@ class _UploadImageState extends State<UploadImage> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: GestureDetector(
                   onTap: _pickImage,
-                  child: DottedBorder(
-                        color: context.theme.cardColor,
-                        dashPattern: [8, 4],
-                        strokeWidth: 1,
-                    child: Container(
-                      width: double.infinity,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: context.theme.highlightColor,
-                        borderRadius: BorderRadius.circular(10),
-                      ),  
-                      child: Center(
-                        child: Text('Pick a Image from your Gallery',
-                          style: TextStyle(color: context.theme.primaryColorDark,fontSize: 16),
-                        )
+                  child: Container(
+                    width: double.infinity,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      color: context.theme.highlightColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),  
+                    child: DottedBorder(
+                      color: Colors.grey,
+                      dashPattern: [8, 4],
+                      strokeWidth: 1,
+                        borderType: BorderType.RRect, 
+                        radius: Radius.circular(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            width: 50,
+                            height: 50,
+                            "assets/images/upload_image.png",
+                            fit: BoxFit.cover,
+                          ),
+                          Center(
+                            child: Text('Pick a Image from your Gallery',
+                              style: TextStyle(color: context.theme.primaryColorDark,fontSize: 14),
+                            )
+                          ),
+                        ],
                       ),
                     ),
-                  ),
+                  ),   
                 ),
               ),
+
               SizedBox(height: 30,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -201,7 +232,7 @@ class _UploadImageState extends State<UploadImage> {
                   width: double.infinity, 
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: context.theme.cardColor, 
+                      color: context.theme.primaryColorDark, 
                       width: 1.5,
                     ),
                     borderRadius: BorderRadius.circular(8), 
@@ -223,8 +254,54 @@ class _UploadImageState extends State<UploadImage> {
                         return DropdownMenuItem<String>(
                           value: crop,
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                            child: Text(crop),
+                            padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                            child: Text(crop,style: TextStyle(color: context.theme.primaryColorDark),),
+                          ),
+                        );
+                      }).toList(),
+                      isExpanded: true, 
+                      underline: SizedBox(), 
+                      style: TextStyle(
+                        fontSize: 16, 
+                        color: Colors.black, 
+                      ),
+                      icon: Icon(Icons.arrow_drop_down),
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: 30,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Container(
+                  width: double.infinity, 
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: context.theme.primaryColorDark, 
+                      width: 1.5,
+                    ),
+                    borderRadius: BorderRadius.circular(8), 
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: context.theme.highlightColor,
+                      borderRadius: BorderRadius.circular(7),
+                    ),
+                    child: DropdownButton<String>(
+                      value: selectedCropStage,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedCropStage = newValue!;
+                        });
+                      },
+                      dropdownColor: context.theme.highlightColor,
+                      items: cropStageOptions.map<DropdownMenuItem<String>>((String crop) {
+                        return DropdownMenuItem<String>(
+                          value: crop,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                            child: Text(crop,style: TextStyle(color: context.theme.primaryColorDark),),
                           ),
                         );
                       }).toList(),
