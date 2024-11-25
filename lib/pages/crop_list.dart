@@ -51,13 +51,28 @@ class _CropListPageState extends State<CropListPage> {
                 "causes": disease['causes'] as String? ?? '',
                 "remedies":
                     (disease['remedies'] as List?)?.map((r) => r as String).toList() ?? [],
+                "summary":
+                    (disease['summary'] as List?)?.map((r) => r as String).toList() ?? [],
                 "chemicalControl": disease['chemicalControl'] as String? ?? '',
                 "cropName": crop['cropName'] as String,
+                "fertilizers": (disease['fertilisers'] as List?)?.map((fertilizer) {
+                return {
+                  "name": fertilizer['name'] as String,
+                  "products": (fertilizer['products'] as List).map((product) {
+                    return {
+                      "companyName": product['companyName'] as String,
+                      "productImage": product['productImage'] as String,
+                      "price": product['price'] as String,
+                      "id": product['id'] as String,
+                    };
+                  }).toList(),
+                  "id": fertilizer['id'] as String,
+                };
+              }).toList() ?? [],
               };
             }))
         .toList();
 
-    // Translate data if necessary
     if (userLang != "en") {
       return await translateCropDiseases(diseases);
     }

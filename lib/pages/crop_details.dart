@@ -1,9 +1,11 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:aigro/utils/translate.dart';
 import 'package:aigro/secret.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:aigro/local_db/db.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class CropDetails extends StatefulWidget {
   final Map<String, dynamic> disease;
@@ -99,6 +101,124 @@ class _CropDetailsState extends State<CropDetails> {
     );
   }
 
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: context.theme.canvasColor,
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(
+          diseaseDetails["diseaseName"] ?? "Disease Details",
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Chip(
+                      label: Text(diseaseDetails["cropName"]),
+                      backgroundColor: context.theme.highlightColor,
+                      shape: StadiumBorder(side: BorderSide(color: context.theme.highlightColor, width: 1)), 
+                      elevation: 0.0,
+                    ),
+                    SizedBox(width: 8),
+                    Chip(
+                      label: Text(diseaseDetails["category"]),
+                      backgroundColor: context.theme.highlightColor,
+                      shape: StadiumBorder(side: BorderSide(color: context.theme.highlightColor, width: 1)),
+                      elevation: 0.0, 
+                    ),
+                    SizedBox(width: 8),
+                    Chip(
+                      label: Text(diseaseDetails["scientificName"]),
+                      backgroundColor: Colors.green[200],
+                      shape: StadiumBorder(side: BorderSide(color: context.theme.highlightColor, width: 1)),
+                      elevation: 0.0, 
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
+             
+              if (diseaseDetails['images'] != null && (diseaseDetails['images'] as List).isNotEmpty)
+               _buildImageGallery(diseaseDetails['images']),
+               
+              _buildInfoCard(
+                title: 'Symptoms',
+                content: diseaseDetails['symptoms'] ?? "No symptoms information available",
+                icon: Icons.medical_information_outlined,
+              ),
+              _buildInfoCard(
+                title: 'What caused it?',
+                content: diseaseDetails['causes'] ?? "No causes information available",
+                icon: Icons.bug_report_outlined,
+              ),
+               Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: context.theme.focusColor,
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Recommendations",
+                      style:  TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: context.theme.primaryColorDark,
+                      ),
+                    ),
+                    _buildRecomCard(
+                      title: 'Organic Control',
+                      content: diseaseDetails['chemicalControl'] ?? "No chemical control information available",
+                      icon: Icons.science_outlined,
+                    ),
+                    _buildRecomCard(
+                      title: 'Chemical Control',
+                      content: diseaseDetails['chemicalControl'] ?? "No chemical control information available",
+                      icon: Icons.science_outlined,
+                    ),
+                    if (diseaseDetails['fertilizers'] != null && (diseaseDetails['fertilizers'] as List).isNotEmpty)
+                      _buildFertilizersSection(diseaseDetails['fertilizers'])
+                  ],
+                ),
+              ),
+              _buildInfoCard(
+                title: 'Preventive Measures',
+                content: '',
+                icon: Icons.healing_outlined,
+                bulletPoints: List<String>.from(diseaseDetails['remedies'] ?? []),
+              ),
+              _buildInfoCard(
+                title: 'Summary',
+                content: '',
+                icon: Icons.healing_outlined,
+                bulletPoints: List<String>.from(diseaseDetails['summary'] ?? []),
+              ),
+              // // Fertilizer Section
+            // if (diseaseDetails['fertilisers'] != null && (diseaseDetails['fertilisers'] as List).isNotEmpty)
+            //   Padding(
+            //     padding: const EdgeInsets.only(top: 20), // Add some top spacing
+            //     child: _buildFertilizersSection(List<Map<String, dynamic>>.from(diseaseDetails['fertilisers'])),
+            //   ),
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildInfoCard({
     required String title,
     required String content,
@@ -106,10 +226,9 @@ class _CropDetailsState extends State<CropDetails> {
     List<String>? bulletPoints,
     List<String>? images,
   }) {
-    return Card(
-      elevation: 2,
+    return Container(
+      color: context.theme.canvasColor,
       margin: const EdgeInsets.symmetric(vertical: 8),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -117,26 +236,18 @@ class _CropDetailsState extends State<CropDetails> {
           children: [
             Row(
               children: [
-                if (icon != null) ...[
-                  Icon(icon, color: const Color(0xFF004D3F), size: 24),
-                  const SizedBox(width: 8),
-                ],
                 Expanded(
                   child: Text(
                     title,
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style:  TextStyle(
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Color(0xFF004D3F),
+                      color: context.theme.primaryColorDark,
                     ),
                   ),
                 ),
               ],
             ),
-            if (images != null && images.isNotEmpty) ...[
-              const SizedBox(height: 12),
-              _buildImageGallery(images),
-            ],
             const SizedBox(height: 12),
             if (bulletPoints != null)
               ...bulletPoints.map((point) => Padding(
@@ -144,20 +255,35 @@ class _CropDetailsState extends State<CropDetails> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text("• ", style: TextStyle(fontSize: 16, color: Color(0xFF004D3F))),
+                        if(title=='Preventive Measures')
+                        CircleAvatar(
+                          radius: 12,
+                          backgroundColor: context.theme.focusColor,
+                            child: Icon(
+                              FeatherIcons.check,
+                              size: 12,
+                              color: context.theme.primaryColorDark,
+                            ),
+                        )
+                        else
+                        Text('•',style: TextStyle(color: context.theme.primaryColorDark,fontSize: 16,fontWeight: FontWeight.bold),),
+                        SizedBox(width: 10,),        
                         Expanded(
-                          child: Text(
-                            point,
-                            style: const TextStyle(fontSize: 15, height: 1.4),
+                          child:  Padding(
+                          padding: const EdgeInsets.only(top: 2),
+                            child: Text(
+                              point,
+                              style: const TextStyle(fontSize: 13, height: 1.4),
+                            ),
                           ),
-                        ),
+                        )                   
                       ],
                     ),
                   ))
             else
               Text(
                 content,
-                style: const TextStyle(fontSize: 15, height: 1.4),
+                style: const TextStyle(fontSize: 12, height: 1.4),
               ),
           ],
         ),
@@ -165,199 +291,129 @@ class _CropDetailsState extends State<CropDetails> {
     );
   }
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: const Color(0xFFF5F6F9),
-    appBar: AppBar(
-      elevation: 0,
-      title: Text(
-        diseaseDetails["diseaseName"] ?? "Disease Details",
-        style: const TextStyle(fontWeight: FontWeight.bold),
-      ),
-      backgroundColor: const Color(0xFF004D3F),
-    ),
-    body: SafeArea(
-      child: SingleChildScrollView(
+   Widget _buildRecomCard({
+    required String title,
+    required String content,
+    IconData? icon,
+    List<String>? bulletPoints,
+    List<String>? images,
+  }) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Card(
-              elevation: 3,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-              child: Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF004D3F), Color(0xFF00684A)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+            Row(
+              children: [
+                Icon(
+                  FontAwesomeIcons.plantWilt,
+                  size: 12,
+                  color: context.theme.primaryColorDark,
+                ),
+                SizedBox(width: 5,),
+                Expanded(
+                  child: Text(
+                    title,
+                    style:  TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: context.theme.primaryColorDark,
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(15),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      diseaseDetails['diseaseName'] ?? "Unknown Disease",
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        diseaseDetails['category'] ?? "Unknown Category",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+              Text(
+                content,
+                style: const TextStyle(fontSize: 11, height: 1.4),
               ),
-            ),
-            const SizedBox(height: 20),
-            if (diseaseDetails['images'] != null && (diseaseDetails['images'] as List).isNotEmpty)
-              _buildInfoCard(
-                title: 'Disease Images',
-                content: '',
-                icon: Icons.image_outlined,
-                images: List<String>.from(diseaseDetails['images']),
-              ),
-            _buildInfoCard(
-              title: 'Symptoms',
-              content: diseaseDetails['symptoms'] ?? "No symptoms information available",
-              icon: Icons.medical_information_outlined,
-            ),
-            _buildInfoCard(
-              title: 'Causes',
-              content: diseaseDetails['causes'] ?? "No causes information available",
-              icon: Icons.bug_report_outlined,
-            ),
-            _buildInfoCard(
-              title: 'Remedies',
-              content: '',
-              icon: Icons.healing_outlined,
-              bulletPoints: List<String>.from(diseaseDetails['remedies'] ?? []),
-            ),
-            _buildInfoCard(
-              title: 'Chemical Control',
-              content: diseaseDetails['chemicalControl'] ?? "No chemical control information available",
-              icon: Icons.science_outlined,
-            ),
-            // Fertilizer Section
-           if (diseaseDetails['fertilisers'] != null && (diseaseDetails['fertilisers'] as List).isNotEmpty)
-  Padding(
-    padding: const EdgeInsets.only(top: 20), // Add some top spacing
-    child: _buildFertilizersSection(List<Map<String, dynamic>>.from(diseaseDetails['fertilisers'])),
-  ),
-
           ],
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-// Method to Build Fertilizer Section
-Widget _buildFertilizersSection(List<Map<String, dynamic>> fertilisers) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      const Text(
-        'Fertilizers',
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-          color: Color(0xFF004D3F),
-        ),
+  Widget _buildFertilizersSection(List<Map<String, dynamic>> fertilisers) {
+    return   Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
       ),
-      const SizedBox(height: 10),
-      ...fertilisers.map((fertilizer) {
-        return Card(
-          margin: const EdgeInsets.symmetric(vertical: 10),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          elevation: 3,
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+             Icon(
+                FontAwesomeIcons.plantWilt,
+                size: 12,
+                color: context.theme.primaryColorDark,
+              ),
+              SizedBox(width: 5,),
+              Expanded(
+                child: Text(
+                  "Pesticides",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: context.theme.primaryColorDark,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20,),
+          ...List.generate((diseaseDetails['fertilizers'] as List).length, (index) {
+            final fertilizer = diseaseDetails['fertilizers'][index];
+            return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  fertilizer['name'] ?? "Unknown Fertilizer",
-                  style: const TextStyle(
-                    fontSize: 18,
+                  fertilizer['name'],
+                  style: TextStyle(
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: Colors.black,
                   ),
                 ),
-                const SizedBox(height: 10),
-                ...List<Map<String, dynamic>>.from(fertilizer['products'] ?? []).map((product) {
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                SizedBox(height: 4),
+                ...List.generate((fertilizer['products'] as List).length, (productIndex) {
+                  final product = fertilizer['products'][productIndex];
+                  return Column(
                     children: [
-                      // Display Fertilizer Product Image
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.network(
-                          product['productImage'] ?? '',
-                          width: 70,
-                          height: 70,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Icon(
-                              Icons.broken_image,
-                              size: 70,
-                              color: Colors.grey,
-                            );
-                          },
+                      Card(
+                        color: context.theme.highlightColor,
+                        elevation: 0,
+                        margin: EdgeInsets.symmetric(vertical: 8),
+                        child: ListTile(
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                          leading: Image.network(
+                            product['productImage'],
+                            width: 70,
+                            height: 70,
+                            fit: BoxFit.cover,
+                          ),
+                          title: Text(product['companyName']),
+                          subtitle: Text(product['price']),
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      // Display Fertilizer Product Details
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              product['companyName'] ?? "Unknown Company",
-                              style: const TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text(
-                              product['price'] ?? "Unknown Price",
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                     
                     ],
                   );
-                }).toList(),
+                }),
+                 if (index != (diseaseDetails['fertilizers'] as List).length - 1)
+                  SizedBox(height: 16),
               ],
-            ),
-          ),
-        );
-      }).toList(),
-    ],
-  );
-}
+            );
+          }),
+          
+        ],
+      ),
+    );
+
+  }
 
 
 }

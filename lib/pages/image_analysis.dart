@@ -30,6 +30,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                   "symptoms": disease['symptoms'] as String? ?? '',
                   "causes": disease['causes'] as String? ?? '',
                   "remedies": (disease['remedies'] as List?)?.map((r) => r as String).toList() ?? [],
+                  "summary":(disease['summary'] as List?)?.map((r) => r as String).toList() ?? [],
                   "chemicalControl": disease['chemicalControl'] as String? ?? '',
                   "cropName": crop['cropName'] as String,
                 };
