@@ -1,6 +1,7 @@
 import 'package:aigro/pages/community.dart';
 import 'package:aigro/pages/disease_forecasting.dart';
 import 'package:aigro/pages/disease_mapping.dart';
+import 'package:aigro/pages/gov_schemes.dart';
 import 'package:aigro/pages/image_analysis.dart';
 import 'package:aigro/pages/khetisathi.dart';
 import 'package:aigro/pages/learning_resources.dart';
@@ -92,6 +93,7 @@ class _MyAppState extends State<MyApp> {
         Myroutes.uploadImageRoute: (context) => UploadImage(),
         Myroutes.learningResourcesRoute: (context) => LearningResources(),
         Myroutes.communityRoute: (context) => Community(),
+        Myroutes.schemesRoute: (context) => GovernmentSchemes(),
       },
     );   
   }

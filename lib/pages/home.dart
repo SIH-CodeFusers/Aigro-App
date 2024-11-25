@@ -161,7 +161,7 @@ class _HomePageState extends State<HomePage> {
       'color': Color.fromRGBO(255, 204, 187,1),
       'text': 'Government Schemes',
       'image': 'assets/images/gv.png',
-      'route': Myroutes.profileRoute,
+      'route': Myroutes.schemesRoute,
     },
   ];
 
