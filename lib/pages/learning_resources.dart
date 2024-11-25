@@ -179,14 +179,12 @@ class _LearningResourcesState extends State<LearningResources> {
                   SizedBox(width: 10.0),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 2),
+                      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 2),
                       decoration: BoxDecoration(
                         color: context.theme.highlightColor,
                         boxShadow: [
                           BoxShadow(
-                            color: context.theme.cardColor,
-                             
+                            color: context.theme.cardColor,                
                             spreadRadius: 1,
                             blurRadius: 1,
                             offset: Offset(0, 0),

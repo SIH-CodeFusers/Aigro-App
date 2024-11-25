@@ -36,146 +36,146 @@ class _AboutUsState extends State<AboutUs> {
   String provideContent =
       "We provide a wide range of agricultural products and services, tailored to meet the unique needs of each farmer.";
 
-    void translateAllTexts() async {
-    String targetLanguage = userLang;
-    String apiKey = GCP_API_KEY;
+  void translateAllTexts() async {
+      String targetLanguage = userLang;
+      String apiKey = GCP_API_KEY;
 
-    if (targetLanguage == "en") {
-      return;
-    }
-
-    try {
-      String aboutUsTitleResult =
-          await translateText(aboutUsTitle, targetLanguage, apiKey);
-      setState(() {
-        aboutUsTitle = aboutUsTitleResult;
-      });
-    } catch (e) {
-      print("Error: $e");
-    }
-
-    try {
-      String ourTeamTitleResult =
-          await translateText(ourTeamTitle, targetLanguage, apiKey);
-      setState(() {
-        ourTeamTitle = ourTeamTitleResult;
-      });
-    } catch (e) {
-      print("Error: $e");
-    }
-    try {
-      String fnqTitleResult =
-          await translateText(fnqTitle, targetLanguage, apiKey);
-      setState(() {
-        fnqTitle = fnqTitleResult;
-      });
-    } catch (e) {
-      print("Error: $e");
-    }
-
-    try {
-      List<Map<String, String>> translatedTeamMembers = [];
-      for (var item in teamMembers) {
-        String translatedRole = await translateText(item["role"] ?? "", targetLanguage, apiKey);        
-         translatedTeamMembers.add({
-          "name": item["name"] ?? "", 
-          "role": translatedRole,
-          "image": item["image"] ?? "", 
-          "web": item["web"] ?? "",
-        });
+      if (targetLanguage == "en") {
+        return;
       }
-      setState(() {
-        teamMembers = translatedTeamMembers;
-      });
-    } catch (e) {
-      print("Error translating team members: $e");
-    }
 
-    try {
-      String motiveTitleResult =
-          await translateText(motiveTitle, targetLanguage, apiKey);
-      setState(() {
-        motiveTitle = motiveTitleResult;
-      });
-
-      String motiveContentResult =
-          await translateText(motiveContent, targetLanguage, apiKey);
-      setState(() {
-        motiveContent = motiveContentResult;
-      });
-    } catch (e) {
-      print("Error: $e");
-    }
-
-    try {
-      String futurePlanningTitleResult =
-          await translateText(futurePlanningTitle, targetLanguage, apiKey);
-      setState(() {
-        futurePlanningTitle = futurePlanningTitleResult;
-      });
-
-      String futurePlanningContentResult =
-          await translateText(futurePlanningContent, targetLanguage, apiKey);
-      setState(() {
-        futurePlanningContent = futurePlanningContentResult;
-      });
-    } catch (e) {
-      print("Error: $e");
-    }
-
-    try {
-      String provideTitleResult =
-          await translateText(provideTitle, targetLanguage, apiKey);
-      setState(() {
-        provideTitle = provideTitleResult;
-      });
-
-      String provideContentResult =
-          await translateText(provideContent, targetLanguage, apiKey);
-      setState(() {
-        provideContent = provideContentResult;
-      });
-    } catch (e) {
-      print("Error: $e");
-    }
-
-    try {
-      List<Map<String, String>> translatedTeamMembers = [];
-      for (var item in teamMembers) {
-        String translatedRole = await translateText(item["role"] ?? "", targetLanguage, apiKey);        
-         translatedTeamMembers.add({
-          "name": item["name"] ?? "", 
-          "role": translatedRole,
-          "image": item["image"] ?? "", 
-          "web": item["web"] ?? "",
+      try {
+        String aboutUsTitleResult =
+            await translateText(aboutUsTitle, targetLanguage, apiKey);
+        setState(() {
+          aboutUsTitle = aboutUsTitleResult;
         });
+      } catch (e) {
+        print("Error: $e");
       }
-      setState(() {
-        teamMembers = translatedTeamMembers;
-      });
-    } catch (e) {
-      print("Error translating team members: $e");
-    }
 
-
-    try {
-      List<Map<String, String>> translatedAccordionData = [];
-      for (var item in accordionData) {
-        String translatedTitle =
-            await translateText(item["title"]!, targetLanguage, apiKey);
-        String translatedContent =
-            await translateText(item["content"]!, targetLanguage, apiKey);
-        translatedAccordionData.add({
-          "title": translatedTitle,
-          "content": translatedContent,
+      try {
+        String ourTeamTitleResult =
+            await translateText(ourTeamTitle, targetLanguage, apiKey);
+        setState(() {
+          ourTeamTitle = ourTeamTitleResult;
         });
+      } catch (e) {
+        print("Error: $e");
       }
-      setState(() {
-        accordionData = translatedAccordionData;
-      });
-    } catch (e) {
-      print("Error translating accordion: $e");
-    }
+      try {
+        String fnqTitleResult =
+            await translateText(fnqTitle, targetLanguage, apiKey);
+        setState(() {
+          fnqTitle = fnqTitleResult;
+        });
+      } catch (e) {
+        print("Error: $e");
+      }
+
+      try {
+        List<Map<String, String>> translatedTeamMembers = [];
+        for (var item in teamMembers) {
+          String translatedRole = await translateText(item["role"] ?? "", targetLanguage, apiKey);        
+          translatedTeamMembers.add({
+            "name": item["name"] ?? "", 
+            "role": translatedRole,
+            "image": item["image"] ?? "", 
+            "web": item["web"] ?? "",
+          });
+        }
+        setState(() {
+          teamMembers = translatedTeamMembers;
+        });
+      } catch (e) {
+        print("Error translating team members: $e");
+      }
+
+      try {
+        String motiveTitleResult =
+            await translateText(motiveTitle, targetLanguage, apiKey);
+        setState(() {
+          motiveTitle = motiveTitleResult;
+        });
+
+        String motiveContentResult =
+            await translateText(motiveContent, targetLanguage, apiKey);
+        setState(() {
+          motiveContent = motiveContentResult;
+        });
+      } catch (e) {
+        print("Error: $e");
+      }
+
+      try {
+        String futurePlanningTitleResult =
+            await translateText(futurePlanningTitle, targetLanguage, apiKey);
+        setState(() {
+          futurePlanningTitle = futurePlanningTitleResult;
+        });
+
+        String futurePlanningContentResult =
+            await translateText(futurePlanningContent, targetLanguage, apiKey);
+        setState(() {
+          futurePlanningContent = futurePlanningContentResult;
+        });
+      } catch (e) {
+        print("Error: $e");
+      }
+
+      try {
+        String provideTitleResult =
+            await translateText(provideTitle, targetLanguage, apiKey);
+        setState(() {
+          provideTitle = provideTitleResult;
+        });
+
+        String provideContentResult =
+            await translateText(provideContent, targetLanguage, apiKey);
+        setState(() {
+          provideContent = provideContentResult;
+        });
+      } catch (e) {
+        print("Error: $e");
+      }
+
+      try {
+        List<Map<String, String>> translatedTeamMembers = [];
+        for (var item in teamMembers) {
+          String translatedRole = await translateText(item["role"] ?? "", targetLanguage, apiKey);        
+          translatedTeamMembers.add({
+            "name": item["name"] ?? "", 
+            "role": translatedRole,
+            "image": item["image"] ?? "", 
+            "web": item["web"] ?? "",
+          });
+        }
+        setState(() {
+          teamMembers = translatedTeamMembers;
+        });
+      } catch (e) {
+        print("Error translating team members: $e");
+      }
+
+
+      try {
+        List<Map<String, String>> translatedAccordionData = [];
+        for (var item in accordionData) {
+          String translatedTitle =
+              await translateText(item["title"]!, targetLanguage, apiKey);
+          String translatedContent =
+              await translateText(item["content"]!, targetLanguage, apiKey);
+          translatedAccordionData.add({
+            "title": translatedTitle,
+            "content": translatedContent,
+          });
+        }
+        setState(() {
+          accordionData = translatedAccordionData;
+        });
+      } catch (e) {
+        print("Error translating accordion: $e");
+      }
 
 
 
@@ -281,7 +281,7 @@ class _AboutUsState extends State<AboutUs> {
 
     super.initState();
 
-    _timer = Timer.periodic(Duration(seconds: 3), (Timer timer) {
+    _timer = Timer.periodic(Duration(seconds: 2), (Timer timer) {
       if (_currentIndex < 2) {
         _currentIndex++;
       } else {
