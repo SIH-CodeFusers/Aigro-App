@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class GovernmentSchemes extends StatefulWidget {
@@ -167,7 +169,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 20,),
+            SizedBox(height: 15,),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -199,71 +201,216 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
               ),
             ),
             
-            SizedBox(height: 20,),
+            SizedBox(height: 15,),
             Expanded(
               child: ListView.builder(
                 itemCount: filteredData.length,
                 itemBuilder: (context, index) {
-                  return Card(
-                    color: context.theme.highlightColor,
-                    margin: const EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image.network(filteredData[index]['image'] as String),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            filteredData[index]['title'] as String,
-                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 8),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: context.theme.highlightColor,
+                        borderRadius: BorderRadius.circular(10)
+                      ), 
+                      margin: const EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(filteredData[index]['image'] as String)
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(filteredData[index]['description'] as String),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: const Text('Key Points:', style: TextStyle(fontWeight: FontWeight.bold)),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: (filteredData[index]['key_points'] as List<String>).map((keyPoint) {
-                              return Text("• $keyPoint");
-                            }).toList(),
+                          SizedBox(height: 10,),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  FeatherIcons.alertCircle,
+                                  size: 20,
+                                  color:context.theme.primaryColorDark
+                                ),
+                                SizedBox(width: 1,),
+                                Flexible(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        filteredData[index]['title'] as String,
+                                        maxLines:1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(                          
+                                          fontSize: 20, 
+                                          fontWeight: FontWeight.bold,
+                                          color:context.theme.primaryColorDark
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              const Text('State: '),
-                              Text(filteredData[index]['state'] as String),
-                            ],
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 2),
+                                  child: Icon(
+                                    FeatherIcons.shield,
+                                    size: 16,
+                                    color:context.theme.primaryColorDark
+                                  ),
+                                ),
+                                SizedBox(width: 4,),
+                                Expanded(    
+                                  child: Text(
+                                    filteredData[index]['description'] as String,
+                                    style: TextStyle(                          
+                                      fontSize: 16, 
+                                      color:Colors.grey[600]
+                                    ),
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3, 
+                                  ),   
+                                ),  
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              const Text('Owner: '),
-                              Text(filteredData[index]['owner_of_scheme'] as String),
-                            ],
+      
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            margin: EdgeInsets.all(10),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: context.theme.canvasColor,
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: (filteredData[index]['key_points'] as List<String>).map((keyPoint) {
+                                  return Row(
+                                    children: [
+                                      Icon(
+                                        FeatherIcons.disc,
+                                        size: 14,
+                                        color:context.theme.primaryColorDark,
+                                      ),
+                                      SizedBox(width: 8,),
+                                      Text("$keyPoint",style: TextStyle(fontWeight: FontWeight.w600),),
+                                    ],
+                                  );
+                                }).toList(),
+                              ),
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Navigate to the scheme's link
-                              _launchURL(filteredData[index]['link'] as String);
-                            },
-                            child: const Text('Learn More'),
+                          
+                          SizedBox(height: 10,),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 2),
+                                  child: Icon(
+                                    FeatherIcons.mapPin,
+                                    size: 16,
+                                    color:context.theme.primaryColorDark
+                                  ),
+                                ),
+                                SizedBox(width: 4,),
+                                Expanded(    
+                                  child: Text(
+                                    'State: ${filteredData[index]['state'] as String}',
+                                    style: TextStyle(                          
+                                      fontSize: 16, 
+                                      color:context.theme.primaryColorDark
+                                    ),
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3, 
+                                  ),   
+                                ),  
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+
+                          SizedBox(height: 5,),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 2),
+                                  child: Icon(
+                                    FeatherIcons.user,
+                                    size: 16,
+                                    color:context.theme.primaryColorDark
+                                  ),
+                                ),
+                                SizedBox(width: 4,),
+                                Expanded(    
+                                  child: Text(
+                                    'Owner: ${filteredData[index]['owner_of_scheme'] as String}',
+                                    style: TextStyle(                          
+                                      fontSize: 16, 
+                                      color:context.theme.primaryColorDark
+                                    ),
+                                    softWrap: true,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3, 
+                                  ),   
+                                ),  
+                              ],
+                            ),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: GestureDetector( 
+                              onTap: (){
+                                _launchURL(filteredData[index]['link'] as String);
+                              },
+                              child: Container(
+                                width: 150,
+                                height: 48,
+                                decoration: BoxDecoration(
+                                  color: context.theme.primaryColorDark,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),   
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Visit Here',
+                                      style: TextStyle(color: context.theme.highlightColor, fontSize: 16),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 2),
+                                      child: Icon(
+                                        FeatherIcons.arrowUpRight,
+                                        size: 16,
+                                        color:context.theme.highlightColor
+                                      ),
+                                    ),
+                                  ],
+                                ),                     
+                              ),
+                            ),
+                          ),
+                          
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -275,9 +422,13 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
     );
   }
 
-  // Method to launch the URL when a scheme is tapped
-  void _launchURL(String url) {
-    // You can use the `url_launcher` package to open the link
-    // Example: launch(url);
+  void _launchURL(String s) async {
+    final Uri url = Uri.parse(s);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
+
 }
