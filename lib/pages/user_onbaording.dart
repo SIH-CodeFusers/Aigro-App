@@ -30,6 +30,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
   final _phonecontroller = TextEditingController();
   final _namecontroller = TextEditingController();
   final _pincontroller = TextEditingController();
+  
 
   final List<String> states = [
     "Andhra Pradesh",
@@ -67,6 +68,19 @@ class _UserOnboardingState extends State<UserOnboarding> {
     "Delhi",
     "Puducherry",
   ];
+
+
+
+  final List<String> languages = [
+    
+    "English",
+    "Hindi",
+    "Bengali",
+    "Telegu",
+  ];
+
+  String? selectedLanguage; 
+
 
   String? selectedState;
 
@@ -159,26 +173,29 @@ class _UserOnboardingState extends State<UserOnboarding> {
           child: Builder(
             builder: (BuildContext context) {
               if (questionInd == 0) {
+                return LanguageSelect(context);
+              } 
+              else if (questionInd == 1) {
                 return NameSelect(context);
-              } else if (questionInd == 1) {
+              } else if (questionInd == 2) {
                 return PhoneSelect(context);
               } 
-              else if (questionInd == 2) {
+              else if (questionInd == 3) {
                 return CountrySelect(context);
               }
-              else if (questionInd == 3) {
+              else if (questionInd == 4) {
                 return StateSelect(context);
               }
-              else if (questionInd == 4) {
+              else if (questionInd == 5) {
                 return DistrictSelect(context);
               }
-              else if (questionInd == 5) {
+              else if (questionInd == 6) {
                 return BlockSelect(context);
               }
-              else if (questionInd == 6) {
+              else if (questionInd == 7) {
                 return PinSelect(context);
               }
-              else if (questionInd == 7) {
+              else if (questionInd == 8) {
                 return CropSelect(context);
               }
               else {
@@ -190,6 +207,105 @@ class _UserOnboardingState extends State<UserOnboarding> {
       ),
     );
   }
+
+  //prefered language
+
+  Widget LanguageSelect(BuildContext context) {
+  return Column(
+    children: [
+      ProgressIndicatorWidget(
+        questionInd: questionInd,
+        totalQuestions: totalQuestions,
+        onBackButtonPressed: _handleBackButtonPressed,
+      ),
+      Spacer(),
+      Center(
+        child: Container(
+          padding: EdgeInsets.all(16),
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            color: context.theme.highlightColor,
+            borderRadius: BorderRadius.circular(5),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10,
+                offset: Offset(0, 0),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Select your Language",
+                    style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: context.theme.primaryColorDark,
+                    width: 2.0,
+                  ),
+                ),
+                child: DropdownButton<String>(
+                  value: selectedLanguage,
+                  hint: Text(
+                    'Select a Language',
+                    style: TextStyle(color: context.theme.primaryColorDark),
+                  ),
+                  isExpanded: true,
+                  items: languages.map((String language) {
+                    return DropdownMenuItem<String>(
+                      value: language,
+                      child: Text(language, style: TextStyle(color: context.theme.primaryColorDark)),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      selectedLanguage = newValue;
+                    });
+                  },
+                  style: TextStyle(color: context.theme.primaryColorDark, fontSize: 18),
+                  underline: Container(),
+                  iconEnabledColor: context.theme.primaryColorDark,
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          questionInd += 1;
+                        });
+                      },
+                      child: NextButton(
+                        text: "Next",
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      Spacer(),
+    ],
+  );
+}
+
 
   //User Name
   Widget NameSelect(BuildContext context) {
