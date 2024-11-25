@@ -54,12 +54,12 @@ class _YourPostsState extends State<YourPosts> {
             return const Center(child: Text('No posts available.'));
           } else {
             return 
-                ListView.builder(
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) {
-                    final post = snapshot.data![index];
-                    return PostWidget(post: post);
-                  },  
+              ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  final post = snapshot.data![index];
+                  return PostWidget(post: post);
+                },  
             );
           }
         },

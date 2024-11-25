@@ -281,7 +281,7 @@ class _AboutUsState extends State<AboutUs> {
 
     super.initState();
 
-    _timer = Timer.periodic(Duration(seconds: 3), (Timer timer) {
+    _timer = Timer.periodic(Duration(seconds: 2), (Timer timer) {
       if (_currentIndex < 2) {
         _currentIndex++;
       } else {

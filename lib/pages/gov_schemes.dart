@@ -164,7 +164,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: const Text('Schemes for Farmers'),
+        title: const Text('Schemes for Farmers 🌱'),
       ),
       body: SafeArea(
         child: Column(
@@ -174,7 +174,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                width: 200,
+                width: 220,
                 decoration: BoxDecoration(
                   color: context.theme.highlightColor,
                   border: Border.all(color: context.theme.primaryColorDark, width: 2), 
@@ -211,8 +211,16 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                     child: Container(
                       decoration: BoxDecoration(
                         color: context.theme.highlightColor,
-                        borderRadius: BorderRadius.circular(10)
-                      ), 
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color.fromARGB(255, 57, 59, 57).withOpacity(0.2),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: Offset(1, 1),
+                          ),
+                        ],
+                      ),     
                       margin: const EdgeInsets.all(10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
