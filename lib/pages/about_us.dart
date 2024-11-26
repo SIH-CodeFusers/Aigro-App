@@ -187,9 +187,9 @@ class _AboutUsState extends State<AboutUs> {
   
   List<Map<String, String>> accordionData = [
     {
-      "title": "What is Aigro",
+      "title": "What is KhetiSathi",
       "content":
-          "AIgro, developed by the CodeFusers Team, is a website designed to assist farmers with various features such as disease prediction, image analysis, a farmers' community, crop health monitoring, an AI chat assistant, weather updates, cultivation tips, and farm resources."
+          "KhetiSathi, developed by the CodeFusers Team, is a website designed to assist farmers with various features such as disease prediction, image analysis, a farmers' community, crop health monitoring, an AI chat assistant, weather updates, cultivation tips, and farm resources."
     },
     {
       "title": "How do the Diseases Prediction Work?",
@@ -202,9 +202,9 @@ class _AboutUsState extends State<AboutUs> {
           "You can reach us via email, phone, or through our in-app support system.The image analysis tool allows farmers to upload images of their crops or plants. The AI then analyzes these images to detect signs of diseases, pests, or nutritional deficiencies, providing actionable insights."
     },
     {
-      "title": "How can i connect with other Farmers in Aigro",
+      "title": "How can i connect with other Farmers in KhetiSathi",
       "content":
-          "AIgro offers a farmers' community feature where users can join discussions, share experiences, and seek advice from other farmers. This platform fosters collaboration and knowledge sharing."
+          "KhetiSathi offers a farmers' community feature where users can join discussions, share experiences, and seek advice from other farmers. This platform fosters collaboration and knowledge sharing."
     },{
       "title": "What kind of Suppourt can I get from AI Chat Assistant",
       "content":
@@ -212,7 +212,7 @@ class _AboutUsState extends State<AboutUs> {
     },{
       "title": "Who do I get Wheather Updates & Cultivtation Tips?",
       "content":
-          "AIgro provides personalized weather updates and cultivation tips based on your location and crop type. Users can access these insights through the website's dedicated sections for weather forecasts and farming advice."
+          "KhetiSathi provides personalized weather updates and cultivation tips based on your location and crop type. Users can access these insights through the website's dedicated sections for weather forecasts and farming advice."
     },
   ];
 

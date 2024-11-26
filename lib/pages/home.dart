@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
   String welcomeText="Welcome to your dashboard. Scroll to see amazing features we provide.";
   String detectAndTreat="Detect and Treat Diseases with a Simple Image Upload";
   String analyzeNow="Analyze Now";
-  String otherFeatures="Other Key features of AIgro";
+  String otherFeatures="Other Key features of Kheti Sathi";
 
 
 

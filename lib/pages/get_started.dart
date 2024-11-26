@@ -1,13 +1,27 @@
+import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:aigro/widgets/circle_painter.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 
-class GetStarted extends StatelessWidget {
+class GetStarted extends StatefulWidget {
   const GetStarted({super.key});
 
+  @override
+  State<GetStarted> createState() => _GetStartedState();
+}
+
+class _GetStartedState extends State<GetStarted> {
+  FlutterTts flutterTts = FlutterTts();
+
+  _speak(String text) async {
+    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
+  }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -84,7 +98,6 @@ class GetStarted extends StatelessWidget {
                         )
                     ),
                            
-                
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
                       child: Container(
@@ -104,8 +117,16 @@ class GetStarted extends StatelessWidget {
                         ),
                       ),      
                     ),
+                    
+                   GestureDetector(
+                      onTap: (){
+                        _speak("Cultivating Crops for a greener tommorow. Empowering farmers for optimal and better outcomes.");
+                      },
+                      child: voiceIcon(context),
+                    ),
+                    
                 
-                    const SizedBox(height: 10,),
+                    const SizedBox(height: 20,),
                 
                     GestureDetector(
                       onTap: (){
