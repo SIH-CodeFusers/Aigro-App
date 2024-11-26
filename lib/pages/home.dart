@@ -1,6 +1,8 @@
 import 'package:aigro/local_db/db.dart';
+import 'package:aigro/pages/khetisathi.dart';
 import 'package:aigro/pages/profile.dart';
 import 'package:aigro/utils/translate.dart';
+import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:aigro/utils/routes.dart';
@@ -8,6 +10,7 @@ import 'package:aigro/utils/bottom_pages_list.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:aigro/widgets/sparkling_animation.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -165,6 +168,14 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
+  FlutterTts flutterTts = FlutterTts();
+
+  _speak(String text) async {
+    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,7 +232,10 @@ class _HomePageState extends State<HomePage> {
               ),
               child: GestureDetector(
                 onTap: (){
-                  Navigator.pushNamed(context, '/khetiSathi');
+                 Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context)=>const KhetiSathi())
+                );
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
@@ -242,7 +256,20 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 5),
                 Text("Hello, $first 🌱",style: TextStyle(fontSize: 26,color: context.theme.primaryColorDark),),
                 const SizedBox(height: 5),
-                Text(welcomeText,style: TextStyle(fontSize: 14,color: Colors.grey[600]),),
+                Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.7, 
+                      child: Text(welcomeText,style: TextStyle(fontSize: 14,color: Colors.grey[600]),)
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        _speak(welcomeText);
+                      },
+                      child: voiceIcon(context),
+                    )
+                  ],
+                ),
                 const SizedBox(height: 15),
                 Container(
                   width: double.infinity,
@@ -295,7 +322,7 @@ class _HomePageState extends State<HomePage> {
                                     Navigator.pushNamed(context, '/imageAnalysis');
                                   },
                                   child: Container(
-                                    width: MediaQuery.of(context).size.width * 0.25, // 25% of screen width
+                                    width: MediaQuery.of(context).size.width * 0.25, 
                                     height: 30,
                                     decoration: BoxDecoration(
                                       color: context.theme.highlightColor,
@@ -329,7 +356,19 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(otherFeatures,style: TextStyle(fontSize: 16,color: Colors.grey[700]),),
+                  child: Row(
+                    children: [
+                      Text(otherFeatures,style: TextStyle(fontSize: 16,color: Colors.grey[700]),),
+                      SizedBox(width: 10,),
+                      GestureDetector(
+                      onTap: (){
+                        _speak(otherFeatures);
+                      },
+                      child: voiceIcon(context),
+                    )
+                    ],
+                  ),
+                  
                 ),
                 const SizedBox(height: 5),
                 Padding(
@@ -410,4 +449,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+
 }

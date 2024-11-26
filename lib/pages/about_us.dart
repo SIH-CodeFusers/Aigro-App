@@ -6,6 +6,7 @@ import 'package:aigro/utils/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hive/hive.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -267,6 +268,13 @@ class _AboutUsState extends State<AboutUs> {
     }
   }
 
+  FlutterTts flutterTts = FlutterTts();
+
+  void _speak(String text) async {
+    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setPitch(1.0); 
+    await flutterTts.speak(text); 
+  }
 
 
   @override
@@ -462,46 +470,51 @@ class _AboutUsState extends State<AboutUs> {
   }
 
   Widget _buildInfoCard({required String title, required String content}) {
-    return Container(
-      decoration: BoxDecoration(
-        color: context.theme.primaryColorDark,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Icon(Icons.eco, color: Colors.white),
-              const SizedBox(width: 8),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            content,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Colors.white70,
-              height: 1.5,
+    return GestureDetector(
+      onTap:  () {
+       _speak("Hello, this is a text to speech demo");
+     },
+      child: Container(
+        decoration: BoxDecoration(
+          color: context.theme.primaryColorDark,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
             ),
-          ),
-        ],
+          ],
+        ),
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.eco, color: Colors.white),
+                const SizedBox(width: 8),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              content,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.white70,
+                height: 1.5,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
