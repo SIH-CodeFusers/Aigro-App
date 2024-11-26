@@ -214,13 +214,6 @@ class _CropDetailsState extends State<CropDetails> {
                 icon: Icons.healing_outlined,
                 bulletPoints: List<String>.from(diseaseDetails['summary'] ?? []),
               ),
-              // // Fertilizer Section
-            // if (diseaseDetails['fertilisers'] != null && (diseaseDetails['fertilisers'] as List).isNotEmpty)
-            //   Padding(
-            //     padding: const EdgeInsets.only(top: 20), // Add some top spacing
-            //     child: _buildFertilizersSection(List<Map<String, dynamic>>.from(diseaseDetails['fertilisers'])),
-            //   ),
-
             ],
           ),
         ),

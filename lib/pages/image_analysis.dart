@@ -26,19 +26,35 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
       cropDiseaseList = (jsonResult['cropDiseases'] as List)
           .expand((crop) => (crop['diseaseDetails'] as List).map((disease) {
                 return {
-                  "diseaseName": disease['diseaseName'] as String,
-                  "scientificName": disease['scientificName'] as String,
-                  "category": disease['category'] as String,
-                  "images": (disease['images'] as List).map((img) => img as String).toList(),
-                  "symptoms": disease['symptoms'] as String? ?? '',
-                  "causes": disease['causes'] as String? ?? '',
-                  "remedies": (disease['remedies'] as List?)?.map((r) => r as String).toList() ?? [],
-                  "summary":(disease['summary'] as List?)?.map((r) => r as String).toList() ?? [],
-                  "chemicalControl": disease['chemicalControl'] as String? ?? '',
-                  "cropName": crop['cropName'] as String,
+                "diseaseName": disease['diseaseName'] as String,
+                "scientificName": disease['scientificName'] as String,
+                "category": disease['category'] as String,
+                "images": (disease['images'] as List).map((img) => img as String).toList(),
+                "symptoms": disease['symptoms'] as String? ?? '',
+                "causes": disease['causes'] as String? ?? '',
+                "remedies":
+                    (disease['remedies'] as List?)?.map((r) => r as String).toList() ?? [],
+                "summary":
+                    (disease['summary'] as List?)?.map((r) => r as String).toList() ?? [],
+                "chemicalControl": disease['chemicalControl'] as String? ?? '',
+                "cropName": crop['cropName'] as String,
+                "fertilizers": (disease['fertilisers'] as List?)?.map((fertilizer) {
+                return {
+                  "name": fertilizer['name'] as String,
+                  "products": (fertilizer['products'] as List).map((product) {
+                    return {
+                      "companyName": product['companyName'] as String,
+                      "productImage": product['productImage'] as String,
+                      "price": product['price'] as String,
+                      "id": product['id'] as String,
+                    };
+                  }).toList(),
+                  "id": fertilizer['id'] as String,
                 };
-              }))
-          .toList();
+              }).toList() ?? [],
+              };
+            }))
+        .toList();
     });
   }
 

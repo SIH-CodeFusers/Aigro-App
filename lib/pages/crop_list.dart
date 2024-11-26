@@ -29,6 +29,9 @@ class _CropListPageState extends State<CropListPage> {
     "Mango",
     "Banana",
     "Tea",
+    "Cotton",
+    "Sugarcane",
+    "Jute"
   ];
   final List<String> categoryOptions = ["Category", "Fungus", "Virus", "Bacteria"];
 

@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class DiseaseMapping extends StatefulWidget {
@@ -97,7 +98,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         "pincode": pincode,
-        "lat": lat,   // to get error use: "22.966" & "88.2036"
+        "lat": lat, 
         "long": long, 
         "range": "100"
       }),
@@ -183,44 +184,153 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
     }
   }
 
-   Future<void> addShopMarkers() async{
-    if (data['shops'] != null){
-    for (var shop in data['shops']as List) {
-      var shopLocation = shop['location'] as Map<String, double>;
-      shopMarkers.add(
-        Marker(
-          height: 100,
-          width: 100,
-          point: LatLng(shopLocation['lat']!, shopLocation['lon']!),
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  shop['name'] as String,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                  textAlign: TextAlign.center,
+   Future<void> addShopMarkers() async {
+    if (data['shops'] != null) {
+      for (var shop in data['shops'] as List) {
+        var shopLocation = shop['location'] as Map<String, double>;
+        shopMarkers.add(
+          Marker(
+            height: 100,
+            width: 100,
+            point: LatLng(shopLocation['lat']!, shopLocation['lon']!),
+            child: GestureDetector(
+              onTap: () { 
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) {
+                    return Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: context.theme.highlightColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Center(
+                            child: Container(
+                              width: 40,
+                              child: Divider(
+                                thickness: 3,
+                                color: Colors.grey.shade300,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: context.theme.highlightColor,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  shop['name'] as String,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(height: 8),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image(
+                                    width: 60,
+                                    height: 60,
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(
+                                      "https://static.vecteezy.com/system/resources/previews/035/321/928/non_2x/mini-cute-store-shop-merchant-building-3d-rendering-icon-illustration-concept-isolated-png.png",
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  shop['address'] as String,
+                                  style: TextStyle(
+                                    color: Colors.grey.shade700,
+                                    fontSize: 12,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                SizedBox(height: 10),
+                                ElevatedButton(
+                                  onPressed: () async{
+                                    final latitude = shop['location']['lat'];
+                                    final longitude = shop['location']['lon'];
+                                    final googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+                                    final Uri url = Uri.parse(googleMapsUrl);
+                                    if (await canLaunchUrl(url)) {
+                                      await launchUrl(url);
+                                    } else {
+                                      throw 'Could not launch $url';
+                                    }
+                                  },       
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: context.theme.cardColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(Icons.navigation, size: 16, color: Colors.white),
+                                      SizedBox(width: 4),
+                                      Text(
+                                        'Get Directions',
+                                        style: TextStyle(
+                                          color: context.theme.highlightColor,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image(
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                        "https://static.vecteezy.com/system/resources/previews/035/321/928/non_2x/mini-cute-store-shop-merchant-building-3d-rendering-icon-illustration-concept-isolated-png.png",
+                      ),
+                    ),
+                  ],
                 ),
-                Image(
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.cover,
-                  image: NetworkImage(       
-                    "https://static.vecteezy.com/system/resources/previews/035/321/928/non_2x/mini-cute-store-shop-merchant-building-3d-rendering-icon-illustration-concept-isolated-png.png",
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-        ),
-      );
-    }
+        );
+      }
     }
   }
+
 
 
   final infobox = Hive.box("BasicInfo-db");
