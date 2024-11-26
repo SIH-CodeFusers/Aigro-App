@@ -283,14 +283,30 @@ class _UserOnboardingState extends State<UserOnboarding> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                if (_isError==true)
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    "Please enter your name.",
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
+                ),
+                const SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded( 
                       child: GestureDetector(
                         onTap: () {
-                          setState(() {
-                            questionInd += 1;
-                          });
+                          if (!_namecontroller.text.isEmpty) {
+                            setState(() {
+                              questionInd += 1;
+                              _isError = false;  
+                            });
+                          } else {
+                            setState(() {
+                              _isError = true;  
+                            });
+                          }
                         },
                         child: NextButton(
                           text: "Next",
@@ -307,7 +323,6 @@ class _UserOnboardingState extends State<UserOnboarding> {
       ],
     );
   }
-
 
 
   //Phone Number
@@ -389,15 +404,31 @@ class _UserOnboardingState extends State<UserOnboarding> {
                 ),
               ),
               const SizedBox(height: 20),
+              if (_isError==true)
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    "Please enter valid phone no.",
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
+                ),
+                const SizedBox(height: 10),
               Row(
                 children: [
                   Expanded( 
                     child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          questionInd += 1;
-                        });
-                      },
+                       onTap: () {
+                          if (_phonecontroller.text.length==10) {
+                            setState(() {
+                              questionInd += 1;
+                              _isError = false;  
+                            });
+                          } else {
+                            setState(() {
+                              _isError = true;  
+                            });
+                          }
+                        },
                       child: NextButton(
                         text: "Next",
                       ),
@@ -498,15 +529,31 @@ class _UserOnboardingState extends State<UserOnboarding> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                if (_isError==true)
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    "Please select a country.",
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
+                ),
+                const SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded( 
                       child: GestureDetector(
                         onTap: () {
-                          setState(() {
-                            questionInd += 1;
-                          });
-                        },
+                            if (selectedCountry!=null) {
+                              setState(() {
+                                questionInd += 1;
+                                _isError = false;  
+                              });
+                            } else {
+                              setState(() {
+                                _isError = true;  
+                              });
+                            }
+                          },
                         child: NextButton(
                           text: "Next",
                         ),
@@ -607,15 +654,31 @@ class _UserOnboardingState extends State<UserOnboarding> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                if (_isError==true)
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    "Please select a state.",
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
+                ),
+                const SizedBox(height: 10),
                 Row(
                   children: [
                     Expanded( 
                       child: GestureDetector(
                         onTap: () {
-                          setState(() {
-                            questionInd += 1;
-                          });
-                        },
+                            if (selectedState!=null) {
+                              setState(() {
+                                questionInd += 1;
+                                _isError = false;  
+                              });
+                            } else {
+                              setState(() {
+                                _isError = true;  
+                              });
+                            }
+                          },
                         child: NextButton(
                           text: "Next",
                         ),
@@ -716,22 +779,38 @@ class _UserOnboardingState extends State<UserOnboarding> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                if (_isError==true)
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    "Please select a district.",
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
+                ),
+                const SizedBox(height: 10),
                 Row(
-                    children: [
-                      Expanded( 
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              questionInd += 1;
-                            });
+                  children: [
+                    Expanded( 
+                      child: GestureDetector(
+                        onTap: () {
+                            if (selectedDistrict!=null) {
+                              setState(() {
+                                questionInd += 1;
+                                _isError = false;  
+                              });
+                            } else {
+                              setState(() {
+                                _isError = true;  
+                              });
+                            }
                           },
-                          child: NextButton(
-                            text: "Next",
-                          ),
+                        child: NextButton(
+                          text: "Next",
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -835,22 +914,38 @@ class _UserOnboardingState extends State<UserOnboarding> {
                     ),
                   ),
                 const SizedBox(height: 20),
+                if (_isError==true)
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    "Please select a block.",
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
+                ),
+                const SizedBox(height: 10),
                 Row(
-                    children: [
-                      Expanded( 
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              questionInd += 1;
-                            });
+                  children: [
+                    Expanded( 
+                      child: GestureDetector(
+                        onTap: () {
+                            if (selectedBlock!=null) {
+                              setState(() {
+                                questionInd += 1;
+                                _isError = false;  
+                              });
+                            } else {
+                              setState(() {
+                                _isError = true;  
+                              });
+                            }
                           },
-                          child: NextButton(
-                            text: "Next",
-                          ),
+                        child: NextButton(
+                          text: "Next",
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -1061,15 +1156,31 @@ class _UserOnboardingState extends State<UserOnboarding> {
                   }).toList(),
                 ),
                 const SizedBox(height: 20),
+                if (_isError==true)
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    "Please select atleast one crop.",
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
+                ),
+                const SizedBox(height: 10),
                 Row(
                   children: [
-                    Expanded(
+                    Expanded( 
                       child: GestureDetector(
                         onTap: () {
-                          setState(() {                        
-                            _saveForm();                  
-                          });
-                        },
+                            if (selectedCrops.length!=0) {
+                              setState(() {
+                                _isError = false;  
+                                _saveForm();
+                              });
+                            } else {
+                              setState(() {
+                                _isError = true;  
+                              });
+                            }
+                          },
                         child: NextButton(
                           text: "Next",
                         ),
