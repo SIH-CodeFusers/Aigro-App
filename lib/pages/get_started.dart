@@ -39,8 +39,8 @@ class GetStarted extends StatelessWidget {
                           child: ClipOval(
                             child: Image.asset(
                               "assets/images/get_started.jpeg",
-                              width: 300,
-                              height: 300,
+                              width: MediaQuery.of(context).size.width*0.75,
+                              height: MediaQuery.of(context).size.width*0.75,
                               fit: BoxFit.cover,
                             ),
                           ),
