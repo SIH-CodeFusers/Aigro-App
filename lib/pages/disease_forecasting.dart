@@ -106,169 +106,169 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
           : '';
     }).join(' ');
   }
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: context.theme.canvasColor,
-    appBar: AppBar(
-      title: Text('Disease Forecasting'),
-    ),
-    body: isLoading
-        ? Center(child: CircularProgressIndicator(
-            color: context.theme.primaryColorDark,
-          ))
-        : Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 30),
-              Expanded(
-                child: _buildForecasting(),
-              ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => DiseaseForecasting()), 
-                      );
-                    });
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: context.theme.primaryColorDark,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Check Alerts',
-                        style: TextStyle(color: context.theme.highlightColor, fontSize: 20),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: context.theme.canvasColor,
+      appBar: AppBar(
+        title: Text('Disease Forecasting'),
+      ),
+      body: isLoading
+          ? Center(child: CircularProgressIndicator(
+              color: context.theme.primaryColorDark,
+            ))
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(height: 30),
+                Expanded(
+                  child: _buildForecasting(),
+                ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => DiseaseForecasting()), 
+                        );
+                      });
+                    },
+                    child: Container(
+                      width: double.infinity,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: context.theme.primaryColorDark,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Check Alerts',
+                          style: TextStyle(color: context.theme.highlightColor, fontSize: 20),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20),
-            ],
-          ),
-  );
-}
-
-Widget _buildForecasting() {
-  if (!exists) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(FeatherIcons.slash, color: Colors.red, size: 18),
-              SizedBox(width: 8),
-              Text(
-                'No alerts found.',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(width: 8),
-              Icon(FeatherIcons.slash, color: Colors.red, size: 18),
-            ],
-          ),
-        ],
-      ),
+                SizedBox(height: 20),
+              ],
+            ),
     );
   }
 
-  return ListView.builder(
-    itemCount: alerts.length,
-    itemBuilder: (context, index) {
-      final alert = alerts[index];
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-        child: Container(
-          padding: EdgeInsets.all(12),
-          width: double.infinity, 
-          decoration: BoxDecoration(
-            color: context.theme.highlightColor,
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.3),
-                spreadRadius: 2,
-                blurRadius: 5,
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildForecasting() {
+    if (!exists) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: imageUrl.isNotEmpty
-                      ? Image.network(
-                          width: double.infinity,
-                          height: 150,
-                          fit: BoxFit.cover,
-                          imageUrl)
-                      : Image.network(
-                          width: double.infinity,
-                          height: 150,
-                          fit: BoxFit.cover,
-                          placeholderImage),
+                Icon(FeatherIcons.slash, color: Colors.red, size: 18),
+                SizedBox(width: 8),
+                Text(
+                  'No alerts found.',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                SizedBox(height: 10),
-                ...alert['diseaseDetails'].map<Widget>((disease) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              '${alert['cropName']}',
-                              style: TextStyle(
-                                color: context.theme.primaryColorDark,
-                                fontSize: 24,
-                              ),
-                            ),
-                            Spacer(),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: Colors.yellow,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text('${disease['alertLevel']} Risk'),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          '${toTitleCase(disease['diseaseName'])}',
-                          style: TextStyle(
-                            color: context.theme.primaryColorDark,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList(),
+                SizedBox(width: 8),
+                Icon(FeatherIcons.slash, color: Colors.red, size: 18),
               ],
             ),
-          ),
+          ],
         ),
       );
-    },
-  );
-}
+    }
+
+    return ListView.builder(
+      itemCount: alerts.length,
+      itemBuilder: (context, index) {
+        final alert = alerts[index];
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          child: Container(
+            padding: EdgeInsets.all(12),
+            width: double.infinity, 
+            decoration: BoxDecoration(
+              color: context.theme.highlightColor,
+              borderRadius: BorderRadius.circular(5),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                ),
+              ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: imageUrl.isNotEmpty
+                        ? Image.network(
+                            width: double.infinity,
+                            height: 150,
+                            fit: BoxFit.cover,
+                            imageUrl)
+                        : Image.network(
+                            width: double.infinity,
+                            height: 150,
+                            fit: BoxFit.cover,
+                            placeholderImage),
+                  ),
+                  SizedBox(height: 10),
+                  ...alert['diseaseDetails'].map<Widget>((disease) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                '${alert['cropName']}',
+                                style: TextStyle(
+                                  color: context.theme.primaryColorDark,
+                                  fontSize: 24,
+                                ),
+                              ),
+                              Spacer(),
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Text('${disease['alertLevel']} Risk'),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            '${toTitleCase(disease['diseaseName'])}',
+                            style: TextStyle(
+                              color: context.theme.primaryColorDark,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 }

@@ -110,7 +110,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
   };
 
   List<String> crops = [
-    "Tomato", "Corn", "Rice", "Mango", "Apple", "Tea", "Banana"
+    "Tomato", "Corn", "Rice", "Mango", "Apple", "Tea", "Banana","Cotton","Sugarcane","Jute"
   ];
 
   List<String> selectedCrops = [];
@@ -129,7 +129,6 @@ class _UserOnboardingState extends State<UserOnboarding> {
   @override
   void initState() {
     super.initState();
-    // _scrollController = FixedExtentScrollController(initialItem: 17);
   }
 
   _saveForm() {
