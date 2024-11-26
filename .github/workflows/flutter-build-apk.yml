@@ -1,39 +1,35 @@
-name: Build Flutter APK
+name: Flutter Build APK
 
 on:
   push:
     branches:
-      - main  # Trigger on push to the main branch
-  pull_request: # Trigger on pull requests
-    branches:
       - main
 
 jobs:
-  build-apk:
-    runs-on: ubuntu-latest  # Use an Ubuntu runner
-
+  build:
+    runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Flutter
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.24.3  # Specify Flutter version
+          flutter-version: 3.24.3
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: flutter pub get
 
-      # Step 4: Build the APK
-      - name: Build APK
-        run: flutter run
+      - name: Set secret content
+        run: echo "$SECRET_DART_CONTENT" > lib/secret.dart
+        env:
+          SECRET_DART_CONTENT: ${{ secrets.SECRET_DART_CONTENT }}
 
-      # Step 5: Upload APK as artifact
-      - name: Upload APK
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Upload APK as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: flutter-app-release-apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
+          name: app-release
+          path: build/app/outputs/flutter-apk/app-release.apk
