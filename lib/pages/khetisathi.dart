@@ -4,6 +4,7 @@ import 'package:aigro/widgets/grid_painter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -25,6 +26,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
   final List<String> _predefinedBotMessages = [
     'Hi, I am your KhetiSathi, I am a chatbot created by team Aigro to assist farmers like you with your queries. How can I help you today ?',
   ];
+
 
 
   void _sendInitialBotMessage(String message) {
@@ -82,11 +84,18 @@ class _KhetiSathiState extends State<KhetiSathi> {
 
   }
 
-
   @override
   void initState() {
     _sendInitialBotMessage(_predefinedBotMessages[count++]);
     super.initState();
+  }
+
+  FlutterTts flutterTts = FlutterTts();
+
+  _speak(String text) async {
+    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
   }
 
   @override
@@ -133,47 +142,53 @@ class _KhetiSathiState extends State<KhetiSathi> {
                                   constraints: const BoxConstraints(
                                   maxWidth: 250,
                                 ),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                                  decoration: BoxDecoration(
-                                    color: isUser
-                                        ? context.theme.cardColor
-                                        : context.theme.highlightColor,
-                                    borderRadius: isUser
-                                        ? const BorderRadius.only(
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20),
-                                            bottomLeft: Radius.circular(20),
-                                            bottomRight: Radius.circular(0),
-                                          )
-                                        : const BorderRadius.only(
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20),
-                                            bottomLeft: Radius.circular(0),
-                                            bottomRight: Radius.circular(20),
+                                child: GestureDetector(
+                                  onTap: (){
+                                    if(!isUser)
+                                     _speak(_messages[index]['message']!);
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                                    decoration: BoxDecoration(
+                                      color: isUser
+                                          ? context.theme.cardColor
+                                          : context.theme.highlightColor,
+                                      borderRadius: isUser
+                                          ? const BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20),
+                                              bottomLeft: Radius.circular(20),
+                                              bottomRight: Radius.circular(0),
+                                            )
+                                          : const BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20),
+                                              bottomLeft: Radius.circular(0),
+                                              bottomRight: Radius.circular(20),
+                                            ),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          name,
+                                          style: TextStyle(
+                                            color: isUser
+                                                ? context.theme.highlightColor
+                                                : context.theme.cardColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14,
                                           ),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        name,
-                                        style: TextStyle(
-                                          color: isUser
-                                              ? context.theme.highlightColor
-                                              : context.theme.cardColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 14,
                                         ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(                   
-                                        _messages[index]['message']!,  
-                                        style: TextStyle(color: isUser
-                                              ? context.theme.highlightColor
-                                              : context.theme.primaryColorDark,),         
-                                      )
-                                    ],
+                                        const SizedBox(height: 4),
+                                        Text(                   
+                                          _messages[index]['message']!,  
+                                          style: TextStyle(color: isUser
+                                                ? context.theme.highlightColor
+                                                : context.theme.primaryColorDark,),         
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

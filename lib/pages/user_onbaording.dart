@@ -1,6 +1,8 @@
 import 'package:aigro/pages/home.dart';
+import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hive/hive.dart';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/widgets/next_buttons.dart';
@@ -16,6 +18,15 @@ class UserOnboarding extends StatefulWidget {
 }
 
 class _UserOnboardingState extends State<UserOnboarding> {
+
+  FlutterTts flutterTts = FlutterTts();
+
+  _speak(String text) async {
+    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
+  }
+
 
   int questionInd = 0;
   int totalQuestions = 8;
@@ -72,7 +83,6 @@ class _UserOnboardingState extends State<UserOnboarding> {
 
 
   final List<String> languages = [
-    
     "English",
     "Hindi",
     "Bengali",
@@ -173,29 +183,26 @@ class _UserOnboardingState extends State<UserOnboarding> {
           child: Builder(
             builder: (BuildContext context) {
               if (questionInd == 0) {
-                return LanguageSelect(context);
-              } 
-              else if (questionInd == 1) {
                 return NameSelect(context);
-              } else if (questionInd == 2) {
+              } else if (questionInd == 1) {
                 return PhoneSelect(context);
               } 
-              else if (questionInd == 3) {
+              else if (questionInd == 2) {
                 return CountrySelect(context);
               }
-              else if (questionInd == 4) {
+              else if (questionInd == 3) {
                 return StateSelect(context);
               }
-              else if (questionInd == 5) {
+              else if (questionInd == 4) {
                 return DistrictSelect(context);
               }
-              else if (questionInd == 6) {
+              else if (questionInd == 5) {
                 return BlockSelect(context);
               }
-              else if (questionInd == 7) {
+              else if (questionInd == 6) {
                 return PinSelect(context);
               }
-              else if (questionInd == 8) {
+              else if (questionInd == 7) {
                 return CropSelect(context);
               }
               else {
@@ -210,101 +217,101 @@ class _UserOnboardingState extends State<UserOnboarding> {
 
   //prefered language
 
-  Widget LanguageSelect(BuildContext context) {
-  return Column(
-    children: [
-      ProgressIndicatorWidget(
-        questionInd: questionInd,
-        totalQuestions: totalQuestions,
-        onBackButtonPressed: _handleBackButtonPressed,
-      ),
-      const Spacer(),
-      Center(
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            color: context.theme.highlightColor,
-            borderRadius: BorderRadius.circular(5),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 10,
-                offset: const Offset(0, 0),
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Select your Language",
-                    style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: context.theme.primaryColorDark,
-                    width: 2.0,
-                  ),
-                ),
-                child: DropdownButton<String>(
-                  value: selectedLanguage,
-                  hint: Text(
-                    'Select a Language',
-                    style: TextStyle(color: context.theme.primaryColorDark),
-                  ),
-                  isExpanded: true,
-                  items: languages.map((String language) {
-                    return DropdownMenuItem<String>(
-                      value: language,
-                      child: Text(language, style: TextStyle(color: context.theme.primaryColorDark)),
-                    );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedLanguage = newValue;
-                    });
-                  },
-                  style: TextStyle(color: context.theme.primaryColorDark, fontSize: 18),
-                  underline: Container(),
-                  iconEnabledColor: context.theme.primaryColorDark,
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          questionInd += 1;
-                        });
-                      },
-                      child: NextButton(
-                        text: "Next",
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-      const Spacer(),
-    ],
-  );
-}
+  //   Widget LanguageSelect(BuildContext context) {
+  //   return Column(
+  //     children: [
+  //       ProgressIndicatorWidget(
+  //         questionInd: questionInd,
+  //         totalQuestions: totalQuestions,
+  //         onBackButtonPressed: _handleBackButtonPressed,
+  //       ),
+  //       const Spacer(),
+  //       Center(
+  //         child: Container(
+  //           padding: const EdgeInsets.all(16),
+  //           margin: const EdgeInsets.symmetric(horizontal: 20),
+  //           decoration: BoxDecoration(
+  //             color: context.theme.highlightColor,
+  //             borderRadius: BorderRadius.circular(5),
+  //             boxShadow: [
+  //               BoxShadow(
+  //                 color: Colors.black.withOpacity(0.1),
+  //                 blurRadius: 10,
+  //                 offset: const Offset(0, 0),
+  //               ),
+  //             ],
+  //           ),
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               Padding(
+  //                 padding: const EdgeInsets.symmetric(horizontal: 8),
+  //                 child: Align(
+  //                   alignment: Alignment.centerLeft,
+  //                   child: Text(
+  //                     "Select your Language",
+  //                     style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+  //                   ),
+  //                 ),
+  //               ),
+  //               const SizedBox(height: 20),
+  //               Container(
+  //                 padding: const EdgeInsets.symmetric(horizontal: 10),
+  //                 decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.circular(10),
+  //                   border: Border.all(
+  //                     color: context.theme.primaryColorDark,
+  //                     width: 2.0,
+  //                   ),
+  //                 ),
+  //                 child: DropdownButton<String>(
+  //                   value: selectedLanguage,
+  //                   hint: Text(
+  //                     'Select a Language',
+  //                     style: TextStyle(color: context.theme.primaryColorDark),
+  //                   ),
+  //                   isExpanded: true,
+  //                   items: languages.map((String language) {
+  //                     return DropdownMenuItem<String>(
+  //                       value: language,
+  //                       child: Text(language, style: TextStyle(color: context.theme.primaryColorDark)),
+  //                     );
+  //                   }).toList(),
+  //                   onChanged: (String? newValue) {
+  //                     setState(() {
+  //                       selectedLanguage = newValue;
+  //                     });
+  //                   },
+  //                   style: TextStyle(color: context.theme.primaryColorDark, fontSize: 18),
+  //                   underline: Container(),
+  //                   iconEnabledColor: context.theme.primaryColorDark,
+  //                 ),
+  //               ),
+  //               const SizedBox(height: 20),
+  //               Row(
+  //                 children: [
+  //                   Expanded(
+  //                     child: GestureDetector(
+  //                       onTap: () {
+  //                         setState(() {
+  //                           questionInd += 1;
+  //                         });
+  //                       },
+  //                       child: NextButton(
+  //                         text: "Next",
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //       const Spacer(),
+  //     ],
+  //   );
+  // }
 
 
   //User Name
@@ -335,15 +342,25 @@ class _UserOnboardingState extends State<UserOnboarding> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "What is your name?",
-                      style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "What is your name?",
+                          style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+                        ),
+                      ),
                     ),
-                  ),
+                    GestureDetector(
+                      onTap: (){
+                        _speak("What is your name?");
+                      },
+                      child: voiceIcon(context),
+                    )
+                  ],
                 ),
                 const SizedBox(height: 20),
                 TextField(
@@ -427,16 +444,29 @@ class _UserOnboardingState extends State<UserOnboarding> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "What is your contact number?",
-                    style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+              Row(
+                children: [
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "What is your contact number?",
+                          style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                   GestureDetector(
+                      onTap: (){
+                        _speak("What is your contact number?");
+                      },
+                      child: voiceIcon(context),
+                    )
+                ],
               ),
+              
               const SizedBox(height: 20),
               TextField(
                 controller: _phonecontroller,
@@ -518,15 +548,27 @@ class _UserOnboardingState extends State<UserOnboarding> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Which country are you from ?",
-                      style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Which country are you from ?",
+                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    GestureDetector(
+                        onTap: (){
+                          _speak("Which country are you from ?");
+                        },
+                        child: voiceIcon(context),
+                      )
+                  ],
                 ),
                 const SizedBox(height: 20),
                 Container(
@@ -615,15 +657,27 @@ class _UserOnboardingState extends State<UserOnboarding> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Select your State",
-                      style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Select your State",
+                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    GestureDetector(
+                        onTap: (){
+                          _speak("Select your state");
+                        },
+                        child: voiceIcon(context),
+                      )
+                  ],
                 ),
                 const SizedBox(height: 20),
                 Container(
@@ -711,15 +765,27 @@ class _UserOnboardingState extends State<UserOnboarding> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Select your District",
-                      style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Select your District",
+                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    GestureDetector(
+                        onTap: (){
+                          _speak("Select your District");
+                        },
+                        child: voiceIcon(context),
+                      )
+                  ],
                 ),
                 const SizedBox(height: 20),
                 Container(
@@ -808,15 +874,27 @@ class _UserOnboardingState extends State<UserOnboarding> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Select your Block",
-                      style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Select your Block",
+                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    GestureDetector(
+                        onTap: (){
+                          _speak("Select your Block");
+                        },
+                        child: voiceIcon(context),
+                      )
+                  ],
                 ),
                 const SizedBox(height: 20),
                 if (selectedDistrict != null)
@@ -889,8 +967,6 @@ class _UserOnboardingState extends State<UserOnboarding> {
   }
 
   Widget PinSelect(BuildContext context) {
-
-
   return Column(
     children: [
       ProgressIndicatorWidget(
@@ -917,15 +993,27 @@ class _UserOnboardingState extends State<UserOnboarding> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "What is your pincode?",
-                    style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+              Row(
+                children: [
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "What is your pincode ?",
+                          style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  GestureDetector(
+                      onTap: (){
+                        _speak("What is your pincode ?");
+                      },
+                      child: voiceIcon(context),
+                    )
+                ],
               ),
               const SizedBox(height: 20),
               TextField(
@@ -999,7 +1087,6 @@ class _UserOnboardingState extends State<UserOnboarding> {
 }
 
 
-
   Widget CropSelect(BuildContext context) {
     return Column(
       children: [
@@ -1027,16 +1114,28 @@ class _UserOnboardingState extends State<UserOnboarding> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Select your Crops",
-                      style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+              Row(
+                children: [
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Select your Crops",
+                          style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                  GestureDetector(
+                      onTap: (){
+                        _speak("Select your Crops");
+                      },
+                      child: voiceIcon(context),
+                    )
+                ],
+              ),
                 const SizedBox(height: 20),
                 Wrap(
                   spacing: 10, 
