@@ -13,6 +13,8 @@ import 'package:mime/mime.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class UploadImage extends StatefulWidget {
+  const UploadImage({super.key});
+
   @override
   _UploadImageState createState() => _UploadImageState();
 }
@@ -111,7 +113,7 @@ class _UploadImageState extends State<UploadImage> {
   }
 
   Future<void> _newAnalysis(String imgURL) async {
-    const analysisUrl = '${BACKEND_URL}/api/imageAnalysis/newAnalysis';
+    const analysisUrl = '$BACKEND_URL/api/imageAnalysis/newAnalysis';
 
     final data = {
       "useruid":BACKEND_UID,
@@ -149,7 +151,7 @@ class _UploadImageState extends State<UploadImage> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text("OK"),
+            child: const Text("OK"),
           ),
         ],
       ),
@@ -167,7 +169,7 @@ class _UploadImageState extends State<UploadImage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
-      appBar: AppBar(title: Text("Create New Analysis")),
+      appBar: AppBar(title: const Text("Create New Analysis")),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -199,10 +201,10 @@ class _UploadImageState extends State<UploadImage> {
                     ),  
                     child: DottedBorder(
                       color: Colors.grey,
-                      dashPattern: [8, 4],
+                      dashPattern: const [8, 4],
                       strokeWidth: 1,
                         borderType: BorderType.RRect, 
-                        radius: Radius.circular(10),
+                        radius: const Radius.circular(10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -225,7 +227,7 @@ class _UploadImageState extends State<UploadImage> {
                 ),
               ),
 
-              SizedBox(height: 30,),
+              const SizedBox(height: 30,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
@@ -260,18 +262,18 @@ class _UploadImageState extends State<UploadImage> {
                         );
                       }).toList(),
                       isExpanded: true, 
-                      underline: SizedBox(), 
-                      style: TextStyle(
+                      underline: const SizedBox(), 
+                      style: const TextStyle(
                         fontSize: 16, 
                         color: Colors.black, 
                       ),
-                      icon: Icon(Icons.arrow_drop_down),
+                      icon: const Icon(Icons.arrow_drop_down),
                     ),
                   ),
                 ),
               ),
 
-              SizedBox(height: 30,),
+              const SizedBox(height: 30,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
@@ -306,17 +308,17 @@ class _UploadImageState extends State<UploadImage> {
                         );
                       }).toList(),
                       isExpanded: true, 
-                      underline: SizedBox(), 
-                      style: TextStyle(
+                      underline: const SizedBox(), 
+                      style: const TextStyle(
                         fontSize: 16, 
                         color: Colors.black, 
                       ),
-                      icon: Icon(Icons.arrow_drop_down),
+                      icon: const Icon(Icons.arrow_drop_down),
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 40,),
+              const SizedBox(height: 40,),
 
               if(uploaded==false && isAnalyzing==false)
               Padding(
@@ -375,10 +377,10 @@ class _UploadImageState extends State<UploadImage> {
                   ),
                 ),
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
 
                 if(isAnalyzing==true)
-                Text("Analyzing Image. Please wait for few seconds...")
+                const Text("Analyzing Image. Please wait for few seconds...")
 
             ],
           ),

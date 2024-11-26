@@ -42,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => const HomePage()),
       (Route<dynamic> route) => false, 
     );
    }
@@ -96,12 +96,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   ],
                 ),
                 
-                SizedBox(height: 30),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
+                const SizedBox(height: 30),
                 _buildProfileInfo(),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 _buildLanguageDropdown(),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
 
                  Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 1),
@@ -140,7 +140,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildLanguageDropdown() {
     return Container(
-      padding:  EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+      padding:  const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       width: double.infinity,
        decoration: BoxDecoration(
           color: Colors.grey[200],
@@ -150,7 +150,7 @@ class _ProfilePageState extends State<ProfilePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Language",
             style: TextStyle(
               fontSize: 16,
@@ -159,13 +159,13 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
            
             child: IgnorePointer(
               ignoring: true,
               child: DropdownButton<String>(
                 value: selectedLanguageCode,
-                items: [
+                items: const [
                   DropdownMenuItem(value: 'en', child: Text('English')),
                   DropdownMenuItem(value: 'hi', child: Text('Hindi')),
                   DropdownMenuItem(value: 'bn', child: Text('Bengali')),
@@ -176,12 +176,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     selectedLanguageCode = newValue!;
                   });
                 },
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.black87, 
                 ),
-                underline: SizedBox(),
-                icon: Icon(Icons.arrow_drop_down, color: Colors.black87), 
+                underline: const SizedBox(),
+                icon: const Icon(Icons.arrow_drop_down, color: Colors.black87), 
               ),
             ),
             
@@ -198,29 +198,29 @@ class _ProfilePageState extends State<ProfilePage> {
         Row(
           children: [
             Expanded(child: _buildListTile("Name", bdb.userName)),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(child: _buildListTile("Phone", bdb.userPhn)),
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           children: [
             Expanded(child: _buildListTile("Country", bdb.userCountry)),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(child: _buildListTile("State", bdb.userState)),
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           children: [
             Expanded(child: _buildListTile("District", bdb.userDistrict)),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(child: _buildListTile("Block", bdb.userBlock)),
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         _buildListTile("Pin Code", bdb.userPin),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         _buildListTile("Your Crops", bdb.userCrops.join(", ")),
       ],
     );
@@ -228,10 +228,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _buildListTile(String title, String subtitle) {
     return ListTile(
-      contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 16,
         ),

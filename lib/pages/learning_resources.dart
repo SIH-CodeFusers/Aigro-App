@@ -8,6 +8,8 @@ import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LearningResources extends StatefulWidget {
+  const LearningResources({super.key});
+
   @override
   _LearningResourcesState createState() => _LearningResourcesState();
 }
@@ -164,7 +166,7 @@ class _LearningResourcesState extends State<LearningResources> {
   return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Courses',
         ),
       ),
@@ -176,10 +178,10 @@ class _LearningResourcesState extends State<LearningResources> {
             children: [
               Row(
                 children: [
-                  SizedBox(width: 10.0),
+                  const SizedBox(width: 10.0),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 2),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 2),
                       decoration: BoxDecoration(
                         color: context.theme.highlightColor,
                         boxShadow: [
@@ -187,7 +189,7 @@ class _LearningResourcesState extends State<LearningResources> {
                             color: context.theme.cardColor,                
                             spreadRadius: 1,
                             blurRadius: 1,
-                            offset: Offset(0, 0),
+                            offset: const Offset(0, 0),
                           ),
                         ],
                         borderRadius: BorderRadius.circular(15.0),
@@ -207,9 +209,9 @@ class _LearningResourcesState extends State<LearningResources> {
                           ),
                           hintText: hint,
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 12),
+                          contentPadding: const EdgeInsets.only(top: 12),
                           suffixIcon: Padding(
-                            padding: EdgeInsets.only(left: 20),
+                            padding: const EdgeInsets.only(left: 20),
                             child: Icon(
                               Icons.search,
                               size: 22,
@@ -222,10 +224,10 @@ class _LearningResourcesState extends State<LearningResources> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Container(
+              SizedBox(
                 height: 50,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -263,7 +265,7 @@ class _LearningResourcesState extends State<LearningResources> {
                   },
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Flexible(
@@ -293,7 +295,7 @@ class _LearningResourcesState extends State<LearningResources> {
        (context,MaterialPageRoute(builder: (context) => CoursesPlayer(coursetitle:courseData['title'],)),);
       },
       child: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         width: double.infinity,
         decoration: BoxDecoration(
           color: context.theme.highlightColor,
@@ -304,10 +306,10 @@ class _LearningResourcesState extends State<LearningResources> {
           ),
           boxShadow: [
             BoxShadow(
-              color: Color.fromARGB(255, 57, 59, 57).withOpacity(0.2),
+              color: const Color.fromARGB(255, 57, 59, 57).withOpacity(0.2),
               spreadRadius: 1,
               blurRadius: 1,
-              offset: Offset(1, 1),
+              offset: const Offset(1, 1),
             ),
           ],
         ),
@@ -329,7 +331,7 @@ class _LearningResourcesState extends State<LearningResources> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -345,7 +347,7 @@ class _LearningResourcesState extends State<LearningResources> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -359,7 +361,7 @@ class _LearningResourcesState extends State<LearningResources> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -383,7 +385,7 @@ class _LearningResourcesState extends State<LearningResources> {
                 ),
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
 
           ],
         ),

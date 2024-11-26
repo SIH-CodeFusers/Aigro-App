@@ -15,16 +15,16 @@ class GridPatternPainter extends CustomPainter {
     ];
 
     for (var position in circlePositions) {
-      canvas.drawCircle(position, 80.0, Paint()..color = Color.fromRGBO(244, 244, 244, 1));
+      canvas.drawCircle(position, 80.0, Paint()..color = const Color.fromRGBO(244, 244, 244, 1));
       
       final Paint gradientPaint = Paint()
         ..shader = RadialGradient(
           colors: [
-            Color.fromRGBO(0, 229, 118, 1).withOpacity(0.3), 
-            Color.fromRGBO(0, 229, 118, 1).withOpacity(0.1),  
-            Color.fromRGBO(0, 229, 118, 1).withOpacity(0.0),  
+            const Color.fromRGBO(0, 229, 118, 1).withOpacity(0.3), 
+            const Color.fromRGBO(0, 229, 118, 1).withOpacity(0.1),  
+            const Color.fromRGBO(0, 229, 118, 1).withOpacity(0.0),  
           ],
-          stops: [0.1,0.8, 1.0], 
+          stops: const [0.1,0.8, 1.0], 
         ).createShader(Rect.fromCircle(center: position, radius: 80.0));
 
       canvas.drawCircle(position, 80.0, gradientPaint);
@@ -34,7 +34,7 @@ class GridPatternPainter extends CustomPainter {
       ..color = Colors.grey.withOpacity(0.2) 
       ..style = PaintingStyle.fill; 
 
-    final double spacing = 10.0; 
+    const double spacing = 10.0; 
 
     for (double x = padding + spacing; x < size.width - padding; x += spacing) {
       for (double y = padding; y < size.height - padding; y += spacing) {

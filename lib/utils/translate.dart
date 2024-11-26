@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<String> translateText(String text, String targetLanguage, String apiKey) async {
-  final String url = 'https://translation.googleapis.com/language/translate/v2';
+  const String url = 'https://translation.googleapis.com/language/translate/v2';
 
   final response = await http.post(
     Uri.parse(url),

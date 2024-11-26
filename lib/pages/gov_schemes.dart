@@ -5,6 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class GovernmentSchemes extends StatefulWidget {
+  const GovernmentSchemes({super.key});
+
   @override
   State<GovernmentSchemes> createState() => _GovernmentSchemesState();
 }
@@ -169,7 +171,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -195,13 +197,13 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                       child: Text(value),
                     );
                   }).toList(),
-                  underline: SizedBox(),
-                  icon: Icon(Icons.arrow_drop_down, color: Colors.black87), 
+                  underline: const SizedBox(),
+                  icon: const Icon(Icons.arrow_drop_down, color: Colors.black87), 
                 ),
               ),
             ),
             
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
             Expanded(
               child: ListView.builder(
                 itemCount: filteredData.length,
@@ -214,10 +216,10 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                            color: Color.fromARGB(255, 57, 59, 57).withOpacity(0.2),
+                            color: const Color.fromARGB(255, 57, 59, 57).withOpacity(0.2),
                             spreadRadius: 1,
                             blurRadius: 1,
-                            offset: Offset(1, 1),
+                            offset: const Offset(1, 1),
                           ),
                         ],
                       ),     
@@ -229,7 +231,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                             borderRadius: BorderRadius.circular(10),
                             child: Image.network(filteredData[index]['image'] as String)
                           ),
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
@@ -239,7 +241,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                                   size: 20,
                                   color:context.theme.primaryColorDark
                                 ),
-                                SizedBox(width: 1,),
+                                const SizedBox(width: 1,),
                                 Flexible(
                                   child: SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
@@ -275,7 +277,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                                     color:context.theme.primaryColorDark
                                   ),
                                 ),
-                                SizedBox(width: 4,),
+                                const SizedBox(width: 4,),
                                 Expanded(    
                                   child: Text(
                                     filteredData[index]['description'] as String,
@@ -293,8 +295,8 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                           ),
       
                           Container(
-                            padding: EdgeInsets.all(10),
-                            margin: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             width: double.infinity,
                             decoration: BoxDecoration(
                               color: context.theme.canvasColor,
@@ -312,8 +314,8 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                                         size: 14,
                                         color:context.theme.primaryColorDark,
                                       ),
-                                      SizedBox(width: 8,),
-                                      Text("$keyPoint",style: TextStyle(fontWeight: FontWeight.w600),),
+                                      const SizedBox(width: 8,),
+                                      Text(keyPoint,style: const TextStyle(fontWeight: FontWeight.w600),),
                                     ],
                                   );
                                 }).toList(),
@@ -321,7 +323,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                             ),
                           ),
                           
-                          SizedBox(height: 10,),
+                          const SizedBox(height: 10,),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
@@ -335,7 +337,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                                     color:context.theme.primaryColorDark
                                   ),
                                 ),
-                                SizedBox(width: 4,),
+                                const SizedBox(width: 4,),
                                 Expanded(    
                                   child: Text(
                                     'State: ${filteredData[index]['state'] as String}',
@@ -352,7 +354,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                             ),
                           ),
 
-                          SizedBox(height: 5,),
+                          const SizedBox(height: 5,),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Row(
@@ -366,7 +368,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                                     color:context.theme.primaryColorDark
                                   ),
                                 ),
-                                SizedBox(width: 4,),
+                                const SizedBox(width: 4,),
                                 Expanded(    
                                   child: Text(
                                     'Owner: ${filteredData[index]['owner_of_scheme'] as String}',

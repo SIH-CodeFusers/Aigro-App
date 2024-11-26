@@ -116,49 +116,49 @@ class _HomePageState extends State<HomePage> {
 
   List<Map<String, dynamic>> dashboardData = [
     {
-      'color':  Color.fromRGBO(190, 200, 249,1),
+      'color':  const Color.fromRGBO(190, 200, 249,1),
       'text': 'Disease Forecasting',
       'image': 'assets/images/forecasting.png',
       'route': Myroutes.diseaseForecastRoute,
     },
     {
-      'color': Color.fromRGBO(232, 213, 207,1),
+      'color': const Color.fromRGBO(232, 213, 207,1),
       'text': 'Offline Model',
       'image': 'assets/images/offline.png',
       'route': Myroutes.offlineDetectionRoute,
     },
     {
-      'color': Color.fromRGBO(201, 223, 221,1),
+      'color': const Color.fromRGBO(201, 223, 221,1),
       'text': 'Disease Mapping',
       'image': 'assets/images/mapping.png',
       'route': Myroutes.diseaseMapRoute,
     },
     {
-      'color': Color.fromRGBO(230, 238, 155,1),
+      'color': const Color.fromRGBO(230, 238, 155,1),
       'text': 'Weather Report',
       'image': 'assets/images/weather.png',
       'route': Myroutes.weatherReportRoute,
     },
     {
-      'color': Color.fromRGBO(249, 187, 208,1),
+      'color': const Color.fromRGBO(249, 187, 208,1),
       'text': 'Kheti Sathi',
       'image': 'assets/images/ks.png',
       'route': Myroutes.khetiSathiRoute,
     },
     {
-      'color': Color.fromRGBO(208, 196, 232,1),
+      'color': const Color.fromRGBO(208, 196, 232,1),
       'text': 'Learning Resources',
       'image': 'assets/images/lr.png',
       'route': Myroutes.learningResourcesRoute,
     },
     {
-      'color': Color.fromRGBO(255, 204, 128,1),
+      'color': const Color.fromRGBO(255, 204, 128,1),
       'text': 'Farmers Community',
       'image': 'assets/images/cm.png',
       'route': Myroutes.communityRoute,
     },
     {
-      'color': Color.fromRGBO(255, 204, 187,1),
+      'color': const Color.fromRGBO(255, 204, 187,1),
       'text': 'Government Schemes',
       'image': 'assets/images/gv.png',
       'route': Myroutes.schemesRoute,
@@ -179,7 +179,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 Navigator.push(
                   context, 
-                  MaterialPageRoute(builder: (context)=>ProfilePage())
+                  MaterialPageRoute(builder: (context)=>const ProfilePage())
                 );
               },
               child: Container(
@@ -207,10 +207,10 @@ class _HomePageState extends State<HomePage> {
             ),
             Row(
               children: [
-                Icon(Icons.location_on, color: Colors.black, size: 16,),
+                const Icon(Icons.location_on, color: Colors.black, size: 16,),
                 Text(
                   "$userDist, $userState",
-                  style: TextStyle(color: Colors.black, fontSize: 16), 
+                  style: const TextStyle(color: Colors.black, fontSize: 16), 
                 ),
               ],
             ),
@@ -223,8 +223,8 @@ class _HomePageState extends State<HomePage> {
                 onTap: (){
                   Navigator.pushNamed(context, '/khetiSathi');
                 },
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Icon(FontAwesomeIcons.comments, color: Colors.black, size: 20,),
                 ),
               ), 
@@ -239,11 +239,11 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 5),
-                Text("Hello, ${first} 🌱",style: TextStyle(fontSize: 26,color: context.theme.primaryColorDark),),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
+                Text("Hello, $first 🌱",style: TextStyle(fontSize: 26,color: context.theme.primaryColorDark),),
+                const SizedBox(height: 5),
                 Text(welcomeText,style: TextStyle(fontSize: 14,color: Colors.grey[600]),),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Container(
                   width: double.infinity,
                   height: 175,
@@ -289,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                   ),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 GestureDetector(
                                   onTap: () {
                                     Navigator.pushNamed(context, '/imageAnalysis');
@@ -312,7 +312,7 @@ class _HomePageState extends State<HomePage> {
                               ],
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Image.asset(
                             width: MediaQuery.of(context).size.width * 0.3, // 30% of screen width
                             height: 175,
@@ -363,11 +363,11 @@ class _HomePageState extends State<HomePage> {
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     dashboardInfo['text'],
-                                    style: TextStyle(color: Colors.white, fontSize: 18),
+                                    style: const TextStyle(color: Colors.white, fontSize: 18),
                                     textAlign: TextAlign.left,
                                   ),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Row(
                                   children: [
                                     Image.asset(
@@ -376,14 +376,14 @@ class _HomePageState extends State<HomePage> {
                                      dashboardInfo['image'],
                                       fit: BoxFit.cover,
                                     ),
-                                    Spacer(),
+                                    const Spacer(),
                                     Container(
                                       decoration: BoxDecoration(
                                         color: Colors.black.withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(10)
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(8.0),
                                         child: Icon(FeatherIcons.arrowUpRight, color: Colors.black, size: 22,),
                                       ), 
                                     ),
@@ -396,7 +396,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                     shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                   ),
                 ),
               ],

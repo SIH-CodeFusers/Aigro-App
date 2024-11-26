@@ -24,7 +24,7 @@ class _YourPostsState extends State<YourPosts> {
   }
 
   Future<List<dynamic>> fetchPosts() async {
-    final response = await http.get(Uri.parse('${CHAT_BACKEND}/api/messages/${BACKEND_UID}'));
+    final response = await http.get(Uri.parse('$CHAT_BACKEND/api/messages/$BACKEND_UID'));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
@@ -37,7 +37,7 @@ class _YourPostsState extends State<YourPosts> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: Text('Your Posts'),
+        title: const Text('Your Posts'),
       ),
       body: FutureBuilder<List<dynamic>>(
         future: posts,

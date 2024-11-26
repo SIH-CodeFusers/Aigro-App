@@ -37,11 +37,11 @@ class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
     if(onboarded==true){
-      return  HomePage();
+      return  const HomePage();
     }
     else if(onboarded==false){
-      return  GetStarted();
+      return  const GetStarted();
     }
-    return Scaffold();
+    return const Scaffold();
   }
 }

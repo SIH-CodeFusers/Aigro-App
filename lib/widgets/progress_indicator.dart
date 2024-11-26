@@ -23,11 +23,11 @@ class ProgressIndicatorWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         Center(
           child: Row(
             children: [
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               Expanded(
                 child: Row(
                   children: [
@@ -46,7 +46,7 @@ class ProgressIndicatorWidget extends StatelessWidget {
                         foreground: Paint()
                           ..shader = LinearGradient(
                             colors: <Color>[context.theme.cardColor, context.theme.primaryColorDark,],
-                          ).createShader(Rect.fromLTWH(0, 0, 200, 70)),
+                          ).createShader(const Rect.fromLTWH(0, 0, 200, 70)),
                       ),
                     ),
                   ],
@@ -55,15 +55,15 @@ class ProgressIndicatorWidget extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Row(
             children: List.generate(totalQuestions, (index) {
               bool isActive = index <= questionInd;
               return Expanded(
                 child: Container(
-                  margin: EdgeInsets.symmetric(
+                  margin: const EdgeInsets.symmetric(
                       horizontal: 2), // Spacing between segments
                   decoration: BoxDecoration(
                     color: isActive ? context.theme.cardColor : Colors.grey[300],

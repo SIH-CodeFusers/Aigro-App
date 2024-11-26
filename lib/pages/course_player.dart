@@ -109,7 +109,7 @@ class _CoursesPlayerState extends State<CoursesPlayer> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: Text(widget.coursetitle, style: TextStyle(fontSize: 22)),
+        title: Text(widget.coursetitle, style: const TextStyle(fontSize: 22)),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -118,25 +118,25 @@ class _CoursesPlayerState extends State<CoursesPlayer> {
             children: [
               YoutubePlayer(controller: _controller),
               Padding(
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Text(title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: context.theme.primaryColorDark)),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 child: Text(
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae dictum risus. Duis ut ornare risus, at pretium mauris.",
                   style: TextStyle(fontSize: 14, color: context.theme.splashColor),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "Completion : ${perc.round()} %",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: context.theme.primaryColorDark),
                 ),
               ),
-              SizedBox(height: 30),
-              Container(
+              const SizedBox(height: 30),
+              SizedBox(
                 height: 250,
                 child: ListView.builder(
                   itemCount: currentCourse.length,

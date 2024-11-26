@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class SparklingAnimation extends StatefulWidget {
   final Widget child;
 
-  const SparklingAnimation({required this.child});
+  const SparklingAnimation({super.key, required this.child});
 
   @override
   _SparklingAnimationState createState() => _SparklingAnimationState();

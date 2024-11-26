@@ -16,10 +16,10 @@ class BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 5),
+      padding: const EdgeInsets.only(top: 5),
       decoration: BoxDecoration(
           color: context.theme.canvasColor,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15))),
       child: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 15),
@@ -45,10 +45,10 @@ class BottomNav extends StatelessWidget {
             color: context.theme.splashColor,
             activeColor: context.theme.cardColor,
             tabBackgroundColor: context.theme.highlightColor,
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             gap: 10,
             rippleColor: context.theme.cardColor,
-            tabs: [         
+            tabs: const [         
               GButton(
                 icon: FontAwesomeIcons.house,
                 text: 'Home',

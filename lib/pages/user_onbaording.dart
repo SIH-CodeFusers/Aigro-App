@@ -151,7 +151,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
     bdb.updateDbInfo(); 
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+      MaterialPageRoute(builder: (context) => const HomePage()),
       (Route<dynamic> route) => false, 
     );
   }
@@ -218,11 +218,11 @@ class _UserOnboardingState extends State<UserOnboarding> {
         totalQuestions: totalQuestions,
         onBackButtonPressed: _handleBackButtonPressed,
       ),
-      Spacer(),
+      const Spacer(),
       Center(
         child: Container(
-          padding: EdgeInsets.all(16),
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: context.theme.highlightColor,
             borderRadius: BorderRadius.circular(5),
@@ -230,7 +230,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
                 blurRadius: 10,
-                offset: Offset(0, 0),
+                offset: const Offset(0, 0),
               ),
             ],
           ),
@@ -247,9 +247,9 @@ class _UserOnboardingState extends State<UserOnboarding> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
@@ -280,7 +280,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                   iconEnabledColor: context.theme.primaryColorDark,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(
@@ -301,7 +301,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
           ),
         ),
       ),
-      Spacer(),
+      const Spacer(),
     ],
   );
 }
@@ -316,11 +316,11 @@ class _UserOnboardingState extends State<UserOnboarding> {
           totalQuestions: totalQuestions,
           onBackButtonPressed: _handleBackButtonPressed,
         ),
-        Spacer(), 
+        const Spacer(), 
         Center(
           child: Container(
-            padding: EdgeInsets.all(16),
-            margin: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
               color: context.theme.highlightColor,
               borderRadius: BorderRadius.circular(5),
@@ -328,7 +328,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1), 
                   blurRadius: 10, 
-                  offset: Offset(0, 0), 
+                  offset: const Offset(0, 0), 
                 ),
               ],
             ),
@@ -345,7 +345,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextField(
                   controller: _namecontroller,
                   style: TextStyle(color: context.theme.primaryColorDark),
@@ -368,10 +368,10 @@ class _UserOnboardingState extends State<UserOnboarding> {
                         width: 2.0,
                       ),
                     ),
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded( 
@@ -392,7 +392,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
             ),
           ),
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }
@@ -408,11 +408,11 @@ class _UserOnboardingState extends State<UserOnboarding> {
           totalQuestions: totalQuestions,
           onBackButtonPressed: _handleBackButtonPressed,
         ),
-        Spacer(), 
+        const Spacer(), 
        Center(
         child: Container(
-          padding: EdgeInsets.all(16),
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: context.theme.highlightColor,
             borderRadius: BorderRadius.circular(5),
@@ -420,7 +420,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
               BoxShadow(
                 color: Colors.black.withOpacity(0.1), 
                 blurRadius: 10, 
-                offset: Offset(0, 0), 
+                offset: const Offset(0, 0), 
               ),
             ],
           ),
@@ -437,7 +437,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: _phonecontroller,
                 keyboardType: TextInputType.number,
@@ -461,10 +461,10 @@ class _UserOnboardingState extends State<UserOnboarding> {
                       width: 2.0,
                     ),
                   ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   Expanded( 
@@ -485,7 +485,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
           ),
         ),
       ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }
@@ -499,11 +499,11 @@ class _UserOnboardingState extends State<UserOnboarding> {
           totalQuestions: totalQuestions,
           onBackButtonPressed: _handleBackButtonPressed,
         ),
-        Spacer(),
+        const Spacer(),
         Center(
           child: Container(
-            padding: EdgeInsets.all(16),
-            margin: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
               color: context.theme.highlightColor,
               borderRadius: BorderRadius.circular(5),
@@ -511,7 +511,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1), 
                   blurRadius: 10, 
-                  offset: Offset(0, 0), 
+                  offset: const Offset(0, 0), 
                 ),
               ],
             ),
@@ -528,9 +528,9 @@ class _UserOnboardingState extends State<UserOnboarding> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
@@ -561,7 +561,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                     iconEnabledColor: context.theme.primaryColorDark, 
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded( 
@@ -582,7 +582,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
             ),
           ),
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }
@@ -596,11 +596,11 @@ class _UserOnboardingState extends State<UserOnboarding> {
           totalQuestions: totalQuestions,
           onBackButtonPressed: _handleBackButtonPressed,
         ),
-        Spacer(),
+        const Spacer(),
         Center(
           child: Container(
-            padding: EdgeInsets.all(16),
-            margin: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
               color: context.theme.highlightColor,
               borderRadius: BorderRadius.circular(5),
@@ -608,7 +608,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1), 
                   blurRadius: 10, 
-                  offset: Offset(0, 0), 
+                  offset: const Offset(0, 0), 
                 ),
               ],
             ),
@@ -625,9 +625,9 @@ class _UserOnboardingState extends State<UserOnboarding> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
@@ -658,7 +658,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                     iconEnabledColor: context.theme.primaryColorDark, 
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded( 
@@ -679,7 +679,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
             ),
           ),
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }
@@ -692,11 +692,11 @@ class _UserOnboardingState extends State<UserOnboarding> {
           totalQuestions: totalQuestions,
           onBackButtonPressed: _handleBackButtonPressed,
         ),
-        Spacer(),
+        const Spacer(),
         Center(
           child: Container(
-            padding: EdgeInsets.all(16),
-            margin: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
               color: context.theme.highlightColor,
               borderRadius: BorderRadius.circular(5),
@@ -704,7 +704,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
                   blurRadius: 10,
-                  offset: Offset(0, 0),
+                  offset: const Offset(0, 0),
                 ),
               ],
             ),
@@ -721,9 +721,9 @@ class _UserOnboardingState extends State<UserOnboarding> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
@@ -755,7 +755,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                     iconEnabledColor: context.theme.primaryColorDark,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                     children: [
                       Expanded( 
@@ -776,7 +776,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
             ),
           ),
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }
@@ -789,11 +789,11 @@ class _UserOnboardingState extends State<UserOnboarding> {
           totalQuestions: totalQuestions,
           onBackButtonPressed: _handleBackButtonPressed,
         ),
-        Spacer(),
+        const Spacer(),
         Center(
           child: Container(
-            padding: EdgeInsets.all(16),
-            margin: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
               color: context.theme.highlightColor,
               borderRadius: BorderRadius.circular(5),
@@ -801,7 +801,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
                   blurRadius: 10,
-                  offset: Offset(0, 0),
+                  offset: const Offset(0, 0),
                 ),
               ],
             ),
@@ -818,10 +818,10 @@ class _UserOnboardingState extends State<UserOnboarding> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 if (selectedDistrict != null)
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
@@ -855,14 +855,14 @@ class _UserOnboardingState extends State<UserOnboarding> {
                     ),
                   ),
                 if (selectedDistrict == null)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       "Please select a district first.",
                       style: TextStyle(color: Colors.grey),
                     ),
                   ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                     children: [
                       Expanded( 
@@ -883,7 +883,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
             ),
           ),
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }
@@ -898,11 +898,11 @@ class _UserOnboardingState extends State<UserOnboarding> {
         totalQuestions: totalQuestions,
         onBackButtonPressed: _handleBackButtonPressed,
       ),
-      Spacer(),
+      const Spacer(),
       Center(
         child: Container(
-          padding: EdgeInsets.all(16),
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.all(16),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
             color: context.theme.highlightColor,
             borderRadius: BorderRadius.circular(5),
@@ -910,7 +910,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
               BoxShadow(
                 color: Colors.black.withOpacity(0.1),
                 blurRadius: 10,
-                offset: Offset(0, 0),
+                offset: const Offset(0, 0),
               ),
             ],
           ),
@@ -927,7 +927,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: _pincontroller,
                 keyboardType: TextInputType.number,
@@ -951,20 +951,20 @@ class _UserOnboardingState extends State<UserOnboarding> {
                       width: 2.0,
                     ),
                   ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               // Display error message if input is invalid
               if (_isError==true)
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0),
                   child: Text(
                     "Please enter a valid 6-digit pincode.",
                     style: TextStyle(color: Colors.red, fontSize: 14),
                   ),
                 ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 children: [
                   Expanded(
@@ -993,7 +993,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
           ),
         ),
       ),
-      Spacer(),
+      const Spacer(),
     ],
   );
 }
@@ -1008,11 +1008,11 @@ class _UserOnboardingState extends State<UserOnboarding> {
           totalQuestions: totalQuestions,
           onBackButtonPressed: _handleBackButtonPressed,
         ),
-        Spacer(),
+        const Spacer(),
         Center(
           child: Container(
-            padding: EdgeInsets.all(16),
-            margin: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
               color: context.theme.highlightColor,
               borderRadius: BorderRadius.circular(5),
@@ -1020,7 +1020,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                 BoxShadow(
                   color: Colors.black.withOpacity(0.1),
                   blurRadius: 10,
-                  offset: Offset(0, 0),
+                  offset: const Offset(0, 0),
                 ),
               ],
             ),
@@ -1037,7 +1037,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Wrap(
                   spacing: 10, 
                   runSpacing: 10,
@@ -1067,7 +1067,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                     );
                   }).toList(),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   children: [
                     Expanded(
@@ -1088,7 +1088,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
             ),
           ),
         ),
-        Spacer(),
+        const Spacer(),
       ],
     );
   }

@@ -39,7 +39,7 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super();
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
 
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       systemNavigationBarColor: Color.fromRGBO(244, 244, 244, 1),
       statusBarColor: Color.fromRGBO(244, 244, 244, 1),
       systemNavigationBarIconBrightness: Brightness.dark,
@@ -75,24 +75,24 @@ class _MyAppState extends State<MyApp> {
       initialRoute: "/",                             
       
       routes: {                                       
-       "/": (context) => Authenticate(),                  
-        Myroutes.getStartedRoute: (context) => GetStarted(),
-        Myroutes.onbaordingRoute: (context) => UserOnboarding(),
-        Myroutes.homeRoute: (context) => HomePage(),
-        Myroutes.aboutUsRoute: (context) => AboutUs(),
-        Myroutes.cropListRoute: (context) => CropListPage(),
-        Myroutes.profileRoute: (context) => ProfilePage(),
-        Myroutes.khetiSathiRoute: (context) => KhetiSathi(),
+       "/": (context) => const Authenticate(),                  
+        Myroutes.getStartedRoute: (context) => const GetStarted(),
+        Myroutes.onbaordingRoute: (context) => const UserOnboarding(),
+        Myroutes.homeRoute: (context) => const HomePage(),
+        Myroutes.aboutUsRoute: (context) => const AboutUs(),
+        Myroutes.cropListRoute: (context) => const CropListPage(),
+        Myroutes.profileRoute: (context) => const ProfilePage(),
+        Myroutes.khetiSathiRoute: (context) => const KhetiSathi(),
         // Myroutes.cropDetailsRoute: (context) => CropDetails(),
 
-        Myroutes.diseaseMapRoute: (context) => DiseaseMapping(),
+        Myroutes.diseaseMapRoute: (context) => const DiseaseMapping(),
         Myroutes.offlineDetectionRoute: (context) => OfflineDetection(),
-        Myroutes.weatherReportRoute: (context) => WeatherReport(),
-        Myroutes.diseaseForecastRoute: (context) => DiseaseForecasting(),
+        Myroutes.weatherReportRoute: (context) => const WeatherReport(),
+        Myroutes.diseaseForecastRoute: (context) => const DiseaseForecasting(),
         Myroutes.imageAnalysisRoute: (context) => ImageAnalysis(),
         Myroutes.uploadImageRoute: (context) => UploadImage(),
         Myroutes.learningResourcesRoute: (context) => LearningResources(),
-        Myroutes.communityRoute: (context) => Community(),
+        Myroutes.communityRoute: (context) => const Community(),
         Myroutes.schemesRoute: (context) => GovernmentSchemes(),
       },
     );   

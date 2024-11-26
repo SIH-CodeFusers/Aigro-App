@@ -112,7 +112,7 @@ class _PostWidgetState extends State<PostWidget> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: context.theme.highlightColor,
-        title:  Center(child: Text('Add Comment')),
+        title:  const Center(child: Text('Add Comment')),
         content:  TextField(
           controller: _commentController,
           decoration: InputDecoration(
@@ -130,12 +130,12 @@ class _PostWidgetState extends State<PostWidget> {
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(width: 1, color: Colors.grey[400] ?? Colors.grey),
             ),
-            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           ),
         ),
         actions: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 5,vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 0),
               decoration: BoxDecoration(
                 color: context.theme.primaryColorDark,
                 borderRadius: BorderRadius.circular(10),
@@ -145,7 +145,7 @@ class _PostWidgetState extends State<PostWidget> {
                   addComment(id,_commentController.text);
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => Community()),
+                    MaterialPageRoute(builder: (context) => const Community()),
                     (Route<dynamic> route) => route.isFirst, 
                   );   
                 },
@@ -153,7 +153,7 @@ class _PostWidgetState extends State<PostWidget> {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 5,vertical: 0),
+              padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 0),
               decoration: BoxDecoration(
                 color: Colors.redAccent,
                 borderRadius: BorderRadius.circular(10),
@@ -191,10 +191,10 @@ class _PostWidgetState extends State<PostWidget> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Color.fromARGB(255, 57, 59, 57).withOpacity(0.2),
+            color: const Color.fromARGB(255, 57, 59, 57).withOpacity(0.2),
             spreadRadius: 1,
             blurRadius: 1,
-            offset: Offset(1, 1),
+            offset: const Offset(1, 1),
           ),
         ],
       ),
@@ -207,8 +207,8 @@ class _PostWidgetState extends State<PostWidget> {
               children: [
                 CircleAvatar(
                   backgroundColor: getRandomColor(),
-                  child: Text(getInitials(widget.post['name'] ?? 'Unknown User'),style: TextStyle(color: context.theme.highlightColor),),
                   radius: 18,
+                  child: Text(getInitials(widget.post['name'] ?? 'Unknown User'),style: TextStyle(color: context.theme.highlightColor),),
                 ),
                 const SizedBox(width: 8),
                 Column(
@@ -288,7 +288,7 @@ class _PostWidgetState extends State<PostWidget> {
                     ],
                   ),
                 ),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                 GestureDetector(
                   onTap: () => showAddCommentDialog(widget.post['_id']),
                 child: Row(
@@ -337,8 +337,8 @@ class CommentWidget extends StatelessWidget {
         children: [
           CircleAvatar(
             backgroundColor: context.theme.focusColor,
-            child: Text(getInitials(comment['commenterName'] ?? 'Unknown User'),style: TextStyle(fontSize: 12),),
             radius: 15,
+            child: Text(getInitials(comment['commenterName'] ?? 'Unknown User'),style: TextStyle(fontSize: 12),),
           ),
           const SizedBox(width: 8),
           Expanded(
@@ -354,7 +354,7 @@ class CommentWidget extends StatelessWidget {
                   style: const TextStyle(fontSize: 12),
                 ),
                 Text(
-                  '${DateFormat('MMM dd, yyyy h:mm a').format(DateTime.parse(comment['createdAt']).toLocal())}',
+                  DateFormat('MMM dd, yyyy h:mm a').format(DateTime.parse(comment['createdAt']).toLocal()),
                   style: TextStyle(color: Colors.grey[600], fontSize: 10),
                 ),
               ],

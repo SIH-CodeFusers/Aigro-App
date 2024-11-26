@@ -4,7 +4,7 @@ import 'package:velocity_x/velocity_x.dart';
 class NextButton extends StatelessWidget {
   final String text;
 
-  NextButton({super.key, required this.text});
+  const NextButton({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class NextButton extends StatelessWidget {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(color: Colors.white, fontSize: 17),
+            style: const TextStyle(color: Colors.white, fontSize: 17),
           ),
         ),
       );

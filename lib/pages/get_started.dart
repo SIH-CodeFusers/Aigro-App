@@ -28,14 +28,14 @@ class GetStarted extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  SizedBox(height: 60,),
+                  const SizedBox(height: 60,),
                    Center(
                       child: ClipOval(
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color.fromRGBO(190, 200, 249,1)
                           ),
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child: ClipOval(
                             child: Image.asset(
                               "assets/images/get_started.jpeg",
@@ -47,7 +47,7 @@ class GetStarted extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                                     
                      const Center(
                        child: Text(
@@ -88,7 +88,7 @@ class GetStarted extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.transparent
                         ),
                         child: Text(
@@ -126,7 +126,7 @@ class GetStarted extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20,)
+                    const SizedBox(height: 20,)
                   ],
                 ),
               ),

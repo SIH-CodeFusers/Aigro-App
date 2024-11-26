@@ -63,7 +63,7 @@ class _WeatherReportState extends State<WeatherReport> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
-      appBar: AppBar(title: Text('Weather Forecast')),
+      appBar: AppBar(title: const Text('Weather Forecast')),
       body: FutureBuilder<List<WeatherData>>(
         future: weatherService.fetchWeather(lat, lon),
         builder: (context, snapshot) {
@@ -74,7 +74,7 @@ class _WeatherReportState extends State<WeatherReport> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No weather data available'));
+            return const Center(child: Text('No weather data available'));
           } else {
             final weatherList = snapshot.data!; 
             return Padding(
@@ -97,7 +97,7 @@ class _WeatherReportState extends State<WeatherReport> {
                         Text(userPin,style: TextStyle(color: context.theme.cardColor,fontSize: 20),),
                       ],
                     ),
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
                     Container(
                       decoration: BoxDecoration(
                         color: context.theme.highlightColor,
@@ -106,7 +106,7 @@ class _WeatherReportState extends State<WeatherReport> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Table(
-                          border: TableBorder(
+                          border: const TableBorder(
                             horizontalInside: BorderSide.none, 
                             verticalInside: BorderSide.none,     
                           ),
@@ -115,40 +115,40 @@ class _WeatherReportState extends State<WeatherReport> {
                               decoration: BoxDecoration(
                                 color: context.theme.cardColor, 
                               ),
-                              children: [
+                              children: const [
                                 TableCell(
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: EdgeInsets.all(8.0),
                                     child: Text('Date', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: EdgeInsets.all(8.0),
                                     child: Text('Max Temp (°C)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: EdgeInsets.all(8.0),
                                     child: Text('Min Temp (°C)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: EdgeInsets.all(8.0),
                                     child: Text('Temp (°C)', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: EdgeInsets.all(8.0),
                                     child: Text('Humidity', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                                   ),
                                 ),
                                 TableCell(
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: EdgeInsets.all(8.0),
                                     child: Text('Weather', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                                   ),
                                 ),
@@ -161,38 +161,38 @@ class _WeatherReportState extends State<WeatherReport> {
                                     child: Container(
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: Text('${daysOfWeek[i]}', style: TextStyle(fontSize: 14)),
+                                        child: Text(daysOfWeek[i], style: const TextStyle(fontSize: 14)),
                                       ),
                                     ),
                                   ),
                                   TableCell(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text('${weatherList[i].tempMax}°C', style: TextStyle(fontSize: 14)),
+                                      child: Text('${weatherList[i].tempMax}°C', style: const TextStyle(fontSize: 14)),
                                     ),
                                   ),
                                   TableCell(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text('${weatherList[i].tempMin}°C', style: TextStyle(fontSize: 14)),
+                                      child: Text('${weatherList[i].tempMin}°C', style: const TextStyle(fontSize: 14)),
                                     ),
                                   ),
                                   TableCell(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text('${weatherList[i].tempDay}°C', style: TextStyle(fontSize: 14)),
+                                      child: Text('${weatherList[i].tempDay}°C', style: const TextStyle(fontSize: 14)),
                                     ),
                                   ),
                                   TableCell(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text('${weatherList[i].humidity}%', style: TextStyle(fontSize: 14)),
+                                      child: Text('${weatherList[i].humidity}%', style: const TextStyle(fontSize: 14)),
                                     ),
                                   ),
                                   TableCell(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Text('${weatherList[i].description}', style: TextStyle(fontSize: 14)),
+                                      child: Text(weatherList[i].description, style: const TextStyle(fontSize: 14)),
                                     ),
                                   ),
                                 ],

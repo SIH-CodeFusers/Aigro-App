@@ -98,7 +98,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
       
       backgroundColor: Colors.transparent,
       
-        title: Text('Your KhetiSathi'),
+        title: const Text('Your KhetiSathi'),
       ),
       body: Stack(
         children: [
@@ -206,7 +206,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
                             controller: _controller,
                             decoration: InputDecoration(
                               hintText: 'Type your message...',
-                              hintStyle: TextStyle(
+                              hintStyle: const TextStyle(
                                 color: Colors.grey,
                               ),
                               border: OutlineInputBorder(
@@ -238,7 +238,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 5,),
+                        const SizedBox(width: 5,),
                         Container(
                           decoration: BoxDecoration(
                             color: context.theme.cardColor, 
@@ -246,7 +246,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
                           ),
                           child: IconButton(
                             color: context.theme.highlightColor,
-                            icon: Icon(FeatherIcons.arrowRight),
+                            icon: const Icon(FeatherIcons.arrowRight),
                             onPressed: () {
                               final message = _controller.text.trim();
                               if (message.isNotEmpty) {

@@ -6,6 +6,8 @@ import 'package:tflite_v2/tflite_v2.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class OfflineDetection extends StatefulWidget {
+  const OfflineDetection({super.key});
+
   @override
   _OfflineDetectionState createState() => _OfflineDetectionState();
 }
@@ -68,7 +70,7 @@ class _OfflineDetectionState extends State<OfflineDetection> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: Text('Offline Model'),
+        title: const Text('Offline Model'),
       ),
       body: SafeArea(
         child: Center(
@@ -99,10 +101,10 @@ class _OfflineDetectionState extends State<OfflineDetection> {
                     ),  
                     child: DottedBorder(
                       color: Colors.grey,
-                      dashPattern: [8, 4],
+                      dashPattern: const [8, 4],
                       strokeWidth: 1,
                         borderType: BorderType.RRect, 
-                        radius: Radius.circular(10),
+                        radius: const Radius.circular(10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -124,9 +126,9 @@ class _OfflineDetectionState extends State<OfflineDetection> {
                   ),  
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               if (_image == null)
-               Text('No image selected'),
+               const Text('No image selected'),
               if (_image != null) ...[
                 Center(
                   child: Padding(
@@ -141,12 +143,12 @@ class _OfflineDetectionState extends State<OfflineDetection> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
-                      "$diseaseName",
+                      diseaseName,
                       style: TextStyle(color: context.theme.cardColor, fontSize: 30),
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: GestureDetector(

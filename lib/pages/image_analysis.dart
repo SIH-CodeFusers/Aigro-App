@@ -4,8 +4,11 @@ import 'package:aigro/secret.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:velocity_x/velocity_x.dart';
+import 'package:aigro/secret.dart';
 
 class ImageAnalysis extends StatefulWidget {
+  const ImageAnalysis({super.key});
+
   @override
   _ImageAnalysisState createState() => _ImageAnalysisState();
 }
@@ -40,7 +43,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   }
 
   Future<void> _fetchAnalysisData() async {
-    const fetchUrl = '${BACKEND_URL}/api/imageAnalysis/fetchDetailsByUid/${BACKEND_UID}';
+    const fetchUrl = '$BACKEND_URL/api/imageAnalysis/fetchDetailsByUid/$BACKEND_UID';
     final response = await http.get(Uri.parse(fetchUrl));
 
     if (response.statusCode == 200) {
@@ -63,13 +66,13 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
-      appBar: AppBar(title: Text("Image Analysis")),
+      appBar: AppBar(title: const Text("Image Analysis")),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Flexible(
                 child: _buildAnalysisResult(),
               ),
@@ -113,16 +116,16 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
 
   Widget _buildAnalysisResult() {
     if (_analysisData == null) {
-      return Center(child: Text("Loading data..."));
+      return const Center(child: Text("Loading data..."));
     }
 
     if (!_analysisData!['exists']) {
-      return Center(child: Text("No analysis results found."));
+      return const Center(child: Text("No analysis results found."));
     }
 
     final results = _analysisData!['results'];
     if (results.isEmpty) {
-      return Center(child: Text("No analysis details found."));
+      return const Center(child: Text("No analysis details found."));
     }
 
     return ListView.builder(
@@ -155,13 +158,13 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
             }
           },
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 8.0),
+            margin: const EdgeInsets.symmetric(vertical: 8.0),
             decoration: BoxDecoration(
               color: diseaseName == "Unknown" 
           ? context.theme.highlightColor.withOpacity(0.8)
           : context.theme.highlightColor,
               borderRadius: BorderRadius.circular(10),
-              boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))],
+              boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))],
             ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -178,22 +181,22 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        constraints: BoxConstraints(
+                        constraints: const BoxConstraints(
                           maxWidth: 200
                         ),
                         child: Text(
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          "$diseaseName in $cropName", style: TextStyle(fontSize: 20, )
+                          "$diseaseName in $cropName", style: const TextStyle(fontSize: 20, )
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                         decoration: BoxDecoration(
                           color: context.theme.focusColor,
                           borderRadius: BorderRadius.circular(10)
@@ -202,10 +205,10 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   Text(
                     "$symptoms",
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                    style: const TextStyle(fontSize: 14, color: Colors.grey),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
