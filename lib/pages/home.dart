@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
     },
     {
       'color': const Color.fromRGBO(249, 187, 208,1),
-      'text': 'Kheti Sathi',
+      'text': ' Krishi AI',
       'image': 'assets/images/ks.png',
       'route': Myroutes.khetiSathiRoute,
     },

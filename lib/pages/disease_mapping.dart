@@ -435,7 +435,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
       body: FlutterMap(
         options: MapOptions(
           initialCenter: LatLng(lat, long),
-          initialZoom: 13.0,
+          initialZoom: 11.0,
         ),
         children: [
           TileLayer(
