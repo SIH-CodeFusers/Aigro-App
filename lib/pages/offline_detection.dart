@@ -55,8 +55,8 @@ class _OfflineDetectionState extends State<OfflineDetection> {
       path: image.path,
       numResults: 1,
       threshold: 0.05,
-      imageMean: 120.5,
-      imageStd: 120.5,
+      imageMean: 127.5,
+      imageStd: 127.5,
     );
     setState(() {
       _recognitions = recognitions;
@@ -92,7 +92,7 @@ class _OfflineDetectionState extends State<OfflineDetection> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: GestureDetector(
                   onTap: _pickImage,
-                                    child: Container(
+                    child: Container(
                     width: double.infinity,
                     height: 150,
                     decoration: BoxDecoration(
