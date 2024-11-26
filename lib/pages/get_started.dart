@@ -33,7 +33,7 @@ class GetStarted extends StatelessWidget {
                       child: ClipOval(
                         child: Container(
                           decoration: const BoxDecoration(
-                            color: Color.fromRGBO(190, 200, 249,1)
+                            color:  Color.fromRGBO(255, 204, 187,1)
                           ),
                           padding: const EdgeInsets.all(15),
                           child: ClipOval(

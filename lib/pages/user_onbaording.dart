@@ -80,18 +80,6 @@ class _UserOnboardingState extends State<UserOnboarding> {
     "Puducherry",
   ];
 
-
-
-  final List<String> languages = [
-    "English",
-    "Hindi",
-    "Bengali",
-    "Telegu",
-  ];
-
-  String? selectedLanguage; 
-
-
   String? selectedState;
 
   final List<String> countries = [
@@ -215,103 +203,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
     );
   }
 
-  //prefered language
 
-  //   Widget LanguageSelect(BuildContext context) {
-  //   return Column(
-  //     children: [
-  //       ProgressIndicatorWidget(
-  //         questionInd: questionInd,
-  //         totalQuestions: totalQuestions,
-  //         onBackButtonPressed: _handleBackButtonPressed,
-  //       ),
-  //       const Spacer(),
-  //       Center(
-  //         child: Container(
-  //           padding: const EdgeInsets.all(16),
-  //           margin: const EdgeInsets.symmetric(horizontal: 20),
-  //           decoration: BoxDecoration(
-  //             color: context.theme.highlightColor,
-  //             borderRadius: BorderRadius.circular(5),
-  //             boxShadow: [
-  //               BoxShadow(
-  //                 color: Colors.black.withOpacity(0.1),
-  //                 blurRadius: 10,
-  //                 offset: const Offset(0, 0),
-  //               ),
-  //             ],
-  //           ),
-  //           child: Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             children: [
-  //               Padding(
-  //                 padding: const EdgeInsets.symmetric(horizontal: 8),
-  //                 child: Align(
-  //                   alignment: Alignment.centerLeft,
-  //                   child: Text(
-  //                     "Select your Language",
-  //                     style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
-  //                   ),
-  //                 ),
-  //               ),
-  //               const SizedBox(height: 20),
-  //               Container(
-  //                 padding: const EdgeInsets.symmetric(horizontal: 10),
-  //                 decoration: BoxDecoration(
-  //                   borderRadius: BorderRadius.circular(10),
-  //                   border: Border.all(
-  //                     color: context.theme.primaryColorDark,
-  //                     width: 2.0,
-  //                   ),
-  //                 ),
-  //                 child: DropdownButton<String>(
-  //                   value: selectedLanguage,
-  //                   hint: Text(
-  //                     'Select a Language',
-  //                     style: TextStyle(color: context.theme.primaryColorDark),
-  //                   ),
-  //                   isExpanded: true,
-  //                   items: languages.map((String language) {
-  //                     return DropdownMenuItem<String>(
-  //                       value: language,
-  //                       child: Text(language, style: TextStyle(color: context.theme.primaryColorDark)),
-  //                     );
-  //                   }).toList(),
-  //                   onChanged: (String? newValue) {
-  //                     setState(() {
-  //                       selectedLanguage = newValue;
-  //                     });
-  //                   },
-  //                   style: TextStyle(color: context.theme.primaryColorDark, fontSize: 18),
-  //                   underline: Container(),
-  //                   iconEnabledColor: context.theme.primaryColorDark,
-  //                 ),
-  //               ),
-  //               const SizedBox(height: 20),
-  //               Row(
-  //                 children: [
-  //                   Expanded(
-  //                     child: GestureDetector(
-  //                       onTap: () {
-  //                         setState(() {
-  //                           questionInd += 1;
-  //                         });
-  //                       },
-  //                       child: NextButton(
-  //                         text: "Next",
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //       const Spacer(),
-  //     ],
-  //   );
-  // }
 
 
   //User Name
@@ -344,13 +236,15 @@ class _UserOnboardingState extends State<UserOnboarding> {
               children: [
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "What is your name?",
-                          style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "What is your name?",
+                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+                          ),
                         ),
                       ),
                     ),

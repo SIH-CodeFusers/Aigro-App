@@ -49,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   saveForm() {
      setState(() {
-      db.startHome = true;
+      db.startHome = false;
     });
     db.updateTheme();
     Navigator.pushNamed(context, Myroutes.getStartedRoute);

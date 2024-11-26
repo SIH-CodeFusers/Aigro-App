@@ -1,6 +1,7 @@
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/get_started.dart';
 import 'package:aigro/pages/home.dart';
+import 'package:aigro/pages/select_lang.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -40,7 +41,7 @@ class _AuthenticateState extends State<Authenticate> {
       return  const HomePage();
     }
     else if(onboarded==false){
-      return  const GetStarted();
+      return  const SelectLang();
     }
     return const Scaffold();
   }
