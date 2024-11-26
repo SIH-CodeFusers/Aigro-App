@@ -7,6 +7,7 @@ import 'package:aigro/widgets/posts.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
@@ -333,9 +334,16 @@ class _CommunityState extends State<Community> {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Center(
-                                child: Text(
-                                  'Create Post',
-                                  style: TextStyle(color: context.theme.highlightColor, fontSize: 14),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Create Post',
+                                      style: TextStyle(color: context.theme.highlightColor, fontSize: 14),
+                                    ),
+                                    SizedBox(width: 5,),
+                                    Icon(FeatherIcons.plus,size: 16,color: context.theme.highlightColor,)
+                                  ],
                                 ),
                               ),
                             ),
@@ -363,9 +371,16 @@ class _CommunityState extends State<Community> {
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: Center(
-                                child: Text(
-                                  'Your Posts',
-                                  style: TextStyle(color: context.theme.highlightColor, fontSize: 14),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Your Posts',
+                                      style: TextStyle(color: context.theme.highlightColor, fontSize: 14),
+                                    ),
+                                    SizedBox(width: 5,),
+                                    Icon(FeatherIcons.users,size: 16,color: context.theme.highlightColor,)
+                                  ],
                                 ),
                               ),
                             ),
