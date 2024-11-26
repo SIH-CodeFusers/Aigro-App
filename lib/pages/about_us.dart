@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/utils/translate.dart';
+import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
@@ -191,7 +192,7 @@ class _AboutUsState extends State<AboutUs> {
           "AIgro, developed by the CodeFusers Team, is a website designed to assist farmers with various features such as disease prediction, image analysis, a farmers' community, crop health monitoring, an AI chat assistant, weather updates, cultivation tips, and farm resources."
     },
     {
-      "title": "How do the Dieases Prediction Work?",
+      "title": "How do the Diseases Prediction Work?",
       "content":
           "The disease prediction feature uses AI algorithms to analyze data and predict potential crop diseases based on historical and real-time information. This helps farmers take preventive measures early."
     },
@@ -270,12 +271,11 @@ class _AboutUsState extends State<AboutUs> {
 
   FlutterTts flutterTts = FlutterTts();
 
-  void _speak(String text) async {
+  _speak(String text) async {
     await flutterTts.setLanguage("en-US"); 
-    await flutterTts.setPitch(1.0); 
+    await flutterTts.setPitch(0.7); 
     await flutterTts.speak(text); 
   }
-
 
   @override
   void initState() {
@@ -436,7 +436,7 @@ class _AboutUsState extends State<AboutUs> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.white.withOpacity(0.8),
+                      color: context.theme.highlightColor.withOpacity(0.8),
                     ),
                     padding: EdgeInsets.all(8),
                     child: Column(
@@ -471,9 +471,6 @@ class _AboutUsState extends State<AboutUs> {
 
   Widget _buildInfoCard({required String title, required String content}) {
     return GestureDetector(
-      onTap:  () {
-       _speak("Hello, this is a text to speech demo");
-     },
       child: Container(
         decoration: BoxDecoration(
           color: context.theme.primaryColorDark,
@@ -492,16 +489,23 @@ class _AboutUsState extends State<AboutUs> {
           children: [
             Row(
               children: [
-                const Icon(Icons.eco, color: Colors.white),
+                Icon(Icons.eco, color: context.theme.highlightColor),
                 const SizedBox(width: 8),
                 Text(
                   title,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    color: context.theme.highlightColor,
                   ),
                 ),
+                Spacer(),
+                GestureDetector(
+                  onTap: (){
+                    _speak(content);
+                  },
+                  child: voiceIcon(context),
+                )
               ],
             ),
             const SizedBox(height: 8),
@@ -523,20 +527,46 @@ Widget _buildAccordionWidget() {
   return Column(
     children: accordionData.map((item) {
       return ExpansionTile(
-        title: Text(
-          item["title"]!,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+        title: Row(
+          children: [
+            GestureDetector(
+              onTap: (){
+                _speak(item["title"]!);
+              },
+              child: voiceIcon(context),
+            ),
+             SizedBox(width: 10,),
+            Flexible(
+              child: Text(
+                item["title"]!,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
         ),
         iconColor: Color.fromRGBO(0, 229, 118, 1), 
         collapsedBackgroundColor: Colors.grey.shade200, 
         backgroundColor: Colors.green.shade100, 
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              item["content"]!,
-              style: const TextStyle(height: 1.5),
-            ),
+          Row(
+            children: [
+              SizedBox(width: 10,),
+              GestureDetector(
+                onTap: (){
+                  _speak(item["content"]!);
+                },
+                child: voiceIcon(context),
+              ),
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Text(
+                    item["content"]!,
+                    style: const TextStyle(height: 1.5),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       );

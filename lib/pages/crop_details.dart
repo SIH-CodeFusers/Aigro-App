@@ -1,7 +1,9 @@
+import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:aigro/utils/translate.dart';
 import 'package:aigro/secret.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:aigro/local_db/db.dart';
@@ -36,6 +38,14 @@ class _CropDetailsState extends State<CropDetails> {
     if (userLang != "en") {
       translateDiseaseDetails(diseaseDetails);
     }
+  }
+
+  FlutterTts flutterTts = FlutterTts();
+
+  _speak(String text) async {
+    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
   }
 
   Future<void> translateDiseaseDetails(Map<String, dynamic> disease) async {
@@ -100,7 +110,6 @@ class _CropDetailsState extends State<CropDetails> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -236,6 +245,13 @@ class _CropDetailsState extends State<CropDetails> {
           children: [
             Row(
               children: [
+                GestureDetector(
+                  onTap: (){
+                    _speak(content);
+                  },
+                  child: voiceIcon(context),
+                ),
+                SizedBox(width: 10,),
                 Expanded(
                   child: Text(
                     title,
@@ -323,6 +339,14 @@ class _CropDetailsState extends State<CropDetails> {
                     ),
                   ),
                 ),
+                SizedBox(width: 10,),
+                GestureDetector(
+                  onTap: (){
+                    _speak(content);
+                  },
+                  child: voiceIcon(context),
+                ),
+                
               ],
             ),
             const SizedBox(height: 12),
@@ -371,12 +395,25 @@ class _CropDetailsState extends State<CropDetails> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  fertilizer['name'],
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        fertilizer['name'],
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    GestureDetector(
+                  onTap: (){
+                    _speak(fertilizer['name']);
+                  },
+                  child: voiceIcon(context),
+                ),
+                  ],
                 ),
                 SizedBox(height: 4),
                 ...List.generate((fertilizer['products'] as List).length, (productIndex) {
