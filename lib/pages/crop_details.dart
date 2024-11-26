@@ -247,7 +247,10 @@ class _CropDetailsState extends State<CropDetails> {
               children: [
                 GestureDetector(
                   onTap: (){
+                    if(bulletPoints == null)
                     _speak(content);
+                    else
+                    _speak(bulletPoints?.join('\n') ?? '');
                   },
                   child: voiceIcon(context),
                 ),
