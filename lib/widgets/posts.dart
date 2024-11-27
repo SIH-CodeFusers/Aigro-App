@@ -226,6 +226,8 @@ class _PostWidgetState extends State<PostWidget> {
                     ),
                   ],
                 ),
+                Spacer(),
+                Icon(FeatherIcons.moreVertical,size: 16,color: Colors.grey[400],)
               ],
             ),
             const SizedBox(height: 10),    

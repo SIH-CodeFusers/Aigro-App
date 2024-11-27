@@ -2023,6 +2023,64 @@
           ],
           "_id": "66e573e29cf19981c5468282",
           "id": "66e573e29cf19981c5468282"
+        },
+        {
+          "diseaseName": " Powdery Mildew ",
+          "scientificName": "Podosphaera leucotricha",
+          "category": "Fungus",
+          "images": [
+            "https://cdn.mos.cms.futurecdn.net/rDMPLqy9V3XsYXTMgTw2CR-1200-80.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6JRzauG-UTGJ_QxViPTZ--qK1Bj0bbN7Ryw&s",
+            "https://gardenerspath.com/wp-content/uploads/2019/05/Treating-and-Controlling-Powdery-Mildew-on-Apple-Trees-Featured.jpg"
+          ],
+          "symptoms": "White powdery coating appears on the leaves, buds, and fruits, leading to deformation and poor growth. Severely affected areas may cause premature leaf fall and reduced yield.",
+          "causes": "This disease is caused by fungal spores that thrive in warm and humid conditions, particularly during the growing season. Overcrowding of plants and lack of proper pruning also contribute to its spread.",
+          "organicControl": "Apply a neem oil spray or sulfur-based organic fungicides regularly during the growing season to suppress the disease.",
+          "chemicalControl": "Use systemic fungicides such as myclobutanil or trifloxystrobin to combat the disease during severe outbreaks.",
+          "fertilisers": [
+            {
+              "name": "Ametoctradin 27.0% SC, Dimethomorph 20.27% SC",
+              "products": [
+                {
+                  "companyName": "BASF",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/tomato-late-blight-fertilizer-2.jpg?alt=media&token=374a4e31-39df-47a1-9d81-ddb4166f8a40",
+                  "price": "Rs.1200 for 400ml",
+                  "_id": "67461adeb096e86e8d6a5f17",
+                  "id": "67461adeb096e86e8d6a5f17"
+                }
+              ],
+              "_id": "67461adeb096e86e8d6a5f16",
+              "id": "67461adeb096e86e8d6a5f16"
+            },
+            {
+              "name": "Azoxystrobin 8.3% WG, Mancozeb 66.7% WG",
+              "products": [
+                {
+                  "companyName": "SWAL Corporation",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/tomato-late-blight-fertilizer-2.jpg?alt=media&token=8b6eea06-375e-41dc-8d52-ec3967c623d8",
+                  "price": "Rs 890 for 300ml",
+                  "_id": "67461adeb096e86e8d6a5f19",
+                  "id": "67461adeb096e86e8d6a5f19"
+                }
+              ],
+              "_id": "67461adeb096e86e8d6a5f18",
+              "id": "67461adeb096e86e8d6a5f18"
+            }
+          ],
+          "remedies": [
+            "Ensure proper spacing between apple trees to improve air circulation.",
+            "Prune infected branches and leaves regularly to prevent the spread of spores.",
+            "Water the base of the tree without wetting the leaves to reduce humidity.",
+            "Choose disease-resistant apple varieties for planting.",
+            "Apply preventive fungicides before the appearance of symptoms during high-risk periods."
+          ],
+          "summary": [
+            "Powdery Mildew is a common fungal disease affecting apple crops worldwide.",
+            "It can significantly reduce fruit yield and quality if not managed effectively.",
+            "Proper pruning, spacing, and fungicide applications are critical for prevention and control."
+          ],
+          "_id": "67461adeb096e86e8d6a5f15",
+          "id": "67461adeb096e86e8d6a5f15"
         }
       ]
     },
@@ -2889,6 +2947,78 @@
           ],
           "_id": "66e739bdb51ac7d9a5c61786",
           "id": "66e739bdb51ac7d9a5c61786"
+        },
+        {
+          "diseaseName": " Root Rot ",
+          "scientificName": "Fusarium spp.",
+          "category": "Fungus",
+          "images": [
+            "https://content.peat-cloud.com/w400/bacterial-soft-rot-of-banana-banana-1563276438.jpg",
+            "https://i.redd.it/6nb9132j5v041.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-8X1zW2CcsqFfBaEh2BVIHtCey_oPCUrcxQ&s"
+          ],
+          "symptoms": "Yellowing and wilting of leaves, poor growth, and decayed roots with a foul odor. In severe cases, the plant may collapse entirely.",
+          "causes": "Caused by soil-borne fungi that thrive in waterlogged and poorly drained soils. Over-irrigation and poor soil health exacerbate the problem.",
+          "organicControl": "Introduce biofungicides like Trichoderma harzianum to the soil. Use compost teas and organic mulches to improve soil health.",
+          "chemicalControl": "Drench the soil with fungicides such as carbendazim or copper oxychloride to manage the infection.",
+          "fertilisers": [
+            {
+              "name": "Potassium Fertilizer",
+              "products": [
+                {
+                  "companyName": "AgriGrow",
+                  "productImage": "https://example.com/banana_potassium1.jpg",
+                  "price": "Rs. 300 for 1kg",
+                  "_id": "67461adeb096e86e8d6a5f65",
+                  "id": "67461adeb096e86e8d6a5f65"
+                },
+                {
+                  "companyName": "FertileBanana Organics",
+                  "productImage": "https://example.com/banana_potassium2.jpg",
+                  "price": "Rs. 550 for 2kg",
+                  "_id": "67461adeb096e86e8d6a5f66",
+                  "id": "67461adeb096e86e8d6a5f66"
+                }
+              ],
+              "_id": "67461adeb096e86e8d6a5f64",
+              "id": "67461adeb096e86e8d6a5f64"
+            },
+            {
+              "name": "Phosphorus Fertilizer",
+              "products": [
+                {
+                  "companyName": "GreenField Agro",
+                  "productImage": "https://example.com/banana_phosphorus1.jpg",
+                  "price": "Rs. 400 for 1.5kg",
+                  "_id": "67461adeb096e86e8d6a5f68",
+                  "id": "67461adeb096e86e8d6a5f68"
+                },
+                {
+                  "companyName": "CropHealth Industries",
+                  "productImage": "https://example.com/banana_phosphorus2.jpg",
+                  "price": "Rs. 650 for 3kg",
+                  "_id": "67461adeb096e86e8d6a5f69",
+                  "id": "67461adeb096e86e8d6a5f69"
+                }
+              ],
+              "_id": "67461adeb096e86e8d6a5f67",
+              "id": "67461adeb096e86e8d6a5f67"
+            }
+          ],
+          "remedies": [
+            "Ensure proper drainage in banana plantations to avoid waterlogging.",
+            "Avoid over-irrigation and maintain moderate soil moisture.",
+            "Incorporate organic matter like compost to improve soil structure and health.",
+            "Remove and destroy infected plants to reduce the spread of the disease.",
+            "Apply fungicides preventively during the early growth stages."
+          ],
+          "summary": [
+            "Root Rot is a destructive fungal disease affecting banana plants under waterlogged conditions.",
+            "It results in poor plant growth, yellowing of leaves, and ultimately plant death if unmanaged.",
+            "Preventive measures such as proper drainage, organic soil amendments, and fungicide applications are essential."
+          ],
+          "_id": "67461adeb096e86e8d6a5f63",
+          "id": "67461adeb096e86e8d6a5f63"
         }
       ]
     },
@@ -3214,6 +3344,952 @@
           "id": "66e883db9ab5a7c1852b4730"
         }
       ]
+    },
+    {
+      "id": "bL6rbGUCYU",
+      "cropName": "Cotton",
+      "diseaseDetails": [
+        {
+          "diseaseName": "Aphids",
+          "scientificName": "Aphidoidea",
+          "category": "Insect",
+          "images": [
+            "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/cotton%2Fcotton-aphids-1.jpg?alt=media&token=ddfb217b-8394-4729-8664-acd5e4d30d03",
+            "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/cotton%2FCotton%20aphid-2.jpg?alt=media&token=d84a8914-5427-4168-9f4d-3d6da8691f54"
+          ],
+          "symptoms": "Aphids are small, pear-shaped insects that infest cotton plants, usually congregating on the undersides of leaves. They feed on the sap, causing yellowing, stunted growth, and wilting. Aphid infestations can also lead to the spread of plant viruses.",
+          "causes": "Aphid infestations are caused by a lack of natural predators and environmental conditions conducive to their growth. They can spread rapidly, especially in dry, warm climates with a high density of crops.",
+          "organicControl": "Introduce beneficial insects like ladybugs or lacewing larvae to control aphid populations. Neem oil and insecticidal soaps can also help reduce aphid numbers without harming beneficial insects.",
+          "chemicalControl": "Use systemic insecticides like Imidacloprid or Pyrethroids for severe infestations. Target aphid colonies early in the season to prevent widespread damage.",
+          "fertilisers": [
+            {
+              "name": "Nitrogen Fertilizer",
+              "products": [
+                {
+                  "companyName": "GreenGrow",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/cotton%2FCotton%20aphid-fert-1.jpg?alt=media&token=143961c2-483d-46ba-bdf4-f5cf2d8aefed",
+                  "price": "Rs. 300 for 1kg",
+                  "_id": "6742185f486be4b15107c652",
+                  "id": "6742185f486be4b15107c652"
+                },
+                {
+                  "companyName": "GreenGrow",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/cotton%2FCotton%20aphid-fert-2.jpg?alt=media&token=afefb897-acf4-42cc-81c0-95911314a008",
+                  "price": "Rs. 300 for 1kg",
+                  "_id": "6742185f486be4b15107c653",
+                  "id": "6742185f486be4b15107c653"
+                }
+              ],
+              "_id": "6742185f486be4b15107c651",
+              "id": "6742185f486be4b15107c651"
+            }
+          ],
+          "remedies": [
+            "Introduce natural predators such as ladybugs and lacewings.",
+            "Use neem oil or insecticidal soap for organic aphid control.",
+            "Maintain good plant health through proper watering and fertilization to minimize aphid impact."
+          ],
+          "summary": [
+            "Aphids are small insects that damage plants by sucking sap.",
+            "They can spread plant viruses and weaken cotton plants.",
+            "Control aphids using natural predators or organic insecticides."
+          ],
+          "_id": "6742185f486be4b15107c650",
+          "id": "6742185f486be4b15107c650"
+        },
+        {
+          "diseaseName": "Army Worm",
+          "scientificName": "Spodoptera frugiperda",
+          "category": "Insect",
+          "images": [
+            "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/cotton%2Fcotton-army-worm2.jpg?alt=media&token=8a54770b-ab68-45a9-b007-d9fea4b1b617",
+            "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/cotton%2Fctton-army-worm.jpg?alt=media&token=ea16ad0f-5096-4404-a52f-3d5e411945a8"
+          ],
+          "symptoms": "Army worms cause significant damage by feeding on the leaves and tender parts of cotton plants. The damage is often characterized by ragged edges on leaves, as well as defoliation in severe cases. They can also attack the plant’s stems and bolls.",
+          "causes": "Army worms are migratory pests that can spread rapidly, especially in areas with warm temperatures. They are attracted to cotton fields due to the abundance of food sources, and can rapidly increase their population under favorable conditions.",
+          "organicControl": "Handpicking caterpillars and introducing natural predators like parasitic wasps can help control army worm populations. Bacillus thuringiensis (Bt) is a biological pesticide that targets the caterpillars without harming other insects.",
+          "chemicalControl": "Insecticides like Spinosad or Chlorantraniliprole can effectively control army worm infestations when applied during early stages of the pest's lifecycle.",
+          "fertilisers": [
+            {
+              "name": "Phosphorus Fertilizer",
+              "products": [
+                {
+                  "companyName": "AgriFertil",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/cotton%2Fcotton-fert-1.jpg?alt=media&token=ca58dc28-a7e3-4823-a1d8-58fa962192bf",
+                  "price": "Rs. 250 for 500g",
+                  "_id": "6742185f486be4b15107c656",
+                  "id": "6742185f486be4b15107c656"
+                },
+                {
+                  "companyName": "GreenGrow",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/cotton%2FCotton%20aphid-fert-2.jpg?alt=media&token=afefb897-acf4-42cc-81c0-95911314a008",
+                  "price": "Rs. 300 for 1kg",
+                  "_id": "6742185f486be4b15107c657",
+                  "id": "6742185f486be4b15107c657"
+                }
+              ],
+              "_id": "6742185f486be4b15107c655",
+              "id": "6742185f486be4b15107c655"
+            }
+          ],
+          "remedies": [
+            "Use Bacillus thuringiensis (Bt) to target army worm larvae.",
+            "Handpick visible caterpillars and destroy them.",
+            "Introduce natural predators such as parasitic wasps to reduce pest population."
+          ],
+          "summary": [
+            "Army worms feed on cotton leaves, causing defoliation and yield loss.",
+            "They are migratory and can rapidly infest cotton fields.",
+            "Biological control like Bt and natural predators can help manage army worms."
+          ],
+          "_id": "6742185f486be4b15107c654",
+          "id": "6742185f486be4b15107c654"
+        },
+        {
+          "diseaseName": "Bacterial Blight",
+          "scientificName": "Xanthomonas axonopodis",
+          "category": "Bacteria",
+          "images": [
+            "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/cotton%2Fcotton-bb-1.jpg?alt=media&token=06f9a38c-ae22-4169-ac48-21e12ad5f87e",
+            "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/cotton%2Fcotton-bb-2.jpg?alt=media&token=fc8d5abe-9b14-41f6-8e9f-5da004b389f8"
+          ],
+          "symptoms": "Bacterial Blight causes yellowing, water-soaked lesions on the leaves of cotton plants, often leading to necrosis. These lesions expand and can cause premature defoliation. The disease reduces photosynthesis and overall plant vitality.",
+          "causes": "Bacterial Blight is caused by the bacterium Xanthomonas, which spreads through rain, irrigation, and wind. The disease thrives in warm, humid conditions and can be exacerbated by excessive irrigation and poor field hygiene.",
+          "organicControl": "Use copper-based fungicides to manage bacterial blight. Crop rotation with non-host plants can also help break the disease cycle.",
+          "chemicalControl": "Apply bactericides like Streptomycin or Copper Hydroxide early in the disease cycle to prevent further spread.",
+          "fertilisers": [
+            {
+              "name": "Magnesium Fertilizer",
+              "products": [
+                {
+                  "companyName": "Mahadan",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/cotton%2Fcotton-bb-fert-1.png?alt=media&token=4f4bcb14-7a7b-4ec7-a189-4d11a9bf71b3",
+                  "price": "Rs. 180 for 500g",
+                  "_id": "6742185f486be4b15107c65a",
+                  "id": "6742185f486be4b15107c65a"
+                },
+                {
+                  "companyName": "AgriSolutions",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/cotton%2Fcotton-bb-fert-2.jpg?alt=media&token=e917c324-7933-439f-9cc7-7b80c38f3859",
+                  "price": "Rs. 180 for 500g",
+                  "_id": "6742185f486be4b15107c65b",
+                  "id": "6742185f486be4b15107c65b"
+                }
+              ],
+              "_id": "6742185f486be4b15107c659",
+              "id": "6742185f486be4b15107c659"
+            }
+          ],
+          "remedies": [
+            "Apply copper-based bactericides to control the disease.",
+            "Practice crop rotation with non-host plants to break the bacterial cycle.",
+            "Improve field sanitation to prevent bacterial spread."
+          ],
+          "summary": [
+            "Bacterial blight causes water-soaked lesions and premature leaf drop.",
+            "It spreads through rain, wind, and irrigation in humid conditions.",
+            "Copper-based bactericides and crop rotation help manage bacterial blight."
+          ],
+          "_id": "6742185f486be4b15107c658",
+          "id": "6742185f486be4b15107c658"
+        },
+        {
+          "diseaseName": "Healthy Cotton",
+          "scientificName": "N/A",
+          "category": "Healthy Cotton",
+          "images": [
+            "https://media.npr.org/assets/img/2018/10/17/cotton31_wide-05101e2aab96ccda6a6c30856f6e356cc9f16485.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiMH6NBBSIngpIaxRS-bqCuTXM0puCsIHW0A&s",
+            "https://smartnitrogen.com/wp-content/uploads/2021/06/cotton-800x445.jpg"
+          ],
+          "symptoms": "Healthy cotton plants exhibit vigorous growth, lush green leaves, and strong root systems. The plants are free from visible signs of disease or pest damage, showing resilience against environmental stresses.",
+          "causes": "Healthy cotton plants are the result of proper care, including optimal soil fertility, adequate watering, and pest management. They benefit from regular monitoring and management practices that ensure a balanced growing environment.",
+          "organicControl": "Maintaining soil health through organic matter and proper crop rotation helps sustain plant health. Beneficial insects can support a balanced ecosystem.",
+          "chemicalControl": "Healthy plants require minimal chemical inputs, but regular foliar feeding with micronutrients can enhance growth.",
+          "fertilisers": [
+            {
+              "name": "Complete Fertilizer",
+              "products": [
+                {
+                  "companyName": "BioGrow",
+                  "productImage": "https://m.media-amazon.com/images/I/61KNeTAvOGL._AC_UF1000,1000_QL80_.jpg",
+                  "price": "Rs. 400 for 1kg",
+                  "_id": "6742185f486be4b15107c65e",
+                  "id": "6742185f486be4b15107c65e"
+                }
+              ],
+              "_id": "6742185f486be4b15107c65d",
+              "id": "6742185f486be4b15107c65d"
+            }
+          ],
+          "remedies": [
+            "Maintain good soil health through organic practices.",
+            "Use natural pest control methods to keep the ecosystem balanced.",
+            "Ensure plants receive adequate water, sunlight, and nutrients."
+          ],
+          "summary": [
+            "Healthy plants exhibit strong growth and resilience.",
+            "Proper care, including balanced soil, pest management, and watering, is key to plant health.",
+            "Minimal chemical use and organic practices help maintain plant vitality."
+          ],
+          "_id": "6742185f486be4b15107c65c",
+          "id": "6742185f486be4b15107c65c"
+        },
+        {
+          "diseaseName": "Powdery mildew",
+          "scientificName": "Erysiphe cichoracearum",
+          "category": "Fungus",
+          "images": [
+            "https://agritech.tnau.ac.in/crop_protection/cotton_disease_images/grey%20mildew2.jpg",
+            "https://content.peat-cloud.com/w400/grey-mildew-of-cotton-cotton-3.jpg",
+            "https://infonet-biovision.org/sites/default/files/inline-images/1846.400x300.jpeg"
+          ],
+          "symptoms": "Powdery mildew appears as a white, powdery coating on the surfaces of cotton leaves, stems, and bolls. As the disease progresses, the leaves may turn yellow, curl, and fall off prematurely, leading to reduced photosynthesis and weakened plants.",
+          "causes": "Powdery mildew is caused by fungal spores that spread through the air, often from nearby infected plants. It thrives in dry, warm conditions and can spread rapidly, especially under conditions of high humidity.",
+          "organicControl": "Apply sulfur-based fungicides to control the spread of powdery mildew. Neem oil can also help control fungal infections. Improve plant spacing to enhance airflow and reduce humidity around the plants.",
+          "chemicalControl": "Fungicides such as Myclobutanil or Tebuconazole are effective in controlling Powdery Mildew. They should be applied early in the disease cycle to prevent further spread.",
+          "fertilisers": [
+            {
+              "name": "Potassium Fertilizer",
+              "products": [
+                {
+                  "companyName": "Cuper",
+                  "productImage": "https://image.made-in-china.com/226f3j00zcUWFiZEhqoH/CURER-Bio-Organic-Fertilizer-special-for-Powdery-Mildew-Grey-mold-Anthracnose.webp",
+                  "price": "Rs. 330 for 500g",
+                  "_id": "6742185f486be4b15107c661",
+                  "id": "6742185f486be4b15107c661"
+                },
+                {
+                  "companyName": "V-Cure",
+                  "productImage": "https://cdn.shopify.com/s/files/1/0722/2059/products/Artboard1copy5-3_91dfd4c5-20a2-42a2-a84a-fbf4be157bd4.webp?v=1675356404&width=384",
+                  "price": "Rs. 330 for 500g",
+                  "_id": "6742185f486be4b15107c662",
+                  "id": "6742185f486be4b15107c662"
+                }
+              ],
+              "_id": "6742185f486be4b15107c660",
+              "id": "6742185f486be4b15107c660"
+            }
+          ],
+          "remedies": [
+            "Apply sulfur or neem oil treatments early in the disease cycle.",
+            "Space plants properly to ensure good air circulation and reduce humidity.",
+            "Prune infected plant parts and remove them from the field."
+          ],
+          "summary": [
+            "Powdery mildew causes white, powdery spots on leaves and stems.",
+            "It thrives in dry, humid conditions and can significantly reduce yields.",
+            "Use fungicides and maintain proper spacing to control the disease."
+          ],
+          "_id": "6742185f486be4b15107c65f",
+          "id": "6742185f486be4b15107c65f"
+        },
+        {
+          "diseaseName": "Target spot",
+          "scientificName": "Corynespora cassiiicola",
+          "category": "Fungus",
+          "images": [
+            "https://news.utcrops.com/wp-content/uploads/2016/08/TS-on-cotton-leaf-and-boll.jpg",
+            "https://www.researchgate.net/publication/308133592/figure/fig1/AS:406957635719169@1474037669501/Cotton-leaves-showing-typical-symptoms-of-target-spot.png"
+          ],
+          "symptoms": "Target Spot causes circular lesions with dark brown or black centers and lighter outer rings on cotton leaves. This disease often leads to premature leaf drop and reduced plant vitality.",
+          "causes": "Target Spot is caused by a soil-borne fungus that thrives in warm, wet conditions. The spores are spread by rain, irrigation, and wind, often infecting the lower leaves of the plant first.",
+          "organicControl": "Crop rotation and the use of resistant cotton varieties can help reduce the impact of Target Spot. Foliar applications of copper or sulfur-based fungicides may also offer some protection.",
+          "chemicalControl": "Fungicides like Chlorothalonil or Mancozeb are commonly used to control Target Spot. These should be applied preventively, especially during wet seasons.",
+          "fertilisers": [
+            {
+              "name": "Calcium Fertilizer",
+              "products": [
+                {
+                  "companyName": "AgroChem",
+                  "productImage": "https://5.imimg.com/data5/SELLER/Default/2022/8/PD/GE/ZQ/6428058/organic-cotton-crop-fertiliser.jpeg",
+                  "price": "Rs. 150 for 250g",
+                  "_id": "6742185f486be4b15107c665",
+                  "id": "6742185f486be4b15107c665"
+                },
+                {
+                  "companyName": "AgroSolutions",
+                  "productImage": "https://images.jdmagicbox.com/quickquotes/images_main/spot-2020710463-arr37ace.jpg",
+                  "price": "Rs. 330 for 500g",
+                  "_id": "6742185f486be4b15107c666",
+                  "id": "6742185f486be4b15107c666"
+                }
+              ],
+              "_id": "6742185f486be4b15107c664",
+              "id": "6742185f486be4b15107c664"
+            }
+          ],
+          "remedies": [
+            "Apply preventive fungicides during wet weather.",
+            "Use resistant cotton varieties to reduce susceptibility.",
+            "Rotate crops and remove infected plant material from the field."
+          ],
+          "summary": [
+            "Target Spot causes circular lesions with concentric rings on leaves.",
+            "It thrives in wet conditions and causes premature leaf drop.",
+            "Preventive fungicides and resistant varieties help control Target Spot."
+          ],
+          "_id": "6742185f486be4b15107c663",
+          "id": "6742185f486be4b15107c663"
+        },
+        {
+          "diseaseName": "Root Rot",
+          "scientificName": "Macrophomina phaseolina",
+          "category": "Fungus",
+          "images": [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ64GF7dbqMTKbiH9oB6R6uanUidpDHTUulhA&s",
+            "https://content.peat-cloud.com/thumbnails/root-rot-of-cotton-1.jpg",
+            "https://www.cottoninc.com/wp-content/uploads/2018/01/Cotton-root-rot-phymatotrichopsis-management-4.jpg"
+          ],
+          "symptoms": "Wilting and yellowing of leaves, followed by stunted growth and decaying roots. In advanced stages, plants may collapse entirely.",
+          "causes": "This disease occurs in poorly drained soils or areas prone to waterlogging. The fungus thrives in wet and compact soil conditions.",
+          "organicControl": "Introduce Trichoderma-based biofungicides to the soil to suppress fungal growth.",
+          "chemicalControl": "Apply carbendazim fungicide to the roots during early infection stages.",
+          "fertilisers": [
+            {
+              "name": "Ametoctradin 27.0% SC, Dimethomorph 20.27% SC",
+              "products": [
+                {
+                  "companyName": "BASF",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/tomato-late-blight-fertilizer-2.jpg?alt=media&token=374a4e31-39df-47a1-9d81-ddb4166f8a40",
+                  "price": "Rs.1200 for 400ml",
+                  "_id": "6746183978ce21eefad4b5fb",
+                  "id": "6746183978ce21eefad4b5fb"
+                }
+              ],
+              "_id": "6746183978ce21eefad4b5fa",
+              "id": "6746183978ce21eefad4b5fa"
+            },
+            {
+              "name": "Azoxystrobin 8.3% WG, Mancozeb 66.7% WG",
+              "products": [
+                {
+                  "companyName": "SWAL Corporation",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/tomato-late-blight-fertilizer-2.jpg?alt=media&token=8b6eea06-375e-41dc-8d52-ec3967c623d8",
+                  "price": "Rs 890 for 300ml",
+                  "_id": "6746183978ce21eefad4b5fd",
+                  "id": "6746183978ce21eefad4b5fd"
+                }
+              ],
+              "_id": "6746183978ce21eefad4b5fc",
+              "id": "6746183978ce21eefad4b5fc"
+            }
+          ],
+          "remedies": [
+            "Ensure proper drainage in cotton fields to avoid waterlogging.",
+            "Avoid over-irrigation, particularly during the early stages of growth.",
+            "Incorporate crop rotation practices to minimize pathogen buildup in the soil.",
+            "Use disease-free seeds and planting material for cultivation.",
+            "Apply organic mulch to improve soil health and reduce compaction."
+          ],
+          "summary": [
+            "Root Rot is a severe fungal disease affecting cotton crops under waterlogged conditions.",
+            "The disease can cause significant yield losses if not identified and managed early.",
+            "Improving soil drainage and using preventive fungicides can help control the spread."
+          ],
+          "_id": "6746183978ce21eefad4b5f9",
+          "id": "6746183978ce21eefad4b5f9"
+        }
+      ]
+    },
+    {
+      "id": "oeBHpe5Nwd",
+      "cropName": "Jute",
+      "diseaseDetails": [
+        {
+          "diseaseName": "Field Cricket",
+          "scientificName": "Gryllus spp.",
+          "category": "Insect",
+          "images": [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBoAYkN27atEMYBhPnXlcn0e8iiHvAEoc3HQ&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlZ4Qo-eVGVaSz5vNPdISAcmMwkdg8TqDO0g&s"
+          ],
+          "symptoms": "Field crickets damage jute plants by feeding on the tender shoots, leaves, and sometimes the roots. This results in stunted growth, reduced vigor, and lower fiber yield.",
+          "causes": "The infestation is caused by adult crickets and nymphs, which are more active during warm, moist conditions. Poor field sanitation and abundant vegetation around fields encourage cricket populations.",
+          "organicControl": "Maintain cleanliness in the field to remove cricket hiding places. Use sticky traps or light traps to capture adult crickets. Encourage natural predators like birds and spiders.",
+          "chemicalControl": "Apply insecticides like Carbaryl or Cypermethrin in the early stages of infestation to control cricket populations.",
+          "fertilisers": [
+            {
+              "name": "Nitrogen Fertilizer",
+              "products": [
+                {
+                  "companyName": "Azeco",
+                  "productImage": "https://5.imimg.com/data5/SELLER/Default/2022/9/PH/DO/KT/3022633/nitrogen-fixing-bio-fertilizer.jpg",
+                  "price": "Rs. 280 for 1kg",
+                  "_id": "67422d2f486be4b15107c69d",
+                  "id": "67422d2f486be4b15107c69d"
+                },
+                {
+                  "companyName": "Katyayani",
+                  "productImage": "https://www.katyayaniorganics.com/wp-content/uploads/2022/06/Nitro-fill_11zon.webp",
+                  "price": "Rs. 280 for 1kg",
+                  "_id": "67422d2f486be4b15107c69e",
+                  "id": "67422d2f486be4b15107c69e"
+                }
+              ],
+              "_id": "67422d2f486be4b15107c69c",
+              "id": "67422d2f486be4b15107c69c"
+            }
+          ],
+          "remedies": [
+            "Use light traps to capture crickets at night.",
+            "Remove weeds and debris to eliminate hiding spots.",
+            "Apply organic or chemical insecticides as necessary."
+          ],
+          "summary": [
+            "Field crickets feed on jute leaves and shoots, causing reduced growth.",
+            "They thrive in moist, cluttered environments near fields.",
+            "Use traps and maintain field hygiene to control infestations."
+          ],
+          "_id": "67422d2f486be4b15107c69b",
+          "id": "67422d2f486be4b15107c69b"
+        },
+        {
+          "diseaseName": "Jute Stem Weevil",
+          "scientificName": "Apion corchori",
+          "category": "Insect",
+          "images": [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQx_HC1NH5DouPX4zbHyAt5-RB7fYD4ikyWQ&s"
+          ],
+          "symptoms": "Jute Stem Weevil larvae bore into the stems of jute plants, causing wilting and drying of the affected parts. Severe infestations can lead to plant death.",
+          "causes": "The weevil infestation occurs when adult weevils lay eggs on jute stems. The larvae then feed inside the stems, disrupting nutrient flow. High humidity and overgrown fields favor weevil outbreaks.",
+          "organicControl": "Use neem oil sprays to deter adult weevils from laying eggs. Introduce natural predators like parasitoid wasps.",
+          "chemicalControl": "Apply systemic insecticides like Imidacloprid to prevent larval development within stems.",
+          "fertilisers": [
+            {
+              "name": "Potash Fertilizer",
+              "products": [
+                {
+                  "companyName": "GreenFields",
+                  "productImage": "https://5.imimg.com/data5/SELLER/Default/2023/7/327125467/OQ/PH/FO/126515263/potash-161-1387.jpg",
+                  "price": "Rs. 300 for 750g",
+                  "_id": "67422d2f486be4b15107c6a1",
+                  "id": "67422d2f486be4b15107c6a1"
+                }
+              ],
+              "_id": "67422d2f486be4b15107c6a0",
+              "id": "67422d2f486be4b15107c6a0"
+            }
+          ],
+          "remedies": [
+            "Prune and destroy infected plant parts to prevent spread.",
+            "Apply neem oil or chemical insecticides for effective control.",
+            "Keep fields clean and ensure proper crop spacing."
+          ],
+          "summary": [
+            "Jute Stem Weevil larvae bore into stems, disrupting nutrient flow.",
+            "They thrive in high humidity and dense fields.",
+            "Neem oil and systemic insecticides can control weevil infestations."
+          ],
+          "_id": "67422d2f486be4b15107c69f",
+          "id": "67422d2f486be4b15107c69f"
+        },
+        {
+          "diseaseName": "Bacterial blight",
+          "scientificName": "Xanthomonas campestris pv. corchori",
+          "category": "Bacterial",
+          "images": [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhiCL1ZlnaEgCKxpG1A_8_NvzPzn50YD-v5w&s"
+          ],
+          "symptoms": "Bacterial Blight causes water-soaked lesions on leaves and stems of jute plants, which later turn brown and necrotic. Severe infections can result in premature leaf drop.",
+          "causes": "The disease is caused by bacteria spreading through rain splashes, irrigation, and contaminated tools. Warm, wet weather exacerbates the disease.",
+          "organicControl": "Use resistant jute varieties and practice crop rotation. Maintain proper spacing between plants to reduce humidity and promote airflow.",
+          "chemicalControl": "Apply copper-based bactericides like Copper Oxychloride or Streptomycin Sulfate to prevent bacterial spread.",
+          "fertilisers": [
+            {
+              "name": "Calcium Fertilizer",
+              "products": [
+                {
+                  "companyName": "Soluphos",
+                  "productImage": "https://www.katyayaniorganics.com/wp-content/uploads/2022/06/SOLUPHOS_11zon.webp",
+                  "price": "Rs. 250 for 500g",
+                  "_id": "67422d2f486be4b15107c6a4",
+                  "id": "67422d2f486be4b15107c6a4"
+                }
+              ],
+              "_id": "67422d2f486be4b15107c6a3",
+              "id": "67422d2f486be4b15107c6a3"
+            }
+          ],
+          "remedies": [
+            "Apply copper-based bactericides to affected plants.",
+            "Ensure good drainage and avoid overhead irrigation.",
+            "Use resistant varieties and rotate crops with non-host plants."
+          ],
+          "summary": [
+            "Bacterial Blight causes lesions and defoliation in jute plants.",
+            "It spreads through rain, irrigation, and contaminated equipment.",
+            "Use copper bactericides and maintain proper field hygiene to control the disease."
+          ],
+          "_id": "67422d2f486be4b15107c6a2",
+          "id": "67422d2f486be4b15107c6a2"
+        },
+        {
+          "diseaseName": "Yellow Mite Spilosoma",
+          "scientificName": "Polyphagotarsonemus latus",
+          "category": "Insect",
+          "images": [
+            "https://www.researchgate.net/publication/367644493/figure/fig1/AS:11431281116259990@1675214127132/Larva-of-Spilosoma-obliqua-infected-with-NPV-and-showing-Wipel-Krankheit-or-Tree-Top_Q320.jpg"
+          ],
+          "symptoms": "Yellow Mites cause leaf curling, discoloration, and stunted growth in jute plants. Severe infestations lead to reduced fiber quality and yield.",
+          "causes": "Mites thrive in hot, dry conditions and can spread through wind or infested plants. Overcrowding of crops facilitates mite proliferation.",
+          "organicControl": "Spray neem oil or garlic extracts to reduce mite populations. Maintain good field hygiene and remove heavily infested plants.",
+          "chemicalControl": "Apply miticides such as Dicofol or Abamectin for effective mite control.",
+          "fertilisers": [
+            {
+              "name": "Magnesium Fertilizer",
+              "products": [
+                {
+                  "companyName": "GrowRich",
+                  "productImage": "https://5.imimg.com/data5/SELLER/Default/2023/7/327125467/OQ/PH/FO/126515263/potash-161-1387.jpg",
+                  "price": "Rs. 200 for 500g",
+                  "_id": "67422d2f486be4b15107c6a7",
+                  "id": "67422d2f486be4b15107c6a7"
+                },
+                {
+                  "companyName": "GrowRich",
+                  "productImage": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTthgKU2JsPQZCUCvsy3bMsTRthY2WCBUjkzgy61E1s7BJPknDwPVHsZh3JkImpAd9g7YapYFRk0_4E_Lb2QVH8zYAze80T5qdpmAcB-X7Tx_9PZQ-mZ5EuWA&usqp=CAE",
+                  "price": "Rs. 500 for 500g",
+                  "_id": "67422d2f486be4b15107c6a8",
+                  "id": "67422d2f486be4b15107c6a8"
+                }
+              ],
+              "_id": "67422d2f486be4b15107c6a6",
+              "id": "67422d2f486be4b15107c6a6"
+            }
+          ],
+          "remedies": [
+            "Use organic sprays like neem oil to deter mites.",
+            "Apply miticides for severe infestations.",
+            "Space plants properly and maintain field hygiene."
+          ],
+          "summary": [
+            "Yellow Mites cause leaf damage and reduced fiber yield.",
+            "They thrive in dry, overcrowded conditions.",
+            "Neem oil and miticides are effective control measures."
+          ],
+          "_id": "67422d2f486be4b15107c6a5",
+          "id": "67422d2f486be4b15107c6a5"
+        },
+        {
+          "diseaseName": "Obliqua",
+          "scientificName": "Spilosoma obliqua",
+          "category": "Insect",
+          "images": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Spilosoma_obliqua_in_Kadavoor.jpg/1200px-Spilosoma_obliqua_in_Kadavoor.jpg",
+            "https://www.shutterstock.com/image-photo/spilosoma-obliqua-jute-hairy-caterpillar-600nw-2450871687.jpg"
+          ],
+          "symptoms": "Obliqua larvae feed on jute leaves, leaving irregular holes and causing defoliation. Severe infestations can lead to reduced plant growth and yield.",
+          "causes": "The larvae emerge from eggs laid by adult moths and feed aggressively during their development. Warm, humid conditions favor their growth.",
+          "organicControl": "Introduce natural enemies like parasitoid wasps and use neem-based sprays to deter larvae.",
+          "chemicalControl": "Apply insecticides like Carbaryl or Dimethoate to control severe infestations.",
+          "fertilisers": [
+            {
+              "name": "Phosphorus Fertilizer",
+              "products": [
+                {
+                  "companyName": "AgriMax",
+                  "productImage": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTKXLtdQh_dmplvZ9B0PuUUoLzm-AzuDtwNih8rbzR19o09xAfiZrpMjTFslyuOMZLK-35MsxzGfZGjoa_OztTiB8_ISFur&usqp=CAE",
+                  "price": "Rs. 220 for 1kg",
+                  "_id": "67422d2f486be4b15107c6ab",
+                  "id": "67422d2f486be4b15107c6ab"
+                }
+              ],
+              "_id": "67422d2f486be4b15107c6aa",
+              "id": "67422d2f486be4b15107c6aa"
+            }
+          ],
+          "remedies": [
+            "Handpick and destroy larvae where possible.",
+            "Use neem oil or chemical sprays to control infestations.",
+            "Maintain proper field sanitation to prevent larval spread."
+          ],
+          "summary": [
+            "Obliqua larvae feed on jute leaves, causing defoliation.",
+            "They thrive in warm, humid conditions.",
+            "Use natural predators and insecticides to control their population."
+          ],
+          "_id": "67422d2f486be4b15107c6a9",
+          "id": "67422d2f486be4b15107c6a9"
+        },
+        {
+          "diseaseName": "Healthy Jute",
+          "scientificName": "Corchorus olitorius ",
+          "category": "Healthy Jute",
+          "images": [
+            "https://i0.wp.com/post.healthline.com/wp-content/uploads/2021/11/saluyot-jute-leaves-1296x728-header.jpg?w=1155&h=1528",
+            "https://sakasaka.net/wp-content/uploads/2017/07/jute-leave-20170718.jpg",
+            "https://rededitmagazine.com/wp-content/uploads/2022/07/Jute-Leaves.jpg"
+          ],
+          "symptoms": "Healthy jute plants exhibit robust growth, vibrant green leaves, and strong stems. They are free from visible signs of disease, pest damage, or nutrient deficiencies.",
+          "causes": "Healthy plants are a result of balanced soil nutrients, adequate water supply, proper pest management, and disease-free seeds.",
+          "organicControl": "Use compost and organic fertilizers to maintain soil health. Encourage beneficial insects to maintain ecological balance.",
+          "chemicalControl": "Foliar feeding with micronutrients can enhance plant growth. Minimize pesticide use to maintain environmental health.",
+          "fertilisers": [
+            {
+              "name": "Complete Fertilizer",
+              "products": [
+                {
+                  "companyName": "EcoFert",
+                  "productImage": "https://m.media-amazon.com/images/I/61Qn91BXZ-L.jpg",
+                  "price": "Rs. 300 for 1kg",
+                  "_id": "67422d2f486be4b15107c6ae",
+                  "id": "67422d2f486be4b15107c6ae"
+                }
+              ],
+              "_id": "67422d2f486be4b15107c6ad",
+              "id": "67422d2f486be4b15107c6ad"
+            }
+          ],
+          "remedies": [
+            "Ensure proper soil health through organic fertilizers.",
+            "Use disease-free seeds and practice crop rotation.",
+            "Water and fertilize plants regularly for optimal growth."
+          ],
+          "summary": [
+            "Healthy jute plants show vigorous growth and resilience.",
+            "Proper care, including balanced nutrition and pest management, ensures plant health.",
+            "Maintain field hygiene and use organic practices to sustain healthy growth."
+          ],
+          "_id": "67422d2f486be4b15107c6ac",
+          "id": "67422d2f486be4b15107c6ac"
+        },
+        {
+          "diseaseName": " Leaf Spot ",
+          "scientificName": "Colletotrichum corchori",
+          "category": "Fungus",
+          "images": [
+            "https://myplantin.com/_next/image?url=https%3A%2F%2Fstrapi.myplantin.com%2Flarge_cercospora-leaf-spot-main_023a8724-ee39-479e-add9-3f12d1567418.webp&w=1920&q=75",
+            "https://plantlet.org/wp-content/uploads/2019/05/anthracnose-1.jpg"
+          ],
+          "symptoms": "Brown or black circular spots appear on leaves, causing tissue death and premature defoliation.",
+          "causes": "The fungus responsible spreads via rain or wind-borne spores, particularly during warm and humid weather.",
+          "organicControl": "Spray a mixture of neem oil and baking soda on affected plants to reduce fungal activity.",
+          "chemicalControl": "Use copper oxychloride or chlorothalonil fungicides to treat the affected areas.",
+          "fertilisers": [
+            {
+              "name": "NPK 10-10-10",
+              "products": [
+                {
+                  "companyName": "GreenGrow",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/tomato-Septoria-leaf-spot-fertilizer-1.jpeg?alt=media&token=7c9b3af4-8337-4198-a5bd-959ac656deae",
+                  "price": "Rs. 450 for 1kg",
+                  "_id": "67461adeb096e86e8d6a5f36",
+                  "id": "67461adeb096e86e8d6a5f36"
+                }
+              ],
+              "_id": "67461adeb096e86e8d6a5f35",
+              "id": "67461adeb096e86e8d6a5f35"
+            },
+            {
+              "name": "Bone Meal",
+              "products": [
+                {
+                  "companyName": "Burpee",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/tomato-Septoria-leaf-spot-fertilizer-2.jpeg?alt=media&token=6f76acd1-abe5-4fa8-9b45-583de9e618c1",
+                  "price": "Rs. 350 for 1kg",
+                  "_id": "67461adeb096e86e8d6a5f38",
+                  "id": "67461adeb096e86e8d6a5f38"
+                }
+              ],
+              "_id": "67461adeb096e86e8d6a5f37",
+              "id": "67461adeb096e86e8d6a5f37"
+            }
+          ],
+          "remedies": [
+            "Maintain proper plant spacing to ensure good ventilation and reduce humidity.",
+            "Remove and destroy infected leaves to prevent further spread of the spores.",
+            "Rotate crops regularly to prevent pathogen buildup in the soil.",
+            "Avoid overhead irrigation to minimize leaf wetness.",
+            "Apply fungicides preventively during high-risk weather conditions."
+          ],
+          "summary": [
+            "Leaf Spot is a destructive fungal disease affecting the foliage of jute crops.",
+            "Severe infections can lead to defoliation and reduced fiber yield.",
+            "Preventive measures and early fungicide treatments are essential for managing the disease."
+          ],
+          "_id": "67461adeb096e86e8d6a5f34",
+          "id": "67461adeb096e86e8d6a5f34"
+        },
+        {
+          "diseaseName": "powdery mildew",
+          "scientificName": "Erysiphecichoracearum",
+          "category": "Fungus",
+          "images": [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpurDBD8nUrrrg863kVDQxYUqox92JBeXEqQ&s",
+            "https://media.istockphoto.com/id/1418752377/photo/detail-of-powdery-mildew-plant-disease-affected-plant-in-the-garden-false-sunflower.jpg?s=612x612&w=0&k=20&c=AOZsGHdLB2wFgPbRg-z2RaVJMbXTNy4RQPBhGdUmAro="
+          ],
+          "symptoms": "A white powdery coating appears on the leaves, stems, and pods of jute plants. Severely affected leaves may turn yellow and fall off prematurely, reducing fiber quality.",
+          "causes": "Fungal spores spread through wind and thrive in warm, humid climates with poor air circulation among plants.",
+          "organicControl": "Spray a mixture of neem oil and baking soda or sulfur-based organic fungicides to suppress fungal activity.",
+          "chemicalControl": "Apply fungicides such as triadimefon or hexaconazole for effective control.",
+          "fertilisers": [
+            {
+              "name": "Azoxystrobin 18.2% SC, Difenoconazole 11.4% SC",
+              "products": [
+                {
+                  "companyName": "Bharat Insecticides",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/tomato-early-blight-fertilizer-2.jpeg?alt=media&token=72afc701-229d-4954-96b4-449ec748e47a",
+                  "price": "Rs. 800 for 500ml",
+                  "_id": "67461b2c07008abcca5544b3",
+                  "id": "67461b2c07008abcca5544b3"
+                }
+              ],
+              "_id": "67461b2c07008abcca5544b2",
+              "id": "67461b2c07008abcca5544b2"
+            },
+            {
+              "name": "Azoxystrobin 23.0% SC",
+              "products": [
+                {
+                  "companyName": "Syngenta",
+                  "productImage": "https://firebasestorage.googleapis.com/v0/b/aigro-d8009.appspot.com/o/tomato-early-blight-fertilizer-1.jpeg?alt=media&token=cdf6ce2e-7cfc-47b8-a16f-8b9549d76a38",
+                  "price": "Rs. 950 for 500ml",
+                  "_id": "67461b2c07008abcca5544b5",
+                  "id": "67461b2c07008abcca5544b5"
+                }
+              ],
+              "_id": "67461b2c07008abcca5544b4",
+              "id": "67461b2c07008abcca5544b4"
+            }
+          ],
+          "remedies": [
+            "Ensure proper spacing between plants to promote airflow and reduce humidity.",
+            "Prune and destroy infected leaves and stems to prevent the spread of spores.",
+            "Avoid overhead irrigation to minimize moisture on the plant surfaces.",
+            "Apply preventive fungicides during the early stages of plant growth.",
+            "Rotate crops to reduce pathogen buildup in the soil over time."
+          ],
+          "summary": [
+            "Powdery Mildew is a fungal disease affecting jute plants, characterized by a white powdery appearance on foliage.",
+            "It reduces the quality and quantity of jute fibers if left untreated.",
+            "Timely application of fungicides and proper crop management can help control its spread."
+          ],
+          "_id": "67461b2c07008abcca5544b1",
+          "id": "67461b2c07008abcca5544b1"
+        }
+      ]
+    },
+    {
+      "id": "a3vLZSesLD",
+      "cropName": "Sugarcane",
+      "diseaseDetails": [
+        {
+          "diseaseName": "Yellow Disease",
+          "scientificName": "Sugarcane Yellow Leaf Virus (SCYLV)",
+          "category": "Virus",
+          "images": [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSckG7Ln4fblCit6dPqkoClVGVsWUxwXHWBNg&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUYSFujaRQ45X0OAad0m9oAqGWDjYCkQb7rg&s"
+          ],
+          "symptoms": "Yellow disease causes a gradual yellowing of the midrib on sugarcane leaves, eventually spreading to the leaf blade. Infected plants show reduced growth and yield.",
+          "causes": "The disease is caused by the Sugarcane Yellow Leaf Virus, which spreads through infected planting material and aphids as vectors.",
+          "organicControl": "Use virus-free planting materials and promote natural aphid predators like lady beetles. Practice crop rotation to break the disease cycle.",
+          "chemicalControl": "Apply systemic insecticides like Imidacloprid to control aphid vectors.",
+          "fertilisers": [
+            {
+              "name": "Nitrogen-Potassium Mix",
+              "products": [
+                {
+                  "companyName": "AgroGrow",
+                  "productImage": "https://agribegri.com/productimage/17762f41e0a1e6690a98f3dcdbbb3a86-03-12-22-11-30-54.webp",
+                  "price": "Rs. 320 for 1kg",
+                  "_id": "67423908486be4b15107c6c7",
+                  "id": "67423908486be4b15107c6c7"
+                }
+              ],
+              "_id": "67423908486be4b15107c6c6",
+              "id": "67423908486be4b15107c6c6"
+            }
+          ],
+          "remedies": [
+            "Use virus-free seeds for planting.",
+            "Control aphid populations using natural predators and insecticides.",
+            "Rotate crops to minimize disease spread."
+          ],
+          "summary": [
+            "Yellow disease causes leaf yellowing and reduced sugarcane yield.",
+            "It is spread by aphids and infected planting materials.",
+            "Control vectors and use healthy seeds to prevent the disease."
+          ],
+          "_id": "67423908486be4b15107c6c5",
+          "id": "67423908486be4b15107c6c5"
+        },
+        {
+          "diseaseName": "Rust Disease",
+          "scientificName": "Puccinia melanocephala",
+          "category": "Fungus",
+          "images": [
+            "https://media.springernature.com/lw685/springer-static/image/art%3A10.1007%2Fs12355-020-00818-x/MediaObjects/12355_2020_818_Fig1_HTML.jpg",
+            "https://content.peat-cloud.com/thumbnails/sugarcane-common-rust-sugarcane-1556454629.jpg"
+          ],
+          "symptoms": "Rust disease causes the formation of reddish-brown pustules on sugarcane leaves. Severely infected plants may experience reduced photosynthesis, stunted growth, and yield loss.",
+          "causes": "The disease is caused by the fungal pathogen Puccinia melanocephala, which thrives in warm and humid conditions.",
+          "organicControl": "Grow resistant sugarcane varieties and ensure proper field sanitation. Remove and destroy infected leaves to reduce fungal spread.",
+          "chemicalControl": "Apply fungicides such as Propiconazole or Mancozeb at the first sign of infection.",
+          "fertilisers": [
+            {
+              "name": "Balanced Micronutrient Fertilizer",
+              "products": [
+                {
+                  "companyName": "GreenFields",
+                  "productImage": "https://5.imimg.com/data5/ANDROID/Default/2021/8/WC/BQ/MW/8774999/product-jpeg-500x500.jpg",
+                  "price": "Rs. 250 for 500g",
+                  "_id": "67423908486be4b15107c6ca",
+                  "id": "67423908486be4b15107c6ca"
+                }
+              ],
+              "_id": "67423908486be4b15107c6c9",
+              "id": "67423908486be4b15107c6c9"
+            }
+          ],
+          "remedies": [
+            "Use resistant varieties to minimize infection.",
+            "Ensure good airflow by maintaining proper plant spacing.",
+            "Apply fungicides early to manage fungal spread."
+          ],
+          "summary": [
+            "Rust disease causes pustules on sugarcane leaves and reduced photosynthesis.",
+            "Warm, humid conditions promote fungal growth.",
+            "Use resistant varieties and fungicides for effective management."
+          ],
+          "_id": "67423908486be4b15107c6c8",
+          "id": "67423908486be4b15107c6c8"
+        },
+        {
+          "diseaseName": "Mosaic Disease",
+          "scientificName": "Sugarcane Mosaic Virus (SCMV)",
+          "category": "Virus",
+          "images": [
+            "https://content.peat-cloud.com/thumbnails/sugarcane-mosaic-virus-sugarcane-1580127054.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzd9UvlQGisKLbEKliKl47XXAlE19GXpcuo68onkzd1TgYvGOatCiV624MmKjmhM1wpOE&usqp=CAU"
+          ],
+          "symptoms": "Mosaic disease causes a mottled pattern of light green and dark green patches on sugarcane leaves. Infected plants exhibit stunted growth and reduced yield.",
+          "causes": "The disease is caused by the Sugarcane Mosaic Virus, which spreads through infected planting material and insect vectors like aphids.",
+          "organicControl": "Plant resistant sugarcane varieties and destroy infected plants. Control aphid populations naturally using predators like lacewings.",
+          "chemicalControl": "Use insecticides to control aphid vectors and prevent the spread of the virus.",
+          "fertilisers": [
+            {
+              "name": "Phosphorus-Rich Fertilizer",
+              "products": [
+                {
+                  "companyName": "Agriapp",
+                  "productImage": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQs0qL1qB8LXIYY8LhOVPSCy9ULQpKFqFbhMvlPn4woP8rUU77tEpQ15iq5uFzbIleLmubep4R7o6Su8d1TsU9MK3lMpwCtsuIQiah1vxRnbuZ0K1XuU1Y7&usqp=CAE",
+                  "price": "Rs. 280 for 1kg",
+                  "_id": "67423908486be4b15107c6cd",
+                  "id": "67423908486be4b15107c6cd"
+                }
+              ],
+              "_id": "67423908486be4b15107c6cc",
+              "id": "67423908486be4b15107c6cc"
+            }
+          ],
+          "remedies": [
+            "Plant virus-resistant sugarcane varieties.",
+            "Destroy infected plants to prevent further spread.",
+            "Control aphids using organic or chemical methods."
+          ],
+          "summary": [
+            "Mosaic disease causes mottling and reduced growth in sugarcane.",
+            "It spreads through infected seeds and aphids.",
+            "Resistant varieties and aphid control are essential for management."
+          ],
+          "_id": "67423908486be4b15107c6cb",
+          "id": "67423908486be4b15107c6cb"
+        },
+        {
+          "diseaseName": "RedRot Disease",
+          "scientificName": "Colletotrichum falcatum",
+          "category": "Fungus",
+          "images": [
+            "https://agritech.tnau.ac.in/crop_protection/images/sugarcane_diseases/4.1.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdhKAwJXkTWsm0pi9VDdDUT-pEmlofFBCyOg&s",
+            "https://img-cdn.krishijagran.com/74427/l-l_1608141957.jpg"
+          ],
+          "symptoms": "RedRot disease causes internal reddening of the stalks, accompanied by a foul odor. Leaves may dry out, and infected plants often die prematurely.",
+          "causes": "The disease is caused by the fungal pathogen Colletotrichum falcatum, which spreads through infected planting material and thrives in waterlogged conditions.",
+          "organicControl": "Use disease-free planting material and avoid waterlogging. Destroy infected stalks and maintain field hygiene.",
+          "chemicalControl": "Apply fungicides like Carbendazim or Mancozeb as a preventive measure.",
+          "fertilisers": [
+            {
+              "name": "Potassium Sulfate Fertilizer",
+              "products": [
+                {
+                  "companyName": "BigHaat",
+                  "productImage": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTlMHr105KhLIQahdFzuRBHeOeo86-wa8_C02mmKmEUXSfLtjr4E5aYefSVTdTk0p1cvU7IL_6kpAx6RJYS2JdZNjEFh4AUcA&usqp=CAE",
+                  "price": "Rs. 400 for 1kg",
+                  "_id": "67423908486be4b15107c6d0",
+                  "id": "67423908486be4b15107c6d0"
+                }
+              ],
+              "_id": "67423908486be4b15107c6cf",
+              "id": "67423908486be4b15107c6cf"
+            }
+          ],
+          "remedies": [
+            "Use disease-free planting material.",
+            "Avoid waterlogging and ensure proper drainage.",
+            "Apply fungicides to manage the spread of the disease."
+          ],
+          "summary": [
+            "RedRot disease causes stalk reddening and plant death.",
+            "It spreads through infected material and waterlogged fields.",
+            "Use clean seeds, maintain drainage, and apply fungicides for control."
+          ],
+          "_id": "67423908486be4b15107c6ce",
+          "id": "67423908486be4b15107c6ce"
+        },
+        {
+          "diseaseName": "Healthy Sugarcane",
+          "scientificName": " Saccharum officinarum ",
+          "category": "Healthy",
+          "images": [
+            "https://images.herzindagi.info/image/2021/Apr/5-Health-Benefits.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhE3v3pcuCpjtshf6cwv-oyMIeUWsg0SywiA&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy8Q1z4v5Wq0JF66NhsoX6hGZAUJTCG4eGYWqn9yr1VJXTM7ueLr2KnhbMjSuM7F9jQSk&usqp=CAU"
+          ],
+          "symptoms": "Healthy sugarcane plants exhibit vigorous growth, dark green leaves, and strong, disease-free stalks. They yield high-quality sugar and show resilience to environmental stress.",
+          "causes": "Healthy plants result from balanced nutrition, proper water management, and effective pest and disease control practices.",
+          "organicControl": "Use compost and organic fertilizers to enrich soil. Rotate crops and maintain field hygiene to minimize pest risks.",
+          "chemicalControl": "Apply micronutrients and foliar sprays to ensure balanced plant nutrition.",
+          "fertilisers": [
+            {
+              "name": "Complete NPK Fertilizer",
+              "products": [
+                {
+                  "companyName": "GrowRich",
+                  "productImage": "data:image/jpeg;base64,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",
+                  "price": "Rs. 350 for 1kg",
+                  "_id": "67423908486be4b15107c6d3",
+                  "id": "67423908486be4b15107c6d3"
+                },
+                {
+                  "companyName": "Prabhat",
+                  "productImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeRmQyEjaBQeSrpFqBjDqkkcAQb2_CU-8aYg&s",
+                  "price": "Rs. 650 for 1kg",
+                  "_id": "67423908486be4b15107c6d4",
+                  "id": "67423908486be4b15107c6d4"
+                }
+              ],
+              "_id": "67423908486be4b15107c6d2",
+              "id": "67423908486be4b15107c6d2"
+            }
+          ],
+          "remedies": [
+            "Practice crop rotation and maintain soil health.",
+            "Use high-quality, disease-free seeds for planting.",
+            "Monitor fields regularly for early detection of pests or diseases."
+          ],
+          "summary": [
+            "Healthy sugarcane exhibits robust growth and high-quality yield.",
+            "Balanced nutrition and proper management ensure plant health.",
+            "Maintain field hygiene and use quality seeds for optimal results."
+          ],
+          "_id": "67423908486be4b15107c6d1",
+          "id": "67423908486be4b15107c6d1"
+        }
+      ]
     }
+
   ]
 }

@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
   String welcomeText="Welcome to your dashboard. Scroll to see amazing features we provide.";
   String detectAndTreat="Detect and Treat Diseases with a Simple Image Upload";
   String analyzeNow="Analyze Now";
-  String otherFeatures="Other Key features of AIgro";
+  String otherFeatures="Other Key features of Kheti Sathi";
 
 
 
@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage> {
     },
     {
       'color': const Color.fromRGBO(249, 187, 208,1),
-      'text': 'Kheti Sathi',
+      'text': ' Krishi AI',
       'image': 'assets/images/ks.png',
       'route': Myroutes.khetiSathiRoute,
     },
@@ -343,7 +343,7 @@ class _HomePageState extends State<HomePage> {
                           Image.asset(
                             width: MediaQuery.of(context).size.width * 0.3, // 30% of screen width
                             height: 175,
-                            "assets/images/woman_farmer.png",
+                            "assets/images/male_farmer.png",
                             fit: BoxFit.cover,
                           ),
                           const SizedBox(width: 10),

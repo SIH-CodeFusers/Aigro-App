@@ -32,7 +32,7 @@ class ProgressIndicatorWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      "AI",
+                      "Kheti",
                       style: TextStyle(
                         color: context.theme.splashColor,
                         fontSize: 24,
@@ -40,7 +40,7 @@ class ProgressIndicatorWidget extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "gro",
+                      "Sathi",
                       style: TextStyle(
                         fontSize: 24,
                         foreground: Paint()

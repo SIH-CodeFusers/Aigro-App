@@ -12,7 +12,7 @@
     </queries>
     <application
         android:usesCleartextTraffic="true"
-        android:label="AIGro"
+        android:label="KhetiSathi"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

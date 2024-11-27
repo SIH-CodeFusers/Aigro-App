@@ -27,13 +27,17 @@ class _UploadImageState extends State<UploadImage> {
   String selectedCrop = "Corn";
 
     final List<String> cropOptions = [
-      "Corn",
-      "Tomato",
-      "Rice",
-      "Apple",
-      "Mango",
-      "Banana",
-      "Tea",
+    "Crops",
+    "Corn",
+    "Tomato",
+    "Rice",
+    "Apple",
+    "Mango",
+    "Banana",
+    "Tea",
+    "Cotton",
+    "Sugarcane",
+    "Jute"
     ];
 
 

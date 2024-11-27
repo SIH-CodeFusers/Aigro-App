@@ -133,7 +133,7 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
                       setState(() {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => DiseaseForecasting()), 
+                          MaterialPageRoute(builder: (context) => const DiseaseForecasting()), 
                         );
                       });
                     },

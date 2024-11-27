@@ -189,7 +189,7 @@ class _CropDetailsState extends State<CropDetails> {
                     ),
                     _buildRecomCard(
                       title: 'Organic Control',
-                      content: diseaseDetails['chemicalControl'] ?? "No chemical control information available",
+                      content: diseaseDetails['organicControl'] ?? "No chemical control information available",
                       icon: Icons.science_outlined,
                     ),
                     _buildRecomCard(

@@ -24,7 +24,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
   final TextEditingController _controller = TextEditingController();
 
   final List<String> _predefinedBotMessages = [
-    'Hi, I am your KhetiSathi, I am a chatbot created by team Aigro to assist farmers like you with your queries. How can I help you today ?',
+    'Hi, I am your Krishi AI, I am a chatbot created by team Kheti Sathi to assist farmers like you with your queries. How can I help you today ?',
   ];
 
 
@@ -74,7 +74,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
       apiKey: GEMINI_API_KEY,
     );
 
-    final prompt = 'You are a helpful chatbot, your task is to answer farming related questions. You have been made by team Aigro consisting of team members Arunava and Pretisha in Frontend, Satyaki in Full Stack Development, Rishi in Machine Learning and Priyanshu and Shinjan in App development. just return answer in plain text strictly. Here is my question \n $message';
+    final prompt = 'You are a helpful chatbot, your task is to answer farming related questions. You have been made by team Kheti Sathi consisting of team members Arunava and Pretisha in Frontend, Satyaki in Full Stack Development, Rishi in Machine Learning and Priyanshu and Shinjan in App development. just return answer in plain text strictly. Here is my question \n $message';
     final content = [
       Content.text(prompt),
     ];
@@ -107,7 +107,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
       
       backgroundColor: Colors.transparent,
       
-        title: const Text('Your KhetiSathi'),
+        title: const Text('Your Krishi AI'),
       ),
       body: Stack(
         children: [
@@ -126,7 +126,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
                     itemBuilder: (context, index) {
                       final isUser = _messages[index]['sender'] == 'user';
                       // final isImage = _messages[index]['type'] == 'image';
-                      final name = isUser ? 'You' : 'KhetiSathi';
+                      final name = isUser ? 'You' : 'Krishi AI';
                       final time =
                           DateTime.now().toLocal().toString().substring(11, 16);
           
@@ -170,15 +170,32 @@ class _KhetiSathiState extends State<KhetiSathi> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          name,
-                                          style: TextStyle(
-                                            color: isUser
-                                                ? context.theme.highlightColor
-                                                : context.theme.cardColor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14,
-                                          ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Flexible(
+                                              child: Text(
+                                                name,
+                                                style: TextStyle(
+                                                  color: isUser
+                                                      ? context.theme.highlightColor
+                                                      : context.theme.cardColor,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 10,),
+                                            if(!isUser)
+                                            CircleAvatar(
+                                              radius: 12,
+                                              backgroundColor: context.theme.focusColor,
+                                              child: const Icon(
+                                                FeatherIcons.volume2,
+                                                size: 12,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                         const SizedBox(height: 4),
                                         Text(                   

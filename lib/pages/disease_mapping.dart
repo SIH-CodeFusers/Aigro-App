@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -73,12 +74,45 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
     ]
   };
   
+
+  void showCustomToast(BuildContext context, String message) {
+    final overlay = Overlay.of(context);
+    final overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: 100, 
+        left: MediaQuery.of(context).size.width * 0.1,
+        right: MediaQuery.of(context).size.width * 0.1,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              message,
+              style: const TextStyle(color: Colors.white, fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ),
+    );
+
+    overlay.insert(overlayEntry);
+
+    Future.delayed(const Duration(seconds: 2), () {
+      overlayEntry.remove();
+    });
+  }
+
   Marker? customMarker;
   List<Marker> nearbyMarkers = []; 
   List<Marker> shopMarkers = [];
 
-  late double lat;
-  late double long;
+  late double lat=22.6420903;
+  late double long=88.7436287;
   bool isLoading = true;
 
  @override
@@ -104,74 +138,76 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
       }),
     );
 
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      if (data['exists'] == true && data['nearbyAlerts'] != null) {
-        List<Marker> fetchedMarkers = [];
-
-        for (var alert in data['nearbyAlerts']) {
-          double alertLat = alert['lat'];
-          double alertLong = alert['lon'];
-          String cropName = alert['cropName'];
-          
-
-          String diseaseName = '';
-          String diseaseLevel = '';
-          if (alert['diseaseDetails'] != null && alert['diseaseDetails'].isNotEmpty) {
-            diseaseName = alert['diseaseDetails'][0]['diseaseName'];
-            diseaseLevel = alert['diseaseDetails'][0]['alertLevel'];
-          }
-
-          fetchedMarkers.add(
-            Marker(
-              point: LatLng(alertLat, alertLong),
-              width: 80,
-              height: 80,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: context.theme.hintColor,
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      cropName,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
-                    ),
-                    if (diseaseName.isNotEmpty)
-                      Text(
-                        '$diseaseName',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                        ),
-                      ),
-                      Text(
-                        'Level: $diseaseLevel',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 10,
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ),
-          );
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    if (data['exists'] == true && data['nearbyAlerts'] != null) {
+      print(response.body);
+      List<Marker> fetchedMarkers = [];
+      for (var alert in data['nearbyAlerts']) {
+        double alertLat = alert['lat'];
+        double alertLong = alert['lon'];
+        String cropName = alert['cropName'];
+        
+        // Use default values if 'diseaseDetails' or specific fields are null
+        String diseaseName = '';
+        String diseaseLevel = '';
+        
+        if (alert['diseaseDetails'] != null && alert['diseaseDetails'].isNotEmpty) {
+          diseaseName = alert['diseaseDetails'][0]['diseaseName'] ?? 'Unknown Disease';
+          diseaseLevel = alert['diseaseDetails'][0]['alertLevel'] ?? 'Unknown Level';
         }
 
-        setState(() {
-          nearbyMarkers = fetchedMarkers;
-          isLoading = false;
-        });
-      } else {
-        print('No nearby alerts found for this pincode.');
+        fetchedMarkers.add(
+          Marker(
+            point: LatLng(alertLat, alertLong),
+            width: 80,
+            height: 80,
+            child: Container(
+              decoration: BoxDecoration(
+                color: context.theme.hintColor,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    cropName,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                  if (diseaseName.isNotEmpty)
+                    Text(
+                      diseaseName,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                      ),
+                    ),
+                  Text(
+                    'Level: $diseaseLevel',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+      setState(() {
+        nearbyMarkers = fetchedMarkers;
+        isLoading = false;
+      });
+    } 
+
+    else {
+       showCustomToast(context, 'No nearby alerts!');
         setState(() {
           isLoading = false;
         });
@@ -201,7 +237,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
                     return Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: context.theme.highlightColor,
+                        color: context.theme.canvasColor,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       padding: const EdgeInsets.all(16),
@@ -213,10 +249,11 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
                               width: 40,
                               child: Divider(
                                 thickness: 3,
-                                color: Colors.grey.shade300,
+                                color: Colors.grey[400],
                               ),
                             ),
                           ),
+                          SizedBox(height: 10,),
                           Container(
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
@@ -332,7 +369,6 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
   }
 
 
-
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
 
@@ -400,7 +436,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
       body: FlutterMap(
         options: MapOptions(
           initialCenter: LatLng(lat, long),
-          initialZoom: 13.0,
+          initialZoom: 11.0,
         ),
         children: [
           TileLayer(
