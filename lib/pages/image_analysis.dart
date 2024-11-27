@@ -57,29 +57,36 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
 
         // Show dialog to open file
         showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('Image Saved'),
-              content: const Text('Would you like to open the saved image?'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel'),
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text(
+              'Image Saved',
+              style: TextStyle(color: Colors.green),
+            ),
+            content: const Text('Would you like to open the saved image?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Cancel', style: TextStyle(color: Colors.green)),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  OpenFile.open(filePath);
+                },
+                child: const Text('Open', style: TextStyle(color: Colors.white)),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    OpenFile.open(filePath);
-                  },
-                  child: const Text('Open'),
-                ),
-              ],
-            );
-          },
-        );
+              ),
+            ],
+          );
+        },
+      );
       }
     } catch (e) {
       print("Error capturing image: $e");
@@ -271,17 +278,28 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         _buildLeafyUI(cropName, diseaseName, symptoms, cropImage),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: ElevatedButton.icon(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              _captureAndSaveImage();
-                            },
-                            icon: const Icon(Icons.save_alt),
-                            label: const Text('Save as PNG'),
-                          ),
+                       Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        if (_analysisData != null && _analysisData!['results'] != null) {
+                          _captureAndSaveImage();
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("No analysis data available")),
+                          );
+                        }
+                      },
+                      icon: const Icon(Icons.save_alt, color: Colors.white),
+                      label: const Text('Save as PNG', style: TextStyle(color: Colors.white)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
+                      ),
+                    ),
+                  ),
                       ],
                     ),
                   ),
