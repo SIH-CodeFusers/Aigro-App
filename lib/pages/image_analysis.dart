@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'package:aigro/pages/crop_details.dart';
-import 'package:aigro/pages/khetisathi.dart';
 import 'package:aigro/secret.dart';
+import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:velocity_x/velocity_x.dart';
-import 'package:aigro/secret.dart';
 
 class ImageAnalysis extends StatefulWidget {
   const ImageAnalysis({super.key});
@@ -19,6 +18,14 @@ class ImageAnalysis extends StatefulWidget {
 class _ImageAnalysisState extends State<ImageAnalysis> {
   Map<String, dynamic>? _analysisData;
   List<Map<String, dynamic>> cropDiseaseList = [];
+  FlutterTts flutterTts = FlutterTts();
+
+  _speak(String text) async {
+    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
+  }
+
 
   Future<void> loadCropDiseases() async {
     final data = await DefaultAssetBundle.of(context)
@@ -214,14 +221,28 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (cropImage.isNotEmpty)
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        cropImage,
-                        width: double.infinity,
-                        height: 200,
-                        fit: BoxFit.cover,
-                      ),
+                   Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            cropImage,
+                            width: double.infinity,
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Positioned(
+                          top: 8,
+                          right: 8, 
+                          child: GestureDetector(
+                            onTap: (){
+                              _speak("$diseaseName in $cropName.$symptoms ");
+                            },
+                            child: voiceIcon(context),
+                          )
+                        ),
+                      ],
                     ),
                   const SizedBox(height: 12),
                   Row(
