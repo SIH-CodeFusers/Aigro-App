@@ -3,10 +3,16 @@ import 'package:aigro/pages/crop_details.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:velocity_x/velocity_x.dart';
+import 'dart:ui' as ui;
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:open_file/open_file.dart';
 
 class ImageAnalysis extends StatefulWidget {
   const ImageAnalysis({super.key});
@@ -26,6 +32,129 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
     await flutterTts.speak(text); 
   }
 
+  final GlobalKey _pngKey = GlobalKey();
+
+  Future<void> _captureAndSaveImage() async {
+    try {
+      RenderRepaintBoundary boundary = _pngKey.currentContext?.findRenderObject() as RenderRepaintBoundary;
+      ui.Image image = await boundary.toImage(pixelRatio: 3.0);
+      ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+      final pngBytes = byteData?.buffer.asUint8List();
+
+      if (pngBytes != null) {
+        final directory = await getApplicationDocumentsDirectory();
+        final filePath = '${directory.path}/analysis_result.png';
+        final file = File(filePath);
+        await file.writeAsBytes(pngBytes);
+        
+        // Show success message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Image saved successfully!'),
+            duration: Duration(seconds: 2),
+          ),
+        );
+
+        // Show dialog to open file
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Image Saved'),
+              content: const Text('Would you like to open the saved image?'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Cancel'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    OpenFile.open(filePath);
+                  },
+                  child: const Text('Open'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    } catch (e) {
+      print("Error capturing image: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error saving image: ${e.toString()}'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  Widget _buildLeafyUI(String cropName, String diseaseName, String symptoms, String cropImage) {
+    return RepaintBoundary(
+      key: _pngKey,
+      child: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(16.0),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Colors.green, Colors.lightGreen],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Colors.green.shade800, width: 2),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Crop Analysis Result",
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  shadows: [
+                    Shadow(color: Colors.black26, blurRadius: 5, offset: Offset(2, 2)),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              if (cropImage.isNotEmpty)
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    cropImage,
+                    height: 150,
+                    width: 150,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              const SizedBox(height: 16),
+              Text(
+                "Crop: $cropName",
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "Disease: $diseaseName",
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "Symptoms: $symptoms",
+                style: TextStyle(fontSize: 14, color: Colors.white70),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   Future<void> loadCropDiseases() async {
     final data = await DefaultAssetBundle.of(context)
@@ -36,35 +165,35 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
       cropDiseaseList = (jsonResult['cropDiseases'] as List)
           .expand((crop) => (crop['diseaseDetails'] as List).map((disease) {
                 return {
-                "diseaseName": disease['diseaseName'] as String,
-                "scientificName": disease['scientificName'] as String,
-                "category": disease['category'] as String,
-                "images": (disease['images'] as List).map((img) => img as String).toList(),
-                "symptoms": disease['symptoms'] as String? ?? '',
-                "causes": disease['causes'] as String? ?? '',
-                "remedies":
-                    (disease['remedies'] as List?)?.map((r) => r as String).toList() ?? [],
-                "summary":
-                    (disease['summary'] as List?)?.map((r) => r as String).toList() ?? [],
-                "chemicalControl": disease['chemicalControl'] as String? ?? '',
-                "cropName": crop['cropName'] as String,
-                "fertilizers": (disease['fertilisers'] as List?)?.map((fertilizer) {
-                return {
-                  "name": fertilizer['name'] as String,
-                  "products": (fertilizer['products'] as List).map((product) {
+                  "diseaseName": disease['diseaseName'] as String,
+                  "scientificName": disease['scientificName'] as String,
+                  "category": disease['category'] as String,
+                  "images": (disease['images'] as List).map((img) => img as String).toList(),
+                  "symptoms": disease['symptoms'] as String? ?? '',
+                  "causes": disease['causes'] as String? ?? '',
+                  "remedies":
+                      (disease['remedies'] as List?)?.map((r) => r as String).toList() ?? [],
+                  "summary":
+                      (disease['summary'] as List?)?.map((r) => r as String).toList() ?? [],
+                  "chemicalControl": disease['chemicalControl'] as String? ?? '',
+                  "cropName": crop['cropName'] as String,
+                  "fertilizers": (disease['fertilisers'] as List?)?.map((fertilizer) {
                     return {
-                      "companyName": product['companyName'] as String,
-                      "productImage": product['productImage'] as String,
-                      "price": product['price'] as String,
-                      "id": product['id'] as String,
+                      "name": fertilizer['name'] as String,
+                      "products": (fertilizer['products'] as List).map((product) {
+                        return {
+                          "companyName": product['companyName'] as String,
+                          "productImage": product['productImage'] as String,
+                          "price": product['price'] as String,
+                          "id": product['id'] as String,
+                        };
+                      }).toList(),
+                      "id": fertilizer['id'] as String,
                     };
-                  }).toList(),
-                  "id": fertilizer['id'] as String,
+                  }).toList() ?? [],
                 };
-              }).toList() ?? [],
-              };
-            }))
-        .toList();
+              }))
+          .toList();
     });
   }
 
@@ -96,33 +225,84 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         title: const Text("Image Analysis"),
         actions: [
           Container(
-              decoration: BoxDecoration(
-                color: context.theme.highlightColor,
-                borderRadius: BorderRadius.circular(10)
-              ),
-              child: GestureDetector(
-                onTap: (){
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const ImageAnalysis()), 
-                  );
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: Icon(FontAwesomeIcons.rotateRight, color: Colors.black, size: 18,),
-                ),
-              ), 
+            decoration: BoxDecoration(
+              color: context.theme.highlightColor,
+              borderRadius: BorderRadius.circular(10)
             ),
-            SizedBox(width: 10,)
-          ],
-        ),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ImageAnalysis()), 
+                );
+              },
+              child: const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Icon(FontAwesomeIcons.rotateRight, color: Colors.black, size: 18),
+              ),
+            ), 
+          ),
+          const SizedBox(width: 10),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (_analysisData != null && _analysisData!['results'] != null) {
+            final result = _analysisData!['results'][0];
+            final cropName = result['cropName'] ?? "Unknown";
+            final diseaseName = result['diseaseName'] ?? "Unknown";
+            final symptoms = result['symptoms'] ?? "Unknown";
+            final cropImage = result['cropImage'] ?? '';
+            showModalBottomSheet(
+              isScrollControlled: true,
+              context: context,
+              builder: (_) => Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: DraggableScrollableSheet(
+                  initialChildSize: 0.6,
+                  minChildSize: 0.4,
+                  maxChildSize: 0.9,
+                  expand: false,
+                  builder: (_, scrollController) => SingleChildScrollView(
+                    controller: scrollController,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _buildLeafyUI(cropName, diseaseName, symptoms, cropImage),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              _captureAndSaveImage();
+                            },
+                            icon: const Icon(Icons.save_alt),
+                            label: const Text('Save as PNG'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("No analysis data available")),
+            );
+          }
+        },
+        child: const Icon(Icons.save),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
               const SizedBox(height: 16),
-              Flexible(
+              Expanded(
                 child: _buildAnalysisResult(),
               ),
             ],
@@ -162,7 +342,6 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
     );
   }
 
-
   Widget _buildAnalysisResult() {
     if (_analysisData == null) {
       return const Center(child: Text("Loading data..."));
@@ -191,7 +370,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
           onTap: () {    
             final selectedDisease = cropDiseaseList.firstWhere(
               (disease) => disease['diseaseName'] == diseaseName, 
-              orElse: () => <String, Object>{} // Explicitly cast to Map<String, Object>
+              orElse: () => <String, dynamic>{},
             );
 
             if (selectedDisease.isNotEmpty) {
@@ -202,7 +381,6 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                 ),
               );
             } else {
-
               print("Disease not found: $diseaseName");
             }
           },
@@ -210,8 +388,8 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
             margin: const EdgeInsets.symmetric(vertical: 8.0),
             decoration: BoxDecoration(
               color: diseaseName == "Unknown" 
-          ? context.theme.highlightColor.withOpacity(0.8)
-          : context.theme.highlightColor,
+                ? context.theme.highlightColor.withOpacity(0.8)
+                : context.theme.highlightColor,
               borderRadius: BorderRadius.circular(10),
               boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))],
             ),
@@ -221,7 +399,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (cropImage.isNotEmpty)
-                   Stack(
+                    Stack(
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
@@ -236,7 +414,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                           top: 8,
                           right: 8, 
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               _speak("$diseaseName in $cropName. $symptoms ");
                             },
                             child: voiceIcon(context),
@@ -248,14 +426,12 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        constraints: const BoxConstraints(
-                          maxWidth: 200
-                        ),
+                      Expanded(
                         child: Text(
+                          "$diseaseName in $cropName",
+                          style: const TextStyle(fontSize: 20),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          "$diseaseName in $cropName", style: const TextStyle(fontSize: 20, )
                         ),
                       ),
                       Container(
@@ -264,13 +440,13 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                           color: context.theme.focusColor,
                           borderRadius: BorderRadius.circular(10)
                         ),
-                        child: Text('$status'),
+                        child: Text(status),
                       ),
                     ],
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    "$symptoms",
+                    symptoms,
                     style: const TextStyle(fontSize: 14, color: Colors.grey),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
@@ -284,4 +460,3 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
     );
   }
 }
-
