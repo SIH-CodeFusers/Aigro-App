@@ -340,15 +340,27 @@ class _AboutUsState extends State<AboutUs> {
                     const SizedBox(height: 16),
                     _buildInfoCard(title: provideTitle, content: provideContent),
                     const SizedBox(height: 30),
-                    Center(
-                      child: Text(
-                        ourTeamTitle,
-                        style: const TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF004D3F),
+                    Row(
+                      children: [
+                        Flexible(
+                          child: Center(
+                            child: Text(
+                              ourTeamTitle,
+                              style: const TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF004D3F),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                        GestureDetector(
+                          onTap: (){
+                            _speak("Our team consists of, young and talented individuals. The Team comprises of Arunava and Pretisha in web development, Priyanshu and Shinjan in mobile app development, Satyaki in Dev Ops, and Rishi in Machine Learning.");
+                          },
+                          child: voiceIcon(context),
+                        )
+                      ],
                     ),
                     const SizedBox(height: 20),
                     _buildTeamWidget(),
