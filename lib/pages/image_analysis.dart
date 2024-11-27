@@ -5,6 +5,7 @@ import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -312,7 +313,8 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
             );
           }
         },
-        child: const Icon(Icons.save),
+        backgroundColor: context.theme.focusColor,
+        child: const Icon(FeatherIcons.save),
       ),
       body: SafeArea(
         child: Padding(
@@ -348,7 +350,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                   child: Center(
                     child: Text(
                       'Analyse New Image',
-                      style: TextStyle(color: context.theme.highlightColor, fontSize: 22),
+                      style: TextStyle(color: context.theme.highlightColor, fontSize: 20),
                     ),
                   ),
                 ),
@@ -447,7 +449,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                       Expanded(
                         child: Text(
                           "$diseaseName in $cropName",
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 18),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -462,7 +464,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 10),
                   Text(
                     symptoms,
                     style: const TextStyle(fontSize: 14, color: Colors.grey),

@@ -72,13 +72,13 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,              
       initialRoute: "/",   
       builder: (context, child) {
-              return MediaQuery(
-                child: child!,
-                data: MediaQuery.of(context).copyWith(
-                  textScaleFactor: 1.0, // Disable text scaling globally
-                ),
-              );
-            },                          
+          return MediaQuery(
+            child: child!,
+            data: MediaQuery.of(context).copyWith(
+              textScaleFactor: 1.0, 
+            ),
+          );
+        },                          
       
       routes: {                                       
        "/": (context) => const Authenticate(),                  

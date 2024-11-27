@@ -340,7 +340,7 @@ class _LearningResourcesState extends State<LearningResources> {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 20,
                   color: context.theme.primaryColorDark,
                   fontFamily: "Raleway",
                   fontWeight: FontWeight.w600,
@@ -354,7 +354,7 @@ class _LearningResourcesState extends State<LearningResources> {
               child: Text(
                 courseData['domain'] ?? '',
                 style: TextStyle(
-                  fontSize: 17,
+                  fontSize: 16,
                   color: context.theme.primaryColorDark,
                   fontFamily: "Raleway",
                   fontWeight: FontWeight.w300,
@@ -375,7 +375,7 @@ class _LearningResourcesState extends State<LearningResources> {
                       child: Text(
                         "* ${courseData['items'][index]} ",
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 12,
                           color: context.theme.primaryColorDark,
                           fontFamily: "Raleway",
                         ),
