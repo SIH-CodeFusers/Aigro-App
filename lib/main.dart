@@ -69,11 +69,16 @@ class _MyAppState extends State<MyApp> {
       
       themeMode: themeProvider.themeMode,
       theme: MyThemes.lightTheme,
-                          
-
       debugShowCheckedModeBanner: false,              
-
-      initialRoute: "/",                             
+      initialRoute: "/",   
+      builder: (context, child) {
+              return MediaQuery(
+                child: child!,
+                data: MediaQuery.of(context).copyWith(
+                  textScaleFactor: 1.0, // Disable text scaling globally
+                ),
+              );
+            },                          
       
       routes: {                                       
        "/": (context) => const Authenticate(),                  

@@ -66,7 +66,7 @@ class _GetStartedState extends State<GetStarted> {
                      const Center(
                        child: Text(
                           "Cultivating Crops for a",
-                          style: TextStyle(fontSize: 30,fontFamily: 'FontMain',letterSpacing: 1),
+                          style: TextStyle(fontSize: 30,fontFamily: 'FontMain',letterSpacing: 1,inherit: false,color: Colors.black, ),
                         ),
                      ),
                       Center(
@@ -81,6 +81,7 @@ class _GetStartedState extends State<GetStarted> {
                                   letterSpacing: 1,
                                   fontWeight: FontWeight.w600,
                                   color: context.theme.cardColor, 
+                                  inherit: false,
                                 ),
                               ),
                               const TextSpan(
@@ -89,7 +90,7 @@ class _GetStartedState extends State<GetStarted> {
                                   fontSize: 30,
                                   fontFamily: 'FontMain',
                                   letterSpacing: 1,
-                                  
+                                  inherit: false,
                                   color: Colors.black, 
                                 ),
                               ),
@@ -111,8 +112,9 @@ class _GetStartedState extends State<GetStarted> {
                             fontSize: 16, 
                             color: context.theme.splashColor,
                             fontFamily: 'FontMain',
-                              height: 1.5,
-                              wordSpacing: 2.0,
+                            height: 1.5,
+                            wordSpacing: 2.0,
+                            inherit: false,
                           ),
                         ),
                       ),      
@@ -142,7 +144,7 @@ class _GetStartedState extends State<GetStarted> {
                             borderRadius: BorderRadius.circular(40)
                           ),
                           child: Center(child: Text("Get Started",
-                            style: TextStyle(color: context.theme.canvasColor,fontSize: 20),
+                            style: TextStyle(color: context.theme.canvasColor,fontSize: 20,inherit: false,),
                           )),
                         ),
                       ),

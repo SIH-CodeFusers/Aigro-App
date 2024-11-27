@@ -59,6 +59,34 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
+      appBar: AppBar(
+        title: Text(
+            "Profile Page",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: context.theme.primaryColorDark,
+            ),
+          ),
+          actions: [
+            GestureDetector(
+              onTap: () => saveForm(),
+              child: Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: context.theme.highlightColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Icon(FontAwesomeIcons.arrowRightFromBracket, color: Colors.grey[700], size: 20),
+                  ), 
+                ),
+              ),
+            ),
+            SizedBox(width: 10,)
+          ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -67,34 +95,6 @@ class _ProfilePageState extends State<ProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-                  children: [
-                    Text(
-                      "🌱 Profile Page",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: context.theme.primaryColorDark,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => saveForm(),
-                      child: Center(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: context.theme.highlightColor,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Icon(FontAwesomeIcons.arrowRightFromBracket, color: Colors.grey[700], size: 20),
-                          ), 
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
                 
                 const SizedBox(height: 30),
                 const SizedBox(height: 30),
