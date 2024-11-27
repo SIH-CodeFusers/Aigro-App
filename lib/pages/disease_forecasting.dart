@@ -30,6 +30,26 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
     fetchAlerts();
   }
 
+  String findRisk(int value) {
+    if (value < 7) {
+      return "low";
+    } else if (value >= 7 && value <= 15) {
+      return "medium";
+    } else {
+      return "high";
+    }
+  }
+
+  Color getRiskColor(int count) {
+    if (count < 7) {
+      return const Color.fromARGB(255, 96, 255, 102); 
+    } else if (count >= 7 && count <= 15) {
+      return Colors.yellow;
+    } else {
+      return Colors.red;
+    }
+  }
+
   String placeholderImage = 'https://placehold.co/600x400/EEE/31343C';
   late Future<List<Map<String, String>>> cropDiseases;
 
@@ -245,11 +265,13 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
                               Container(
                                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                                 decoration: BoxDecoration(
-                                  color: Colors.yellow,
+                                  color: getRiskColor(disease['count']),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Text('${disease['alertLevel']} Risk'),
-                              ),
+                                child: Text(
+                                  '${findRisk(int.parse(disease['count'].toString()))} Risk',
+                                ),
+                              )
                             ],
                           ),
                           Text(

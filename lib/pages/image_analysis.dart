@@ -237,7 +237,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                           right: 8, 
                           child: GestureDetector(
                             onTap: (){
-                              _speak("$diseaseName in $cropName.$symptoms ");
+                              _speak("$diseaseName in $cropName. $symptoms ");
                             },
                             child: voiceIcon(context),
                           )
