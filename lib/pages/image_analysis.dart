@@ -350,8 +350,8 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                   ),
                   child: Center(
                     child: Text(
-                      'Analyse New Image',
-                      style: TextStyle(color: context.theme.highlightColor, fontSize: 20),
+                      'Analyze New Image',
+                      style: TextStyle(color: context.theme.highlightColor, fontSize: 18),
                     ),
                   ),
                 ),

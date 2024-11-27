@@ -338,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                                     child: Center(
                                       child: Text(
                                         analyzeNow,
-                                        style: TextStyle(color: context.theme.cardColor),
+                                        style: TextStyle(color: context.theme.cardColor,fontSize: 12),
                                       ),
                                     ),
                                   ),
@@ -409,7 +409,7 @@ class _HomePageState extends State<HomePage> {
                                   alignment: Alignment.centerLeft,
                                   child: Text(
                                     dashboardInfo['text'],
-                                    style: const TextStyle(color: Colors.white, fontSize: 18),
+                                    style: TextStyle(color: context.theme.highlightColor, fontSize: 16),
                                     textAlign: TextAlign.left,
                                   ),
                                 ),

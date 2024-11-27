@@ -367,7 +367,7 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                               child: Center(
                                 child: Text(
                                   'Submit for Analysis',
-                                  style: TextStyle(color: context.theme.highlightColor, fontSize: 20),
+                                  style: TextStyle(color: context.theme.highlightColor, fontSize: 18),
                                 ),
                               ),
                             ),

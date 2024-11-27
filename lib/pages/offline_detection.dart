@@ -165,7 +165,7 @@ class _OfflineDetectionState extends State<OfflineDetection> {
                       child: Center(
                         child: Text(
                           'View Remedy',
-                          style: TextStyle(color: context.theme.highlightColor, fontSize: 22),
+                          style: TextStyle(color: context.theme.highlightColor, fontSize: 20),
                         ),
                       ),
                     ),

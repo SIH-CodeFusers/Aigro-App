@@ -344,7 +344,7 @@ class _UploadImageState extends State<UploadImage> {
                       child: Center(
                         child: Text(
                           'Submit for Analysis',
-                          style: TextStyle(color: context.theme.highlightColor, fontSize: 20),
+                          style: TextStyle(color: context.theme.highlightColor, fontSize: 18),
                         ),
                       ),
                     ),
