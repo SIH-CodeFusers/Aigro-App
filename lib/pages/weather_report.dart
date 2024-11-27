@@ -3,6 +3,7 @@ import 'package:aigro/utils/get_lat_long.dart';
 import 'package:aigro/utils/weather_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class WeatherReport extends StatefulWidget {
   const WeatherReport({super.key});
@@ -57,18 +58,17 @@ class _WeatherReportState extends State<WeatherReport> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE8F5E9),
+      backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
         title: const Text('Weather Forecast'),
-        backgroundColor: const Color(0xFF2E7D32),
       ),
       body: FutureBuilder<List<WeatherData>>(
         future: weatherService.fetchWeather(lat, lon),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
+            return  Center(
               child: CircularProgressIndicator(
-                color: Color(0xFF2E7D32), 
+                color: context.theme.primaryColorDark, 
               ),
             );
           } else if (snapshot.hasError) {
@@ -86,7 +86,7 @@ class _WeatherReportState extends State<WeatherReport> {
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Card(
-                      color: const Color(0xFF66BB6A),
+                      color: context.theme.cardColor,
                       elevation: 4,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -102,15 +102,15 @@ class _WeatherReportState extends State<WeatherReport> {
                                   "Location: ",
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 16,
+                                    fontSize: 18,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
                                   userDist,
                                   style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontSize: 18,
                                   ),
                                 ),
                               ],
@@ -130,7 +130,7 @@ class _WeatherReportState extends State<WeatherReport> {
                                 Text(
                                   userPin,
                                   style: const TextStyle(
-                                    color: Colors.white70,
+                                    color: Colors.white,
                                     fontSize: 16,
                                   ),
                                 ),
@@ -151,11 +151,11 @@ class _WeatherReportState extends State<WeatherReport> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 8.0),
                         child: Card(
-                          elevation: 4,
+                          elevation: 2,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
                           ),
-                          color: const Color(0xFFA5D6A7), 
+                          color: const Color.fromARGB(255, 205, 233, 206), 
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Column(
@@ -175,8 +175,8 @@ class _WeatherReportState extends State<WeatherReport> {
                                         const SizedBox(width: 8),
                                         Text(
                                           daysOfWeek[index],
-                                          style: const TextStyle(
-                                            color: Color(0xFF2E7D32),
+                                          style:  TextStyle(
+                                            color: context.theme.primaryColorDark,
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -186,7 +186,7 @@ class _WeatherReportState extends State<WeatherReport> {
                                     Text(
                                       weather.description,
                                       style: const TextStyle(
-                                        color: Colors.white70,
+                                        color: Colors.white,
                                         fontSize: 16,
                                       ),
                                     ),
@@ -238,14 +238,14 @@ class _WeatherReportState extends State<WeatherReport> {
           children: [
             Icon(
               icon, 
-              color: Color(0xFF2E7D32), 
+              color: context.theme.primaryColorDark, 
               size: 18,
             ),
             const SizedBox(width: 8),
             Text(
               title,
-              style: const TextStyle(
-                color: Color(0xFF2E7D32), 
+              style: TextStyle(
+                color: context.theme.primaryColorDark, 
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),

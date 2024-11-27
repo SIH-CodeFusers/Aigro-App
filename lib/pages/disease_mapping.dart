@@ -237,7 +237,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
                     return Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: context.theme.highlightColor,
+                        color: context.theme.canvasColor,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       padding: const EdgeInsets.all(16),
@@ -249,10 +249,11 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
                               width: 40,
                               child: Divider(
                                 thickness: 3,
-                                color: Colors.grey.shade300,
+                                color: Colors.grey[400],
                               ),
                             ),
                           ),
+                          SizedBox(height: 10,),
                           Container(
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(

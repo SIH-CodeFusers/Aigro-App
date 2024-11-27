@@ -343,7 +343,7 @@ class _HomePageState extends State<HomePage> {
                           Image.asset(
                             width: MediaQuery.of(context).size.width * 0.3, // 30% of screen width
                             height: 175,
-                            "assets/images/woman_farmer.png",
+                            "assets/images/male_farmer.png",
                             fit: BoxFit.cover,
                           ),
                           const SizedBox(width: 10),
