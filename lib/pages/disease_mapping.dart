@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';

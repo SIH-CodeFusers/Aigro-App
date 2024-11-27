@@ -9,7 +9,6 @@ import 'package:aigro/utils/routes.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:aigro/widgets/sparkling_animation.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
@@ -123,48 +122,56 @@ class _HomePageState extends State<HomePage> {
       'text': 'Disease Forecasting',
       'image': 'assets/images/forecasting.png',
       'route': Myroutes.diseaseForecastRoute,
+      'voice':'In disease forecasting, you will get alerts about current diseases that are spreading your area.'
     },
     {
       'color': const Color.fromRGBO(232, 213, 207,1),
       'text': 'Offline Model',
       'image': 'assets/images/offline.png',
       'route': Myroutes.offlineDetectionRoute,
+      'voice':'No Internet ? No worry. You can still use our offline model to detect diseases on the go.'
     },
     {
       'color': const Color.fromRGBO(201, 223, 221,1),
       'text': 'Disease Mapping',
       'image': 'assets/images/mapping.png',
       'route': Myroutes.diseaseMapRoute,
+      'voice':'Disease mapping can be used to see in which farms near you diseases are spreading and you can also see pesticide shops near you.'
     },
     {
       'color': const Color.fromRGBO(230, 238, 155,1),
       'text': 'Weather Report',
       'image': 'assets/images/weather.png',
       'route': Myroutes.weatherReportRoute,
+      'voice':'Get live updates about weather in your current locality and take actions accordingly.'
     },
     {
       'color': const Color.fromRGBO(249, 187, 208,1),
       'text': ' Krishi AI',
       'image': 'assets/images/ks.png',
       'route': Myroutes.khetiSathiRoute,
+      'voice':'Krishi AI is our self developed chatbot which will help you to guide you in your farming related queries.'
     },
     {
       'color': const Color.fromRGBO(208, 196, 232,1),
       'text': 'Learning Resources',
       'image': 'assets/images/lr.png',
       'route': Myroutes.learningResourcesRoute,
+      'voice':'Learn about various ways of farming techniques to maximize your crop yields and minimize losses.'
     },
     {
       'color': const Color.fromRGBO(255, 204, 128,1),
       'text': 'Farmers Community',
       'image': 'assets/images/cm.png',
       'route': Myroutes.communityRoute,
+      'voice':'Stay in touch with your farmer friends using our community feature and prosper together.'
     },
     {
       'color': const Color.fromRGBO(255, 204, 187,1),
       'text': 'Government Schemes',
       'image': 'assets/images/gv.png',
       'route': Myroutes.schemesRoute,
+      'voice':'Get live updates about different government schemes that are currently available and take the complete benefits.'
     },
   ];
 
@@ -264,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     GestureDetector(
                       onTap: (){
-                        _speak(welcomeText);
+                        _speak("Hi $first. $welcomeText");
                       },
                       child: voiceIcon(context),
                     )
@@ -312,7 +319,7 @@ class _HomePageState extends State<HomePage> {
                                     detectAndTreat,
                                     style: TextStyle(
                                       color: context.theme.highlightColor,
-                                      fontSize: 18,
+                                      fontSize: MediaQuery.of(context).size.width * 0.045,
                                     ),
                                   ),
                                 ),
@@ -361,11 +368,11 @@ class _HomePageState extends State<HomePage> {
                       Text(otherFeatures,style: TextStyle(fontSize: 16,color: Colors.grey[700]),),
                       SizedBox(width: 10,),
                       GestureDetector(
-                      onTap: (){
-                        _speak(otherFeatures);
-                      },
-                      child: voiceIcon(context),
-                    )
+                        onTap: (){
+                          _speak("Hi, in Kheti Sathi we have lots of features. This includes, Disease Forecasting, Offline Analysis, Disease Mapping, Weather Forecast, Learning Resources, Community and more.");
+                        },
+                        child: voiceIcon(context),
+                      )
                     ],
                   ),
                   
@@ -416,16 +423,12 @@ class _HomePageState extends State<HomePage> {
                                       fit: BoxFit.cover,
                                     ),
                                     const Spacer(),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(0.1),
-                                        borderRadius: BorderRadius.circular(10)
-                                      ),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: Icon(FeatherIcons.arrowUpRight, color: Colors.black, size: 22,),
-                                      ), 
-                                    ),
+                                    GestureDetector(
+                                      onTap: (){
+                                        _speak(dashboardInfo['voice']);
+                                      },
+                                      child: voiceIcon(context),
+                                    )
                                   ],
                                 ),
                               ],
