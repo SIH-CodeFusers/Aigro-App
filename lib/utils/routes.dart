@@ -6,6 +6,7 @@ class Myroutes{
   static String cropDetailsRoute = "/recipeDetails";
   static String aboutUsRoute = "/aboutus";
   static String profileRoute = "/profile";
+  static String newAnalysisRoute = "/newAnalysis";
   static String khetiSathiRoute = "/khetiSathi";
   static String diseaseMapRoute = "/diseaseMap";
   static String offlineDetectionRoute = "/offlineDetection";

@@ -130,10 +130,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNav(
-        pages: pages,
-        selectedInd: 2,
-      ),
     );
   }
 

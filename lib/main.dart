@@ -5,6 +5,7 @@ import 'package:aigro/pages/gov_schemes.dart';
 import 'package:aigro/pages/image_analysis.dart';
 import 'package:aigro/pages/khetisathi.dart';
 import 'package:aigro/pages/learning_resources.dart';
+import 'package:aigro/pages/new_analysis_nav.dart';
 import 'package:aigro/pages/offline_detection.dart';
 import 'package:aigro/pages/upload_image.dart';
 import 'package:aigro/pages/user_onbaording.dart';
@@ -82,6 +83,7 @@ class _MyAppState extends State<MyApp> {
         Myroutes.aboutUsRoute: (context) => const AboutUs(),
         Myroutes.cropListRoute: (context) => const CropListPage(),
         Myroutes.profileRoute: (context) => const ProfilePage(),
+        Myroutes.newAnalysisRoute: (context) => const NewAnalysisNav(),
         Myroutes.khetiSathiRoute: (context) => const KhetiSathi(),
         // Myroutes.cropDetailsRoute: (context) => CropDetails(),
 

@@ -62,8 +62,8 @@ class BottomNav extends StatelessWidget {
                 textSize: 16,
               ),
                GButton(
-                icon: FontAwesomeIcons.user,
-                text: 'Profile',
+                icon: FontAwesomeIcons.magnifyingGlass,
+                text: 'Analyze',
                 iconSize: 19,
                 textSize: 16,
               ),
