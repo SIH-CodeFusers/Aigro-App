@@ -252,7 +252,6 @@ class _CommunityState extends State<Community> {
   }
 
   
-
   Future<void> _pickImage() async {
     final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {

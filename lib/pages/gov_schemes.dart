@@ -165,7 +165,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
               children: [
                 Icon(
                   FeatherIcons.alertCircle,
-                  size: 20,
+                  size: 18,
                   color:context.theme.primaryColorDark
                 ),
                 const SizedBox(width: 1,),
@@ -179,7 +179,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                         maxLines:1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(                          
-                          fontSize: 20, 
+                          fontSize: 18, 
                           fontWeight: FontWeight.bold,
                           color:context.theme.primaryColorDark
                         ),
@@ -199,7 +199,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                   padding: const EdgeInsets.only(top: 2),
                   child: Icon(
                     FeatherIcons.shield,
-                    size: 16,
+                    size: 14,
                     color:context.theme.primaryColorDark
                   ),
                 ),
@@ -208,7 +208,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                   child: Text(
                     filteredData[index]['description'] as String,
                     style: TextStyle(                          
-                      fontSize: 16, 
+                      fontSize: 14, 
                       color:Colors.grey[600]
                     ),
                     softWrap: true,
@@ -237,11 +237,11 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                     children: [
                       Icon(
                         FeatherIcons.disc,
-                        size: 14,
+                        size: 12,
                         color:context.theme.primaryColorDark,
                       ),
                       const SizedBox(width: 8,),
-                      Flexible(child: Text(keyPoint,style: const TextStyle(fontWeight: FontWeight.w600),)),
+                      Flexible(child: Text(keyPoint,style: const TextStyle(fontWeight: FontWeight.w600,fontSize: 12),)),
                     ],
                   );
                 }).toList(),
@@ -259,7 +259,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                   padding: const EdgeInsets.only(top: 2),
                   child: Icon(
                     FeatherIcons.mapPin,
-                    size: 16,
+                    size: 14,
                     color:context.theme.primaryColorDark
                   ),
                 ),
@@ -268,7 +268,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                   child: Text(
                     'State: ${filteredData[index]['state'] as String}',
                     style: TextStyle(                          
-                      fontSize: 16, 
+                      fontSize: 14, 
                       color:context.theme.primaryColorDark
                     ),
                     softWrap: true,
@@ -290,7 +290,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                   padding: const EdgeInsets.only(top: 2),
                   child: Icon(
                     FeatherIcons.user,
-                    size: 16,
+                    size: 14,
                     color:context.theme.primaryColorDark
                   ),
                 ),
@@ -299,7 +299,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                   child: Text(
                     'Owner: ${filteredData[index]['owner_of_scheme'] as String}',
                     style: TextStyle(                          
-                      fontSize: 16, 
+                      fontSize: 14, 
                       color:context.theme.primaryColorDark
                     ),
                     softWrap: true,
@@ -329,7 +329,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                   children: [
                     Text(
                       'Visit Here',
-                      style: TextStyle(color: context.theme.highlightColor, fontSize: 16),
+                      style: TextStyle(color: context.theme.highlightColor, fontSize: 14),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 2),

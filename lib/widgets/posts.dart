@@ -284,6 +284,7 @@ class _PostWidgetState extends State<PostWidget> {
                         style: TextStyle(
                           color: context.theme.cardColor,
                           fontWeight: FontWeight.bold,
+                          fontSize: 12
                         ),
                       ),
                       
@@ -298,7 +299,7 @@ class _PostWidgetState extends State<PostWidget> {
                       Icon(
                         FeatherIcons.plus,
                         color: context.theme.cardColor,
-                        size: 12,
+                        size: 13,
                       ),
                       const SizedBox(width: 4),
                       Text(
@@ -306,6 +307,7 @@ class _PostWidgetState extends State<PostWidget> {
                         style: TextStyle(
                           color: context.theme.cardColor,
                           fontWeight: FontWeight.bold,
+                          fontSize: 13
                         ),
                       ),
                       

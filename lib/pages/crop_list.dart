@@ -57,6 +57,7 @@ class _CropListPageState extends State<CropListPage> {
                 "summary":
                     (disease['summary'] as List?)?.map((r) => r as String).toList() ?? [],
                 "chemicalControl": disease['chemicalControl'] as String? ?? '',
+                "organicControl": disease['organicControl'] as String? ?? '',
                 "cropName": crop['cropName'] as String,
                 "fertilizers": (disease['fertilisers'] as List?)?.map((fertilizer) {
                 return {

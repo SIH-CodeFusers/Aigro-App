@@ -324,7 +324,7 @@ class _AboutUsState extends State<AboutUs> {
               Text(
                 aboutUsTitle,
                 style: const TextStyle(
-                  fontSize: 28,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF004D3F),
                 ),
@@ -347,7 +347,7 @@ class _AboutUsState extends State<AboutUs> {
                             child: Text(
                               ourTeamTitle,
                               style: const TextStyle(
-                                fontSize: 28,
+                                fontSize: 24,
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF004D3F),
                               ),
@@ -369,7 +369,7 @@ class _AboutUsState extends State<AboutUs> {
                       child: Text(
                         fnqTitle,
                         style: const TextStyle(
-                          fontSize: 26,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF004D3F),
                         ),
@@ -506,7 +506,7 @@ class _AboutUsState extends State<AboutUs> {
                 Text(
                   title,
                   style:  TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: context.theme.highlightColor,
                   ),
@@ -524,7 +524,7 @@ class _AboutUsState extends State<AboutUs> {
             Text(
               content,
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 color: Colors.white70,
                 height: 1.5,
               ),

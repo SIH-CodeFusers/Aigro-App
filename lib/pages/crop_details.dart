@@ -182,7 +182,7 @@ class _CropDetailsState extends State<CropDetails> {
                     Text(
                       "Recommendations",
                       style:  TextStyle(
-                        fontSize: 24,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                         color: context.theme.primaryColorDark,
                       ),
@@ -252,7 +252,7 @@ class _CropDetailsState extends State<CropDetails> {
                   child: Text(
                     title,
                     style:  TextStyle(
-                      fontSize: 24,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: context.theme.primaryColorDark,
                     ),

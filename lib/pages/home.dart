@@ -261,13 +261,13 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 5),
-                Text("Hello, $first 🌱",style: TextStyle(fontSize: 26,color: context.theme.primaryColorDark),),
+                Text("Hello, $first 🌱",style: TextStyle(fontSize: 24,color: context.theme.primaryColorDark),),
                 const SizedBox(height: 5),
                 Row(
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width * 0.7, 
-                      child: Text(welcomeText,style: TextStyle(fontSize: 14,color: Colors.grey[600]),)
+                      child: Text(welcomeText,style: TextStyle(fontSize: 12,color: Colors.grey[600]),)
                     ),
                     GestureDetector(
                       onTap: (){
@@ -319,7 +319,7 @@ class _HomePageState extends State<HomePage> {
                                     detectAndTreat,
                                     style: TextStyle(
                                       color: context.theme.highlightColor,
-                                      fontSize: MediaQuery.of(context).size.width * 0.045,
+                                      fontSize: MediaQuery.of(context).size.width * 0.04,
                                     ),
                                   ),
                                 ),
@@ -365,7 +365,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Text(otherFeatures,style: TextStyle(fontSize: 16,color: Colors.grey[700]),),
+                      Text(otherFeatures,style: TextStyle(fontSize: 14,color: Colors.grey[700]),),
                       SizedBox(width: 10,),
                       GestureDetector(
                         onTap: (){

@@ -184,6 +184,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                   "summary":
                       (disease['summary'] as List?)?.map((r) => r as String).toList() ?? [],
                   "chemicalControl": disease['chemicalControl'] as String? ?? '',
+                  "organicControl": disease['organicControl'] as String? ?? '',
                   "cropName": crop['cropName'] as String,
                   "fertilizers": (disease['fertilisers'] as List?)?.map((fertilizer) {
                     return {
@@ -387,10 +388,10 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         final cropImage = result['cropImage'] ?? '';
 
         return GestureDetector(
-          onTap: () {    
+           onTap: () {    
             final selectedDisease = cropDiseaseList.firstWhere(
               (disease) => disease['diseaseName'] == diseaseName, 
-              orElse: () => <String, dynamic>{},
+              orElse: () => <String, Object>{} 
             );
 
             if (selectedDisease.isNotEmpty) {
@@ -401,6 +402,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                 ),
               );
             } else {
+
               print("Disease not found: $diseaseName");
             }
           },

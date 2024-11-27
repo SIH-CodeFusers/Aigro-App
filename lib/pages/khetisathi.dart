@@ -181,7 +181,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
                                                       ? context.theme.highlightColor
                                                       : context.theme.cardColor,
                                                   fontWeight: FontWeight.bold,
-                                                  fontSize: 14,
+                                                  fontSize: 12,
                                                 ),
                                               ),
                                             ),
@@ -202,7 +202,8 @@ class _KhetiSathiState extends State<KhetiSathi> {
                                           _messages[index]['message']!,  
                                           style: TextStyle(color: isUser
                                                 ? context.theme.highlightColor
-                                                : context.theme.primaryColorDark,),         
+                                                : context.theme.primaryColorDark,
+                                                fontSize: 12),         
                                         )
                                       ],
                                     ),
