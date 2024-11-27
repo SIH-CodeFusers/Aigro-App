@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'package:aigro/pages/crop_details.dart';
+import 'package:aigro/pages/khetisathi.dart';
 import 'package:aigro/secret.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:velocity_x/velocity_x.dart';
 import 'package:aigro/secret.dart';
@@ -82,7 +85,30 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
-      appBar: AppBar(title: const Text("Image Analysis")),
+      appBar: AppBar(
+        title: const Text("Image Analysis"),
+        actions: [
+          Container(
+              decoration: BoxDecoration(
+                color: context.theme.highlightColor,
+                borderRadius: BorderRadius.circular(10)
+              ),
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ImageAnalysis()), 
+                  );
+                },
+                child: const Padding(
+                  padding: EdgeInsets.all(12.0),
+                  child: Icon(FontAwesomeIcons.rotateRight, color: Colors.black, size: 18,),
+                ),
+              ), 
+            ),
+            SizedBox(width: 10,)
+          ],
+        ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

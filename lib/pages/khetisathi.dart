@@ -170,15 +170,32 @@ class _KhetiSathiState extends State<KhetiSathi> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          name,
-                                          style: TextStyle(
-                                            color: isUser
-                                                ? context.theme.highlightColor
-                                                : context.theme.cardColor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 14,
-                                          ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Flexible(
+                                              child: Text(
+                                                name,
+                                                style: TextStyle(
+                                                  color: isUser
+                                                      ? context.theme.highlightColor
+                                                      : context.theme.cardColor,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 10,),
+                                            if(!isUser)
+                                            CircleAvatar(
+                                              radius: 12,
+                                              backgroundColor: context.theme.focusColor,
+                                              child: const Icon(
+                                                FeatherIcons.volume2,
+                                                size: 12,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                         const SizedBox(height: 4),
                                         Text(                   
