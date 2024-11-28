@@ -300,7 +300,91 @@ class _CommunityState extends State<Community> {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No posts available.'));
+            return  Stack(
+              children: [
+                Center(
+                  child: Text('No posts available.')
+                ),
+                                Positioned(
+                  bottom: 16.0,
+                  left: 16.0,
+                  right: 16.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+
+                     Flexible(
+                       child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 1),
+                          child: GestureDetector(
+                            onTap: () {
+                              showCreatePostDialog();
+                            },
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: context.theme.primaryColorDark,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Create Post',
+                                      style: TextStyle(color: context.theme.highlightColor, fontSize: 14),
+                                    ),
+                                    SizedBox(width: 5,),
+                                    Icon(FeatherIcons.plus,size: 16,color: context.theme.highlightColor,)
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(width: 10,),
+                     
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 1),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => YourPosts()),
+                                
+                              );  
+                            },
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: context.theme.primaryColorDark,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Your Posts',
+                                      style: TextStyle(color: context.theme.highlightColor, fontSize: 14),
+                                    ),
+                                    SizedBox(width: 5,),
+                                    Icon(FeatherIcons.users,size: 16,color: context.theme.highlightColor,)
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
           } else {
             return Stack(
               children: [

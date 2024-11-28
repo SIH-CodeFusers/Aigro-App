@@ -1,9 +1,13 @@
+import 'package:aigro/widgets/voice_icon.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:tflite_v2/tflite_v2.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'dart:math';
+import 'package:image/image.dart' as img;
 
 class OfflineDetection extends StatefulWidget {
   const OfflineDetection({super.key});
@@ -29,6 +33,101 @@ class _OfflineDetectionState extends State<OfflineDetection> {
     });
   }
 
+
+
+  Future<double> calculateMean(File imageFile)  async{
+
+    final imageBytes = await imageFile.readAsBytes();
+    final img.Image? decodedImage = img.decodeImage(imageBytes);
+
+    if (decodedImage == null) {
+      print("Could not decode image.");
+      return 0.0;
+    }
+    List<int> pixels = [];
+    for (int y = 0; y < decodedImage.height; y++) {
+      for (int x = 0; x < decodedImage.width; x++) {
+        int pixel = decodedImage.getPixel(x, y) as int;
+        pixels.add(pixel);
+      }
+    }
+    double mean = pixels.reduce((a, b) => a + b) / pixels.length;
+
+    return mean;
+}
+
+  Future<double> calculateStdDev(File imageFile) async  {
+    final imageBytes = await imageFile.readAsBytes();
+    final img.Image? decodedImage = img.decodeImage(imageBytes);
+
+    if (decodedImage == null) {
+      print("Could not decode image.");
+      return 0.0;
+    }
+
+    List<int> pixels = [];
+    for (int y = 0; y < decodedImage.height; y++) {
+      for (int x = 0; x < decodedImage.width; x++) {
+        int pixel = decodedImage.getPixel(x, y) as int;
+        pixels.add(pixel);
+      }
+    }
+
+    double mean = pixels.reduce((a, b) => a + b) / pixels.length;
+
+
+    double variance = pixels
+        .map((pixel) => pow(pixel - mean, 2))
+        .reduce((a, b) => a + b) /
+        pixels.length;
+    double stdDev = sqrt(variance);
+
+    return stdDev;
+  }
+
+  void showCustomToast(BuildContext context, String message) {
+    final overlay = Overlay.of(context);
+    final overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: 100, 
+        left: MediaQuery.of(context).size.width * 0.1,
+        right: MediaQuery.of(context).size.width * 0.1,
+        child: Material(
+          color: Colors.transparent,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            decoration: BoxDecoration(
+              color: context.theme.highlightColor,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 12,
+                  backgroundColor: Colors.red,
+                  child: Icon(FeatherIcons.x,color: context.theme.highlightColor,size: 12,)
+                ),
+                SizedBox(width: 10,),
+                Text(
+                  message,
+                  style:  TextStyle(color: Colors.red, fontSize: 18),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    overlay.insert(overlayEntry);
+
+    Future.delayed(const Duration(seconds: 2), () {
+      overlayEntry.remove();
+    });
+  }
+
   loadmodel() async {
     await Tflite.loadModel(
       model: "assets/others/app_model.tflite",
@@ -49,14 +148,21 @@ class _OfflineDetectionState extends State<OfflineDetection> {
     }
   }
 
+  Future<void> _removeImage() async {
+    setState(() {
+      // Reset both _image and file to null, removing the selected image
+      _image = null;
+      file = null;
+    });
+  }
+
   Future detectimage(File image) async {
-    // int startTime = new DateTime.now().millisecondsSinceEpoch;
     var recognitions = await Tflite.runModelOnImage(
       path: image.path,
       numResults: 1,
       threshold: 0.05,
-      imageMean: 127.5,
-      imageStd: 127.5,
+      imageMean: 100,
+      imageStd:100,
     );
     setState(() {
       _recognitions = recognitions;
@@ -78,14 +184,35 @@ class _OfflineDetectionState extends State<OfflineDetection> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               if (_image != null)
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.file(
-                    File(_image!.path),
-                    height: 250,
-                    width: 250,
-                    fit: BoxFit.cover,
-                  ),
+                Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.file(
+                        File(_image!.path),
+                        height: 250,
+                        width: 250,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      top: 8,
+                      right: 8, 
+                      child: GestureDetector(
+                        onTap: (){
+                         _removeImage();
+                        },
+                        child: CircleAvatar(
+                          radius: 14,
+                          backgroundColor: Colors.grey[300],
+                          child: Icon(
+                            FeatherIcons.x,
+                            size: 16,
+                          ),
+                        ),
+                      )
+                    ),
+                  ],
                 )
               else
               Padding(
@@ -135,16 +262,16 @@ class _OfflineDetectionState extends State<OfflineDetection> {
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
                       "Detected disease:",
-                      style: TextStyle(color: context.theme.cardColor, fontSize: 26),
+                      style: TextStyle(color: context.theme.cardColor, fontSize: 24),
                     ),
                   ),
                 ),
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    padding: const EdgeInsets.symmetric(horizontal: 28),
                     child: Text(
                       diseaseName,
-                      style: TextStyle(color: context.theme.cardColor, fontSize: 30),
+                      style: TextStyle(color: context.theme.cardColor, fontSize: 28),
                     ),
                   ),
                 ),
@@ -153,7 +280,7 @@ class _OfflineDetectionState extends State<OfflineDetection> {
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: GestureDetector(
                     onTap: () {
-                      
+                      showCustomToast(context, 'Currently Unavailable');
                     },
                     child: Container(
                       width: 250,

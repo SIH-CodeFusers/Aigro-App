@@ -1,5 +1,4 @@
 import 'package:aigro/local_db/db.dart';
-import 'package:aigro/pages/get_started.dart';
 import 'package:aigro/pages/home.dart';
 import 'package:aigro/pages/select_lang.dart';
 import 'package:flutter/material.dart';

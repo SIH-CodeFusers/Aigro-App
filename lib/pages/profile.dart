@@ -3,8 +3,6 @@ import 'package:aigro/pages/home.dart';
 import 'package:aigro/utils/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:aigro/utils/bottom_pages_list.dart';
-import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -84,15 +85,26 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
         child: Material(
           color: Colors.transparent,
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.circular(8),
+              color: context.theme.highlightColor,
+              borderRadius: BorderRadius.circular(5),
             ),
-            child: Text(
-              message,
-              style: const TextStyle(color: Colors.white, fontSize: 18),
-              textAlign: TextAlign.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 12,
+                  backgroundColor: context.theme.cardColor,
+                  child: Icon(FeatherIcons.check,color: context.theme.highlightColor,size: 12,)
+                ),
+                SizedBox(width: 10,),
+                Text(
+                  message,
+                  style:  TextStyle(color: context.theme.cardColor, fontSize: 18),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
           ),
         ),
