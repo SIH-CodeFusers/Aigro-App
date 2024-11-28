@@ -20,11 +20,28 @@ class _SelectLangState extends State<SelectLang> {
 
   FlutterTts flutterTts = FlutterTts();
 
-  _speak(String text) async {
-    await flutterTts.setLanguage("en-US"); 
-    await flutterTts.setPitch(0.7); 
-    await flutterTts.speak(text); 
-  }
+_speak(String text) async {
+  await flutterTts.awaitSpeakCompletion(true);
+
+  await flutterTts.setLanguage("en-US");
+  await flutterTts.setPitch(0.7);
+  await flutterTts.speak(text);
+
+  await flutterTts.setLanguage("hi-IN");
+  await flutterTts.setPitch(0.7);
+  await flutterTts.speak("अपनी भाषा का चयन करें");
+
+  await flutterTts.setLanguage("bn-BD");
+  await flutterTts.setPitch(0.7);
+  await flutterTts.speak("আপনার ভাষা নির্বাচন করুন");
+}
+
+// void checkSupportedLanguages() async {
+//   List<dynamic> languages = await flutterTts.getLanguages;
+//   for (var language in languages) {
+//     print(language); // This will print the supported language codes
+//   }
+// }
 
   String? selectedLanguage; 
   @override
@@ -74,6 +91,7 @@ class _SelectLangState extends State<SelectLang> {
                      GestureDetector(
                       onTap: (){
                         _speak("Select your Language");
+                        // checkSupportedLanguages();
                       },
                       child: voiceIcon(context),
                     )

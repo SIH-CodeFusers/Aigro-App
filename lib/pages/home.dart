@@ -333,24 +333,35 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                                 const Spacer(),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(context, '/imageAnalysis');
-                                  },
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width * 0.25, 
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      color: context.theme.highlightColor,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        analyzeNow,
-                                        style: TextStyle(color: context.theme.cardColor,fontSize: 12),
+                                Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushNamed(context, '/imageAnalysis');
+                                      },
+                                      child: Container(
+                                        width: MediaQuery.of(context).size.width * 0.25, 
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                          color: context.theme.highlightColor,
+                                          borderRadius: BorderRadius.circular(20),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            analyzeNow,
+                                            style: TextStyle(color: context.theme.cardColor,fontSize: 12),
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    SizedBox(width: 10,),
+                                    GestureDetector(
+                                      onTap: (){
+                                        _speak("Analyze any disease in your crops with our disease detection feature, which is fast and efficient.");
+                                      },
+                                      child: voiceIcon(context),
+                                    )
+                                  ],
                                 ),
                               ],
                             ),
