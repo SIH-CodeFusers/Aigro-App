@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:aigro/secret.dart';
 import 'package:aigro/widgets/grid_painter.dart';
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -118,6 +119,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
           });
         },
       );
+     
     } else {
       debugPrint('Speech recognition not available');
     }
@@ -127,7 +129,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
     await _speechToText.stop();
     setState(() {
       isListening = false;
-      listeningText = ''; // Clear listening text
+      listeningText = '';
     });
   }
 
@@ -159,9 +161,9 @@ class _KhetiSathiState extends State<KhetiSathi> {
                 const SizedBox(height: 30),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: _messages.length + (isTyping || isListening ? 1 : 0),
+                    itemCount: _messages.length + (isTyping? 1 : 0),
                     itemBuilder: (context, index) {
-                      if ((isTyping || isListening) && index == _messages.length) {
+                      if ((isTyping) && index == _messages.length) {
                         // Loader message for typing or listening
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -172,13 +174,13 @@ class _KhetiSathiState extends State<KhetiSathi> {
                                 color: context.theme.primaryColorDark,
                               ),
                               const SizedBox(width: 8),
-                              Text(
-                                isListening ? listeningText : 'Krishi AI is typing...',
-                                style: TextStyle(
-                                  color: context.theme.primaryColorDark,
-                                  fontSize: 12,
-                                ),
-                              ),
+                              // Text(
+                              //   isListening ? listeningText : 'Krishi AI is typing...',
+                              //   style: TextStyle(
+                              //     color: context.theme.primaryColorDark,
+                              //     fontSize: 12,
+                              //   ),
+                              // ),
                             ],
                           ),
                         );
@@ -302,40 +304,86 @@ class _KhetiSathiState extends State<KhetiSathi> {
                       vertical: 10, horizontal: 15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.grey,
-
                   ),
                   child: Row(
                     children: [
-                      Flexible(
-                        child: TextField(
-                          controller: _controller,
-                          decoration: const InputDecoration.collapsed(
-                            hintText: 'Type your message...',
+                      Expanded(
+                         child: TextField(
+                            controller: _controller,
+                            decoration: InputDecoration(
+                              hintText: 'Type your message...',
+                              hintStyle: const TextStyle(
+                                color: Colors.grey,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12), 
+                                borderSide: BorderSide(
+                                  color: context.theme.primaryColorDark,
+                                  width: 2.0, 
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide(
+                                  color: context.theme.cardColor,
+                                  width: 2.0,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide(
+                                  color: context.theme.cardColor, 
+                                  width: 2.0,
+                                ),
+                              ),
+                              filled: true, 
+                              fillColor: context.theme.highlightColor, 
+                            ),
+                            style: TextStyle(
+                              color: context.theme.primaryColorDark, 
+                            ),
                           ),
                         ),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          FeatherIcons.mic,
-                          color: isListening
-                              ? Colors.red
-                              : context.theme.focusColor,
+                        SizedBox(width: 2,),
+                        AvatarGlow(
+                          glowColor: context.theme.cardColor, 
+                          animate: isListening, 
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: context.theme.cardColor, 
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(color: context.theme.cardColor)
+                              ),
+                            child: IconButton(
+                              icon: Icon(
+                                FeatherIcons.mic,
+                                color: context.theme.highlightColor,
+                                size: 18,
+                              ),
+                              onPressed: () {
+                                isListening ? _stopListening() : _startListening();
+                              },
+                            ),
+                          ),
                         ),
-                        onPressed: () {
-                          isListening ? _stopListening() : _startListening();
-                        },
-                      ),
-                      IconButton(
-                        icon: const Icon(FeatherIcons.send),
-                        onPressed: () {
-                          final text = _controller.text;
-                          if (text.isNotEmpty) {
-                            _sendMessage(text);
-                            _controller.clear();
-                          }
-                        },
-                      ),
+                        SizedBox(width: 2,),
+                        Container(
+                            decoration: BoxDecoration(
+                              color: context.theme.cardColor, 
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: IconButton(
+                              color: context.theme.highlightColor,
+                              icon: const Icon(FeatherIcons.arrowUpRight,size: 18,),
+                              onPressed: () {
+                                final message = _controller.text.trim();
+                                if (message.isNotEmpty) {
+                                  _sendMessage(message);
+                                  _controller.clear();
+                                }
+                              },
+                            ),
+                        )
                     ],
                   ),
                 ),
