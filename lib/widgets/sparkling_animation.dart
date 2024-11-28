@@ -18,6 +18,7 @@ class _SparklingAnimationState extends State<SparklingAnimation> with SingleTick
   final List<Offset> _velocity = [];
   late AnimationController _controller;
 
+  double minSpeed = 0.1;
   final double maxSpeed = 0.3;  // Slow down the movement
   final int trailLength = 10; // Number of trail positions to store for each star
 
@@ -36,10 +37,17 @@ class _SparklingAnimationState extends State<SparklingAnimation> with SingleTick
       _sparkleTrails.add(initialTrail);
       _sparkleOpacities.add(random.nextDouble() * 0.5 + 0.5);
 
-      _velocity.add(Offset(
-        random.nextDouble() * maxSpeed * 2 - maxSpeed,
-        random.nextDouble() * maxSpeed * 2 - maxSpeed,
-      ));
+      double vx = random.nextDouble() * maxSpeed * 2 - maxSpeed;
+      double vy = random.nextDouble() * maxSpeed * 2 - maxSpeed;
+
+      if (vx.abs() < minSpeed) {
+        vx = vx.isNegative ? -minSpeed : minSpeed;
+      }
+      if (vy.abs() < minSpeed) {
+        vy = vy.isNegative ? -minSpeed : minSpeed;
+      }
+
+      _velocity.add(Offset(vx, vy));
     }
 
     _controller = AnimationController(

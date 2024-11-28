@@ -191,7 +191,7 @@ class _HomePageState extends State<HomePage> {
         automaticallyImplyLeading: false,
         toolbarHeight: 80,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
           children: [
             GestureDetector(
               onTap: () {
@@ -223,14 +223,23 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Row(
-              children: [
-                const Icon(Icons.location_on, color: Colors.black, size: 16,),
-                Text(
-                  "$userDist, $userState",
-                  style: const TextStyle(color: Colors.black, fontSize: 16), 
+            Flexible(
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.location_on, color: Colors.black, size: 14,),
+                    Flexible(
+                      child: Text(
+                        "$userDist, $userState",
+                        style: const TextStyle(color: Colors.black, fontSize: 14),
+                        overflow: TextOverflow.ellipsis, 
+                        maxLines: 1,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
             Container(
               decoration: BoxDecoration(
@@ -365,7 +374,7 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Text(otherFeatures,style: TextStyle(fontSize: 14,color: Colors.grey[700]),),
+                      Flexible(child: Text(otherFeatures,style: TextStyle(fontSize: 14,color: Colors.grey[700]),)),
                       SizedBox(width: 10,),
                       GestureDetector(
                         onTap: (){
@@ -407,18 +416,19 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Align(
                                   alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    dashboardInfo['text'],
-                                    style: TextStyle(color: context.theme.highlightColor, fontSize: 16),
-                                    textAlign: TextAlign.left,
-                                  ),
+                                    child: Text(
+                                      dashboardInfo['text'],
+                                      style: TextStyle(color: context.theme.highlightColor, fontSize: 16),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  
                                 ),
                                 const Spacer(),
                                 Row(
                                   children: [
                                     Image.asset(
-                                      width: 70, 
-                                      height: 70,
+                                      width: 60, 
+                                      height: 60,
                                      dashboardInfo['image'],
                                       fit: BoxFit.cover,
                                     ),

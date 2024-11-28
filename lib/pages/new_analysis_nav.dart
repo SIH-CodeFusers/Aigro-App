@@ -30,7 +30,6 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
   String selectedCrop = "Corn";
 
     final List<String> cropOptions = [
-    "Crops",
     "Corn",
     "Tomato",
     "Rice",

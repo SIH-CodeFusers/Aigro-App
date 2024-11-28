@@ -27,7 +27,6 @@ class _UploadImageState extends State<UploadImage> {
   String selectedCrop = "Corn";
 
     final List<String> cropOptions = [
-    "Crops",
     "Corn",
     "Tomato",
     "Rice",

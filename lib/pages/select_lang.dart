@@ -67,7 +67,7 @@ class _SelectLangState extends State<SelectLang> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Select your Language",
-                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
                           ),
                         ),
                       ),

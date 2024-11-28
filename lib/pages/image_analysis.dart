@@ -48,7 +48,6 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         final file = File(filePath);
         await file.writeAsBytes(pngBytes);
         
-        // Show success message
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Image saved successfully!'),
@@ -56,7 +55,6 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
           ),
         );
 
-        // Show dialog to open file
         showDialog(
         context: context,
         builder: (BuildContext context) {

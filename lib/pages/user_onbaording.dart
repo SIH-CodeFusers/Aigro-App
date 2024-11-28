@@ -242,7 +242,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "What is your name?",
-                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 24),
+                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
                           ),
                         ),
                       ),
@@ -361,7 +361,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "What is your contact number?",
-                          style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                          style: TextStyle(color: context.theme.primaryColorDark, fontSize: 20),
                         ),
                       ),
                     ),
@@ -481,7 +481,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Which country are you from ?",
-                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 20),
                           ),
                         ),
                       ),
@@ -606,7 +606,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Select your State",
-                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 20),
                           ),
                         ),
                       ),
@@ -730,7 +730,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Select your District",
-                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 20),
                           ),
                         ),
                       ),
@@ -855,7 +855,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             "Select your Block",
-                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 20),
                           ),
                         ),
                       ),
@@ -990,7 +990,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "What is your pincode ?",
-                          style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
+                          style: TextStyle(color: context.theme.primaryColorDark, fontSize: 20),
                         ),
                       ),
                     ),

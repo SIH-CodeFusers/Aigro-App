@@ -66,7 +66,7 @@ class _GetStartedState extends State<GetStarted> {
                      const Center(
                        child: Text(
                           "Cultivating Crops for a",
-                          style: TextStyle(fontSize: 30,fontFamily: 'FontMain',letterSpacing: 1,inherit: false,color: Colors.black, ),
+                          style: TextStyle(fontSize: 28,fontFamily: 'FontMain',letterSpacing: 1,inherit: false,color: Colors.black, ),
                         ),
                      ),
                       Center(
@@ -76,7 +76,7 @@ class _GetStartedState extends State<GetStarted> {
                               TextSpan(
                                 text: "greener ",
                                 style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 28,
                                   fontFamily: 'FontMain',
                                   letterSpacing: 1,
                                   fontWeight: FontWeight.w600,
@@ -87,7 +87,7 @@ class _GetStartedState extends State<GetStarted> {
                               const TextSpan(
                                 text: "tommorow",
                                 style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 28,
                                   fontFamily: 'FontMain',
                                   letterSpacing: 1,
                                   inherit: false,
