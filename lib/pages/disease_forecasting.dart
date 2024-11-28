@@ -231,60 +231,68 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: imageUrl.isNotEmpty
-                        ? Image.network(
-                            width: double.infinity,
-                            height: 150,
-                            fit: BoxFit.cover,
-                            imageUrl)
-                        : Image.network(
-                            width: double.infinity,
-                            height: 150,
-                            fit: BoxFit.cover,
-                            placeholderImage),
-                  ),
-                  SizedBox(height: 10),
                   ...alert['diseaseDetails'].map<Widget>((disease) {
+                    final imageUrl = (disease['images'] as List).isNotEmpty 
+                        ? disease['images'][0] 
+                        : placeholderImage;
+
                     return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.network(
+                              imageUrl,
+                              width: double.infinity,
+                              height: 150,
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.network(
+                                  placeholderImage,
+                                  width: double.infinity,
+                                  height: 150,
+                                  fit: BoxFit.cover,
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 10),
                           Row(
                             children: [
                               Text(
                                 '${alert['cropName']}',
                                 style: TextStyle(
                                   color: context.theme.primaryColorDark,
-                                  fontSize: 24,
+                                  fontSize: 22,
                                 ),
                               ),
                               Spacer(),
                               Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                 decoration: BoxDecoration(
                                   color: getRiskColor(disease['count']),
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
-                                  '${findRisk(int.parse(disease['count'].toString()))} Risk',
+                                  '${findRisk(int.parse(disease['count'].toString()))} risk',
                                 ),
-                              )
+                              ),
                             ],
                           ),
                           Text(
                             '${toTitleCase(disease['diseaseName'])}',
                             style: TextStyle(
                               color: context.theme.primaryColorDark,
-                              fontSize: 18,
+                              fontSize: 16,
                             ),
                           ),
                         ],
                       ),
                     );
                   }).toList(),
+
                 ],
               ),
             ),
