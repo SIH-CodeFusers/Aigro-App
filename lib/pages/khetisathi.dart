@@ -16,29 +16,28 @@ class KhetiSathi extends StatefulWidget {
 }
 
 class _KhetiSathiState extends State<KhetiSathi> {
-  int count=0;
-  bool imgup=false;
-  bool suggest=false;
+  int count = 0;
+  bool imgup = false;
+  bool suggest = false;
+  bool isTyping = false; // Indicates if the bot is typing
   
   final List<Map<String, dynamic>> _messages = [];
   final TextEditingController _controller = TextEditingController();
 
   final List<String> _predefinedBotMessages = [
-    'Hi, I am your Krishi AI, I am a chatbot created by team Kheti Sathi to assist farmers like you with your queries. How can I help you today ?',
+    'Hi, I am your Krishi AI, I am a chatbot created by team Kheti Sathi to assist farmers like you with your queries. How can I help you today?',
   ];
-
-
 
   void _sendInitialBotMessage(String message) {
     Timer(const Duration(seconds: 0), () {
       _streamBotMessage(message);
     });
-
   }
 
   void _sendMessage(String message) {
     setState(() {
-      _messages.add({'sender': 'user', 'message': message}); 
+      _messages.add({'sender': 'user', 'message': message});
+      isTyping = true; // Bot is "typing"
     });
     _sendGemini(message);
   }
@@ -63,7 +62,10 @@ class _KhetiSathiState extends State<KhetiSathi> {
         });
         index++;
       } else {
-        timer.cancel(); 
+        timer.cancel();
+        setState(() {
+          isTyping = false; // Bot finished typing
+        });
       }
     });
   }
@@ -74,14 +76,15 @@ class _KhetiSathiState extends State<KhetiSathi> {
       apiKey: GEMINI_API_KEY,
     );
 
-    final prompt = 'You are a helpful chatbot, your task is to answer farming related questions. You have been made by team Kheti Sathi consisting of team members Arunava and Pretisha in Frontend, Satyaki in Full Stack Development, Rishi in Machine Learning and Priyanshu and Shinjan in App development. just return answer in plain text strictly and no markdown. Here is my question \n $message';
+    final prompt =
+        'You are a helpful chatbot, your task is to answer farming related questions. You have been made by team Kheti Sathi consisting of team members Arunava and Pretisha in Frontend, Satyaki in Full Stack Development, Rishi in Machine Learning and Priyanshu and Shinjan in App development. Just return the answer in plain text strictly and no markdown. Here is my question: $message';
+
     final content = [
       Content.text(prompt),
     ];
 
     final response = await model.generateContent(content);
-    _streamBotMessage(response.text!); 
-
+    _streamBotMessage(response.text!);
   }
 
   @override
@@ -93,9 +96,9 @@ class _KhetiSathiState extends State<KhetiSathi> {
   FlutterTts flutterTts = FlutterTts();
 
   _speak(String text) async {
-    await flutterTts.setLanguage("en-US"); 
-    await flutterTts.setPitch(0.7); 
-    await flutterTts.speak(text); 
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak(text);
   }
 
   @override
@@ -104,15 +107,13 @@ class _KhetiSathiState extends State<KhetiSathi> {
       extendBodyBehindAppBar: true,
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-      
-      backgroundColor: Colors.transparent,
-      
+        backgroundColor: Colors.transparent,
         title: const Text('Your Krishi AI'),
       ),
       body: Stack(
         children: [
-           CustomPaint(
-            size: Size.infinite, // Take the full available space
+          CustomPaint(
+            size: Size.infinite,
             painter: GridPatternPainter(),
           ),
           Padding(
@@ -122,33 +123,61 @@ class _KhetiSathiState extends State<KhetiSathi> {
                 const SizedBox(height: 30),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: _messages.length,
+                    itemCount: _messages.length + (isTyping ? 1 : 0),
                     itemBuilder: (context, index) {
+                      if (isTyping && index == _messages.length) {
+                        // Loader message
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              CircularProgressIndicator(
+                                strokeWidth: 2.0,
+                                color: context.theme.primaryColorDark,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Krishi AI is typing...',
+                                style: TextStyle(
+                                  color: context.theme.primaryColorDark,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+
                       final isUser = _messages[index]['sender'] == 'user';
-                      // final isImage = _messages[index]['type'] == 'image';
                       final name = isUser ? 'You' : 'Krishi AI';
-                      final time =
-                          DateTime.now().toLocal().toString().substring(11, 16);
-          
+                      final time = DateTime.now()
+                          .toLocal()
+                          .toString()
+                          .substring(11, 16);
+
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
-                          crossAxisAlignment:
-                              isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                          crossAxisAlignment: isUser
+                              ? CrossAxisAlignment.end
+                              : CrossAxisAlignment.start,
                           children: [
                             Align(
-                              alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+                              alignment: isUser
+                                  ? Alignment.centerRight
+                                  : Alignment.centerLeft,
                               child: ConstrainedBox(
-                                  constraints: const BoxConstraints(
+                                constraints: const BoxConstraints(
                                   maxWidth: 250,
                                 ),
                                 child: GestureDetector(
-                                  onTap: (){
-                                    if(!isUser)
-                                     _speak(_messages[index]['message']!);
+                                  onTap: () {
+                                    if (!isUser)
+                                      _speak(_messages[index]['message']!);
                                   },
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 12, horizontal: 20),
                                     decoration: BoxDecoration(
                                       color: isUser
                                           ? context.theme.cardColor
@@ -168,7 +197,8 @@ class _KhetiSathiState extends State<KhetiSathi> {
                                             ),
                                     ),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Row(
                                           mainAxisSize: MainAxisSize.min,
@@ -178,32 +208,37 @@ class _KhetiSathiState extends State<KhetiSathi> {
                                                 name,
                                                 style: TextStyle(
                                                   color: isUser
-                                                      ? context.theme.highlightColor
+                                                      ? context.theme
+                                                          .highlightColor
                                                       : context.theme.cardColor,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 12,
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(width: 10,),
-                                            if(!isUser)
-                                            CircleAvatar(
-                                              radius: 12,
-                                              backgroundColor: context.theme.focusColor,
-                                              child: const Icon(
-                                                FeatherIcons.volume2,
-                                                size: 12,
+                                            const SizedBox(width: 10),
+                                            if (!isUser)
+                                              CircleAvatar(
+                                                radius: 12,
+                                                backgroundColor: context
+                                                    .theme.focusColor,
+                                                child: const Icon(
+                                                  FeatherIcons.volume2,
+                                                  size: 12,
+                                                ),
                                               ),
-                                            ),
                                           ],
                                         ),
                                         const SizedBox(height: 4),
-                                        Text(                   
-                                          _messages[index]['message']!,  
-                                          style: TextStyle(color: isUser
-                                                ? context.theme.highlightColor
-                                                : context.theme.primaryColorDark,
-                                                fontSize: 12),         
+                                        Text(
+                                          _messages[index]['message']!,
+                                          style: TextStyle(
+                                              color: isUser
+                                                  ? context
+                                                      .theme.highlightColor
+                                                  : context
+                                                      .theme.primaryColorDark,
+                                              fontSize: 12),
                                         )
                                       ],
                                     ),
@@ -225,75 +260,72 @@ class _KhetiSathiState extends State<KhetiSathi> {
                     },
                   ),
                 ),
-                
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    decoration: BoxDecoration(
-                      
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                         child: TextField(
-                            controller: _controller,
-                            decoration: InputDecoration(
-                              hintText: 'Type your message...',
-                              hintStyle: const TextStyle(
-                                color: Colors.grey,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12), 
-                                borderSide: BorderSide(
-                                  color: context.theme.primaryColorDark,
-                                  width: 2.0, 
-                                ),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                  color: context.theme.cardColor,
-                                  width: 2.0,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide(
-                                  color: context.theme.cardColor, 
-                                  width: 2.0,
-                                ),
-                              ),
-                              filled: true, 
-                              fillColor: context.theme.highlightColor, 
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10, horizontal: 15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _controller,
+                          decoration: InputDecoration(
+                            hintText: 'Type your message...',
+                            hintStyle: const TextStyle(
+                              color: Colors.grey,
                             ),
-                            style: TextStyle(
-                              color: context.theme.primaryColorDark, 
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: context.theme.primaryColorDark,
+                                width: 2.0,
+                              ),
                             ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: context.theme.cardColor,
+                                width: 2.0,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: context.theme.cardColor,
+                                width: 2.0,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: context.theme.highlightColor,
+                          ),
+                          style: TextStyle(
+                            color: context.theme.primaryColorDark,
                           ),
                         ),
-                        const SizedBox(width: 5,),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: context.theme.cardColor, 
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: IconButton(
-                            color: context.theme.highlightColor,
-                            icon: const Icon(FeatherIcons.arrowRight),
-                            onPressed: () {
-                              final message = _controller.text.trim();
-                              if (message.isNotEmpty) {
-                                _sendMessage(message);
-                                // _sendGemini(message);
-                                _controller.clear();
-                              }
-                            },
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                      const SizedBox(width: 5),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: context.theme.cardColor,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: IconButton(
+                          color: context.theme.highlightColor,
+                          icon: const Icon(FeatherIcons.arrowRight),
+                          onPressed: () {
+                            final message = _controller.text.trim();
+                            if (message.isNotEmpty) {
+                              _sendMessage(message);
+                              _controller.clear();
+                            }
+                          },
+                        ),
+                      )
+                    ],
                   ),
-   
+                ),
               ],
             ),
           ),
@@ -301,6 +333,4 @@ class _KhetiSathiState extends State<KhetiSathi> {
       ),
     );
   }
-
-   
 }
