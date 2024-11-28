@@ -7,6 +7,7 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class KhetiSathi extends StatefulWidget {
   const KhetiSathi({super.key});
@@ -20,9 +21,12 @@ class _KhetiSathiState extends State<KhetiSathi> {
   bool imgup = false;
   bool suggest = false;
   bool isTyping = false; // Indicates if the bot is typing
-  
+  bool isListening = false; // Indicates if the mic is actively listening
+  String listeningText = ''; // Holds the current listening text
+
   final List<Map<String, dynamic>> _messages = [];
   final TextEditingController _controller = TextEditingController();
+  final stt.SpeechToText _speechToText = stt.SpeechToText();
 
   final List<String> _predefinedBotMessages = [
     'Hi, I am your Krishi AI, I am a chatbot created by team Kheti Sathi to assist farmers like you with your queries. How can I help you today?',
@@ -87,18 +91,50 @@ class _KhetiSathiState extends State<KhetiSathi> {
     _streamBotMessage(response.text!);
   }
 
-  @override
-  void initState() {
-    _sendInitialBotMessage(_predefinedBotMessages[count++]);
-    super.initState();
-  }
-
   FlutterTts flutterTts = FlutterTts();
 
   _speak(String text) async {
     await flutterTts.setLanguage("en-US");
     await flutterTts.setPitch(0.7);
     await flutterTts.speak(text);
+  }
+
+  Future<void> _startListening() async {
+    bool available = await _speechToText.initialize(
+      onStatus: (status) => debugPrint('Status: $status'),
+      onError: (error) => debugPrint('Error: $error'),
+    );
+
+    if (available) {
+      setState(() {
+        isListening = true;
+        listeningText = 'Listening...'; // Indicate listening mode
+      });
+      _speechToText.listen(
+        onResult: (result) {
+          setState(() {
+            listeningText = result.recognizedWords;
+            _controller.text = result.recognizedWords;
+          });
+        },
+      );
+    } else {
+      debugPrint('Speech recognition not available');
+    }
+  }
+
+  Future<void> _stopListening() async {
+    await _speechToText.stop();
+    setState(() {
+      isListening = false;
+      listeningText = ''; // Clear listening text
+    });
+  }
+
+  @override
+  void initState() {
+    _sendInitialBotMessage(_predefinedBotMessages[count++]);
+    super.initState();
   }
 
   @override
@@ -123,10 +159,10 @@ class _KhetiSathiState extends State<KhetiSathi> {
                 const SizedBox(height: 30),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: _messages.length + (isTyping ? 1 : 0),
+                    itemCount: _messages.length + (isTyping || isListening ? 1 : 0),
                     itemBuilder: (context, index) {
-                      if (isTyping && index == _messages.length) {
-                        // Loader message
+                      if ((isTyping || isListening) && index == _messages.length) {
+                        // Loader message for typing or listening
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
@@ -137,7 +173,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
                               ),
                               const SizedBox(width: 8),
                               Text(
-                                'Krishi AI is typing...',
+                                isListening ? listeningText : 'Krishi AI is typing...',
                                 style: TextStyle(
                                   color: context.theme.primaryColorDark,
                                   fontSize: 12,
@@ -172,8 +208,9 @@ class _KhetiSathiState extends State<KhetiSathi> {
                                 ),
                                 child: GestureDetector(
                                   onTap: () {
-                                    if (!isUser)
+                                    if (!isUser) {
                                       _speak(_messages[index]['message']!);
+                                    }
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
@@ -264,65 +301,41 @@ class _KhetiSathiState extends State<KhetiSathi> {
                   padding: const EdgeInsets.symmetric(
                       vertical: 10, horizontal: 15),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.grey,
+
                   ),
                   child: Row(
                     children: [
-                      Expanded(
+                      Flexible(
                         child: TextField(
                           controller: _controller,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration.collapsed(
                             hintText: 'Type your message...',
-                            hintStyle: const TextStyle(
-                              color: Colors.grey,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
-                                color: context.theme.primaryColorDark,
-                                width: 2.0,
-                              ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
-                                color: context.theme.cardColor,
-                                width: 2.0,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
-                                color: context.theme.cardColor,
-                                width: 2.0,
-                              ),
-                            ),
-                            filled: true,
-                            fillColor: context.theme.highlightColor,
-                          ),
-                          style: TextStyle(
-                            color: context.theme.primaryColorDark,
                           ),
                         ),
                       ),
-                      const SizedBox(width: 5),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: context.theme.cardColor,
-                          borderRadius: BorderRadius.circular(8),
+                      IconButton(
+                        icon: Icon(
+                          FeatherIcons.mic,
+                          color: isListening
+                              ? Colors.red
+                              : context.theme.focusColor,
                         ),
-                        child: IconButton(
-                          color: context.theme.highlightColor,
-                          icon: const Icon(FeatherIcons.arrowRight),
-                          onPressed: () {
-                            final message = _controller.text.trim();
-                            if (message.isNotEmpty) {
-                              _sendMessage(message);
-                              _controller.clear();
-                            }
-                          },
-                        ),
-                      )
+                        onPressed: () {
+                          isListening ? _stopListening() : _startListening();
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(FeatherIcons.send),
+                        onPressed: () {
+                          final text = _controller.text;
+                          if (text.isNotEmpty) {
+                            _sendMessage(text);
+                            _controller.clear();
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ),
