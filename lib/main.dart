@@ -10,6 +10,7 @@ import 'package:aigro/pages/offline_detection.dart';
 import 'package:aigro/pages/upload_image.dart';
 import 'package:aigro/pages/user_onbaording.dart';
 import 'package:aigro/pages/weather_report.dart';
+import 'package:aigro/services/notifictation_service.dart';
 import 'package:aigro/utils/authenticate.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -31,12 +32,13 @@ void main() async {
   await Hive.openBox("Start_db");
   await Hive.openBox("BasicInfo-db");
   await Hive.openBox("Language_db");
-  await Firebase.initializeApp(
-   
-);
-  runApp(
-    const MyApp(), 
-  );
+  await Firebase.initializeApp();
+  
+  // Initialize notification service
+  final notificationService = NotificationService();
+  await notificationService.initialize();
+  
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -64,46 +66,40 @@ class _MyAppState extends State<MyApp> {
         builder: (context, _) {
           final themeProvider = Provider.of<ThemeProvider>(context);
 
-    
-    return MaterialApp(
-      
-      themeMode: themeProvider.themeMode,
-      theme: MyThemes.lightTheme,
-      debugShowCheckedModeBanner: false,              
-      initialRoute: "/",   
-      builder: (context, child) {
-          return MediaQuery(
-            child: child!,
-            data: MediaQuery.of(context).copyWith(
-              textScaleFactor: 1.0, 
-            ),
+          return MaterialApp(
+            themeMode: themeProvider.themeMode,
+            theme: MyThemes.lightTheme,
+            debugShowCheckedModeBanner: false,
+            initialRoute: "/",
+            builder: (context, child) {
+              return MediaQuery(
+                child: child!,
+                data: MediaQuery.of(context).copyWith(
+                  textScaleFactor: 1.0,
+                ),
+              );
+            },
+            routes: {
+              "/": (context) => const Authenticate(),
+              Myroutes.getStartedRoute: (context) => const GetStarted(),
+              Myroutes.onbaordingRoute: (context) => const UserOnboarding(),
+              Myroutes.homeRoute: (context) => const HomePage(),
+              Myroutes.aboutUsRoute: (context) => const AboutUs(),
+              Myroutes.cropListRoute: (context) => const CropListPage(),
+              Myroutes.profileRoute: (context) => const ProfilePage(),
+              Myroutes.newAnalysisRoute: (context) => const NewAnalysisNav(),
+              Myroutes.khetiSathiRoute: (context) => const KhetiSathi(),
+              Myroutes.diseaseMapRoute: (context) => const DiseaseMapping(),
+              Myroutes.offlineDetectionRoute: (context) => OfflineDetection(),
+              Myroutes.weatherReportRoute: (context) => const WeatherReport(),
+              Myroutes.diseaseForecastRoute: (context) => const DiseaseForecasting(),
+              Myroutes.imageAnalysisRoute: (context) => ImageAnalysis(),
+              Myroutes.uploadImageRoute: (context) => UploadImage(),
+              Myroutes.learningResourcesRoute: (context) => LearningResources(),
+              Myroutes.communityRoute: (context) => const Community(),
+              Myroutes.schemesRoute: (context) => GovernmentSchemes(),
+            },
           );
-        },                          
-      
-      routes: {                                       
-       "/": (context) => const Authenticate(),                  
-        Myroutes.getStartedRoute: (context) => const GetStarted(),
-        Myroutes.onbaordingRoute: (context) => const UserOnboarding(),
-        Myroutes.homeRoute: (context) => const HomePage(),
-        Myroutes.aboutUsRoute: (context) => const AboutUs(),
-        Myroutes.cropListRoute: (context) => const CropListPage(),
-        Myroutes.profileRoute: (context) => const ProfilePage(),
-        Myroutes.newAnalysisRoute: (context) => const NewAnalysisNav(),
-        Myroutes.khetiSathiRoute: (context) => const KhetiSathi(),
-        // Myroutes.cropDetailsRoute: (context) => CropDetails(),
-
-        Myroutes.diseaseMapRoute: (context) => const DiseaseMapping(),
-        Myroutes.offlineDetectionRoute: (context) => OfflineDetection(),
-        Myroutes.weatherReportRoute: (context) => const WeatherReport(),
-        Myroutes.diseaseForecastRoute: (context) => const DiseaseForecasting(),
-        Myroutes.imageAnalysisRoute: (context) => ImageAnalysis(),
-        Myroutes.uploadImageRoute: (context) => UploadImage(),
-        Myroutes.learningResourcesRoute: (context) => LearningResources(),
-        Myroutes.communityRoute: (context) => const Community(),
-        Myroutes.schemesRoute: (context) => GovernmentSchemes(),
-      },
-    );   
-  }
-  );
+        },
+      );
 }
-
