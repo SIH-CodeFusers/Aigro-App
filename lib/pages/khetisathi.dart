@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
@@ -164,23 +165,22 @@ class _KhetiSathiState extends State<KhetiSathi> {
                     itemCount: _messages.length + (isTyping? 1 : 0),
                     itemBuilder: (context, index) {
                       if ((isTyping) && index == _messages.length) {
-                        // Loader message for typing or listening
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              CircularProgressIndicator(
-                                strokeWidth: 2.0,
-                                color: context.theme.primaryColorDark,
+                              Shimmer.fromColors(
+                                baseColor: Colors.grey[400]!,
+                                highlightColor: Colors.grey[200]!,
+                                child: Text(
+                                  'Generating...',
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                               ),
                               const SizedBox(width: 8),
-                              // Text(
-                              //   isListening ? listeningText : 'Krishi AI is typing...',
-                              //   style: TextStyle(
-                              //     color: context.theme.primaryColorDark,
-                              //     fontSize: 12,
-                              //   ),
-                              // ),
                             ],
                           ),
                         );
@@ -309,9 +309,10 @@ class _KhetiSathiState extends State<KhetiSathi> {
                     children: [
                       Expanded(
                          child: TextField(
+                            cursorColor: context.theme.cardColor,
                             controller: _controller,
                             decoration: InputDecoration(
-                              hintText: 'Type your message...',
+                              hintText: 'Enter your question...',
                               hintStyle: const TextStyle(
                                 color: Colors.grey,
                               ),

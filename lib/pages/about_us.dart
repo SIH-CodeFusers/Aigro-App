@@ -369,7 +369,7 @@ class _AboutUsState extends State<AboutUs> {
                       child: Text(
                         fnqTitle,
                         style: const TextStyle(
-                          fontSize: 24,
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF004D3F),
                         ),
@@ -551,7 +551,7 @@ Widget _buildAccordionWidget() {
             Flexible(
               child: Text(
                 item["title"]!,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 14),
               ),
             ),
           ],
@@ -571,15 +571,16 @@ Widget _buildAccordionWidget() {
               ),
               Flexible(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.only(left: 16.0,right: 16,bottom: 10),
                   child: Text(
                     item["content"]!,
-                    style: const TextStyle(height: 1.5),
+                    style: const TextStyle(height: 1.5,fontSize: 12),
                   ),
                 ),
               ),
             ],
           ),
+          
         ],
       );
     }).toList(),
