@@ -52,7 +52,7 @@ class _GetStartedState extends State<GetStarted> {
                           padding: const EdgeInsets.all(15),
                           child: ClipOval(
                             child: Image.asset(
-                              "assets/images/get_started.jpeg",
+                              "assets/images/get_started.png",
                               width: MediaQuery.of(context).size.width*0.75,
                               height: MediaQuery.of(context).size.width*0.75,
                               fit: BoxFit.cover,

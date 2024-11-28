@@ -59,24 +59,24 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Text(
+            title:  Text(
               'Image Saved',
-              style: TextStyle(color: Colors.green),
+              style: TextStyle(color: context.theme.cardColor),
             ),
             content: const Text('Would you like to open the saved image?'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel', style: TextStyle(color: Colors.green)),
+                child: Text('Cancel', style: TextStyle(color: context.theme.cardColor)),
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                   OpenFile.open(filePath);
                 },
-                child: const Text('Open', style: TextStyle(color: Colors.white)),
+                child:  Text('Open', style: TextStyle(color: context.theme.highlightColor)),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
+                  backgroundColor: context.theme.cardColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -105,13 +105,12 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         child: Container(
           padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Colors.green, Colors.lightGreen],
+            gradient:  LinearGradient(
+              colors: [context.theme.cardColor, Colors.lightGreen],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: Colors.green.shade800, width: 2),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -121,7 +120,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                 "Crop Analysis Result",
                 style: TextStyle(
                   fontSize: 24,
-                  color: Colors.white,
+                  color: context.theme.highlightColor,
                   fontWeight: FontWeight.bold,
                   shadows: [
                     Shadow(color: Colors.black26, blurRadius: 5, offset: Offset(2, 2)),
@@ -255,7 +254,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_analysisData != null && _analysisData!['results'] != null) {
-            final result = _analysisData!['results'][0];
+final result = _analysisData!['results'].last;
             final cropName = result['cropName'] ?? "Unknown";
             final diseaseName = result['diseaseName'] ?? "Unknown";
             final symptoms = result['symptoms'] ?? "Unknown";
@@ -290,10 +289,10 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                           );
                         }
                       },
-                      icon: const Icon(Icons.save_alt, color: Colors.white),
-                      label: const Text('Save as PNG', style: TextStyle(color: Colors.white)),
+                      icon:  Icon(Icons.save_alt, color: context.theme.highlightColor),
+                      label:  Text('Save as PNG', style: TextStyle(color: context.theme.highlightColor)),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: context.theme.cardColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),

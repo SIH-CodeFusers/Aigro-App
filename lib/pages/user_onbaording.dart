@@ -30,7 +30,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
 
   int questionInd = 0;
   int totalQuestions = 8;
-    // Add a flag to control the error state
+
   bool _isError = false;
 
   bool olduser = false;

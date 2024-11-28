@@ -185,7 +185,7 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                 Text(
                   "🌱 Create New Analysis",
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
                     color: context.theme.primaryColorDark,
                   ),

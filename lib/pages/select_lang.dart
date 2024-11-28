@@ -12,12 +12,11 @@ class SelectLang extends StatefulWidget {
 }
 
 class _SelectLangState extends State<SelectLang> {
-    final List<String> languages = [
+  final List<String> languages = [
     "English",
-    "Hindi",
-    "Bengali",
-    "Telegu",
   ];
+  bool _isError = false;
+
 
   FlutterTts flutterTts = FlutterTts();
 
@@ -114,14 +113,32 @@ class _SelectLangState extends State<SelectLang> {
                   ),
                 ),
                 const SizedBox(height: 20),
+                if (_isError==true)
+                const Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    "Please select a block.",
+                    style: TextStyle(color: Colors.red, fontSize: 14),
+                  ),
+                ),
+                const SizedBox(height: 10),
                 Row(
                   children: [
-                    Expanded(
+                    Expanded( 
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, '/getStarted');
-                        },
-                        child: NextButton(
+                            if (selectedLanguage!=null) {
+                              setState(() {
+                                _isError = false; 
+                                Navigator.pushNamed(context, '/getStarted'); 
+                              });
+                            } else {
+                              setState(() {
+                                _isError = true;  
+                              });
+                            }
+                          },
+                        child: const NextButton(
                           text: "Proceed",
                         ),
                       ),
