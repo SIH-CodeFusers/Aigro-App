@@ -29,55 +29,19 @@ class _UserOnboardingState extends State<UserOnboarding> {
 
 
   int questionInd = 0;
-  int totalQuestions = 8;
+  int totalQuestions = 7;
 
   bool _isError = false;
 
   bool olduser = false;
   late StreamSubscription<bool> keyboardSubscription;
-  // final List<String> items =
-  //     List<String>.generate(100, (index) => "${index + 1}");
-  // late FixedExtentScrollController _scrollController;
   final _phonecontroller = TextEditingController();
   final _namecontroller = TextEditingController();
   final _pincontroller = TextEditingController();
   
 
   final List<String> states = [
-    "Andhra Pradesh",
-    "Arunachal Pradesh",
-    "Assam",
-    "Bihar",
-    "Chhattisgarh",
-    "Goa",
-    "Gujarat",
-    "Haryana",
-    "Himachal Pradesh",
-    "Jharkhand",
-    "Karnataka",
-    "Kerala",
-    "Madhya Pradesh",
-    "Maharashtra",
-    "Manipur",
-    "Meghalaya",
-    "Mizoram",
-    "Nagaland",
-    "Odisha",
-    "Punjab",
-    "Rajasthan",
-    "Sikkim",
-    "Tamil Nadu",
-    "Telangana",
-    "Tripura",
-    "Uttar Pradesh",
-    "Uttarakhand",
     "West Bengal",
-    "Andaman and Nicobar Islands",
-    "Chandigarh",
-    "Dadra and Nagar Haveli and Daman and Diu",
-    "Lakshadweep",
-    "Delhi",
-    "Puducherry",
   ];
 
   String? selectedState;
@@ -86,7 +50,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
     "India",
   ];
 
-  String? selectedCountry;
+  String selectedCountry="India";
 
   Map<String, List<String>> districtData = {
     "PURULIA": ["PUNCHA", "BPURULIA-I", "MANBAZAR-II"],
@@ -175,21 +139,18 @@ class _UserOnboardingState extends State<UserOnboarding> {
                 return PhoneSelect(context);
               } 
               else if (questionInd == 2) {
-                return CountrySelect(context);
-              }
-              else if (questionInd == 3) {
                 return StateSelect(context);
               }
-              else if (questionInd == 4) {
+              else if (questionInd == 3) {
                 return DistrictSelect(context);
               }
-              else if (questionInd == 5) {
+              else if (questionInd == 4) {
                 return BlockSelect(context);
               }
-              else if (questionInd == 6) {
+              else if (questionInd == 5) {
                 return PinSelect(context);
               }
-              else if (questionInd == 7) {
+              else if (questionInd == 6) {
                 return CropSelect(context);
               }
               else {
@@ -444,130 +405,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
     );
   }
 
-  //State
-  Widget CountrySelect(BuildContext context) {
-    return Column(
-      children: [
-        ProgressIndicatorWidget(
-          questionInd: questionInd,
-          totalQuestions: totalQuestions,
-          onBackButtonPressed: _handleBackButtonPressed,
-        ),
-        const Spacer(),
-        Center(
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-              color: context.theme.highlightColor,
-              borderRadius: BorderRadius.circular(5),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1), 
-                  blurRadius: 10, 
-                  offset: const Offset(0, 0), 
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  children: [
-                    Flexible(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Which country are you from ?",
-                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 20),
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                        onTap: (){
-                          _speak("Which country are you from ?");
-                        },
-                        child: voiceIcon(context),
-                      )
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: context.theme.primaryColorDark, 
-                      width: 2.0, 
-                    ),
-                  ),
-                  child: DropdownButton<String>(
-                    value: selectedCountry,
-                    hint: Text(
-                      'Select a Country',
-                      style: TextStyle(color: context.theme.primaryColorDark),
-                    ),
-                    isExpanded: true,
-                    items: countries.map((String state) {
-                      return DropdownMenuItem<String>(
-                        value: state,
-                        child: Text(state, style: TextStyle(color: context.theme.primaryColorDark)),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedCountry = newValue;
-                      });
-                    },
-                    style: TextStyle(color: context.theme.primaryColorDark, fontSize: 18),
-                    underline: Container(),
-                    iconEnabledColor: context.theme.primaryColorDark, 
-                  ),
-                ),
-                const SizedBox(height: 20),
-                if (_isError==true)
-                const Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    "Please select a country.",
-                    style: TextStyle(color: Colors.red, fontSize: 14),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded( 
-                      child: GestureDetector(
-                        onTap: () {
-                            if (selectedCountry!=null) {
-                              setState(() {
-                                questionInd += 1;
-                                _isError = false;  
-                              });
-                            } else {
-                              setState(() {
-                                _isError = true;  
-                              });
-                            }
-                          },
-                        child: NextButton(
-                          text: "Next",
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-        const Spacer(),
-      ],
-    );
-  }
+ 
 
   //State
   Widget StateSelect(BuildContext context) {

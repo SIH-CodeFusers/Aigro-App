@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:aigro/local_db/db.dart';
+import 'package:aigro/pages/crop_details.dart';
 import 'package:aigro/secret.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:hive/hive.dart';
@@ -18,7 +19,7 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
   bool isLoading = true;
   bool exists = false;
   List alerts = [];
-  String imageUrl = "";
+  List<Map<String, dynamic>> cropDiseaseList = [];
 
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
@@ -28,57 +29,78 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
     super.initState();
     bdb.loadDataInfo(); 
     fetchAlerts();
+    loadCropDiseases();
   }
 
   String findRisk(int value) {
     if (value < 7) {
-      return "low";
+      return "Low Risk";
     } else if (value >= 7 && value <= 15) {
-      return "medium";
+      return "Rising";
     } else {
-      return "high";
+      return "High Warning";
     }
   }
 
   Color getRiskColor(int count) {
     if (count < 7) {
-      return const Color.fromARGB(255, 96, 255, 102); 
+      return const Color.fromARGB(255, 208, 255, 210); 
     } else if (count >= 7 && count <= 15) {
-      return Colors.yellow;
+      return Color.fromRGBO(241, 204, 158, 1);
     } else {
       return Colors.red;
     }
   }
 
+  String toSentenceCase(String input) {
+    if (input.isEmpty) return input;
+    return input[0].toUpperCase() + input.substring(1).toLowerCase();
+  }
+
   String placeholderImage = 'https://placehold.co/600x400/EEE/31343C';
   late Future<List<Map<String, String>>> cropDiseases;
 
-  Future<List<Map<String, String>>> loadCropDiseases() async {
-    final String data = await DefaultAssetBundle.of(context)
+  Future<void> loadCropDiseases() async {
+    final data = await DefaultAssetBundle.of(context)
         .loadString('assets/others/crop_disease_18nov.json');
     final Map<String, dynamic> jsonResult = json.decode(data);
 
-    return (jsonResult['cropDiseases'] as List)
-        .expand((crop) => (crop['diseaseDetails'] as List)
-            .map((disease) => {
+    setState(() {
+      cropDiseaseList = (jsonResult['cropDiseases'] as List)
+          .expand((crop) => (crop['diseaseDetails'] as List).map((disease) {
+                return {
                   "diseaseName": disease['diseaseName'] as String,
+                  "scientificName": disease['scientificName'] as String,
                   "category": disease['category'] as String,
-                  "image": (disease['images'] as List).isNotEmpty
-                      ? disease['images'][0] as String
-                      : '',
-                }))
-        .toList();
+                  "images": (disease['images'] as List).map((img) => img as String).toList(),
+                  "symptoms": disease['symptoms'] as String? ?? '',
+                  "causes": disease['causes'] as String? ?? '',
+                  "remedies":
+                      (disease['remedies'] as List?)?.map((r) => r as String).toList() ?? [],
+                  "summary":
+                      (disease['summary'] as List?)?.map((r) => r as String).toList() ?? [],
+                  "chemicalControl": disease['chemicalControl'] as String? ?? '',
+                  "organicControl": disease['organicControl'] as String? ?? '',
+                  "cropName": crop['cropName'] as String,
+                  "fertilizers": (disease['fertilisers'] as List?)?.map((fertilizer) {
+                    return {
+                      "name": fertilizer['name'] as String,
+                      "products": (fertilizer['products'] as List).map((product) {
+                        return {
+                          "companyName": product['companyName'] as String,
+                          "productImage": product['productImage'] as String,
+                          "price": product['price'] as String,
+                          "id": product['id'] as String,
+                        };
+                      }).toList(),
+                      "id": fertilizer['id'] as String,
+                    };
+                  }).toList() ?? [],
+                };
+              }))
+          .toList();
+    });
   }
-
-  Future<String> getDiseaseImageUrl(String diseaseName) async {
-    final diseases = await loadCropDiseases();
-    final disease = diseases.firstWhere(
-      (disease) => disease['diseaseName']!.toLowerCase() == diseaseName.toLowerCase(),
-      orElse: () => {},
-    );
-    return disease.isNotEmpty ? disease['image']! : placeholderImage;
-  }
-
   Future<void> fetchAlerts() async {
     final url = Uri.parse('${BACKEND_URL}/api/futurePred/fetchAlerts/${bdb.userPin}'); 
     try {
@@ -92,16 +114,7 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
           }
           isLoading = false;
         });
-    
-        for (var alert in alerts) {
-          for (var disease in alert['diseaseDetails']) {
-            final diseaseName = disease['diseaseName'] as String;
-            final diseaseImageUrl = await getDiseaseImageUrl(diseaseName);
-            setState(() {
-              imageUrl = diseaseImageUrl;
-            });
-          }
-        }
+
       } else {
         setState(() {
           isLoading = false;
@@ -231,64 +244,84 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ...alert['diseaseDetails'].map<Widget>((disease) {
-                    final imageUrl = (disease['images'] as List).isNotEmpty 
-                        ? disease['images'][0] 
+                  ...alert['diseaseDetails'].map<Widget>((dis) {
+                    final imageUrl = (dis['images'] as List).isNotEmpty 
+                        ? dis['images'][0] 
                         : placeholderImage;
 
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Image.network(
-                              imageUrl,
-                              width: double.infinity,
-                              height: 150,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Image.network(
-                                  placeholderImage,
-                                  width: double.infinity,
-                                  height: 150,
-                                  fit: BoxFit.cover,
-                                );
-                              },
+                    return GestureDetector(
+                      onTap: () {    
+                        final selectedDisease = cropDiseaseList.firstWhere(
+                          (disease) => disease['diseaseName']?.trim() == toSentenceCase(dis['diseaseName']?.trim() ?? ''),
+                          orElse: () => <String, Object>{},
+                        );
+
+                        if (selectedDisease.isNotEmpty) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CropDetails(disease: selectedDisease),
                             ),
-                          ),
-                          SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Text(
-                                '${alert['cropName']}',
-                                style: TextStyle(
-                                  color: context.theme.primaryColorDark,
-                                  fontSize: 22,
-                                ),
+                          );
+                        } else {
+
+                          print("Disease not found: ${toSentenceCase(dis['diseaseName'] ?? '')}");
+                        }
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: Image.network(
+                                imageUrl,
+                                width: double.infinity,
+                                height: 150,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Image.network(
+                                    placeholderImage,
+                                    width: double.infinity,
+                                    height: 150,
+                                    fit: BoxFit.cover,
+                                  );
+                                },
                               ),
-                              Spacer(),
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                decoration: BoxDecoration(
-                                  color: getRiskColor(disease['count']),
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                child: Text(
-                                  '${findRisk(int.parse(disease['count'].toString()))} risk',
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            '${toTitleCase(disease['diseaseName'])}',
-                            style: TextStyle(
-                              color: context.theme.primaryColorDark,
-                              fontSize: 16,
                             ),
-                          ),
-                        ],
+                            SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Text(
+                                  '${alert['cropName']}',
+                                  style: TextStyle(
+                                    color: context.theme.primaryColorDark,
+                                    fontSize: 22,
+                                  ),
+                                ),
+                                Spacer(),
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: getRiskColor(dis['count']),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Text(
+                                    '${findRisk(int.parse(dis['count'].toString()))}',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              '${toTitleCase(dis['diseaseName'])}',
+                              style: TextStyle(
+                                color: context.theme.primaryColorDark,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }).toList(),

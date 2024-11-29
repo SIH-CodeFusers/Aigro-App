@@ -1,7 +1,6 @@
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/home.dart';
 import 'package:aigro/pages/select_lang.dart';
-import 'package:aigro/utils/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
