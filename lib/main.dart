@@ -34,9 +34,9 @@ void main() async {
   await Hive.openBox("Language_db");
   await Firebase.initializeApp();
   
-  // Initialize notification service
-  final notificationService = NotificationService();
-  await notificationService.initialize();
+  // // Initialize notification service
+  // final notificationService = NotificationService();
+  // await notificationService.initialize();
   
   runApp(const MyApp());
 }
@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> {
               return MediaQuery(
                 child: child!,
                 data: MediaQuery.of(context).copyWith(
-                  textScaleFactor: 1.0,
+                  textScaler: TextScaler.linear(1.0),
                 ),
               );
             },
