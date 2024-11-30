@@ -187,6 +187,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   @override
   Widget build(BuildContext context) {
     final severityData = severityMap[widget.severity.toLowerCase()] ?? severityMap['low'];
+    int totalWeeks = calculateWeek(widget.recoveryDays);
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
@@ -360,6 +361,36 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                     ),
                   ),
                 ),
+
+
+                SizedBox(height: 30,),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: context.theme.highlightColor,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(FeatherIcons.clock,size: 18,color: Colors.grey[500],),
+                            SizedBox(width: 10,),
+                            Flexible(
+                              child: Text("Recovery Timeline",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        for (int week = 1; week <= calculateWeek(widget.recoveryDays); week++) 
+                          _buildRecoveryWeek(week, calculateWeek(widget.recoveryDays)),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -433,4 +464,60 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
       ),
     );
   }
+
+  Widget _buildRecoveryWeek(int week, int totalWeeks) {
+    String weekText = '';
+    Color color = Colors.blue;
+
+    if (week == 1) {
+      weekText = 'Initial treatment applied';
+      color = Colors.orange;
+    } else if (week == totalWeeks) {
+      weekText = 'Nearly fully recovered';
+      color = Colors.green;
+    } else {
+      weekText = 'Treatment ongoing';
+      color = Colors.yellow;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14.0,vertical: 8),
+        decoration: BoxDecoration(
+          color:week==1? Colors.grey[200]:context.theme.highlightColor,
+          borderRadius: BorderRadius.circular(10)
+        ),
+        child: Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: color,
+                shape: BoxShape.circle,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Text(week.toString(),style: TextStyle(color: context.theme.highlightColor),),
+              ),
+            ),
+            const SizedBox(width: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Week $week',
+                  style: TextStyle(fontSize: 16),
+                ),
+                Text(
+                  ' $weekText',
+                  style: TextStyle(fontSize: 16,color: Colors.grey[500]),
+                ),
+              ],  
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
 }
