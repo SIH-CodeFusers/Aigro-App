@@ -55,11 +55,11 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
 
   Color getRiskColor(int count) {
     if (count < 7) {
-      return const Color.fromARGB(255, 208, 255, 210); 
+      return  Color.fromARGB(255, 208, 255, 210); 
     } else if (count >= 7 && count <= 15) {
-      return Color.fromRGBO(241, 204, 158, 1);
+      return Color.fromRGBO(255, 245, 156,1);
     } else {
-      return Colors.red;
+      return Color.fromRGBO(255, 204, 128,1);
     }
   }
 

@@ -409,6 +409,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                      weatherSeverity: weatherSeverity, 
                      severity: severity, 
                      yieldLoss: yieldLoss,
+                     diseaseName:diseaseName,
                     
                   ),
                 ),
