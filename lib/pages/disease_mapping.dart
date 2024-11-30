@@ -126,6 +126,9 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
   late double long=88.7436287;
   bool isLoading = true;
 
+  final infobox = Hive.box("BasicInfo-db");
+  BasicDB bdb = BasicDB();
+
  @override
   void initState() {
     super.initState();
@@ -380,8 +383,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
   }
 
 
-  final infobox = Hive.box("BasicInfo-db");
-  BasicDB bdb = BasicDB();
+
 
 
   Future<void> getLatLongFromPincode(String pincode) async {
