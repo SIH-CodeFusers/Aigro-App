@@ -1,4 +1,5 @@
 import 'package:aigro/pages/community.dart';
+import 'package:aigro/pages/dis_management.dart';
 import 'package:aigro/pages/disease_forecasting.dart';
 import 'package:aigro/pages/disease_mapping.dart';
 import 'package:aigro/pages/gov_schemes.dart';

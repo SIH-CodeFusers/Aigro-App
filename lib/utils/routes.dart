@@ -18,4 +18,5 @@ class Myroutes{
   static String coursesPlayerRoute = "/coursesPlayer";
   static String communityRoute = "/community";
   static String schemesRoute = "/schemes";
+  static String disManRoute = "/disMan";
 }

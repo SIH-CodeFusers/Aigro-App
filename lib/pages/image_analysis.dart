@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:aigro/pages/crop_details.dart';
+import 'package:aigro/pages/dis_management.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/material.dart';
@@ -384,6 +385,13 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         final symptoms = result['symptoms'] ?? "Unknown";
         final cropImage = result['cropImage'] ?? '';
 
+        final manStatus = result['managementStatus'] ?? '';
+        final soilDeficiency = result['soilDeficiency'] ?? {};
+        final weatherSeverity = result['weatherSeverity'] ?? {};
+        final severity = result['severity'] ?? '';
+        final recoveryDays = result['recoveryDays'] ?? 0;
+        final yieldLoss = result['yeildLoss'] ?? 0;
+
         return GestureDetector(
            onTap: () {    
             final selectedDisease = cropDiseaseList.firstWhere(
@@ -391,14 +399,28 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
               orElse: () => <String, Object>{} 
             );
 
-            if (selectedDisease.isNotEmpty) {
+            if (manStatus=='completed'&& selectedDisease.isNotEmpty) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DiseaseManagement(
+                    soilDeficiency: soilDeficiency,
+                     recoveryDays: recoveryDays, 
+                     weatherSeverity: weatherSeverity, 
+                     severity: severity, 
+                     yieldLoss: yieldLoss,
+                    
+                  ),
+                ),
+              );
+            } else if (manStatus=='failed'&& selectedDisease.isNotEmpty) {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => CropDetails(disease: selectedDisease),
                 ),
               );
-            } else {
+            }else {
 
               print("Disease not found: $diseaseName");
             }
