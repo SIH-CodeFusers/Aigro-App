@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/utils/get_lat_long.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:flutter/services.dart';
 
 class DiseaseManagement extends StatefulWidget {
   final Map<String,dynamic> soilDeficiency;
@@ -88,19 +90,19 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
       }
     } else if (parameter == 'humidity') {
       if (value < 80) {
-        result = {'color': Color.fromARGB(255, 208, 255, 210), 'text': 'Low Humidity, Continue normal operations.'};
+        result = {'color': Color.fromARGB(255, 167, 250, 171), 'text': 'Low Humidity, Continue normal operations.'};
       } else if (value >= 80 && value <= 90) {
-        result = {'color': Color.fromRGBO(255, 245, 156,1), 'text': 'Medium Humidity, Stay vigillant and alert.'};
+        result = {'color': Color.fromRGBO(255, 241, 114, 1), 'text': 'Medium Humidity, Stay vigillant and alert.'};
       } else {
-        result = {'color': Color.fromARGB(255, 208, 255, 210), 'text': 'High Humidity, Warning! Take shelter.'};
+        result = {'color': Color.fromARGB(255, 255, 137, 101), 'text': 'High Humidity, Warning! Take shelter.'};
       }
     } else if (parameter == 'raining') {
       if (value < 15) {
-        result = {'color': Color.fromARGB(255, 208, 255, 210), 'text': 'Low Rainfall, Continue normal operations.'};
+        result = {'color': Color.fromARGB(255, 167, 250, 171), 'text': 'Low Rainfall, Continue normal operations.'};
       } else if (value >= 15 && value <= 25) {
-        result = {'color': Color.fromRGBO(255, 245, 156,1), 'text': 'Medium Rainfall, Stay vigillant and alert.'};
+        result = {'color': Color.fromRGBO(255, 241, 114, 1), 'text': 'Medium Rainfall, Stay vigillant and alert.'};
       } else {
-        result = {'color': Color.fromARGB(255, 208, 255, 210), 'text': 'Heavy Rainfall, Warning! Take shelter.'};
+        result = {'color': Color.fromARGB(255, 255, 137, 101), 'text': 'Heavy Rainfall, Warning! Take shelter.'};
       }
     }
 
@@ -112,6 +114,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   late double lat=27.0416;
   late double long=88.2664;
   bool isLoading = false;
+  final double organicProgress = Random().nextInt(11) + 50; // Random value between 50 and 60
+  final double inorganicProgress = Random().nextInt(11) + 70; // Random value between 70 and 80
 
   @override
   void initState() {
@@ -154,7 +158,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
             .map((item) => {'rain': item['rain'] != null ? item['rain']['3h'] : 0})
             .toList();
 
-        int rainAmount = rainData[0]['rain'];
+        int rainAmount = (rainData[0]['rain'] ?? 0.0).round();
 
         if (rainAmount == 0) {
           String severity = "medium"; 
@@ -187,7 +191,6 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   @override
   Widget build(BuildContext context) {
     final severityData = severityMap[widget.severity.toLowerCase()] ?? severityMap['low'];
-    int totalWeeks = calculateWeek(widget.recoveryDays);
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
@@ -387,16 +390,188 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         SizedBox(height: 20),
                         for (int week = 1; week <= calculateWeek(widget.recoveryDays); week++) 
                           _buildRecoveryWeek(week, calculateWeek(widget.recoveryDays)),
+
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 1,color: context.theme.canvasColor),
+                                  borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text("Organic", style: TextStyle(fontSize: 16)),
+                                        Spacer(),
+                                        Text("${organicProgress.toStringAsFixed(0)}%")
+                                      ],
+                                    ),
+                                    SizedBox(height: 8),
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: LinearProgressIndicator(
+                                        value: organicProgress / 100,
+                                        backgroundColor: Colors.grey[300],
+                                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                                        minHeight: 6,
+                                      ),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text("Safe for soil health", style: TextStyle(fontSize: 12)),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            Expanded(
+                              child: Container(
+                                padding: EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  border: Border.all(width: 1,color: context.theme.canvasColor),
+                                  borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text("Inorganic", style: TextStyle(fontSize: 16)),
+                                        Spacer(),
+                                        Text("${inorganicProgress.toStringAsFixed(0)}%")
+                                      ],
+                                    ),
+                                    SizedBox(height: 8),
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: LinearProgressIndicator(
+                                        value: inorganicProgress / 100,
+                                        backgroundColor: Colors.grey[300],
+                                        valueColor: AlwaysStoppedAnimation<Color>(const Color.fromARGB(255, 250, 171, 22)),
+                                        minHeight: 6,
+                                      ),
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text("Fast acting solution", style: TextStyle(fontSize: 12)),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
                 ),
+
+
+                SizedBox(height: 30,),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: context.theme.highlightColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(FontAwesomeIcons.disease, size: 18, color: Colors.grey[500]),
+                            SizedBox(width: 10),
+                            Flexible(
+                              child: Text(
+                                "Treatment Tracking",
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Last Start:", style: TextStyle(fontSize: 16)),
+                            Text("12 Oct 2024", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                          ],
+                        ),
+                        SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Next Checkup:", style: TextStyle(fontSize: 16)),
+                            Text("12 Nov 2024", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        Text("Select Fertilizer",style: TextStyle(fontSize: 16),),
+                        SizedBox(height: 8),
+                        DropdownButtonFormField<String>(
+                          value: 'Type A', 
+                          style: TextStyle(fontSize: 14,color: context.theme.primaryColorDark),
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: context.theme.primaryColorDark)),
+                            focusedBorder: OutlineInputBorder( borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: context.theme.primaryColorDark,width: 2),),
+                          ),
+                          items: ['Type A', 'Type B', 'Type C']
+                              .map((type) => DropdownMenuItem(value: type, child: Text(type)))
+                              .toList(),
+                          onChanged: (value) {
+                          },
+                        ),
+                        SizedBox(height: 20),
+                        Text("Quantity Used"),
+                        TextField(
+                          cursorColor: context.theme.primaryColorDark,
+                          decoration: InputDecoration(    
+                            hintText: "Enter Quantity",
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: context.theme.primaryColorDark)),
+                            focusedBorder: OutlineInputBorder( borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: context.theme.primaryColorDark,width: 2),),
+                          ),
+                          maxLines: 1,
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [FilteringTextInputFormatter.digitsOnly], 
+                        ),
+                        SizedBox(height: 20), 
+                        ElevatedButton(
+                          onPressed: () {
+                          },
+                          child: Text("Save Treatment Details"),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: context.theme.primaryColorDark,
+                            foregroundColor: context.theme.highlightColor,
+                            minimumSize: Size(double.infinity, 50),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          ),
+                        ),
+                        SizedBox(height: 20), 
+                        ElevatedButton(
+                          onPressed: () {
+                          },
+                          child: Text("Fertilizer Group"),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: context.theme.primaryColorDark,
+                            foregroundColor: context.theme.highlightColor,
+                            minimumSize: Size(double.infinity, 50),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+      
               ],
             ),
           ),
         )
         :Center(
-          child: CircularProgressIndicator()
+          child: CircularProgressIndicator(color: context.theme.primaryColorDark,)
         ),
       ),
     );
@@ -497,7 +672,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(14.0),
-                child: Text(week.toString(),style: TextStyle(color: context.theme.highlightColor),),
+                child: Text(week.toString(),style: TextStyle(color: context.theme.highlightColor,fontWeight: FontWeight.bold),),
               ),
             ),
             const SizedBox(width: 20),

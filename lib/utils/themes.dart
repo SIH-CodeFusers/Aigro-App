@@ -22,7 +22,7 @@ class MyThemes {
       hintColor: Color.fromRGBO(239, 183, 2, 1),
       cardColor: Color.fromRGBO(0, 229, 118, 1),
       focusColor: Color.fromRGBO(185, 246, 202, 1),
-      splashColor: Color.fromARGB(255, 134, 132, 132),
+      splashColor: Color.fromARGB(255, 175, 172, 172),
       
       appBarTheme: AppBarTheme(
         color: Color.fromRGBO(244, 244, 244, 1),
