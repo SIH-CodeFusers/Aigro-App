@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/crop_details.dart';
 import 'package:aigro/secret.dart';
+import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -31,6 +33,15 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
     fetchAlerts();
     loadCropDiseases();
   }
+
+  FlutterTts flutterTts = FlutterTts();
+
+  _speak(String text) async {
+    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
+  }
+
 
   String findRisk(int value) {
     if (value < 7) {
@@ -226,110 +237,125 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: Container(
-            padding: EdgeInsets.all(12),
-            width: double.infinity, 
-            decoration: BoxDecoration(
-              color: context.theme.highlightColor,
-              borderRadius: BorderRadius.circular(5),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  spreadRadius: 2,
-                  blurRadius: 5,
+                padding: EdgeInsets.all(12),
+                width: double.infinity, 
+                decoration: BoxDecoration(
+                  color: context.theme.highlightColor,
+                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ...alert['diseaseDetails'].map<Widget>((dis) {
-                    final imageUrl = (dis['images'] as List).isNotEmpty 
-                        ? dis['images'][0] 
-                        : placeholderImage;
-
-                    return GestureDetector(
-                      onTap: () {    
-                        final selectedDisease = cropDiseaseList.firstWhere(
-                          (disease) => disease['diseaseName']?.trim() == toSentenceCase(dis['diseaseName']?.trim() ?? ''),
-                          orElse: () => <String, Object>{},
-                        );
-
-                        if (selectedDisease.isNotEmpty) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CropDetails(disease: selectedDisease),
-                            ),
-                          );
-                        } else {
-
-                          print("Disease not found: ${toSentenceCase(dis['diseaseName'] ?? '')}");
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(5),
-                              child: Image.network(
-                                imageUrl,
-                                width: double.infinity,
-                                height: 150,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Image.network(
-                                    placeholderImage,
-                                    width: double.infinity,
-                                    height: 150,
-                                    fit: BoxFit.cover,
-                                  );
-                                },
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Row(
-                              children: [
-                                Text(
-                                  '${alert['cropName']}',
-                                  style: TextStyle(
-                                    color: context.theme.primaryColorDark,
-                                    fontSize: 22,
-                                  ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ...alert['diseaseDetails'].map<Widget>((dis) {
+                        final imageUrl = (dis['images'] as List).isNotEmpty 
+                            ? dis['images'][0] 
+                            : placeholderImage;
+              
+                        return GestureDetector(
+                          onTap: () {    
+                            final selectedDisease = cropDiseaseList.firstWhere(
+                              (disease) => disease['diseaseName']?.trim() == toSentenceCase(dis['diseaseName']?.trim() ?? ''),
+                              orElse: () => <String, Object>{},
+                            );
+              
+                            if (selectedDisease.isNotEmpty) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CropDetails(disease: selectedDisease),
                                 ),
-                                Spacer(),
-                                Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-                                  decoration: BoxDecoration(
-                                    color: getRiskColor(dis['count']),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Text(
-                                    '${findRisk(int.parse(dis['count'].toString()))}',
-                                  ),
+                              );
+                            } else {
+              
+                              print("Disease not found: ${toSentenceCase(dis['diseaseName'] ?? '')}");
+                            }
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Stack(             
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(5),
+                                      child: Image.network(
+                                        imageUrl,
+                                        width: double.infinity,
+                                        height: 150,
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (context, error, stackTrace) {
+                                          return Image.network(
+                                            placeholderImage,
+                                            width: double.infinity,
+                                            height: 150,
+                                            fit: BoxFit.cover,
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          '${alert['cropName']}',
+                                          style: TextStyle(
+                                            color: context.theme.primaryColorDark,
+                                            fontSize: 22,
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                                          decoration: BoxDecoration(
+                                            color: getRiskColor(dis['count']),
+                                            borderRadius: BorderRadius.circular(12),
+                                          ),
+                                          child: Text(
+                                            '${findRisk(int.parse(dis['count'].toString()))}',
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      '${toTitleCase(dis['diseaseName'])}',
+                                      style: TextStyle(
+                                        color: context.theme.primaryColorDark,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Positioned(
+                                  top: 8,
+                                  right: 8, 
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      _speak("Detected ${dis['diseaseName']} in ${alert['cropName']} ");
+                                    },
+                                    child: voiceIcon(context),
+                                  )
                                 ),
                               ],
                             ),
-                            Text(
-                              '${toTitleCase(dis['diseaseName'])}',
-                              style: TextStyle(
-                                color: context.theme.primaryColorDark,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
-
-                ],
+                          ),
+                        );
+                      }).toList(),
+              
+                    ],
+                  ),
+                ),
               ),
-            ),
-          ),
+
         );
       },
     );

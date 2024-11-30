@@ -254,7 +254,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_analysisData != null && _analysisData!['results'] != null) {
-final result = _analysisData!['results'].last;
+            final result = _analysisData!['results'].last;
             final cropName = result['cropName'] ?? "Unknown";
             final diseaseName = result['diseaseName'] ?? "Unknown";
             final symptoms = result['symptoms'] ?? "Unknown";

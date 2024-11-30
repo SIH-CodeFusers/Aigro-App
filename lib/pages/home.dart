@@ -124,6 +124,13 @@ class _HomePageState extends State<HomePage> {
       'route': Myroutes.diseaseForecastRoute,
       'voice':'In disease forecasting, you will get alerts about current diseases that are spreading your area.'
     },
+        {
+      'color': const Color.fromRGBO(255, 204, 187,1),
+      'text': 'Government Schemes',
+      'image': 'assets/images/gv.png',
+      'route': Myroutes.schemesRoute,
+      'voice':'Get live updates about different government schemes that are currently available and take the complete benefits.'
+    },
     {
       'color': const Color.fromRGBO(232, 213, 207,1),
       'text': 'Offline Model',
@@ -166,19 +173,12 @@ class _HomePageState extends State<HomePage> {
       'route': Myroutes.communityRoute,
       'voice':'Stay in touch with your farmer friends using our community feature and prosper together.'
     },
-    {
-      'color': const Color.fromRGBO(255, 204, 187,1),
-      'text': 'Government Schemes',
-      'image': 'assets/images/gv.png',
-      'route': Myroutes.schemesRoute,
-      'voice':'Get live updates about different government schemes that are currently available and take the complete benefits.'
-    },
   ];
 
   FlutterTts flutterTts = FlutterTts();
 
   _speak(String text) async {
-    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setLanguage("en"); 
     await flutterTts.setPitch(0.7); 
     await flutterTts.speak(text); 
   }

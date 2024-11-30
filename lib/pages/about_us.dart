@@ -485,7 +485,9 @@ class _AboutUsState extends State<AboutUs> {
     return GestureDetector(
       child: Container(
         decoration: BoxDecoration(
-          color: context.theme.primaryColorDark,
+          gradient: LinearGradient(
+            colors: [context.theme.primaryColorDark, Color.fromRGBO(3, 123, 65, 1),context.theme.cardColor],
+          ),
           borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(

@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:aigro/local_db/db.dart';
+import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hive/hive.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:aigro/pages/community.dart';
@@ -56,6 +58,14 @@ class _PostWidgetState extends State<PostWidget> {
   void dispose() {
     _commentController.dispose();
     super.dispose();
+  }
+
+  FlutterTts flutterTts = FlutterTts();
+
+  _speak(String text) async {
+    await flutterTts.setLanguage("en"); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
   }
 
   void initializeSocket() {
@@ -227,7 +237,12 @@ class _PostWidgetState extends State<PostWidget> {
                   ],
                 ),
                 Spacer(),
-                Icon(FeatherIcons.moreVertical,size: 16,color: Colors.grey[400],)
+                GestureDetector(
+                  onTap: (){
+                    _speak("${widget.post['message'] ?? ''}");
+                  },
+                  child: voiceIcon(context),
+                )
               ],
             ),
             const SizedBox(height: 10),    
