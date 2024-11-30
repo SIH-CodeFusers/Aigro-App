@@ -391,6 +391,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         final severity = result['severity'] ?? '';
         final recoveryDays = result['recoveryDays'] ?? 0;
         final yieldLoss = result['yeildLoss'] ?? 0;
+        final cropid = result['id'] ?? 0;
 
         return GestureDetector(
            onTap: () {    
@@ -410,6 +411,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                      severity: severity, 
                      yieldLoss: yieldLoss,
                      diseaseName:diseaseName,
+                     cropId:cropid,
                     
                   ),
                 ),

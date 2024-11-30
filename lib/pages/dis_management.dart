@@ -5,10 +5,10 @@ import 'package:aigro/secret.dart';
 import 'package:aigro/utils/get_lat_long.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
-import 'package:aigro/pages/about_us.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/services.dart';
 
@@ -17,6 +17,7 @@ class DiseaseManagement extends StatefulWidget {
   final Map<String,dynamic> weatherSeverity;
   final String severity;
   final String diseaseName;
+  final String cropId;
   final int yieldLoss;
   final int recoveryDays;
   const DiseaseManagement(
@@ -27,7 +28,8 @@ class DiseaseManagement extends StatefulWidget {
       required this.severity, 
       required this.yieldLoss, 
       required this.recoveryDays,
-      required this.diseaseName
+      required this.diseaseName,
+      required this.cropId,
     }
   );
 
@@ -114,8 +116,12 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   late double lat=27.0416;
   late double long=88.2664;
   bool isLoading = false;
-  final double organicProgress = Random().nextInt(11) + 50; // Random value between 50 and 60
-  final double inorganicProgress = Random().nextInt(11) + 70; // Random value between 70 and 80
+  final double organicProgress = Random().nextInt(11) + 50; 
+  final double inorganicProgress = Random().nextInt(11) + 70; 
+  Map<String, dynamic>? treatmentData;
+  final _quancontroller = TextEditingController();
+  String? fertSel;
+  bool updated=false;
 
   @override
   void initState() {
@@ -128,7 +134,14 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         long = latLon['lon']!;
         fetchWeatherData();
       });
-    });  
+    }); 
+   fetchFarmDetails().then((data) {
+    setState(() {
+      treatmentData = data;
+      updated = isCurrentDateLater(treatmentData?['createdAt']!);
+    });
+  });
+
   }
 
   Future<void> fetchWeatherData() async {
@@ -143,8 +156,11 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
       if (weatherResponse.statusCode == 200) {
         final weatherData = jsonDecode(weatherResponse.body);
         setState(() {
-          weather['humidity'] = weatherData['main']['humidity'];
-          weather['temperature'] = weatherData['main']['temp'];
+          // Ensure 'humidity' is an integer
+          weather['humidity'] = weatherData['main']['humidity'].toInt();
+
+          // Ensure 'temperature' is an integer (if it's a floating point value, round it)
+          weather['temperature'] = (weatherData['main']['temp']).toInt();  // or .round() if you want rounding
         });
       } else {
         print('Failed to load weather data');
@@ -188,9 +204,101 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
     return ((day - 1) ~/ 7) + 1;
   }
 
+  Future<Map<String, dynamic>> fetchFarmDetails() async {
+    final url = 'https://api.thefuturetech.xyz/api/imageAnalysis/fetchDetails/${widget.cropId}';
+    try {
+      final response = await http.get(Uri.parse(url));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final result = data['result'];
+        final Map<String, dynamic> resultDetails = {
+          'fertilisers': List<String>.from(
+            result['fertilisers'].map((fertilizer) => fertilizer['name'])
+          ),
+          'farmerTreatmentEmpty': result['farmerTreatment'].isEmpty,
+          'createdAt': result['createdAt'],
+          'updatedAt': result['updatedAt'],
+        };
+        return resultDetails;
+      } else {
+        print('Failed to load data');
+        return {}; 
+      }
+    } catch (e) {
+      print('Error occurred: $e');
+      return {};
+    }
+  }
+
+  Future<void> handleFarmerDBUpload({
+    required String fertSel, 
+    required int quantity,
+  }) async {
+
+    final timestamp = DateTime.now().millisecondsSinceEpoch;
+    final formattedDate = DateTime.fromMillisecondsSinceEpoch(timestamp).toLocal().toString().split(' ')[0];
+
+
+    final data = {
+      'id': widget.cropId,
+      'fertiliser': fertSel, 
+      'quantity': quantity,
+      'date': formattedDate,
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse('https://api.thefuturetech.xyz/api/imageAnalysis/updateTreatment'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode(data),
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        if (responseData['success'] == true) {
+          print(responseData['message']);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => DiseaseManagement(soilDeficiency: widget.soilDeficiency, weatherSeverity: widget.weatherSeverity, severity: widget.severity, yieldLoss: widget.yieldLoss, recoveryDays: widget.recoveryDays, diseaseName: widget.diseaseName, cropId: widget.cropId,)), 
+          );
+        }
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  String formatDate(String date) {
+    DateTime parsedDate = DateTime.parse(date);
+    return DateFormat('d MMM, yyyy').format(parsedDate);
+  }
+
+  String formatAddDate(String date) {
+    DateTime parsedDate = DateTime.parse(date);
+    DateTime newDate = parsedDate.add(Duration(days: 5));
+    return DateFormat('d MMM, yyyy').format(newDate);
+  }
+
+  String formatDateNow(DateTime date) {
+    return DateFormat('d MMM, yyyy').format(date);
+  }
+
+  bool isCurrentDateLater(String createdAt) {
+    DateTime currentDate = DateTime.now();
+    DateTime formattedDate = DateTime.parse(createdAt);
+    if (!treatmentData?['farmerTreatmentEmpty']!) {
+      formattedDate = formattedDate.add(Duration(days: 5));
+    } 
+    return currentDate.isAfter(formattedDate) || currentDate.isAtSameMomentAs(formattedDate);
+  }
+
   @override
   Widget build(BuildContext context) {
     final severityData = severityMap[widget.severity.toLowerCase()] ?? severityMap['low'];
+ 
+    
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
@@ -496,37 +604,73 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Last Start:", style: TextStyle(fontSize: 16)),
-                            Text("12 Oct 2024", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                            Text("Last Treatment:", style: TextStyle(fontSize: 16)),
+                            Text(
+                              treatmentData?['farmerTreatmentEmpty']! ? "NA"
+                              :formatDate(treatmentData?['createdAt']!), 
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
                           ],
                         ),
                         SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Next Checkup:", style: TextStyle(fontSize: 16)),
-                            Text("12 Nov 2024", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                            Text("Next Treatment:", style: TextStyle(fontSize: 16)),
+                            Text(
+                               treatmentData?['farmerTreatmentEmpty']! ? formatDateNow(DateTime.now())
+                              :formatAddDate(treatmentData?['createdAt']!), 
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)
+                            ),
                           ],
                         ),
                         SizedBox(height: 20),
                         Text("Select Fertilizer",style: TextStyle(fontSize: 16),),
                         SizedBox(height: 8),
-                        DropdownButtonFormField<String>(
-                          value: 'Type A', 
-                          style: TextStyle(fontSize: 14,color: context.theme.primaryColorDark),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: context.theme.primaryColorDark)),
-                            focusedBorder: OutlineInputBorder( borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: context.theme.primaryColorDark,width: 2),),
+                        IgnorePointer(
+                          ignoring: treatmentData?['farmerTreatmentEmpty']! ?false:true,
+                          child: DropdownButtonFormField<String>(
+                            value: treatmentData?['fertilisers']?.isNotEmpty == true 
+                              ? treatmentData!['fertilisers'][0] 
+                              : '', 
+                            style: TextStyle(fontSize: 12, color: context.theme.primaryColorDark),
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(color: context.theme.primaryColorDark),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(color: context.theme.primaryColorDark, width: 2),
+                              ),
+                            ),
+                            items: treatmentData?['fertilisers'] != null
+                                ? treatmentData!['fertilisers']
+                                    .map<DropdownMenuItem<String>>(
+                                      (fertiliser) => DropdownMenuItem<String>(
+                                        value: fertiliser,
+                                        child: Text(
+                                          fertiliser.length > 30 ? fertiliser.substring(0, 30) + '...' : fertiliser,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          softWrap: false,
+                                        )
+                                      ),
+                                    )
+                                    .toList()
+                                : [], 
+                            onChanged: (value) { 
+                              setState(() {
+                                fertSel = value;
+                              });   
+                            },     
                           ),
-                          items: ['Type A', 'Type B', 'Type C']
-                              .map((type) => DropdownMenuItem(value: type, child: Text(type)))
-                              .toList(),
-                          onChanged: (value) {
-                          },
                         ),
+
                         SizedBox(height: 20),
-                        Text("Quantity Used"),
+                        Text("Quantity Used",style: TextStyle(fontSize: 16),),
+                        SizedBox(height: 8),
                         TextField(
+                          controller: _quancontroller,
                           cursorColor: context.theme.primaryColorDark,
                           decoration: InputDecoration(    
                             hintText: "Enter Quantity",
@@ -538,20 +682,26 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           inputFormatters: [FilteringTextInputFormatter.digitsOnly], 
                         ),
                         SizedBox(height: 20), 
-                        ElevatedButton(
-                          onPressed: () {
-                          },
-                          child: Text("Save Treatment Details"),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: context.theme.primaryColorDark,
-                            foregroundColor: context.theme.highlightColor,
-                            minimumSize: Size(double.infinity, 50),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        IgnorePointer(                 
+                          ignoring: updated ?false:true,
+                          child: ElevatedButton(
+                            onPressed: () {
+                            int quantity = int.tryParse(_quancontroller.text) ?? 0;
+                            handleFarmerDBUpload(fertSel: fertSel ?? '', quantity:quantity,);
+                            },
+                            child: Text("Save Treatment Details"),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:updated? context.theme.primaryColorDark:Color.fromRGBO(109, 143, 132,1),
+                              foregroundColor: context.theme.highlightColor,
+                              minimumSize: Size(double.infinity, 50),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                            ),
                           ),
                         ),
                         SizedBox(height: 20), 
                         ElevatedButton(
                           onPressed: () {
+                            print(updated);
                           },
                           child: Text("Fertilizer Group"),
                           style: ElevatedButton.styleFrom(
