@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:aigro/local_db/db.dart';
+import 'package:aigro/pages/crop_details.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/utils/get_lat_long.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -122,6 +124,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   final _quancontroller = TextEditingController();
   String? fertSel;
   bool updated=false;
+  List<Map<String, dynamic>> cropDiseaseList = [];
 
   @override
   void initState() {
@@ -130,18 +133,18 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
     bdb.loadDataInfo(); 
     getLatLongFromPincode(bdb.userPin).then((latLon) {
       setState(() {
-        lat = latLon['lat']!;
-        long = latLon['lon']!;
-        fetchWeatherData();
+          lat = latLon['lat']!;
+          long = latLon['lon']!;
+          fetchWeatherData();
+        });
+      }); 
+    fetchFarmDetails().then((data) {
+      setState(() {
+        treatmentData = data;
+        updated = isCurrentDateLater(treatmentData?['createdAt']!);
       });
-    }); 
-   fetchFarmDetails().then((data) {
-    setState(() {
-      treatmentData = data;
-      updated = isCurrentDateLater(treatmentData?['createdAt']!);
     });
-  });
-
+    loadCropDiseases();
   }
 
   Future<void> fetchWeatherData() async {
@@ -156,11 +159,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
       if (weatherResponse.statusCode == 200) {
         final weatherData = jsonDecode(weatherResponse.body);
         setState(() {
-          // Ensure 'humidity' is an integer
           weather['humidity'] = weatherData['main']['humidity'].toInt();
-
-          // Ensure 'temperature' is an integer (if it's a floating point value, round it)
-          weather['temperature'] = (weatherData['main']['temp']).toInt();  // or .round() if you want rounding
+          weather['temperature'] = (weatherData['main']['temp']).toInt();
         });
       } else {
         print('Failed to load weather data');
@@ -218,6 +218,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           'farmerTreatmentEmpty': result['farmerTreatment'].isEmpty,
           'createdAt': result['createdAt'],
           'updatedAt': result['updatedAt'],
+          'farmerTreatment': result['farmerTreatment'] ?? [],
         };
         return resultDetails;
       } else {
@@ -237,7 +238,6 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
 
     final timestamp = DateTime.now().millisecondsSinceEpoch;
     final formattedDate = DateTime.fromMillisecondsSinceEpoch(timestamp).toLocal().toString().split(' ')[0];
-
 
     final data = {
       'id': widget.cropId,
@@ -269,6 +269,50 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
       print('Error: $e');
     }
   }
+
+    Future<void> loadCropDiseases() async {
+    final data = await DefaultAssetBundle.of(context)
+        .loadString('assets/others/crop_disease_18nov.json');
+    final Map<String, dynamic> jsonResult = json.decode(data);
+
+    setState(() {
+      cropDiseaseList = (jsonResult['cropDiseases'] as List)
+          .expand((crop) => (crop['diseaseDetails'] as List).map((disease) {
+                return {
+                  "diseaseName": disease['diseaseName'] as String,
+                  "scientificName": disease['scientificName'] as String,
+                  "category": disease['category'] as String,
+                  "images": (disease['images'] as List).map((img) => img as String).toList(),
+                  "symptoms": disease['symptoms'] as String? ?? '',
+                  "causes": disease['causes'] as String? ?? '',
+                  "remedies":
+                      (disease['remedies'] as List?)?.map((r) => r as String).toList() ?? [],
+                  "summary":
+                      (disease['summary'] as List?)?.map((r) => r as String).toList() ?? [],
+                  "chemicalControl": disease['chemicalControl'] as String? ?? '',
+                  "organicControl": disease['organicControl'] as String? ?? '',
+                  "cropName": crop['cropName'] as String,
+                  "fertilizers": (disease['fertilisers'] as List?)?.map((fertilizer) {
+                    return {
+                      "name": fertilizer['name'] as String,
+                      "products": (fertilizer['products'] as List).map((product) {
+                        return {
+                          "companyName": product['companyName'] as String,
+                          "productImage": product['productImage'] as String,
+                          "price": product['price'] as String,
+                          "id": product['id'] as String,
+                        };
+                      }).toList(),
+                      "id": fertilizer['id'] as String,
+                    };
+                  }).toList() ?? [],
+                };
+              }))
+          .toList();
+    });
+  }
+
+  
 
   String formatDate(String date) {
     DateTime parsedDate = DateTime.parse(date);
@@ -318,7 +362,36 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                       style: TextStyle(fontSize: 24,color: context.theme.primaryColorDark),
                     ),      
                 ),
-                
+                SizedBox(height: 10,),
+                GestureDetector(
+                  onTap: (){
+                    final selectedDisease = cropDiseaseList.firstWhere(
+                      (disease) => disease['diseaseName'] == widget.diseaseName, 
+                      orElse: () => <String, Object>{} 
+                    );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CropDetails(disease: selectedDisease),
+                    ),
+                  );
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.25, 
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: context.theme.primaryColorDark,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "See More",
+                        style: TextStyle(color: context.theme.highlightColor,fontSize: 12),
+                      ),
+                    ),
+                  ),
+                ),
+                          
                 SizedBox(height: 30,),
                 Container(
                   width: double.infinity,
@@ -575,6 +648,93 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                   ),
                 ),
 
+                treatmentData?['farmerTreatmentEmpty']==false?
+                Column(
+                  children: [
+                    Text(
+                      treatmentData?['farmerTreatment'] != null && treatmentData!['farmerTreatment'].isNotEmpty
+                          ? "Quantity: ${treatmentData!['farmerTreatment'][0]['quantity']}"
+                          : "No farmer treatment data available"
+                    ),
+                    SizedBox(
+                      height: 200,
+                      child: LineChart(
+                        LineChartData(
+                          titlesData: FlTitlesData(
+                            leftTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                getTitlesWidget: (value, _) {
+                                  if (value.toInt() == 0) {
+                                    return const SizedBox.shrink();
+                                  }
+                                  return Text(
+                                    "${value.toInt().toString()}",
+                                    style:  TextStyle(color: context.theme.primaryColorDark, fontSize: 12),
+                                  );
+                                },
+                              ),
+                            ),
+                            bottomTitles: AxisTitles(
+                              sideTitles: SideTitles(
+                                showTitles: true,
+                                getTitlesWidget: (value, _) {
+                                  if (value == 0) {
+                                    return const Text("Date", style: TextStyle(color: Colors.black));
+                                  }
+                                  return const SizedBox.shrink();
+                                },
+                              ),
+                            ),
+                            topTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                            rightTitles: AxisTitles(
+                              sideTitles: SideTitles(showTitles: false),
+                            ),
+                          ),
+                          gridData: FlGridData(show: true),
+                          borderData: FlBorderData(
+                            show: true,
+                            border: Border(
+                              left: BorderSide(color: Colors.black, width: 2),
+                              right: BorderSide.none,
+                              top: BorderSide.none, 
+                              bottom:BorderSide(color: Colors.black, width: 1), 
+                            ),
+                          ),
+                          minY: 0,
+                          maxY: 20,
+                          lineBarsData: [
+                            LineChartBarData(
+                              spots: treatmentData!['farmerTreatment']
+                                  .asMap()
+                                  .entries
+                                  .map((entry) {
+                                    double xPosition = entry.key.toDouble();
+                                    if (treatmentData!['farmerTreatment'].length == 1) {
+                                      xPosition = 0.5;
+                                    }
+                                    return FlSpot(xPosition, (entry.value['quantity'] as num).toDouble());
+                                  })
+                                  .toList()
+                                  .cast<FlSpot>(),
+                              isCurved: true,  
+                              color: context.theme.primaryColorDark,
+                              dotData: FlDotData(show: true),
+                              belowBarData: BarAreaData(
+                                show: true,
+                                color: context.theme.cardColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+             
+                :SizedBox.shrink(),
 
                 SizedBox(height: 30,),
                 Container(
@@ -585,134 +745,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(FontAwesomeIcons.disease, size: 18, color: Colors.grey[500]),
-                            SizedBox(width: 10),
-                            Flexible(
-                              child: Text(
-                                "Treatment Tracking",
-                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Last Treatment:", style: TextStyle(fontSize: 16)),
-                            Text(
-                              treatmentData?['farmerTreatmentEmpty']! ? "NA"
-                              :formatDate(treatmentData?['createdAt']!), 
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-                          ],
-                        ),
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Next Treatment:", style: TextStyle(fontSize: 16)),
-                            Text(
-                               treatmentData?['farmerTreatmentEmpty']! ? formatDateNow(DateTime.now())
-                              :formatAddDate(treatmentData?['createdAt']!), 
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                        Text("Select Fertilizer",style: TextStyle(fontSize: 16),),
-                        SizedBox(height: 8),
-                        IgnorePointer(
-                          ignoring: treatmentData?['farmerTreatmentEmpty']! ?false:true,
-                          child: DropdownButtonFormField<String>(
-                            value: treatmentData?['fertilisers']?.isNotEmpty == true 
-                              ? treatmentData!['fertilisers'][0] 
-                              : '', 
-                            style: TextStyle(fontSize: 12, color: context.theme.primaryColorDark),
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(color: context.theme.primaryColorDark),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(color: context.theme.primaryColorDark, width: 2),
-                              ),
-                            ),
-                            items: treatmentData?['fertilisers'] != null
-                                ? treatmentData!['fertilisers']
-                                    .map<DropdownMenuItem<String>>(
-                                      (fertiliser) => DropdownMenuItem<String>(
-                                        value: fertiliser,
-                                        child: Text(
-                                          fertiliser.length > 30 ? fertiliser.substring(0, 30) + '...' : fertiliser,
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 1,
-                                          softWrap: false,
-                                        )
-                                      ),
-                                    )
-                                    .toList()
-                                : [], 
-                            onChanged: (value) { 
-                              setState(() {
-                                fertSel = value;
-                              });   
-                            },     
-                          ),
-                        ),
-
-                        SizedBox(height: 20),
-                        Text("Quantity Used",style: TextStyle(fontSize: 16),),
-                        SizedBox(height: 8),
-                        TextField(
-                          controller: _quancontroller,
-                          cursorColor: context.theme.primaryColorDark,
-                          decoration: InputDecoration(    
-                            hintText: "Enter Quantity",
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: context.theme.primaryColorDark)),
-                            focusedBorder: OutlineInputBorder( borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: context.theme.primaryColorDark,width: 2),),
-                          ),
-                          maxLines: 1,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [FilteringTextInputFormatter.digitsOnly], 
-                        ),
-                        SizedBox(height: 20), 
-                        IgnorePointer(                 
-                          ignoring: updated ?false:true,
-                          child: ElevatedButton(
-                            onPressed: () {
-                            int quantity = int.tryParse(_quancontroller.text) ?? 0;
-                            handleFarmerDBUpload(fertSel: fertSel ?? '', quantity:quantity,);
-                            },
-                            child: Text("Save Treatment Details"),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:updated? context.theme.primaryColorDark:Color.fromRGBO(109, 143, 132,1),
-                              foregroundColor: context.theme.highlightColor,
-                              minimumSize: Size(double.infinity, 50),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20), 
-                        ElevatedButton(
-                          onPressed: () {
-                            print(updated);
-                          },
-                          child: Text("Fertilizer Group"),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: context.theme.primaryColorDark,
-                            foregroundColor: context.theme.highlightColor,
-                            minimumSize: Size(double.infinity, 50),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                          ),
-                        ),
-                      ],
-                    ),
+                    child: treatment(context),
                   ),
                 ),
       
@@ -724,6 +757,141 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           child: CircularProgressIndicator(color: context.theme.primaryColorDark,)
         ),
       ),
+    );
+  }
+
+  Column treatment(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(FontAwesomeIcons.disease, size: 18, color: Colors.grey[500]),
+            SizedBox(width: 10),
+            Flexible(
+              child: Text(
+                "Treatment Tracking",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("Last Treatment:", style: TextStyle(fontSize: 16)),
+            Text(
+              treatmentData?['farmerTreatmentEmpty']! ? "NA"
+              :formatDate(treatmentData?['createdAt']!), 
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+          ],
+        ),
+        SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("Next Treatment:", style: TextStyle(fontSize: 16)),
+            Text(
+                treatmentData?['farmerTreatmentEmpty']! ? formatDateNow(DateTime.now())
+              :formatAddDate(treatmentData?['createdAt']!), 
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)
+            ),
+          ],
+        ),
+        SizedBox(height: 20),
+        Text("Select Fertilizer",style: TextStyle(fontSize: 16),),
+        SizedBox(height: 8),
+        IgnorePointer(
+          ignoring: treatmentData?['farmerTreatmentEmpty']! ?false:true,
+          child: DropdownButtonFormField<String>(
+            value: treatmentData?['fertilisers']?.isNotEmpty == true
+                ? (!(treatmentData?['farmerTreatmentEmpty'] ?? true)
+                    ? (treatmentData?['farmerTreatment']?.isNotEmpty == true
+                        ? treatmentData!['farmerTreatment'][0]['fertiliser']
+                        : treatmentData!['fertilisers'][0])
+                    : treatmentData!['fertilisers'][0])
+                : '',
+            style: TextStyle(fontSize: 12, color: context.theme.primaryColorDark),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: context.theme.primaryColorDark),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: context.theme.primaryColorDark, width: 2),
+              ),
+            ),
+            items: treatmentData?['fertilisers'] != null
+                ? treatmentData!['fertilisers']
+                    .map<DropdownMenuItem<String>>(
+                      (fertiliser) => DropdownMenuItem<String>(
+                        value: fertiliser,
+                        child: Text(
+                          fertiliser.length > 30 ? fertiliser.substring(0, 30) + '...' : fertiliser,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          softWrap: false,
+                        )
+                      ),
+                    )
+                    .toList()
+                : [], 
+            onChanged: (value) { 
+              setState(() {
+                fertSel = value;
+              });   
+            },     
+          ),
+        ),
+
+        SizedBox(height: 20),
+        Text("Quantity Used",style: TextStyle(fontSize: 16),),
+        SizedBox(height: 8),
+        TextField(
+          controller: _quancontroller,
+          cursorColor: context.theme.primaryColorDark,
+          decoration: InputDecoration(    
+            hintText: "Enter Quantity",
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: context.theme.primaryColorDark)),
+            focusedBorder: OutlineInputBorder( borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: context.theme.primaryColorDark,width: 2),),
+          ),
+          maxLines: 1,
+          keyboardType: TextInputType.number,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly], 
+        ),
+        SizedBox(height: 20), 
+        IgnorePointer(                 
+          ignoring: updated ?false:true,
+          child: ElevatedButton(
+            onPressed: () {
+            int quantity = int.tryParse(_quancontroller.text) ?? 0;
+            handleFarmerDBUpload(fertSel: fertSel ?? '', quantity:quantity,);
+            },
+            child: Text("Save Treatment Details"),
+            style: ElevatedButton.styleFrom(
+              backgroundColor:updated? context.theme.primaryColorDark:Color.fromRGBO(109, 143, 132,1),
+              foregroundColor: context.theme.highlightColor,
+              minimumSize: Size(double.infinity, 50),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            ),
+          ),
+        ),
+        SizedBox(height: 20), 
+        ElevatedButton(
+          onPressed: () {
+            print(updated);
+          },
+          child: Text("Fertilizer Group"),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: context.theme.primaryColorDark,
+            foregroundColor: context.theme.highlightColor,
+            minimumSize: Size(double.infinity, 50),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          ),
+        ),
+      ],
     );
   }
 

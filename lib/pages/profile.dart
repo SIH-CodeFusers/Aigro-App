@@ -133,7 +133,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-
   Widget _buildLanguageDropdown() {
     return Container(
       padding:  const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
