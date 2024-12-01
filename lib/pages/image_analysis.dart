@@ -241,7 +241,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
-      appBar: AppBar(
+    appBar: AppBar(
   backgroundColor: Colors.white,
   elevation: 0,
   title: Row(
@@ -249,9 +249,9 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
       const Icon(
         Icons.spa,
         color: Colors.green,
-        size: 24, 
+        size: 24,
       ),
-      const SizedBox(width: 8), 
+      const SizedBox(width: 8),
       const Text(
         "Analysis Results",
         style: TextStyle(
@@ -260,21 +260,37 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      const SizedBox(width: 10), 
+      const SizedBox(width: 10),
       IconButton(
         icon: const Icon(Icons.volume_up_rounded, color: Colors.green),
         tooltip: 'Speak',
         onPressed: () {
-          
-          final text =
-              "Here are the Results of the Image Analysis";
+          final text = "Here are the Results of the Image Analysis";
           _speak(text);
         },
       ),
     ],
   ),
   centerTitle: false,
+  actions: [
+    IconButton(
+      icon: const Icon(Icons.refresh, color: Colors.green),
+      tooltip: 'Refresh',
+      onPressed: () {
+        setState(() {
+          _fetchAnalysisData();
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Data refreshed successfully."),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      },
+    ),
+  ],
 ),
+
 
       floatingActionButton: FloatingActionButton(
         onPressed: () {
