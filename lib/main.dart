@@ -1,5 +1,4 @@
 import 'package:aigro/pages/community.dart';
-import 'package:aigro/pages/dis_management.dart';
 import 'package:aigro/pages/disease_forecasting.dart';
 import 'package:aigro/pages/disease_mapping.dart';
 import 'package:aigro/pages/gov_schemes.dart';
@@ -12,7 +11,6 @@ import 'package:aigro/pages/offline_detection.dart';
 import 'package:aigro/pages/upload_image.dart';
 import 'package:aigro/pages/user_onbaording.dart';
 import 'package:aigro/pages/weather_report.dart';
-import 'package:aigro/services/notifictation_service.dart';
 import 'package:aigro/utils/authenticate.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

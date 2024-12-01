@@ -116,7 +116,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
     
     db.updateTheme();
     bdb.updateDbInfo(); 
-    ldb.loadLang();
+
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => const HomePage()),
