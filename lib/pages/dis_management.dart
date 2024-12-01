@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:math';
 import 'package:aigro/local_db/db.dart';
@@ -45,21 +47,21 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   
   final Map<String, Map<String, dynamic>> severityMap = {
     'high': {
-      'color': Color.fromRGBO(255, 204, 128,1),
+      'color': const Color.fromRGBO(255, 204, 128,1),
       'icon': Icons.warning,
       'iconColor': Colors.red, 
       'text': 'High Severity',
       'perc':75,
     },
     'medium': {
-      'color': Color.fromRGBO(255, 245, 156,1),
+      'color': const Color.fromRGBO(255, 245, 156,1),
       'icon': Icons.error_outline,
       'iconColor': Colors.orange,
       'text': 'Medium Severity',
       'perc':50,
     },
     'low': {
-      'color': Color.fromARGB(255, 208, 255, 210),
+      'color': const Color.fromARGB(255, 208, 255, 210),
       'icon': Icons.check_circle,
       'iconColor': Colors.green,
       'text': 'Low Severity',
@@ -88,27 +90,27 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
 
     if (parameter == 'temperature') {
       if (value < 25) {
-        result = {'color': Color.fromARGB(255, 167, 250, 171), 'text': 'Low Temperature, Continue normal operations.'};
+        result = {'color': const Color.fromARGB(255, 167, 250, 171), 'text': 'Low Temperature, Continue normal operations.'};
       } else if (value >= 25 && value <= 35) {
-        result = {'color': Color.fromRGBO(255, 241, 114, 1), 'text': 'Medium Temperature, Stay vigillant and alert.'};
+        result = {'color': const Color.fromRGBO(255, 241, 114, 1), 'text': 'Medium Temperature, Stay vigillant and alert.'};
       } else {
-        result = {'color': Color.fromARGB(255, 255, 137, 101), 'text': 'High Temperature, Warning! Take shelter.'};
+        result = {'color': const Color.fromARGB(255, 255, 137, 101), 'text': 'High Temperature, Warning! Take shelter.'};
       }
     } else if (parameter == 'humidity') {
       if (value < 80) {
-        result = {'color': Color.fromARGB(255, 167, 250, 171), 'text': 'Low Humidity, Continue normal operations.'};
+        result = {'color': const Color.fromARGB(255, 167, 250, 171), 'text': 'Low Humidity, Continue normal operations.'};
       } else if (value >= 80 && value <= 90) {
-        result = {'color': Color.fromRGBO(255, 241, 114, 1), 'text': 'Medium Humidity, Stay vigillant and alert.'};
+        result = {'color': const Color.fromRGBO(255, 241, 114, 1), 'text': 'Medium Humidity, Stay vigillant and alert.'};
       } else {
-        result = {'color': Color.fromARGB(255, 255, 137, 101), 'text': 'High Humidity, Warning! Take shelter.'};
+        result = {'color': const Color.fromARGB(255, 255, 137, 101), 'text': 'High Humidity, Warning! Take shelter.'};
       }
     } else if (parameter == 'raining') {
       if (value < 15) {
-        result = {'color': Color.fromARGB(255, 167, 250, 171), 'text': 'Low Rainfall, Continue normal operations.'};
+        result = {'color': const Color.fromARGB(255, 167, 250, 171), 'text': 'Low Rainfall, Continue normal operations.'};
       } else if (value >= 15 && value <= 25) {
-        result = {'color': Color.fromRGBO(255, 241, 114, 1), 'text': 'Medium Rainfall, Stay vigillant and alert.'};
+        result = {'color': const Color.fromRGBO(255, 241, 114, 1), 'text': 'Medium Rainfall, Stay vigillant and alert.'};
       } else {
-        result = {'color': Color.fromARGB(255, 255, 137, 101), 'text': 'Heavy Rainfall, Warning! Take shelter.'};
+        result = {'color': const Color.fromARGB(255, 255, 137, 101), 'text': 'Heavy Rainfall, Warning! Take shelter.'};
       }
     }
 
@@ -130,7 +132,6 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     bdb.loadDataInfo(); 
     getLatLongFromPincode(bdb.userPin).then((latLon) {
@@ -165,7 +166,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           weather['temperature'] = (weatherData['main']['temp']).toInt();
         });
       } else {
-        print('Failed to load weather data');
+        // print('Failed to load weather data');
       }
       final rainReport = await http.get(
         Uri.parse(
@@ -193,10 +194,10 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           weather['raining'] = rainAmount;
         });
       } else {
-        print('Failed to load rain forecast data');
+        // print('Failed to load rain forecast data');
       }
     } catch (e) {
-      print('Error fetching weather data: $e');
+      // print('Error fetching weather data: $e');
     }
     isLoading=true;
   }
@@ -224,11 +225,11 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         };
         return resultDetails;
       } else {
-        print('Failed to load data');
+        // print('Failed to load data');
         return {}; 
       }
     } catch (e) {
-      print('Error occurred: $e');
+      // print('Error occurred: $e');
       return {};
     }
   }
@@ -260,7 +261,6 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
         if (responseData['success'] == true) {
-          print(responseData['message']);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => DiseaseManagement(soilDeficiency: widget.soilDeficiency, weatherSeverity: widget.weatherSeverity, severity: widget.severity, yieldLoss: widget.yieldLoss, recoveryDays: widget.recoveryDays, diseaseName: widget.diseaseName, cropId: widget.cropId,cropName: widget.cropName,)), 
@@ -268,7 +268,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         }
       }
     } catch (e) {
-      print('Error: $e');
+      // print('Error: $e');
     }
   }
 
@@ -337,15 +337,15 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         body: jsonEncode(data),
       );
 
-      print(response.body);
+      // print(response.body);
       setState(() {
         isLoading=true;
       });
-      Future.delayed(Duration(milliseconds: 1200), () {
+      Future.delayed(const Duration(milliseconds: 1200), () {
         Navigator.pushNamed(context, '/grpHomeRoute');
       });
     } catch (error) {
-      print('Error creating or joining group: $error');
+      // print('Error creating or joining group: $error');
     }
   }
 
@@ -357,7 +357,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
 
   String formatAddDate(String date) {
     DateTime parsedDate = DateTime.parse(date);
-    DateTime newDate = parsedDate.add(Duration(days: 5));
+    DateTime newDate = parsedDate.add(const Duration(days: 5));
     return DateFormat('d MMM, yyyy').format(newDate);
   }
 
@@ -369,7 +369,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
     DateTime currentDate = DateTime.now();
     DateTime formattedDate = DateTime.parse(createdAt);
     if (!treatmentData?['farmerTreatmentEmpty']!) {
-      formattedDate = formattedDate.add(Duration(days: 5));
+      formattedDate = formattedDate.add(const Duration(days: 5));
     } 
     return currentDate.isAfter(formattedDate) || currentDate.isAtSameMomentAs(formattedDate);
   }
@@ -391,14 +391,14 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
             padding: const EdgeInsets.symmetric(vertical: 10.0,horizontal: 16),
             child: Column(
               children: [
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 Center(
                     child: Text(
-                      "${widget.diseaseName}",
+                      widget.diseaseName,
                       style: TextStyle(fontSize: 24,color: context.theme.primaryColorDark),
                     ),      
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 GestureDetector(
                   onTap: (){
                     final selectedDisease = cropDiseaseList.firstWhere(
@@ -428,7 +428,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                   ),
                 ),
                           
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -440,7 +440,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                     child: Row(
                       children: [
                         Icon(severityData?['icon'],color: severityData?['iconColor'],),
-                        SizedBox(width: 10,),
+                        const SizedBox(width: 10,),
                         Flexible(
                           child: Text("${widget.severity.upperCamelCase} severity detected. Expected reccovery: ${calculateWeek(widget.recoveryDays)-1} - ${calculateWeek(widget.recoveryDays)} weeks" )
                         )
@@ -449,7 +449,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                   ),
                 ),
 
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -464,28 +464,28 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         Row(
                           children: [
                             Icon(FeatherIcons.activity,color: severityData?['iconColor'],),
-                            SizedBox(width: 10,),
-                            Flexible(
+                            const SizedBox(width: 10,),
+                            const Flexible(
                               child: Text("Disease Severity",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
                             )
                           ],
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("${widget.severity.upperCamelCase} Risk",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                          child: Text("${widget.severity.upperCamelCase} Risk",style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
                         ),
-                        SizedBox(height: 5,),
+                        const SizedBox(height: 5,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("Around ${severityData?['perc']} % of crops affected",style: TextStyle(fontSize: 14,),),
+                          child: Text("Around ${severityData?['perc']} % of crops affected",style: const TextStyle(fontSize: 14,),),
                         )    
                       ],
                     ),
                   ),
                 ),
 
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -500,20 +500,20 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         Row(
                           children: [
                             Icon(FontAwesomeIcons.seedling,color: severityData?['iconColor'],size: 16,),
-                            SizedBox(width: 10,),
-                            Flexible(
+                            const SizedBox(width: 10,),
+                            const Flexible(
                               child: Text("Expected Crop Loss",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
                             )
                           ],
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("${widget.yieldLoss} %",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                          child: Text("${widget.yieldLoss} %",style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
                         ),
-                        SizedBox(height: 5,),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        const SizedBox(height: 5,),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.0),
                           child: Text("of your crop will be affected if untreated",style: TextStyle(fontSize: 14,),),
                         )    
                       ],
@@ -521,7 +521,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                   ),
                 ),
 
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -536,13 +536,13 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         Row(
                           children: [
                             Icon(FontAwesomeIcons.tree,color: severityData?['iconColor'],size: 16,),
-                            SizedBox(width: 10,),
-                            Flexible(
+                            const SizedBox(width: 10,),
+                            const Flexible(
                               child: Text("Soil Health Status",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
                             )
                           ],
                         ),
-                        SizedBox(height: 15,),
+                        const SizedBox(height: 15,),
                         _buildSoilNutrientRow("Nitrogen (N)", widget.soilDeficiency['n'], getColorForNutrient(widget.soilDeficiency['n'])),
                         _buildSoilNutrientRow("Phosphorus (P)", widget.soilDeficiency['p'], getColorForNutrient(widget.soilDeficiency['p'])),
                         _buildSoilNutrientRow("Potassium (K)",widget.soilDeficiency['k'], getColorForNutrient(widget.soilDeficiency['k'])),              
@@ -552,7 +552,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                 ),
 
 
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -567,13 +567,13 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         Row(
                           children: [
                             Icon(FontAwesomeIcons.buildingColumns,size: 16,color: Colors.grey[500],),
-                            SizedBox(width: 10,),
-                            Flexible(
+                            const SizedBox(width: 10,),
+                            const Flexible(
                               child: Text("Weather Conditions for next 5 days",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
                             )
                           ],
                         ),
-                        SizedBox(height: 10,),
+                        const SizedBox(height: 10,),
                        _buildWeatherDetail('Temperature', weather['temperature'], 'temperature', FeatherIcons.thermometer,Colors.red,"°C"),  
                        _buildWeatherDetail('Humidity', weather['humidity'], 'humidity', FeatherIcons.droplet,Colors.blue,"%"),
                        _buildWeatherDetail('Rainfall', weather['raining'], 'raining', FeatherIcons.cloudDrizzle,Colors.grey,"mm"),
@@ -583,7 +583,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                 ),
 
 
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -598,13 +598,13 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         Row(
                           children: [
                             Icon(FeatherIcons.clock,size: 18,color: Colors.grey[500],),
-                            SizedBox(width: 10,),
-                            Flexible(
+                            const SizedBox(width: 10,),
+                            const Flexible(
                               child: Text("Recovery Timeline",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
                             )
                           ],
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         for (int week = 1; week <= calculateWeek(widget.recoveryDays); week++) 
                           _buildRecoveryWeek(week, calculateWeek(widget.recoveryDays)),
 
@@ -612,7 +612,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           children: [
                             Expanded(
                               child: Container(
-                                padding: EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                   border: Border.all(width: 1,color: context.theme.canvasColor),
                                   borderRadius: BorderRadius.circular(10)
@@ -622,31 +622,31 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                                   children: [
                                     Row(
                                       children: [
-                                        Text("Organic", style: TextStyle(fontSize: 16)),
-                                        Spacer(),
+                                        const Text("Organic", style: TextStyle(fontSize: 16)),
+                                        const Spacer(),
                                         Text("${organicProgress.toStringAsFixed(0)}%")
                                       ],
                                     ),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
                                       child: LinearProgressIndicator(
                                         value: organicProgress / 100,
                                         backgroundColor: Colors.grey[300],
-                                        valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+                                        valueColor: const AlwaysStoppedAnimation<Color>(Colors.green),
                                         minHeight: 6,
                                       ),
                                     ),
-                                    SizedBox(height: 8),
-                                    Text("Safe for soil health", style: TextStyle(fontSize: 12)),
+                                    const SizedBox(height: 8),
+                                    const Text("Safe for soil health", style: TextStyle(fontSize: 12)),
                                   ],
                                 ),
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Expanded(
                               child: Container(
-                                padding: EdgeInsets.all(12),
+                                padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                   border: Border.all(width: 1,color: context.theme.canvasColor),
                                   borderRadius: BorderRadius.circular(10)
@@ -656,23 +656,23 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                                   children: [
                                     Row(
                                       children: [
-                                        Text("Inorganic", style: TextStyle(fontSize: 16)),
-                                        Spacer(),
+                                        const Text("Inorganic", style: TextStyle(fontSize: 16)),
+                                        const Spacer(),
                                         Text("${inorganicProgress.toStringAsFixed(0)}%")
                                       ],
                                     ),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
                                       child: LinearProgressIndicator(
                                         value: inorganicProgress / 100,
                                         backgroundColor: Colors.grey[300],
-                                        valueColor: AlwaysStoppedAnimation<Color>(const Color.fromARGB(255, 250, 171, 22)),
+                                        valueColor: const AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 250, 171, 22)),
                                         minHeight: 6,
                                       ),
                                     ),
-                                    SizedBox(height: 8),
-                                    Text("Fast acting solution", style: TextStyle(fontSize: 12)),
+                                    const SizedBox(height: 8),
+                                    const Text("Fast acting solution", style: TextStyle(fontSize: 12)),
                                   ],
                                 ),
                               ),
@@ -705,7 +705,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                                     return const SizedBox.shrink();
                                   }
                                   return Text(
-                                    "${value.toInt().toString()}",
+                                    value.toInt().toString(),
                                     style:  TextStyle(color: context.theme.primaryColorDark, fontSize: 12),
                                   );
                                 },
@@ -722,17 +722,17 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                                 },
                               ),
                             ),
-                            topTitles: AxisTitles(
+                            topTitles: const AxisTitles(
                               sideTitles: SideTitles(showTitles: false),
                             ),
-                            rightTitles: AxisTitles(
+                            rightTitles: const AxisTitles(
                               sideTitles: SideTitles(showTitles: false),
                             ),
                           ),
-                          gridData: FlGridData(show: true),
+                          gridData: const FlGridData(show: true),
                           borderData: FlBorderData(
                             show: true,
-                            border: Border(
+                            border: const Border(
                               left: BorderSide(color: Colors.black, width: 2),
                               right: BorderSide.none,
                               top: BorderSide.none, 
@@ -757,7 +757,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                                   .cast<FlSpot>(),
                               isCurved: true,  
                               color: context.theme.primaryColorDark,
-                              dotData: FlDotData(show: true),
+                              dotData: const FlDotData(show: true),
                               belowBarData: BarAreaData(
                                 show: true,
                                 color: context.theme.cardColor,
@@ -770,9 +770,9 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                   ],
                 )
              
-                :SizedBox.shrink(),
+                :const SizedBox.shrink(),
 
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -803,8 +803,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         Row(
           children: [
             Icon(FontAwesomeIcons.disease, size: 18, color: Colors.grey[500]),
-            SizedBox(width: 10),
-            Flexible(
+            const SizedBox(width: 10),
+            const Flexible(
               child: Text(
                 "Treatment Tracking",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
@@ -812,32 +812,32 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
             ),
           ],
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Last Treatment:", style: TextStyle(fontSize: 16)),
+            const Text("Last Treatment:", style: TextStyle(fontSize: 16)),
             Text(
               treatmentData?['farmerTreatmentEmpty']! ? "NA"
               :formatDate(treatmentData?['createdAt']!), 
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
           ],
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text("Next Treatment:", style: TextStyle(fontSize: 16)),
+            const Text("Next Treatment:", style: TextStyle(fontSize: 16)),
             Text(
                 treatmentData?['farmerTreatmentEmpty']! ? formatDateNow(DateTime.now())
               :formatAddDate(treatmentData?['createdAt']!), 
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)
             ),
           ],
         ),
-        SizedBox(height: 20),
-        Text("Select Fertilizer",style: TextStyle(fontSize: 16),),
-        SizedBox(height: 8),
+        const SizedBox(height: 20),
+        const Text("Select Fertilizer",style: TextStyle(fontSize: 16),),
+        const SizedBox(height: 8),
         IgnorePointer(
           ignoring: treatmentData?['farmerTreatmentEmpty']! ?false:true,
           child: DropdownButtonFormField<String>(
@@ -882,9 +882,9 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           ),
         ),
 
-        SizedBox(height: 20),
-        Text("Quantity Used",style: TextStyle(fontSize: 16),),
-        SizedBox(height: 8),
+        const SizedBox(height: 20),
+        const Text("Quantity Used",style: TextStyle(fontSize: 16),),
+        const SizedBox(height: 8),
         TextField(
           controller: _quancontroller,
           cursorColor: context.theme.primaryColorDark,
@@ -897,7 +897,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly], 
         ),
-        SizedBox(height: 20), 
+        const SizedBox(height: 20), 
         IgnorePointer(                 
           ignoring: updated ?false:true,
           child: ElevatedButton(
@@ -905,25 +905,25 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
             int quantity = int.tryParse(_quancontroller.text) ?? 0;
             handleFarmerDBUpload(fertSel: fertSel ?? '', quantity:quantity,);
             },
-            child: Text("Save Treatment Details"),
             style: ElevatedButton.styleFrom(
-              backgroundColor:updated? context.theme.primaryColorDark:Color.fromRGBO(109, 143, 132,1),
+              backgroundColor:updated? context.theme.primaryColorDark:const Color.fromRGBO(109, 143, 132,1),
               foregroundColor: context.theme.highlightColor,
-              minimumSize: Size(double.infinity, 50),
+              minimumSize: const Size(double.infinity, 50),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             ),
+            child: const Text("Save Treatment Details"),
           ),
         ),
-        SizedBox(height: 20), 
+        const SizedBox(height: 20), 
         ElevatedButton(
           onPressed: () => handleGroupComm(context),
-          child: Text("Fertilizer Group"),
           style: ElevatedButton.styleFrom(
             backgroundColor: context.theme.primaryColorDark,
             foregroundColor: context.theme.highlightColor,
-            minimumSize: Size(double.infinity, 50),
+            minimumSize: const Size(double.infinity, 50),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           ),
+          child: const Text("Fertilizer Group"),
         ),
       ],
     );
@@ -938,10 +938,10 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           color: color,
           size: 10,
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Text(
           "$nutrient: $level%",
-          style: TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16),
         ),
       ],
     );
@@ -951,8 +951,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
     Map<String, dynamic> severity = getSeverityLevel(parameter, value);
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.all(16),
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: severity['color'].withOpacity(0.2),
         borderRadius: BorderRadius.circular(10),
@@ -963,28 +963,28 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           Row(
             children: [
               Icon(iconData,color: iconColor,size: 22,),
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     header,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     '$value $unit',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ],
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               '${severity['text']}',
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             ),
           ),
         ],
@@ -1033,7 +1033,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
               children: [
                 Text(
                   'Week $week',
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
                 Text(
                   ' $weekText',

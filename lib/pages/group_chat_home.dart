@@ -53,7 +53,9 @@ class _GroupChatHomeState extends State<GroupChatHome> {
         title: Text('Group Chats'),
       ),
       body: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? Center(child: CircularProgressIndicator(
+            color: context.theme.primaryColorDark,
+          ))
           : _groups.isEmpty
               ? Center(child: Text('No groups found'))
               : SingleChildScrollView(

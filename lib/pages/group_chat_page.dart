@@ -146,8 +146,6 @@ class _GroupChatPageState extends State<GroupChatPage> {
         "comment": comment,
         "commenterName": bdb.userName
       }
-      // 'name': bdb.userName,
-      // 'image': null,
     };
 
     try {
