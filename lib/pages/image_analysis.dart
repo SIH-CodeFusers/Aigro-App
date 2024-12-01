@@ -242,29 +242,40 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: const Text("Image Analysis"),
-        actions: [
-          Container(
-            decoration: BoxDecoration(
-              color: context.theme.highlightColor,
-              borderRadius: BorderRadius.circular(10)
-            ),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ImageAnalysis()), 
-                );
-              },
-              child: const Padding(
-                padding: EdgeInsets.all(12.0),
-                child: Icon(FontAwesomeIcons.rotateRight, color: Colors.black, size: 18),
-              ),
-            ), 
-          ),
-          const SizedBox(width: 10),
-        ],
+  backgroundColor: Colors.white,
+  elevation: 0,
+  title: Row(
+    children: [
+      const Icon(
+        Icons.spa,
+        color: Colors.green,
+        size: 24, 
       ),
+      const SizedBox(width: 8), 
+      const Text(
+        "Analysis Results",
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      const SizedBox(width: 10), 
+      IconButton(
+        icon: const Icon(Icons.volume_up_rounded, color: Colors.green),
+        tooltip: 'Speak',
+        onPressed: () {
+          
+          final text =
+              "Here are the Results of the Image Analysis";
+          _speak(text);
+        },
+      ),
+    ],
+  ),
+  centerTitle: false,
+),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_analysisData != null && _analysisData!['results'] != null) {
