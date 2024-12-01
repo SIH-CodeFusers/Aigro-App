@@ -5,6 +5,7 @@ import 'package:aigro/secret.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:velocity_x/velocity_x.dart';
 
 class GroupChatPage extends StatefulWidget {
   final String groupId;
@@ -183,6 +184,7 @@ class _GroupChatPageState extends State<GroupChatPage> {
  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
         title: Text(group.isNotEmpty ? '${group['diseaseName'] ?? 'Group'} Chat' : 'Chat'),
       ),

@@ -89,7 +89,7 @@ class _GroupChatHomeState extends State<GroupChatHome> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => GroupChatPage(groupId:"674bd4baa20c1f1259211cf0"),
+                                  builder: (context) => GroupChatPage(groupId: group['_id']),
                                 ),
                               );
                             },
