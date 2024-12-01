@@ -19,6 +19,7 @@ class DiseaseManagement extends StatefulWidget {
   final Map<String,dynamic> weatherSeverity;
   final String severity;
   final String diseaseName;
+  final String cropName;
   final String cropId;
   final int yieldLoss;
   final int recoveryDays;
@@ -32,6 +33,7 @@ class DiseaseManagement extends StatefulWidget {
       required this.recoveryDays,
       required this.diseaseName,
       required this.cropId,
+      required this.cropName
     }
   );
 
@@ -261,7 +263,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           print(responseData['message']);
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => DiseaseManagement(soilDeficiency: widget.soilDeficiency, weatherSeverity: widget.weatherSeverity, severity: widget.severity, yieldLoss: widget.yieldLoss, recoveryDays: widget.recoveryDays, diseaseName: widget.diseaseName, cropId: widget.cropId,)), 
+            MaterialPageRoute(builder: (context) => DiseaseManagement(soilDeficiency: widget.soilDeficiency, weatherSeverity: widget.weatherSeverity, severity: widget.severity, yieldLoss: widget.yieldLoss, recoveryDays: widget.recoveryDays, diseaseName: widget.diseaseName, cropId: widget.cropId,cropName: widget.cropName,)), 
           );
         }
       }
@@ -312,7 +314,35 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
     });
   }
 
-  
+  Future<void> handleGroupComm(BuildContext context) async {
+    final data = {
+      'diseaseName': widget.diseaseName,
+      'userClerkId': BACKEND_UID,
+      'cropName':widget.cropName,
+      'pincode': bdb.userPin,
+      'members': {
+        'userClerkId': BACKEND_UID,
+      },
+    };
+
+    print(data);
+
+    try {
+      final response = await http.post(
+        Uri.parse('$CHAT_BACKEND/createorjoingroups'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(data),
+      );
+
+      print(response.body);
+      Future.delayed(Duration(milliseconds: 1200), () {
+        Navigator.pushNamed(context, '/grpHomeRoute');
+      });
+    } catch (error) {
+      print('Error creating or joining group: $error');
+    }
+  }
+
 
   String formatDate(String date) {
     DateTime parsedDate = DateTime.parse(date);
@@ -880,9 +910,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         ),
         SizedBox(height: 20), 
         ElevatedButton(
-          onPressed: () {
-            print(updated);
-          },
+          onPressed: () => handleGroupComm(context),
           child: Text("Fertilizer Group"),
           style: ElevatedButton.styleFrom(
             backgroundColor: context.theme.primaryColorDark,

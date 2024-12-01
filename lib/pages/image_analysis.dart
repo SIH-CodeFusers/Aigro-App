@@ -412,6 +412,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                      yieldLoss: yieldLoss,
                      diseaseName:diseaseName,
                      cropId:cropid,
+                     cropName:cropName,
                     
                   ),
                 ),

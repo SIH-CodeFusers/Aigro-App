@@ -3,6 +3,7 @@ import 'package:aigro/pages/dis_management.dart';
 import 'package:aigro/pages/disease_forecasting.dart';
 import 'package:aigro/pages/disease_mapping.dart';
 import 'package:aigro/pages/gov_schemes.dart';
+import 'package:aigro/pages/group_chat_home.dart';
 import 'package:aigro/pages/image_analysis.dart';
 import 'package:aigro/pages/khetisathi.dart';
 import 'package:aigro/pages/learning_resources.dart';
@@ -99,6 +100,7 @@ class _MyAppState extends State<MyApp> {
               Myroutes.learningResourcesRoute: (context) => LearningResources(),
               Myroutes.communityRoute: (context) => const Community(),
               Myroutes.schemesRoute: (context) => GovernmentSchemes(),
+              Myroutes.grpHomeRoute: (context) => GroupChatHome(),
             },
           );
         },
