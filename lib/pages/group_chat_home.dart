@@ -1,3 +1,5 @@
+import 'package:aigro/pages/group_chat_page.dart';
+import 'package:aigro/secret.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -22,7 +24,7 @@ class _GroupChatHomeState extends State<GroupChatHome> {
   }
 
   Future<void> fetchGroups() async {
-    const String apiUrl = 'https://chat.thefuturetech.xyz/yourgroups/user_2ozYA1JorKYVMjC0kVNdnLTLevt';
+    const String apiUrl = '$CHAT_BACKEND/yourgroups/$BACKEND_UID';
 
     try {
       final response = await http.get(Uri.parse(apiUrl));
@@ -74,7 +76,7 @@ class _GroupChatHomeState extends State<GroupChatHome> {
                               backgroundColor: Theme.of(context).cardColor,
                               child: Text(
                                 group['diseaseName'][0],
-                                style: TextStyle(color: Colors.white, fontSize: 18),
+                                style: TextStyle(color: context.theme.highlightColor, fontSize: 18),
                               ),
                             ),
                             title: Text(
@@ -84,7 +86,12 @@ class _GroupChatHomeState extends State<GroupChatHome> {
                             subtitle: Text('Pincode: ${group['pincode']}'),
                             trailing: Icon(Icons.arrow_forward_ios),
                             onTap: () {
-                              print(group);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => GroupChatPage(groupId:"674bd4baa20c1f1259211cf0"),
+                                ),
+                              );
                             },
                           ),
                         );

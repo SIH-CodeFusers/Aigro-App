@@ -315,6 +315,9 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   }
 
   Future<void> handleGroupComm(BuildContext context) async {
+    setState(() {
+      isLoading=true;
+    });
     final data = {
       'diseaseName': widget.diseaseName,
       'userClerkId': BACKEND_UID,
@@ -335,6 +338,9 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
       );
 
       print(response.body);
+      setState(() {
+        isLoading=true;
+      });
       Future.delayed(Duration(milliseconds: 1200), () {
         Navigator.pushNamed(context, '/grpHomeRoute');
       });
