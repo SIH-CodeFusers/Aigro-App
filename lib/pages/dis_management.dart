@@ -6,7 +6,9 @@ import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/crop_details.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/utils/get_lat_long.dart';
+import 'package:aigro/widgets/voice_icon.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -44,6 +46,13 @@ class DiseaseManagement extends StatefulWidget {
 }
 
 class _DiseaseManagementState extends State<DiseaseManagement> {
+
+  FlutterTts flutterTts = FlutterTts();
+  _speak(String text) async {
+    await flutterTts.setLanguage(ldb.language); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
+  }
   
   final Map<String, Map<String, dynamic>> severityMap = {
     'high': {
@@ -119,6 +128,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
 
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
   late double lat=27.0416;
   late double long=88.2664;
   bool isLoading = false;
@@ -134,6 +145,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   void initState() {
     super.initState();
     bdb.loadDataInfo(); 
+    ldb.loadLang();
     getLatLongFromPincode(bdb.userPin).then((latLon) {
       setState(() {
           lat = latLon['lat']!;
@@ -392,11 +404,23 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
             child: Column(
               children: [
                 const SizedBox(height: 20,),
-                Center(
-                    child: Text(
-                      widget.diseaseName,
-                      style: TextStyle(fontSize: 24,color: context.theme.primaryColorDark),
-                    ),      
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(       
+                      child: Text(
+                        widget.diseaseName,
+                        style: TextStyle(fontSize: 24,color: context.theme.primaryColorDark),
+                      ),                   
+                    ),
+                    const SizedBox(width: 10,),
+                    GestureDetector(
+                      onTap: () {
+                        _speak("This is Disease Management Dashboard. Scroll to see all about your current crop disease");
+                      },
+                      child: voiceIcon(context),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 10,),
                 GestureDetector(
@@ -464,10 +488,16 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         Row(
                           children: [
                             Icon(FeatherIcons.activity,color: severityData?['iconColor'],),
-                            const SizedBox(width: 10,),
-                            const Flexible(
+                            const SizedBox(width: 10,),              
+                            const Expanded(
                               child: Text("Disease Severity",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
-                            )
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                _speak("This shows the disease severity of your crops.");
+                              },
+                              child: voiceIcon(context),
+                            ),              
                           ],
                         ),
                         const SizedBox(height: 10,),
@@ -501,9 +531,15 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           children: [
                             Icon(FontAwesomeIcons.seedling,color: severityData?['iconColor'],size: 16,),
                             const SizedBox(width: 10,),
-                            const Flexible(
+                            const Expanded(
                               child: Text("Expected Crop Loss",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
-                            )
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                _speak("This shows how much crop yield is expected to be lost.");
+                              },
+                              child: voiceIcon(context),
+                            ),  
                           ],
                         ),
                         const SizedBox(height: 10,),
@@ -537,9 +573,15 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           children: [
                             Icon(FontAwesomeIcons.tree,color: severityData?['iconColor'],size: 16,),
                             const SizedBox(width: 10,),
-                            const Flexible(
+                            const Expanded(
                               child: Text("Soil Health Status",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
-                            )
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                _speak("This shows the estimated soil health status of your field.");
+                              },
+                              child: voiceIcon(context),
+                            ), 
                           ],
                         ),
                         const SizedBox(height: 15,),
@@ -568,9 +610,15 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           children: [
                             Icon(FontAwesomeIcons.buildingColumns,size: 16,color: Colors.grey[500],),
                             const SizedBox(width: 10,),
-                            const Flexible(
+                            const Expanded(
                               child: Text("Weather Conditions for next 5 days",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
-                            )
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                _speak("Weather Conditions for next 5 days.");
+                              },
+                              child: voiceIcon(context),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 10,),
@@ -599,9 +647,15 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           children: [
                             Icon(FeatherIcons.clock,size: 18,color: Colors.grey[500],),
                             const SizedBox(width: 10,),
-                            const Flexible(
+                            const Expanded(
                               child: Text("Recovery Timeline",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
-                            )
+                            ),
+                             GestureDetector(
+                              onTap: () {
+                                _speak("Your crops recovery timeline");
+                              },
+                              child: voiceIcon(context),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -687,11 +741,23 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                 treatmentData?['farmerTreatmentEmpty']==false?
                 Column(
                   children: [
-                    Text(
-                      treatmentData?['farmerTreatment'] != null && treatmentData!['farmerTreatment'].isNotEmpty
-                          ? "Quantity: ${treatmentData!['farmerTreatment'][0]['quantity']}"
-                          : "No farmer treatment data available"
+                    SizedBox(height: 20,),
+                     Row(
+                      children: [
+                        Icon(FeatherIcons.clock,size: 18,color: Colors.grey[500],),
+                        const SizedBox(width: 10,),
+                        const Expanded(
+                          child: Text("Previous Tracking",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),)
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            _speak("This shows the Previous Tracking of your crops.");
+                          },
+                          child: voiceIcon(context),
+                        ),
+                      ],
                     ),
+                    SizedBox(height: 20,),
                     SizedBox(
                       height: 200,
                       child: LineChart(
@@ -804,11 +870,17 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           children: [
             Icon(FontAwesomeIcons.disease, size: 18, color: Colors.grey[500]),
             const SizedBox(width: 10),
-            const Flexible(
+            const Expanded(
               child: Text(
                 "Treatment Tracking",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
               ),
+            ),
+            GestureDetector(
+              onTap: () {
+                _speak("Treatment Tracking using pesticides");
+              },
+              child: voiceIcon(context),
             ),
           ],
         ),
@@ -836,7 +908,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           ],
         ),
         const SizedBox(height: 20),
-        const Text("Select Fertilizer",style: TextStyle(fontSize: 16),),
+        const Text("Select Pesticide",style: TextStyle(fontSize: 16),),
         const SizedBox(height: 8),
         IgnorePointer(
           ignoring: treatmentData?['farmerTreatmentEmpty']! ?false:true,

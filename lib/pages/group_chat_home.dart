@@ -1,6 +1,10 @@
+import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/group_chat_page.dart';
 import 'package:aigro/secret.dart';
+import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -16,10 +20,21 @@ class GroupChatHome extends StatefulWidget {
 class _GroupChatHomeState extends State<GroupChatHome> {
   List<dynamic> _groups = [];
   bool _isLoading = true;
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
+
+  FlutterTts flutterTts = FlutterTts();
+  _speak(String text) async {
+    await flutterTts.setLanguage(ldb.language); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
+  }
+  
 
   @override
   void initState() {
     super.initState();
+    ldb.loadLang();
     fetchGroups();
   }
 
@@ -62,12 +77,24 @@ class _GroupChatHomeState extends State<GroupChatHome> {
                   child: Column(
                     children: [
                       SizedBox(height: 30),
-                      Center(
-                        child: Text(
-                          "View Your Groups",
-                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                     
+                        Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                "View Your Groups",
+                                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                             GestureDetector(
+                              onTap: () {
+                                _speak("View all your groups here");
+                              },
+                              child: voiceIcon(context),
+                            ),
+                          ],
                         ),
-                      ),
+                      
                       SizedBox(height: 20),
                       ..._groups.map((group) {
                         return Card(
