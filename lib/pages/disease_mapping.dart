@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'dart:math';
 
 class DiseaseMapping extends StatefulWidget {
   const DiseaseMapping({super.key});
@@ -129,6 +131,41 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
 
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
+
+  void moveToNearestShop(Map<String, Object> data, double userLat, double userLon, MapController mapController) {
+  List<dynamic> shops = data['shops'] as List<dynamic>;
+  
+
+  double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+    const R = 6371; // Radius of Earth in km
+    double dLat = (lat2 - lat1) * pi / 180;
+    double dLon = (lon2 - lon1) * pi / 180;
+    double a = sin(dLat / 2) * sin(dLat / 2) +
+        cos(lat1 * pi / 180) * cos(lat2 * pi / 180) *
+        sin(dLon / 2) * sin(dLon / 2);
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    return R * c; 
+  }
+
+  Map<String, dynamic> nearestShop = shops[0];
+  double minDistance = calculateDistance(userLat, userLon, nearestShop['location']['lat'], nearestShop['location']['lon']);
+
+  for (var shop in shops) {
+    double shopLat = shop['location']['lat'];
+    double shopLon = shop['location']['lon'];
+    double distance = calculateDistance(userLat, userLon, shopLat, shopLon);
+
+    if (distance < minDistance) {
+      minDistance = distance;
+      nearestShop = shop;
+    }
+  }
+
+  double nearestLat = nearestShop['location']['lat'];
+  double nearestLon = nearestShop['location']['lon'];
+  mapController.move(LatLng(nearestLat, nearestLon), 15.0);
+}
+
 
  @override
   void initState() {
@@ -399,9 +436,6 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
   }
 
 
-
-
-
   Future<void> getLatLongFromPincode(String pincode) async {
     final String apiUrl =
         'http://api.openweathermap.org/geo/1.0/zip?zip=$pincode,IN&appid=$OPEN_WEATHER_API_KEY';
@@ -448,7 +482,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
     }
   }
 
-
+  final MapController _mapController = MapController();
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
@@ -462,22 +496,50 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
     return Scaffold(
  
       appBar: AppBar(title: const Text('Disease Mapping')),
-      body: FlutterMap(
-        options: MapOptions(
-          initialCenter: LatLng(lat, long),
-          initialZoom: 11.0,
-        ),
+      body: Stack(
         children: [
-          TileLayer(
-            urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            subdomains: ['a', 'b', 'c'],
-          ),
-          MarkerLayer(
-            markers: [
-                ...nearbyMarkers,
-              if (customMarker != null) customMarker!, 
-              ...shopMarkers, 
+          FlutterMap(
+            mapController: _mapController,
+            options: MapOptions(
+              initialCenter: LatLng(lat, long),
+              initialZoom: 11.0,
+            ),
+            children: [
+              TileLayer(
+                urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                subdomains: ['a', 'b', 'c'],
+              ),
+              MarkerLayer(
+                markers: [
+                  ...nearbyMarkers,
+                  if (customMarker != null) customMarker!,
+                  ...shopMarkers,
+                ],
+              ),
             ],
+          ),
+          Positioned(
+            bottom: 10,
+            left: 10,
+            right: 10,
+            child: GestureDetector(
+              onTap: (){
+                moveToNearestShop(data, lat, long, _mapController);
+              },
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: context.theme.primaryColorDark,
+                  borderRadius: BorderRadius.circular(8)
+                ),
+                padding: EdgeInsets.all(16.0),
+                child: Text(
+                  'Find Nearest Fertilizer Shop',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: context.theme.highlightColor),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ),
         ],
       ),
