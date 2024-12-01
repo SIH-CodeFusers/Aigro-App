@@ -361,7 +361,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
               padding: const EdgeInsets.symmetric(horizontal: 1),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, '/uploadImage');
+                  Navigator.pushNamed(context, '/newAnalysis');
                 },
                 child: Container(
                   width: double.infinity,
