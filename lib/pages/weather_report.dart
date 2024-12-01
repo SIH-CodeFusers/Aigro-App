@@ -79,6 +79,7 @@ class _WeatherReportState extends State<WeatherReport> {
       ),
       body: FutureBuilder<List<WeatherData>>(
         future: weatherService.fetchWeather(lat, lon),
+
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return  Center(
@@ -94,6 +95,7 @@ class _WeatherReportState extends State<WeatherReport> {
             return const Center(child: Text('No weather data available'));
           } else {
             final weatherList = snapshot.data!;
+            final todayweather=weatherList[0];
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,52 +103,64 @@ class _WeatherReportState extends State<WeatherReport> {
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Card(
-                      color: context.theme.cardColor,
-                      elevation: 4,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(15),
                       ),
+                      elevation: 4,
+                      color: context.theme.highlightColor,
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            Icon(
+                              Icons.nights_stay, 
+                              size: 64,
+                              color: Colors.grey[400],
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '${todayweather.tempDay.round()}°C',
+                              style: TextStyle(
+                                fontSize: 40,
+                                color: Colors.black,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              '${daysOfWeek[1]}, ${TimeOfDay.now().format(context)}', 
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey[400],
+                              ),
+                            ),
+                            const SizedBox(height: 10),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
+                                Icon(Icons.cloud, size: 24, color: Colors.grey[400]),
+                                const SizedBox(width: 8),
                                 Text(
-                                  "Location: ",
+                                  todayweather.description,
                                   style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  userDist,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
+                                    fontSize: 16,
+                                    color: Colors.grey[600],
                                   ),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 8),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
+                                Icon(Icons.location_on, size: 24, color: context.theme.cardColor),
+                                const SizedBox(width: 8),
                                 Text(
-                                  "Pincode: ",
+                                  userDist,
                                   style: TextStyle(
-                                    color: Colors.white,
                                     fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  userPin,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
+                                    color: Colors.grey[600],
                                   ),
                                 ),
                               ],
@@ -156,6 +170,8 @@ class _WeatherReportState extends State<WeatherReport> {
                       ),
                     ),
                   ),
+
+
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -184,7 +200,7 @@ class _WeatherReportState extends State<WeatherReport> {
                                       children: [
                                         Icon(
                                           Icons.cloud,
-                                          color: Colors.white,
+                                          color: context.theme.highlightColor,
                                           size: 24,
                                         ),
                                         const SizedBox(width: 8),
@@ -200,9 +216,16 @@ class _WeatherReportState extends State<WeatherReport> {
                                     ),
                                     Text(
                                       weather.description,
-                                      style: const TextStyle(
-                                        color: Colors.white,
+                                      style:  TextStyle(
+                                        color: context.theme.highlightColor,
                                         fontSize: 16,
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(1.0, 1.0),
+                                            blurRadius: 3.0,          
+                                            color: const Color.fromARGB(255, 211, 199, 199), 
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],

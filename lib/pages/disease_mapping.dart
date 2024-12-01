@@ -137,7 +137,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
   
 
   double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
-    const R = 6371; // Radius of Earth in km
+    const R = 6371;
     double dLat = (lat2 - lat1) * pi / 180;
     double dLon = (lon2 - lon1) * pi / 180;
     double a = sin(dLat / 2) * sin(dLat / 2) +
