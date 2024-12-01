@@ -41,9 +41,8 @@ class _CropDetailsState extends State<CropDetails> {
   }
 
   FlutterTts flutterTts = FlutterTts();
-
   _speak(String text) async {
-    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setLanguage(ldb.language); 
     await flutterTts.setPitch(0.7); 
     await flutterTts.speak(text); 
   }

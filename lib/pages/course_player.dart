@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
+import '../local_db/db.dart';
 
 class CoursesPlayer extends StatefulWidget {
   const CoursesPlayer({super.key, required this.coursetitle});
@@ -61,11 +65,24 @@ class _CoursesPlayerState extends State<CoursesPlayer> {
 
   String title = "";
   double perc = 0;
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
+  FlutterTts flutterTts = FlutterTts();
+  _speak(String text) async {
+    await flutterTts.setLanguage(ldb.language); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
+  }
 
   @override
   void initState() {
     super.initState();
-
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
     currentCourse = courseData[widget.coursetitle] ?? courseData["default"]!;
 
     checkedState = List.generate(currentCourse.length, (index) => false);

@@ -1,7 +1,10 @@
+import 'package:aigro/local_db/db.dart';
 import 'package:aigro/widgets/voice_icon.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:tflite_v2/tflite_v2.dart';
@@ -31,6 +34,21 @@ class _OfflineDetectionState extends State<OfflineDetection> {
     loadmodel().then((value) {
       setState(() {});
     });
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
+  }
+
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
+  FlutterTts flutterTts = FlutterTts();
+  _speak(String text) async {
+    await flutterTts.setLanguage(ldb.language); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
   }
 
 

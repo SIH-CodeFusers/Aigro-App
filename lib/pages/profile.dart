@@ -3,6 +3,7 @@ import 'package:aigro/pages/home.dart';
 import 'package:aigro/pages/select_lang.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -26,10 +27,24 @@ class _ProfilePageState extends State<ProfilePage> {
 
   String selectedLanguageCode = 'en';
 
+
+  FlutterTts flutterTts = FlutterTts();
+  _speak(String text) async {
+    await flutterTts.setLanguage(ldb.language); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
+  }
+
   @override
   void initState() {
     super.initState();
     bdb.loadDataInfo(); 
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
   }
 
    saveLang() {

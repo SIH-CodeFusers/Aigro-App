@@ -19,14 +19,14 @@ class UserOnboarding extends StatefulWidget {
 
 class _UserOnboardingState extends State<UserOnboarding> {
 
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
-
   _speak(String text) async {
-    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setLanguage(ldb.language); 
     await flutterTts.setPitch(0.7); 
     await flutterTts.speak(text); 
   }
-
 
   int questionInd = 0;
   int totalQuestions = 7;
@@ -93,6 +93,12 @@ class _UserOnboardingState extends State<UserOnboarding> {
   @override
   void initState() {
     super.initState();
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
   }
 
   _saveForm() {
@@ -110,6 +116,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
     
     db.updateTheme();
     bdb.updateDbInfo(); 
+    ldb.loadLang();
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => const HomePage()),

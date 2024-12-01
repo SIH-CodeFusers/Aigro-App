@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -133,9 +134,24 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
   void initState() {
     super.initState();
     bdb.loadDataInfo(); 
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
     getLatLongFromPincode(bdb.userPin);
     getNearbyAlerts(bdb.userPin);
     addShopMarkers();
+  }
+
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
+  FlutterTts flutterTts = FlutterTts();
+  _speak(String text) async {
+    await flutterTts.setLanguage(ldb.language); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
   }
 
   Future<void> getNearbyAlerts(String pincode) async {

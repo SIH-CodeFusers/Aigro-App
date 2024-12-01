@@ -34,7 +34,12 @@ class _GroupChatHomeState extends State<GroupChatHome> {
   @override
   void initState() {
     super.initState();
-    ldb.loadLang();
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
     fetchGroups();
   }
 

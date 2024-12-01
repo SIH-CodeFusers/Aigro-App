@@ -8,6 +8,7 @@ import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
@@ -54,6 +55,14 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
     "Tea",
   ];
 
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
+  FlutterTts flutterTts = FlutterTts();
+  _speak(String text) async {
+    await flutterTts.setLanguage(ldb.language); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
+  }
 
 
   final infobox = Hive.box("BasicInfo-db");
@@ -62,6 +71,12 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
    @override
   void initState() {
     bdb.loadDataInfo(); 
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
     super.initState();
   }
 

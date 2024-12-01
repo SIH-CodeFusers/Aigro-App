@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/crop_details.dart';
 import 'package:aigro/pages/dis_management.dart';
 import 'package:aigro/secret.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:velocity_x/velocity_x.dart';
 import 'dart:ui' as ui;
@@ -26,10 +28,12 @@ class ImageAnalysis extends StatefulWidget {
 class _ImageAnalysisState extends State<ImageAnalysis> {
   Map<String, dynamic>? _analysisData;
   List<Map<String, dynamic>> cropDiseaseList = [];
-  FlutterTts flutterTts = FlutterTts();
 
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
+  FlutterTts flutterTts = FlutterTts();
   _speak(String text) async {
-    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setLanguage(ldb.language); 
     await flutterTts.setPitch(0.7); 
     await flutterTts.speak(text); 
   }
@@ -223,6 +227,12 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   @override
   void initState() {
     super.initState();
+     if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
     loadCropDiseases();
     _fetchAnalysisData(); 
   }

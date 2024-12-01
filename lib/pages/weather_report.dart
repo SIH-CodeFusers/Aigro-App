@@ -2,6 +2,7 @@ import 'package:aigro/local_db/db.dart';
 import 'package:aigro/utils/get_lat_long.dart';
 import 'package:aigro/utils/weather_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -28,6 +29,15 @@ class _WeatherReportState extends State<WeatherReport> {
     }
   }
 
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
+  FlutterTts flutterTts = FlutterTts();
+  _speak(String text) async {
+    await flutterTts.setLanguage(ldb.language); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
+  }
+
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
   String userDist = "abc";
@@ -45,7 +55,12 @@ class _WeatherReportState extends State<WeatherReport> {
       userPin = bdb.userPin;
       userDist = bdb.userDistrict;
     }
-
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
     getLatLongFromPincode(bdb.userPin).then((latLon) {
       setState(() {
         lat = latLon['lat']!;

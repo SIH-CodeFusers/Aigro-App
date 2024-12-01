@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/widgets/grid_painter.dart';
 import 'package:avatar_glow/avatar_glow.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
+import 'package:hive/hive.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
@@ -93,12 +95,13 @@ class _KhetiSathiState extends State<KhetiSathi> {
     _streamBotMessage(response.text!);
   }
 
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
-
   _speak(String text) async {
-    await flutterTts.setLanguage("en-US");
-    await flutterTts.setPitch(0.7);
-    await flutterTts.speak(text);
+    await flutterTts.setLanguage(ldb.language); 
+    await flutterTts.setPitch(0.7); 
+    await flutterTts.speak(text); 
   }
 
   Future<void> _startListening() async {
@@ -137,6 +140,12 @@ class _KhetiSathiState extends State<KhetiSathi> {
   @override
   void initState() {
     _sendInitialBotMessage(_predefinedBotMessages[count++]);
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
     super.initState();
   }
 

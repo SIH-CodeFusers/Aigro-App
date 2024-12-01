@@ -52,6 +52,12 @@ class _PostWidgetState extends State<PostWidget> {
     super.initState();
     initializeSocket();
     bdb.loadDataInfo(); 
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
   }
 
   @override
@@ -60,10 +66,11 @@ class _PostWidgetState extends State<PostWidget> {
     super.dispose();
   }
 
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
-
   _speak(String text) async {
-    await flutterTts.setLanguage("en"); 
+    await flutterTts.setLanguage(ldb.language); 
     await flutterTts.setPitch(0.7); 
     await flutterTts.speak(text); 
   }

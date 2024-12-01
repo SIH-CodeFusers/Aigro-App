@@ -145,7 +145,12 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   void initState() {
     super.initState();
     bdb.loadDataInfo(); 
-    ldb.loadLang();
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
     getLatLongFromPincode(bdb.userPin).then((latLon) {
       setState(() {
           lat = latLon['lat']!;

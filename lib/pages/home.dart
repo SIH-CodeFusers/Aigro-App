@@ -175,10 +175,10 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
-  FlutterTts flutterTts = FlutterTts();
 
+  FlutterTts flutterTts = FlutterTts();
   _speak(String text) async {
-    await flutterTts.setLanguage("en"); 
+    await flutterTts.setLanguage(ldb.language); 
     await flutterTts.setPitch(0.7); 
     await flutterTts.speak(text); 
   }

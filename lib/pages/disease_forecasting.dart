@@ -25,23 +25,30 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
 
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
 
   @override
   void initState() {
     super.initState();
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
     bdb.loadDataInfo(); 
     fetchAlerts();
     loadCropDiseases();
   }
 
-  FlutterTts flutterTts = FlutterTts();
 
+  FlutterTts flutterTts = FlutterTts();
   _speak(String text) async {
-    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setLanguage(ldb.language); 
     await flutterTts.setPitch(0.7); 
     await flutterTts.speak(text); 
   }
-
 
   String findRisk(int value) {
     if (value < 7) {

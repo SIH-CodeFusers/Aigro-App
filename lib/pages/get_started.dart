@@ -1,9 +1,11 @@
+import 'package:aigro/local_db/db.dart';
 import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:aigro/widgets/circle_painter.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 
@@ -15,10 +17,22 @@ class GetStarted extends StatefulWidget {
 }
 
 class _GetStartedState extends State<GetStarted> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
+  }
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
-
   _speak(String text) async {
-    await flutterTts.setLanguage("en-US"); 
+    await flutterTts.setLanguage(ldb.language); 
     await flutterTts.setPitch(0.7); 
     await flutterTts.speak(text); 
   }
