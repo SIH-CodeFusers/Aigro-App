@@ -79,6 +79,7 @@ class _GroupChatHomeState extends State<GroupChatHome> {
                       SizedBox(height: 30),
                      
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Flexible(
                               child: Text(
@@ -86,6 +87,7 @@ class _GroupChatHomeState extends State<GroupChatHome> {
                                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                               ),
                             ),
+                            SizedBox(width: 20,),
                              GestureDetector(
                               onTap: () {
                                 _speak("View all your groups here");
