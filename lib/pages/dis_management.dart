@@ -18,6 +18,8 @@ import 'package:intl/intl.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter/services.dart';
 
+import '../utils/translate.dart';
+
 class DiseaseManagement extends StatefulWidget {
   final Map<String,dynamic> soilDeficiency;
   final Map<String,dynamic> weatherSeverity;
@@ -49,9 +51,10 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
 
   FlutterTts flutterTts = FlutterTts();
   _speak(String text) async {
-    await flutterTts.setLanguage(ldb.language); 
-    await flutterTts.setPitch(0.7); 
-    await flutterTts.speak(text); 
+    String translatedText = await translateTextInput(text, ldb.language);
+    await flutterTts.setLanguage(ldb.language);
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak(translatedText);
   }
   
   final Map<String, Map<String, dynamic>> severityMap = {

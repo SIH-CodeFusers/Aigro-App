@@ -42,9 +42,10 @@ class _CropDetailsState extends State<CropDetails> {
 
   FlutterTts flutterTts = FlutterTts();
   _speak(String text) async {
-    await flutterTts.setLanguage(ldb.language); 
-    await flutterTts.setPitch(0.7); 
-    await flutterTts.speak(text); 
+    String translatedText = await translateTextInput(text, ldb.language);
+    await flutterTts.setLanguage(ldb.language);
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak(translatedText);
   }
 
   Future<void> translateDiseaseDetails(Map<String, dynamic> disease) async {

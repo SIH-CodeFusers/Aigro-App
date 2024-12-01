@@ -1,6 +1,7 @@
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/home.dart';
 import 'package:aigro/pages/select_lang.dart';
+import 'package:aigro/utils/translate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -30,9 +31,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
   FlutterTts flutterTts = FlutterTts();
   _speak(String text) async {
-    await flutterTts.setLanguage(ldb.language); 
-    await flutterTts.setPitch(0.7); 
-    await flutterTts.speak(text); 
+    String translatedText = await translateTextInput(text, ldb.language);
+    await flutterTts.setLanguage(ldb.language);
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak(translatedText);
   }
 
   @override
@@ -44,6 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
     }
     else{
       ldb.loadLang();
+      selectedLanguageCode=ldb.language;
     }
   }
 

@@ -90,25 +90,27 @@ class _CropListPageState extends State<CropListPage> {
     String targetLanguage = userLang;
     String apiKey = GCP_API_KEY;
 
-    try {
-      for (var disease in diseases) {
-        String translatedDiseaseName =
-            await translateText(disease['diseaseName'], targetLanguage, apiKey);
-        String translatedCategory =
-            await translateText(disease['category'], targetLanguage, apiKey);
+    return diseases;
 
-        translatedDiseases.add({
-          ...disease,
-          "diseaseName": translatedDiseaseName,
-          "category": translatedCategory,
-        });
-      }
-    } catch (e) {
-      print("Error translating diseases: $e");
-      return diseases; // Fallback to untranslated data
-    }
+    // try {
+    //   for (var disease in diseases) {
+    //     String translatedDiseaseName =
+    //         await translateText(disease['diseaseName'], targetLanguage, apiKey);
+    //     String translatedCategory =
+    //         await translateText(disease['category'], targetLanguage, apiKey);
 
-    return translatedDiseases;
+    //     translatedDiseases.add({
+    //       ...disease,
+    //       "diseaseName": translatedDiseaseName,
+    //       "category": translatedCategory,
+    //     });
+    //   }
+    // } catch (e) {
+    //   print("Error translating diseases: $e");
+    //   return diseases; // Fallback to untranslated data
+    // }
+
+    // return translatedDiseases;
   }
 
   @override

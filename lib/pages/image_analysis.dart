@@ -3,6 +3,7 @@ import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/crop_details.dart';
 import 'package:aigro/pages/dis_management.dart';
 import 'package:aigro/secret.dart';
+import 'package:aigro/utils/translate.dart';
 import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -33,11 +34,11 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
   _speak(String text) async {
-    await flutterTts.setLanguage(ldb.language); 
-    await flutterTts.setPitch(0.7); 
-    await flutterTts.speak(text); 
+    String translatedText = await translateTextInput(text, ldb.language);
+    await flutterTts.setLanguage(ldb.language);
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak(translatedText);
   }
-
   final GlobalKey _pngKey = GlobalKey();
 
   Future<void> _captureAndSaveImage() async {
@@ -241,55 +242,54 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
-    appBar: AppBar(
-  backgroundColor: Colors.white,
-  elevation: 0,
-  title: Row(
-    children: [
-      const Icon(
-        Icons.spa,
-        color: Colors.green,
-        size: 24,
-      ),
-      const SizedBox(width: 8),
-      const Text(
-        "Analysis Results",
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Row(
+          children: [
+            // const Icon(
+            //   Icons.spa,
+            //   color: context.theme.cardColor,
+            //   size: 24,
+            // ),
+            const SizedBox(width: 8),
+            const Text(
+              "Analysis Results",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              ),
+            ),
+            const SizedBox(width: 10),
+            IconButton(
+              icon:  Icon(Icons.volume_up_rounded, color: context.theme.primaryColorDark),
+              tooltip: 'Speak',
+              onPressed: () {
+                final text = "Here are the Results of the Image Analysis";
+                _speak(text);
+              },
+            ),
+          ],
         ),
-      ),
-      const SizedBox(width: 10),
-      IconButton(
-        icon: const Icon(Icons.volume_up_rounded, color: Colors.green),
-        tooltip: 'Speak',
-        onPressed: () {
-          final text = "Here are the Results of the Image Analysis";
-          _speak(text);
-        },
-      ),
-    ],
-  ),
-  centerTitle: false,
-  actions: [
-    IconButton(
-      icon: const Icon(Icons.refresh, color: Colors.green),
-      tooltip: 'Refresh',
-      onPressed: () {
-        setState(() {
-          _fetchAnalysisData();
-        });
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Data refreshed successfully."),
-            duration: Duration(seconds: 2),
+        centerTitle: false,
+        actions: [
+          IconButton(
+            icon:  Icon(Icons.refresh, color: context.theme.primaryColorDark),
+            tooltip: 'Refresh',
+            onPressed: () {
+              setState(() {
+                _fetchAnalysisData();
+              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Data refreshed successfully."),
+                  duration: Duration(seconds: 2),
+                ),
+              );
+            },
           ),
-        );
-      },
-    ),
-  ],
-),
+        ],
+      ),
 
 
       floatingActionButton: FloatingActionButton(

@@ -1,6 +1,7 @@
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/group_chat_page.dart';
 import 'package:aigro/secret.dart';
+import 'package:aigro/utils/translate.dart';
 import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -25,9 +26,10 @@ class _GroupChatHomeState extends State<GroupChatHome> {
 
   FlutterTts flutterTts = FlutterTts();
   _speak(String text) async {
-    await flutterTts.setLanguage(ldb.language); 
-    await flutterTts.setPitch(0.7); 
-    await flutterTts.speak(text); 
+    String translatedText = await translateTextInput(text, ldb.language);
+    await flutterTts.setLanguage(ldb.language);
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak(translatedText);
   }
   
 

@@ -1,7 +1,9 @@
+import 'package:aigro/local_db/db.dart';
 import 'package:aigro/widgets/next_buttons.dart';
 import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class SelectLang extends StatefulWidget {
@@ -12,29 +14,57 @@ class SelectLang extends StatefulWidget {
 }
 
 class _SelectLangState extends State<SelectLang> {
-  final List<String> languages = [
-    "English",
-  ];
+  //other language commneted for now
+  final Map<String, String> languages = {
+    "English": "en",
+    // "Hindi": "hi",
+    // "Bengali": "bn",
+    // "Telugu": "te",
+  };
+
+String? selectedLanguage;
   bool _isError = false;
 
 
   FlutterTts flutterTts = FlutterTts();
 
-_speak(String text) async {
-  await flutterTts.awaitSpeakCompletion(true);
+  _speak(String text) async {
+    await flutterTts.awaitSpeakCompletion(true);
 
-  await flutterTts.setLanguage("en-US");
-  await flutterTts.setPitch(0.7);
-  await flutterTts.speak(text);
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak(text);
 
-  await flutterTts.setLanguage("hi-IN");
-  await flutterTts.setPitch(0.7);
-  await flutterTts.speak("अपनी भाषा का चयन करें");
+    await flutterTts.setLanguage("hi-IN");
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak("अपनी भाषा का चयन करें");
 
-  await flutterTts.setLanguage("bn-BD");
-  await flutterTts.setPitch(0.7);
-  await flutterTts.speak("আপনার ভাষা নির্বাচন করুন");
-}
+    await flutterTts.setLanguage("bn-BD");
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak("আপনার ভাষা নির্বাচন করুন");
+  }
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
+  }
+
+  saveLang() {
+    setState(() {
+      ldb.language = selectedLanguage!;  
+    });
+    ldb.updateLang();
+    Navigator.pushNamed(context, '/getStarted'); 
+   }
 
 // void checkSupportedLanguages() async {
 //   List<dynamic> languages = await flutterTts.getLanguages;
@@ -43,7 +73,6 @@ _speak(String text) async {
 //   }
 // }
 
-  String? selectedLanguage; 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,14 +143,15 @@ _speak(String text) async {
                       style: TextStyle(color: context.theme.primaryColorDark),
                     ),
                     isExpanded: true,
-                    items: languages.map((String language) {
+                   items: languages.entries.map((entry) {
                       return DropdownMenuItem<String>(
-                        value: language,
-                        child: Text(language, style: TextStyle(color: context.theme.primaryColorDark)),
+                        value: entry.value,
+                        child: Text(entry.key, style: TextStyle(color: context.theme.primaryColorDark)),
                       );
                     }).toList(),
                     onChanged: (String? newValue) {
                       setState(() {
+                        print(newValue);
                         selectedLanguage = newValue;
                       });
                     },
@@ -135,7 +165,7 @@ _speak(String text) async {
                 const Padding(
                   padding: EdgeInsets.only(top: 8.0),
                   child: Text(
-                    "Please select a block.",
+                    "Please select a language.",
                     style: TextStyle(color: Colors.red, fontSize: 14),
                   ),
                 ),
@@ -148,7 +178,7 @@ _speak(String text) async {
                             if (selectedLanguage!=null) {
                               setState(() {
                                 _isError = false; 
-                                Navigator.pushNamed(context, '/getStarted'); 
+                                saveLang();
                               });
                             } else {
                               setState(() {

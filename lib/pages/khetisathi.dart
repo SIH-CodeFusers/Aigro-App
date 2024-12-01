@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
+import 'package:aigro/utils/translate.dart';
 import 'package:aigro/widgets/grid_painter.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/cupertino.dart';
@@ -99,9 +100,10 @@ class _KhetiSathiState extends State<KhetiSathi> {
   LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
   _speak(String text) async {
-    await flutterTts.setLanguage(ldb.language); 
-    await flutterTts.setPitch(0.7); 
-    await flutterTts.speak(text); 
+    String translatedText = await translateTextInput(text, ldb.language);
+    await flutterTts.setLanguage(ldb.language);
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak(translatedText);
   }
 
   Future<void> _startListening() async {

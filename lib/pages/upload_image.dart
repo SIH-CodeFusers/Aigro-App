@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/image_analysis.dart';
 import 'package:aigro/secret.dart';
+import 'package:aigro/utils/translate.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -62,9 +63,10 @@ class _UploadImageState extends State<UploadImage> {
   LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
   _speak(String text) async {
-    await flutterTts.setLanguage(ldb.language); 
-    await flutterTts.setPitch(0.7); 
-    await flutterTts.speak(text); 
+    String translatedText = await translateTextInput(text, ldb.language);
+    await flutterTts.setLanguage(ldb.language);
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak(translatedText);
   }
 
    @override

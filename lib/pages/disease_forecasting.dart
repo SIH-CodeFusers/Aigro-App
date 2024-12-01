@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/crop_details.dart';
 import 'package:aigro/secret.dart';
+import 'package:aigro/utils/translate.dart';
 import 'package:aigro/widgets/voice_icon.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -45,9 +46,10 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
 
   FlutterTts flutterTts = FlutterTts();
   _speak(String text) async {
-    await flutterTts.setLanguage(ldb.language); 
-    await flutterTts.setPitch(0.7); 
-    await flutterTts.speak(text); 
+    String translatedText = await translateTextInput(text, ldb.language);
+    await flutterTts.setLanguage(ldb.language);
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak(translatedText);
   }
 
   String findRisk(int value) {

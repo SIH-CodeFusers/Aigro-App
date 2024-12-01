@@ -4,6 +4,7 @@ import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/image_analysis.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
+import 'package:aigro/utils/translate.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -57,11 +58,11 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
   final languageBox = Hive.box("Language_db");
   LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
-
-  Future<void> _speak(String text) async {
+  _speak(String text) async {
+    String translatedText = await translateTextInput(text, ldb.language);
     await flutterTts.setLanguage(ldb.language);
     await flutterTts.setPitch(0.7);
-    await flutterTts.speak(text);
+    await flutterTts.speak(translatedText);
   }
 
   final infobox = Hive.box("BasicInfo-db");
