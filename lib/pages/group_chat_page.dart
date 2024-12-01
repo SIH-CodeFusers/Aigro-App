@@ -1,9 +1,13 @@
+import 'dart:math';
 import 'dart:convert';
+import 'package:aigro/widgets/posts.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:http/http.dart' as http;
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:velocity_x/velocity_x.dart';
 
@@ -26,14 +30,43 @@ class _GroupChatPageState extends State<GroupChatPage> {
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
 
+  List<String> colors = [
+    "FF9C66",  // Lighter Red
+    "668BFF",  // Lighter Blue
+    "FF66D1",  // Lighter Pink
+    "B166FF",  // Lighter Purple
+    "66FFFF",  // Lighter Aqua Blue
+    "FFB366",  // Lighter Orange
+    "FF6666",  // Lighter Red
+  ];
+
+  Color getRandomColor() {
+    final random = Random();
+    String colorHex = colors[random.nextInt(colors.length)];
+    return Color(int.parse('0xFF$colorHex'));
+  }
+
+  late List<bool> _isCommentsVisible;
+
   @override
   void initState() {
-    print("helllllo");
     super.initState();
-    fetchGroups(widget.groupId); 
-    bdb.loadDataInfo(); 
+    print("hello");
+
+    // Fetch data first
+    fetchGroups(widget.groupId).then((_) {
+      // After fetchGroups completes, initialize the _messages and _isCommentsVisible list
+      setState(() {
+        _messages = group['messages'] ?? [];
+        _isCommentsVisible = List<bool>.filled(_messages.length, false);
+      });
+    });
+
+    // Load other data (assuming this is a synchronous operation)
+    bdb.loadDataInfo();
+
+    // Initialize socket
     initializeSocket();
-    _messages = group['messages'] ?? [];
   }
 
   Future<void> fetchGroups(String groupId) async {
@@ -179,15 +212,21 @@ class _GroupChatPageState extends State<GroupChatPage> {
     ''';
   }
 
- @override
+
+  void _toggleCommentsVisibility(int indx) {
+    setState(() {
+      _isCommentsVisible[indx] = !_isCommentsVisible[indx];
+    });
+  }
+
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
-      appBar: AppBar(
-        title: Text(group.isNotEmpty ? '${group['diseaseName'] ?? 'Group'} Chat' : 'Chat'),
-      ),
+      appBar: AppBar(title: Text('Chat')),
       body: Column(
         children: [
+          SizedBox(height: 10,),
           Expanded(
             child: ListView.builder(
               itemCount: _messages.length,
@@ -199,31 +238,184 @@ class _GroupChatPageState extends State<GroupChatPage> {
                   () => TextEditingController(),
                 );
 
-                return Card(
-                  margin: const EdgeInsets.all(8),
+                return Container(
+                  decoration: BoxDecoration(
+                    color: context.theme.highlightColor,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1), 
+                        offset: Offset(0, 4),
+                        blurRadius: 8,
+                        spreadRadius: 0,
+                      ),
+                    ],
+                  ),
+                  margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(12.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('${message['name'] ?? 'Unknown'}: ${message['message'] ?? 'No message'}'),
-                        ...List.generate(
-                          message['comments']?.length ?? 0,
-                          (i) => Padding(
-                            padding: const EdgeInsets.only(top: 4.0),
-                            child: Text('- ${message['comments'][i]['comment'] ?? 'No comment'}'),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: getRandomColor(),
+                                radius: 22,
+                                child: Text(
+                                  getInitials(message['name'] ?? 'Unkown User'),
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 12),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                Text(
+                                  message['name'] ?? 'Unknown',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,  
+                                ),
+                                SizedBox(width: 8),  
+                                Text(
+                                  DateFormat('MMM dd, yyyy').format(DateTime.parse(message['createdAt']).toLocal()),
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey[500]
+                                  ),
+                                  overflow: TextOverflow.ellipsis, 
+                                ),
+                               SizedBox(height: 10,),
+                                Text(
+                                  message['message'] ?? 'No message',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              SizedBox(height: 15,),
+
+                              if( message['comments']?.length!=0)
+                               GestureDetector(
+                                  onTap: (){
+                                    _toggleCommentsVisibility(index);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        FeatherIcons.eye,
+                                        color: context.theme.cardColor,
+                                        size: 12,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Text(_isCommentsVisible[index]?
+                                      'View Less':'View Comments',
+                                        style: TextStyle(
+                                          color: context.theme.cardColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12
+                                        ),
+                                      ),
+                                      
+                                    ],
+                                  ),
+                                ), 
+                                ],
+                              ),
+                            ],
                           ),
-                        ),
-                        TextField(
-                          controller: _commentControllers[messageId],
-                          decoration: InputDecoration(
-                            hintText: 'Add a comment...',
-                            suffixIcon: IconButton(
-                              icon: Icon(Icons.send),
-                              onPressed: () => _addComment(messageId),
+
+                          SizedBox(height: 12),
+
+                          if (_isCommentsVisible[index])
+                          ...List.generate(
+                            message['comments']?.length ?? 0,
+                            (i) => Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor: context.theme.focusColor,
+                                    radius: 16,
+                                    child: Text(
+                                      getInitials(message['comments'][i]['commenterName']?? 'Unkown User'),
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Expanded(
+                                    child: Container(
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[100],
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: Text(
+                                        '${message['comments'][i]['commenterName'] ?? 'Unknown'}: ${message['comments'][i]['comment'] ?? 'No comment'}',
+                                        style: TextStyle(fontSize: 14, color: Colors.black87),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
+
+                           if (_isCommentsVisible[index])
+                          SizedBox(height: 20),
+
+
+                          
+
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                            child: Row(
+                              children: [
+                                
+                                Expanded(
+                                  child: TextField(
+                                    controller: _commentControllers[messageId],
+                                    decoration: InputDecoration(
+                                      hintText: 'Add a comment...',
+                                      hintStyle: TextStyle(color: Colors.grey[500]),
+                                      contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(color: Colors.grey[200]!, width: 1),
+                                      ),
+                                      filled: true,
+                                      fillColor: Colors.grey[100],
+                                    ),
+                                    style: TextStyle(fontSize: 16, color: Colors.black87),
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Container(           
+                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: context.theme.cardColor,),
+                                  child:IconButton(
+                                      onPressed: () => _addComment(messageId),
+                                      icon:  Icon(FeatherIcons.arrowRight,size: 18,color: context.theme.highlightColor,),
+                                  ), 
+                                )                
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+
                       ],
                     ),
                   ),
@@ -231,28 +423,77 @@ class _GroupChatPageState extends State<GroupChatPage> {
               },
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _messageController,
-                    decoration: InputDecoration(
-                      hintText: 'Type your message',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
+          postWidget(context),
+        ],
+      ),
+    );
+  }
+
+  Container postWidget(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+          vertical: 10, horizontal: 15),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+              child: TextField(
+                cursorColor: context.theme.cardColor,
+                controller: _messageController,
+                decoration: InputDecoration(
+                  hintText: 'Enter your post...',
+                  hintStyle: const TextStyle(
+                    color: Colors.grey,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12), 
+                    borderSide: BorderSide(
+                      color: context.theme.primaryColorDark,
+                      width: 2.0, 
                     ),
                   ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: context.theme.cardColor,
+                      width: 2.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: context.theme.cardColor, 
+                      width: 2.0,
+                    ),
+                  ),
+                  filled: true, 
+                  fillColor: context.theme.highlightColor, 
                 ),
-                IconButton(
-                  icon: Icon(Icons.send),
-                  onPressed: _sendMessage,
+                style: TextStyle(
+                  color: context.theme.primaryColorDark, 
                 ),
-              ],
-            ),
-          ),
+              ),
+            ),    
+            SizedBox(width: 4,),
+            Container(
+                decoration: BoxDecoration(
+                  color: context.theme.cardColor, 
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: IconButton(
+                  color: context.theme.highlightColor,
+                  icon: const Icon(FeatherIcons.arrowUpRight,size: 18,),
+                  onPressed: () {
+                    final message = _messageController.text.trim();
+                    if (message.isNotEmpty) {
+                      _sendMessage();
+                      _messageController.clear();
+                    }
+                  },
+                ),
+            )
         ],
       ),
     );
