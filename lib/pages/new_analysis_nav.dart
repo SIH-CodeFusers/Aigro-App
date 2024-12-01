@@ -25,11 +25,11 @@ class NewAnalysisNav extends StatefulWidget {
 class _NewAnalysisNavState extends State<NewAnalysisNav> {
   final ImagePicker _picker = ImagePicker();
   File? _cropImage;
-  bool uploaded=false;
-  bool isAnalyzing=false;
+  bool uploaded = false;
+  bool isAnalyzing = false;
   String selectedCrop = "Corn";
 
-    final List<String> cropOptions = [
+  final List<String> cropOptions = [
     "Corn",
     "Tomato",
     "Rice",
@@ -40,8 +40,7 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
     "Cotton",
     "Sugarcane",
     "Jute"
-    ];
-
+  ];
 
   String selectedCropStage = "Vegetative Growth";
 
@@ -58,23 +57,22 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
   final languageBox = Hive.box("Language_db");
   LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
-  _speak(String text) async {
-    await flutterTts.setLanguage(ldb.language); 
-    await flutterTts.setPitch(0.7); 
-    await flutterTts.speak(text); 
-  }
 
+  Future<void> _speak(String text) async {
+    await flutterTts.setLanguage(ldb.language);
+    await flutterTts.setPitch(0.7);
+    await flutterTts.speak(text);
+  }
 
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
 
-   @override
+  @override
   void initState() {
-    bdb.loadDataInfo(); 
-    if(languageBox.get("LANG") == null){
+    bdb.loadDataInfo();
+    if (languageBox.get("LANG") == null) {
       ldb.createLang();
-    }
-    else{
+    } else {
       ldb.loadLang();
     }
     super.initState();
@@ -136,7 +134,7 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
     const analysisUrl = '$BACKEND_URL/api/imageAnalysis/newAnalysis';
 
     final data = {
-      "useruid":BACKEND_UID,
+      "useruid": BACKEND_UID,
       "cropName": selectedCrop,
       "cropImage": imgURL,
       "block": bdb.userBlock,
@@ -152,16 +150,14 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
 
     if (response.statusCode == 200) {
       _showSuccessMessage("New Analysis added successfully!");
-      
     } else {
       print("Error: ${response.body}");
     }
     setState(() {
-      uploaded=true;
-      isAnalyzing=false;
+      uploaded = true;
+      isAnalyzing = false;
     });
   }
-
 
   void _showAlert(String message) {
     showDialog(
@@ -185,16 +181,16 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: context.theme.canvasColor,
-      body: SafeArea(
-        child: Column(
-          children: [
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: context.theme.canvasColor,
+    body: SafeArea(
+      child: Column(
+        children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 16),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   "🌱 Create New Analysis",
@@ -204,30 +200,37 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                     color: context.theme.primaryColorDark,
                   ),
                 ),
+                IconButton(
+                  icon: const Icon(Icons.volume_up),
+                  color: context.theme.primaryColorDark,
+                  onPressed: () {
+                    _speak("Create a new analysis by selecting the crop, growth stage, and uploading an image.");
+                  },
+                ),
               ],
             ),
-          ),     
+          ),
           const SizedBox(height: 30),
           Expanded(
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-            
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (_cropImage != null) 
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // All existing widgets remain unchanged
+                    if (_cropImage != null)
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.file(
-                            File(_cropImage!.path),
-                            height: 250,
-                            width: 250,
-                            fit: BoxFit.cover,
-                          ),
+                          File(_cropImage!.path),
+                          height: 250,
+                          width: 250,
+                          fit: BoxFit.cover,
+                        ),
                       )
-                      else
+                    else
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: GestureDetector(
@@ -238,13 +241,13 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                             decoration: BoxDecoration(
                               color: context.theme.highlightColor,
                               borderRadius: BorderRadius.circular(10),
-                            ),  
+                            ),
                             child: DottedBorder(
                               color: Colors.grey,
                               dashPattern: const [8, 4],
                               strokeWidth: 1,
-                                borderType: BorderType.RRect, 
-                                radius: const Radius.circular(10),
+                              borderType: BorderType.RRect,
+                              radius: const Radius.circular(10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -256,186 +259,192 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                                     fit: BoxFit.cover,
                                   ),
                                   Center(
-                                    child: Text('Pick a Image from your Gallery',
-                                      style: TextStyle(color: context.theme.primaryColorDark,fontSize: 14),
-                                    )
+                                    child: Text(
+                                      'Pick a Image from your Gallery',
+                                      style: TextStyle(
+                                        color: context.theme.primaryColorDark,
+                                        fontSize: 14,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                          ),   
+                          ),
                         ),
                       ),
-                                
-                      const SizedBox(height: 30,),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                    // Remaining widgets
+                    const SizedBox(height: 30),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: context.theme.primaryColorDark,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         child: Container(
-                          width: double.infinity, 
                           decoration: BoxDecoration(
-                            border: Border.all(
-                              color: context.theme.primaryColorDark, 
-                              width: 1.5,
-                            ),
-                            borderRadius: BorderRadius.circular(8), 
+                            color: context.theme.highlightColor,
+                            borderRadius: BorderRadius.circular(7),
                           ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: context.theme.highlightColor,
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                            child: DropdownButton<String>(
-                              value: selectedCrop,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  selectedCrop = newValue!;
-                                });
-                              },
-                              dropdownColor: context.theme.highlightColor,
-                              items: cropOptions.map<DropdownMenuItem<String>>((String crop) {
-                                return DropdownMenuItem<String>(
-                                  value: crop,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                                    child: Text(crop,style: TextStyle(color: context.theme.primaryColorDark),),
-                                  ),
-                                );
-                              }).toList(),
-                              isExpanded: true, 
-                              underline: const SizedBox(), 
-                              style: const TextStyle(
-                                fontSize: 16, 
-                                color: Colors.black, 
-                              ),
-                              icon: const Icon(Icons.arrow_drop_down),
-                            ),
-                          ),
-                        ),
-                      ),
-                                
-                      const SizedBox(height: 30,),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: Container(
-                          width: double.infinity, 
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: context.theme.primaryColorDark, 
-                              width: 1.5,
-                            ),
-                            borderRadius: BorderRadius.circular(8), 
-                          ),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: context.theme.highlightColor,
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                            child: DropdownButton<String>(
-                              value: selectedCropStage,
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  selectedCropStage = newValue!;
-                                });
-                              },
-                              dropdownColor: context.theme.highlightColor,
-                              items: cropStageOptions.map<DropdownMenuItem<String>>((String crop) {
-                                return DropdownMenuItem<String>(
-                                  value: crop,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                                    child: Text(crop,style: TextStyle(color: context.theme.primaryColorDark),),
-                                  ),
-                                );
-                              }).toList(),
-                              isExpanded: true, 
-                              underline: const SizedBox(), 
-                              style: const TextStyle(
-                                fontSize: 16, 
-                                color: Colors.black, 
-                              ),
-                              icon: const Icon(Icons.arrow_drop_down),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 40,),
-                                
-                      if(uploaded==false && isAnalyzing==false)
-                      Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: GestureDetector(
-                            onTap: () {
-                              _uploadAndAnalyzeImage();
+                          child: DropdownButton<String>(
+                            value: selectedCrop,
+                            onChanged: (String? newValue) {
                               setState(() {
-                                isAnalyzing=true;
+                                selectedCrop = newValue!;
                               });
                             },
-                            child: Container(
-                              width: double.infinity,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: context.theme.primaryColorDark,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Submit for Analysis',
-                                  style: TextStyle(color: context.theme.highlightColor, fontSize: 18),
+                            dropdownColor: context.theme.highlightColor,
+                            items: cropOptions.map<DropdownMenuItem<String>>((String crop) {
+                              return DropdownMenuItem<String>(
+                                value: crop,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                                  child: Text(
+                                    crop,
+                                    style: TextStyle(color: context.theme.primaryColorDark),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-                        ),
-                                
-                                
-                        if(uploaded==true)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: GestureDetector(
-                            onTap: () {
-                              // _uploadAndAnalyzeImage();
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(builder: (context) => ImageAnalysis()),
-                                (Route<dynamic> route) => route.isFirst, 
                               );
+                            }).toList(),
+                            isExpanded: true,
+                            underline: const SizedBox(),
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                            icon: const Icon(Icons.arrow_drop_down),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: context.theme.primaryColorDark,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: context.theme.highlightColor,
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: DropdownButton<String>(
+                            value: selectedCropStage,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                selectedCropStage = newValue!;
+                              });
                             },
-                            child: Container(
-                              width: double.infinity,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: context.theme.primaryColorDark,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Image Analyzed Successfully',
-                                  style: TextStyle(color: context.theme.highlightColor, fontSize: 20),
+                            dropdownColor: context.theme.highlightColor,
+                            items: cropStageOptions.map<DropdownMenuItem<String>>((String crop) {
+                              return DropdownMenuItem<String>(
+                                value: crop,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                                  child: Text(
+                                    crop,
+                                    style: TextStyle(color: context.theme.primaryColorDark),
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                            isExpanded: true,
+                            underline: const SizedBox(),
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                            icon: const Icon(Icons.arrow_drop_down),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                    if (uploaded == false && isAnalyzing == false)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: GestureDetector(
+                          onTap: () {
+                            _uploadAndAnalyzeImage();
+                            setState(() {
+                              isAnalyzing = true;
+                            });
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: context.theme.primaryColorDark,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Submit for Analysis',
+                                style: TextStyle(
+                                  color: context.theme.highlightColor,
+                                  fontSize: 18,
                                 ),
                               ),
                             ),
                           ),
                         ),
-                                
-                        const SizedBox(height: 20,),
-                                
-                        if(isAnalyzing==true)
-                        const Text("Analyzing Image. Please wait for few seconds...")
-                                
-                    ],
-                  ),
+                      ),
+                    if (uploaded == true)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => ImageAnalysis()),
+                              (Route<dynamic> route) => route.isFirst,
+                            );
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: context.theme.primaryColorDark,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Image Analyzed Successfully',
+                                style: TextStyle(
+                                  color: context.theme.highlightColor,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    const SizedBox(height: 20),
+                    if (isAnalyzing == true) const Text("Analyzing Image. Please wait for few seconds...")
+                  ],
+                ),
               ),
             ),
           ),
         ],
       ),
-      ),
-      bottomNavigationBar: BottomNav(
-        pages: pages,
-        selectedInd: 2,
-      ),
-    );
-  }
-
+    ),
+    bottomNavigationBar: BottomNav(
+      pages: pages,
+      selectedInd: 2,
+    ),
+  );
+}
 
 }
