@@ -152,57 +152,53 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildLanguageDropdown() {
-    return Container(
-      padding:  const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-      width: double.infinity,
-       decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(8), 
+  return Container(
+    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+    width: double.infinity,
+    decoration: BoxDecoration(
+      color: Colors.grey[200],
+      borderRadius: BorderRadius.circular(8),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Language",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
         ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Language",
-            style: TextStyle(
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+          child: DropdownButton<String>(
+            value: selectedLanguageCode,
+            items: const [
+              DropdownMenuItem(value: 'en', child: Text('English')),
+              DropdownMenuItem(value: 'hi', child: Text('Hindi')),
+              DropdownMenuItem(value: 'bn', child: Text('Bengali')),
+              DropdownMenuItem(value: 'te', child: Text('Telegu')),
+            ],
+            onChanged: (String? newValue) {
+              setState(() {
+                selectedLanguageCode = newValue!;
+              });
+            },
+            style: const TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87, 
+              color: Colors.black87,
             ),
+            underline: const SizedBox(),
+            icon: const Icon(Icons.arrow_drop_down, color: Colors.black87),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-           
-            child: IgnorePointer(
-              ignoring: true,
-              child: DropdownButton<String>(
-                value: selectedLanguageCode,
-                items: const [
-                  DropdownMenuItem(value: 'en', child: Text('English')),
-                  DropdownMenuItem(value: 'hi', child: Text('Hindi')),
-                  DropdownMenuItem(value: 'bn', child: Text('Bengali')),
-                  DropdownMenuItem(value: 'te', child: Text('Telegu')),
-                ],
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedLanguageCode = newValue!;
-                  });
-                },
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.black87, 
-                ),
-                underline: const SizedBox(),
-                icon: const Icon(Icons.arrow_drop_down, color: Colors.black87), 
-              ),
-            ),
-            
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      ],
+    ),
+  );
+}
+
 
 
   Widget _buildProfileInfo() {
