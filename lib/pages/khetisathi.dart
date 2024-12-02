@@ -37,9 +37,10 @@ class _KhetiSathiState extends State<KhetiSathi> {
     'Hi, I am your Krishi AI, I am a chatbot created by team Kheti Sathi to assist farmers like you with your queries. How can I help you today?',
   ];
 
-  void _sendInitialBotMessage(String message) {
+  void _sendInitialBotMessage(String message) async{
+     final msg = await translateTextInput(message, ldb.language);
     Timer(const Duration(seconds: 0), () {
-      _streamBotMessage(message);
+      _streamBotMessage(msg);
     });
   }
 
@@ -80,16 +81,17 @@ class _KhetiSathiState extends State<KhetiSathi> {
   }
 
   Future<void> _sendGemini(String message) async {
+    final translatedMessage = await translateTextInput(message, ldb.language);
     final model = GenerativeModel(
       model: 'gemini-pro',
       apiKey: GEMINI_API_KEY,
     );
 
     final prompt =
-        'You are a helpful chatbot, your task is to answer farming related questions. You have been made by team Kheti Sathi consisting of team members Arunava and Pretisha in Frontend, Satyaki in Full Stack Development, Rishi in Machine Learning and Priyanshu and Shinjan in App development. Just return the answer in plain text strictly and no markdown. Here is my question: $message';
+        'You are a helpful chatbot, your task is to answer farming related questions. You have been made by team Kheti Sathi consisting of team members Arunava and Pretisha in Frontend, Satyaki in Full Stack Development, Rishi in Machine Learning and Priyanshu and Shinjan in App development. Just return the answer in plain text strictly and no markdown. Here is my question: $translatedMessage';
 
     final content = [
-      Content.text(prompt),
+       Content.text(prompt),
     ];
 
     final response = await model.generateContent(content);
@@ -254,17 +256,14 @@ class _KhetiSathiState extends State<KhetiSathi> {
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Flexible(
-                                              child: Text(
-                                                name,
-                                                style: TextStyle(
+                                              child:translateHelper(name, TextStyle(
                                                   color: isUser
                                                       ? context.theme
                                                           .highlightColor
                                                       : context.theme.cardColor,
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 12,
-                                                ),
-                                              ),
+                                                ), ldb.language)
                                             ),
                                             const SizedBox(width: 10),
                                             if (!isUser)
@@ -280,16 +279,13 @@ class _KhetiSathiState extends State<KhetiSathi> {
                                           ],
                                         ),
                                         const SizedBox(height: 4),
-                                        Text(
-                                          _messages[index]['message']!,
-                                          style: TextStyle(
+                                        translateHelper(_messages[index]['message']!, TextStyle(
                                               color: isUser
                                                   ? context
                                                       .theme.highlightColor
                                                   : context
                                                       .theme.primaryColorDark,
-                                              fontSize: 12),
-                                        )
+                                              fontSize: 12), ldb.language)
                                       ],
                                     ),
                                   ),
@@ -404,6 +400,18 @@ class _KhetiSathiState extends State<KhetiSathi> {
           ),
         ],
       ),
+    );
+  }
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
     );
   }
 }
