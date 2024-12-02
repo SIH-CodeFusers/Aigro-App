@@ -164,7 +164,7 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: Text('Disease Forecasting'),
+        title: translateHelper('Disease Forecasting', const TextStyle(), ldb.language)
       ),
       body: isLoading
           ? Center(child: CircularProgressIndicator(

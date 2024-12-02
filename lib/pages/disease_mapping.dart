@@ -103,11 +103,14 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
                   child: Icon(FeatherIcons.check,color: context.theme.highlightColor,size: 12,)
                 ),
                 SizedBox(width: 10,),
-                Text(
-                  message,
-                  style:  TextStyle(color: context.theme.cardColor, fontSize: 18),
-                  textAlign: TextAlign.center,
-                ),
+                Center(
+                  child: translateHelper(message,TextStyle(color: context.theme.cardColor, fontSize: 18),ldb.language)
+                )
+                // Text(
+                //   message,
+                //   style:  TextStyle(color: context.theme.cardColor, fontSize: 18),
+                //   textAlign: TextAlign.center,
+                // ),
               ],
             ),
           ),
@@ -340,15 +343,11 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  shop['name'] as String,
-                                  style: TextStyle(
+                                translateHelper(shop['name'] as String,  TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
+                                  ), ldb.language),
                                 SizedBox(height: 8),
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
@@ -362,14 +361,12 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
                                   ),
                                 ),
                                 SizedBox(height: 8),
-                                Text(
-                                  shop['address'] as String,
-                                  style: TextStyle(
+                                 translateHelper(shop['address'] as String, 
+                                  TextStyle(
                                     color: Colors.grey.shade700,
+                                    fontWeight: FontWeight.bold,
                                     fontSize: 12,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
+                                  ), ldb.language),
                                 SizedBox(height: 10),
                                 ElevatedButton(
                                   onPressed: () async{
@@ -395,14 +392,11 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
                                     children: [
                                       Icon(Icons.navigation, size: 16, color: Colors.white),
                                       SizedBox(width: 4),
-                                      Text(
-                                        'Get Directions',
-                                        style: TextStyle(
+                                      translateHelper('Get Directions', TextStyle(
                                           color: context.theme.highlightColor,
                                           fontSize: 14,
                                           fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
+                                        ), ldb.language)
                                     ],
                                   ),
                                 ),
@@ -489,7 +483,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
   Widget build(BuildContext context) {
     if (isLoading) {
       return Scaffold(
-        appBar: AppBar(title: const Text('Disease Mapping')),
+        appBar: AppBar(title: translateHelper('Disease Mapping', const TextStyle(), ldb.language)),
         body: Center(child: CircularProgressIndicator(
           color: context.theme.primaryColorDark,
         )),
@@ -497,7 +491,9 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
     }
     return Scaffold(
  
-      appBar: AppBar(title: const Text('Disease Mapping')),
+      appBar: AppBar(
+        title: translateHelper('Disease Mapping', const TextStyle(), ldb.language)
+      ),
       body: Stack(
         children: [
           FlutterMap(
@@ -535,16 +531,24 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
                   borderRadius: BorderRadius.circular(8)
                 ),
                 padding: EdgeInsets.all(16.0),
-                child: Text(
-                  'Find Nearest Fertilizer Shop',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: context.theme.highlightColor),
-                  textAlign: TextAlign.center,
-                ),
+                child:Center(child: translateHelper('Find Nearest Fertilizer Shop', TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: context.theme.highlightColor), ldb.language))
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
     );
   }
 }
