@@ -77,7 +77,7 @@ class _WeatherReportState extends State<WeatherReport> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: const Text('Weather Forecast'),
+        title: translateHelper("Weather Forecast", const TextStyle(), ldb.language),
       ),
       body: FutureBuilder<List<WeatherData>>(
         future: weatherService.fetchWeather(lat, lon),
@@ -122,34 +122,25 @@ class _WeatherReportState extends State<WeatherReport> {
                               color: Colors.grey[400],
                             ),
                             const SizedBox(height: 4),
-                            Text(
-                              '${todayweather.tempDay.round()}°C',
-                              style: TextStyle(
+                            translateHelper('${todayweather.tempDay.round()}°C',TextStyle(
                                 fontSize: 40,
                                 color: Colors.black,
-                              ),
-                            ),
+                              ),ldb.language),       
                             const SizedBox(height: 4),
-                            Text(
-                              '${daysOfWeek[1]}, ${TimeOfDay.now().format(context)}', 
-                              style: TextStyle(
+                            translateHelper('${daysOfWeek[1]}, ${TimeOfDay.now().format(context)}',  TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey[400],
-                              ),
-                            ),
+                              ), ldb.language),
                             const SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Icon(Icons.cloud, size: 24, color: Colors.grey[400]),
                                 const SizedBox(width: 8),
-                                Text(
-                                  todayweather.description,
-                                  style: TextStyle(
+                                translateHelper(todayweather.description, TextStyle(
                                     fontSize: 16,
                                     color: Colors.grey[600],
-                                  ),
-                                ),
+                                  ), ldb.language)
                               ],
                             ),
                             const SizedBox(height: 8),
@@ -158,13 +149,10 @@ class _WeatherReportState extends State<WeatherReport> {
                               children: [
                                 Icon(Icons.location_on, size: 24, color: context.theme.cardColor),
                                 const SizedBox(width: 8),
-                                Text(
-                                  userDist,
-                                  style: TextStyle(
+                                translateHelper(userDist, TextStyle(
                                     fontSize: 16,
                                     color: Colors.grey[600],
-                                  ),
-                                ),
+                                  ), ldb.language)
                               ],
                             ),
                           ],
@@ -206,19 +194,14 @@ class _WeatherReportState extends State<WeatherReport> {
                                           size: 24,
                                         ),
                                         const SizedBox(width: 8),
-                                        Text(
-                                          daysOfWeek[index],
-                                          style:  TextStyle(
+                                        translateHelper(daysOfWeek[index], TextStyle(
                                             color: context.theme.primaryColorDark,
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
+                                          ), ldb.language)
                                       ],
                                     ),
-                                    Text(
-                                      weather.description,
-                                      style:  TextStyle(
+                                    translateHelper(weather.description, TextStyle(
                                         color: context.theme.highlightColor,
                                         fontSize: 16,
                                         shadows: [
@@ -228,8 +211,7 @@ class _WeatherReportState extends State<WeatherReport> {
                                             color: const Color.fromARGB(255, 211, 199, 199), 
                                           ),
                                         ],
-                                      ),
-                                    ),
+                                      ), ldb.language)
                                   ],
                                 ),
                                 const SizedBox(height: 12),
@@ -282,25 +264,38 @@ class _WeatherReportState extends State<WeatherReport> {
               size: 18,
             ),
             const SizedBox(width: 8),
-            Text(
-              title,
-              style: TextStyle(
+            translateHelper(title,TextStyle(
                 color: context.theme.primaryColorDark, 
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
-              ),
-            ),
+              ),ldb.language)
           ],
         ),
         const SizedBox(height: 4),
-        Text(
-          value,
-          style: const TextStyle(
+        translateHelper(value,const TextStyle(
             color: Colors.black87,
             fontSize: 14,
-          ),
-        ),
+          ),ldb.language)
+        // Text(
+        //   value,
+        //   style: const TextStyle(
+        //     color: Colors.black87,
+        //     fontSize: 14,
+        //   ),
+        // ),
       ],
+    );
+  }
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
     );
   }
 }
