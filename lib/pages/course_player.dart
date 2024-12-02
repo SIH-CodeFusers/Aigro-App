@@ -4,8 +4,8 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hive/hive.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
-import '../local_db/db.dart';
+import 'package:aigro/secret.dart';
+import 'package:aigro/local_db/db.dart';
 
 class CoursesPlayer extends StatefulWidget {
   const CoursesPlayer({super.key, required this.coursetitle});
@@ -19,7 +19,7 @@ class _CoursesPlayerState extends State<CoursesPlayer> {
   int assessScore = 0;
 
   final Map<String, List<Map<String, String>>> courseData = {
-    "Soil Health & Preparation": [
+   "Soil Health & Preparation": [
       {"title": "Understanding Soil Types", "url": "https://youtu.be/_dXGJooB0Qw?si=b_3A5WjhxXmeoRFe"},
       {"title": "Soil Classification Methods", "url": "https://youtu.be/ilmXUhsHaZg?si=FbZrWGqkB0pdb5PD"},
       {"title": "How to test soil", "url": "https://youtu.be/hDTwuO9PHp8?si=cMdSJ5unu3-w4RMZ"},
@@ -55,7 +55,7 @@ class _CoursesPlayerState extends State<CoursesPlayer> {
       {"title": "Soil Classification Methods", "url": "https://youtu.be/ilmXUhsHaZg?si=FbZrWGqkB0pdb5PD"},
       {"title": "How to test soil", "url": "https://youtu.be/hDTwuO9PHp8?si=cMdSJ5unu3-w4RMZ"},
       {"title": "Soil Management Techniques", "url": "https://youtu.be/dtFS8s4gE54?si=xf8LUp1Tj9Gi-hwJ"},
-    ],
+    ], // Same course data as before
   };
 
   late List<Map<String, String>> currentCourse;
@@ -65,28 +65,56 @@ class _CoursesPlayerState extends State<CoursesPlayer> {
   late YoutubePlayerController _controller;
 
   String title = "";
+  String description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae dictum risus. Duis ut ornare risus, at pretium mauris.";
   double perc = 0;
+
   final languageBox = Hive.box("Language_db");
   LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
-  _speak(String text) async {
+
+  void _speak(String text) async {
     String translatedText = await translateTextInput(text, ldb.language);
     await flutterTts.setLanguage(ldb.language);
     await flutterTts.setPitch(0.7);
     await flutterTts.speak(translatedText);
   }
 
+  void _translateTexts() async {
+    String targetLanguage = ldb.language;
+
+    if (targetLanguage == "en") {
+      return; // No translation needed for English
+    }
+
+    try {
+      String translatedTitle = await translateText(title, targetLanguage, GCP_API_KEY);
+      String translatedDescription = await translateText(description, targetLanguage, GCP_API_KEY);
+
+      List<Map<String, String>> translatedCourse = [];
+      for (var item in currentCourse) {
+        String translatedItemTitle = await translateText(item["title"]!, targetLanguage, GCP_API_KEY);
+        translatedCourse.add({"title": translatedItemTitle, "url": item["url"]!});
+      }
+
+      setState(() {
+        title = translatedTitle;
+        description = translatedDescription;
+        currentCourse = translatedCourse;
+      });
+    } catch (e) {
+      print("Error translating course data: $e");
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-    if(languageBox.get("LANG") == null){
+    if (languageBox.get("LANG") == null) {
       ldb.createLang();
-    }
-    else{
+    } else {
       ldb.loadLang();
     }
     currentCourse = courseData[widget.coursetitle] ?? courseData["default"]!;
-
     checkedState = List.generate(currentCourse.length, (index) => false);
 
     if (currentCourse.isNotEmpty) {
@@ -101,6 +129,8 @@ class _CoursesPlayerState extends State<CoursesPlayer> {
         ),
       );
     }
+
+    _translateTexts(); // Initiate translation
   }
 
   void _loadVideo(int index) {
@@ -143,7 +173,7 @@ class _CoursesPlayerState extends State<CoursesPlayer> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                 child: Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae dictum risus. Duis ut ornare risus, at pretium mauris.",
+                  description,
                   style: TextStyle(fontSize: 14, color: context.theme.splashColor),
                 ),
               ),
