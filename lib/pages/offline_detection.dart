@@ -129,11 +129,7 @@ class _OfflineDetectionState extends State<OfflineDetection> {
                   child: Icon(FeatherIcons.x,color: context.theme.highlightColor,size: 12,)
                 ),
                 SizedBox(width: 10,),
-                Text(
-                  message,
-                  style:  TextStyle(color: Colors.red, fontSize: 18),
-                  textAlign: TextAlign.center,
-                ),
+                translateHelper(message, TextStyle(color: Colors.red, fontSize: 18), ldb.language)
               ],
             ),
           ),
@@ -196,7 +192,7 @@ class _OfflineDetectionState extends State<OfflineDetection> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: const Text('Offline Model'),
+        title:  translateHelper('Offline Model', TextStyle(), ldb.language)
       ),
       body: SafeArea(
         child: Center(
@@ -263,9 +259,7 @@ class _OfflineDetectionState extends State<OfflineDetection> {
                             fit: BoxFit.cover,
                           ),
                           Center(
-                            child: Text('Pick a Image from your Gallery',
-                              style: TextStyle(color: context.theme.primaryColorDark,fontSize: 14),
-                            )
+                            child: translateHelper('Pick a Image from your Gallery',TextStyle(color: context.theme.primaryColorDark,fontSize: 14),ldb.language)
                           ),
                         ],
                       ),
@@ -275,24 +269,18 @@ class _OfflineDetectionState extends State<OfflineDetection> {
               ),
               const SizedBox(height: 30),
               if (_image == null)
-               const Text('No image selected'),
+              translateHelper('No image selected', const TextStyle(), ldb.language),
               if (_image != null) ...[
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Text(
-                      "Detected disease:",
-                      style: TextStyle(color: context.theme.cardColor, fontSize: 24),
-                    ),
+                    child: translateHelper("Detected disease:",TextStyle(color: context.theme.cardColor, fontSize: 24),ldb.language)
                   ),
                 ),
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 28),
-                    child: Text(
-                      diseaseName,
-                      style: TextStyle(color: context.theme.cardColor, fontSize: 28),
-                    ),
+                    child: translateHelper(diseaseName, TextStyle(color: context.theme.cardColor, fontSize: 28), ldb.language)
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -309,11 +297,8 @@ class _OfflineDetectionState extends State<OfflineDetection> {
                         color: context.theme.primaryColorDark,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      child: Center(
-                        child: Text(
-                          'View Remedy',
-                          style: TextStyle(color: context.theme.highlightColor, fontSize: 20),
-                        ),
+                      child: Center(     
+                        child:translateHelper('View Remedy', TextStyle(color: context.theme.highlightColor, fontSize: 20), ldb.language)
                       ),
                     ),
                   ),
@@ -324,6 +309,18 @@ class _OfflineDetectionState extends State<OfflineDetection> {
           ),
         ),
       ),
+    );
+  }
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
     );
   }
 }
