@@ -198,10 +198,7 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       child: Center(
-                        child: Text(
-                          'Check Alerts',
-                          style: TextStyle(color: context.theme.highlightColor, fontSize: 20),
-                        ),
+                        child: translateHelper('Check Alerts',TextStyle(color: context.theme.highlightColor, fontSize: 20),ldb.language)
                       ),
                     ),
                   ),
@@ -284,7 +281,6 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
                                 ),
                               );
                             } else {
-              
                               print("Disease not found: ${toSentenceCase(dis['diseaseName'] ?? '')}");
                             }
                           },
@@ -315,12 +311,13 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
                                     SizedBox(height: 10),
                                     Row(
                                       children: [
-                                        Text(
+                                        translateHelper(
                                           '${alert['cropName']}',
-                                          style: TextStyle(
+                                          TextStyle(
                                             color: context.theme.primaryColorDark,
                                             fontSize: 22,
                                           ),
+                                          ldb.language
                                         ),
                                         Spacer(),
                                         Container(
@@ -329,19 +326,19 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
                                             color: getRiskColor(dis['count']),
                                             borderRadius: BorderRadius.circular(12),
                                           ),
-                                          child: Text(
-                                            '${findRisk(int.parse(dis['count'].toString()))}',
-                                          ),
+                                          child:
+                                          translateHelper('${findRisk(int.parse(dis['count'].toString()))}',const TextStyle(),ldb.language)
                                         ),
                                       ],
                                     ),
-                                    Text(
+                                    translateHelper(
                                       '${toTitleCase(dis['diseaseName'])}',
-                                      style: TextStyle(
+                                      TextStyle(
                                         color: context.theme.primaryColorDark,
                                         fontSize: 16,
                                       ),
-                                    ),
+                                      ldb.language
+                                    )
                                   ],
                                 ),
                                 Positioned(
@@ -366,6 +363,19 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
               ),
 
         );
+      },
+    );
+  }
+
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
       },
     );
   }
