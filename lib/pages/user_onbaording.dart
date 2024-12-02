@@ -210,10 +210,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            "What is your name?",
-                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
-                          ),
+                          child:translateHelper("What is your name?", TextStyle(color: context.theme.primaryColorDark, fontSize: 22),ldb.language)
                         ),
                       ),
                     ),
@@ -279,6 +276,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                         },
                         child: NextButton(
                           text: "Next",
+                          lang: ldb.language,
                         ),
                       ),
                     ),
@@ -329,10 +327,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                          "What is your contact number?",
-                          style: TextStyle(color: context.theme.primaryColorDark, fontSize: 20),
-                        ),
+                        child: translateHelper("What is your contact number?", TextStyle(color: context.theme.primaryColorDark, fontSize: 20),ldb.language)
                       ),
                     ),
                   ),
@@ -400,6 +395,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                         },
                       child: NextButton(
                         text: "Next",
+                        lang: ldb.language,
                       ),
                     ),
                   ),
@@ -451,10 +447,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Select your State",
-                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 20),
-                          ),
+                          child: translateHelper("Select your State", TextStyle(color: context.theme.primaryColorDark, fontSize: 20),ldb.language)
                         ),
                       ),
                     ),
@@ -527,6 +520,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                           },
                         child: NextButton(
                           text: "Next",
+                          lang: ldb.language,
                         ),
                       ),
                     ),
@@ -575,10 +569,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Select your District",
-                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 20),
-                          ),
+                          child: translateHelper("Select your District", TextStyle(color: context.theme.primaryColorDark, fontSize: 20),ldb.language)
                         ),
                       ),
                     ),
@@ -652,6 +643,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                           },
                         child: NextButton(
                           text: "Next",
+                          lang: ldb.language,
                         ),
                       ),
                     ),
@@ -700,10 +692,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Text(
-                            "Select your Block",
-                            style: TextStyle(color: context.theme.primaryColorDark, fontSize: 20),
-                          ),
+                          child:translateHelper("Select your Block", TextStyle(color: context.theme.primaryColorDark, fontSize: 20),ldb.language)
                         ),
                       ),
                     ),
@@ -787,6 +776,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                           },
                         child: NextButton(
                           text: "Next",
+                          lang: ldb.language,
                         ),
                       ),
                     ),
@@ -835,10 +825,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                          "What is your pincode ?",
-                          style: TextStyle(color: context.theme.primaryColorDark, fontSize: 20),
-                        ),
+                        child: translateHelper("What is your pincode ?", TextStyle(color: context.theme.primaryColorDark, fontSize: 20),ldb.language)
                       ),
                     ),
                   ),
@@ -907,6 +894,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                       },
                       child: NextButton(
                         text: "Next",
+                        lang: ldb.language,
                       ),
                     ),
                   ),
@@ -956,10 +944,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Select your Crops",
-                          style: TextStyle(color: context.theme.primaryColorDark, fontSize: 22),
-                        ),
+                        child: translateHelper("Select your Crops", TextStyle(color: context.theme.primaryColorDark, fontSize: 20),ldb.language)
                       ),
                     ),
                   ),
@@ -1028,7 +1013,8 @@ class _UserOnboardingState extends State<UserOnboarding> {
                             }
                           },
                         child: NextButton(
-                          text: "Next",
+                          text: "Complete",
+                          lang: ldb.language,
                         ),
                       ),
                     ),
@@ -1040,6 +1026,19 @@ class _UserOnboardingState extends State<UserOnboarding> {
         ),
         const Spacer(),
       ],
+    );
+  }
+
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
     );
   }
 

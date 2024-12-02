@@ -1,10 +1,12 @@
+import 'package:aigro/utils/translate.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class NextButton extends StatelessWidget {
   final String text;
+  final lang;
 
-  const NextButton({super.key, required this.text});
+  const NextButton({super.key, required this.text,required this.lang});
 
   @override
   Widget build(BuildContext context) {
@@ -29,5 +31,18 @@ class NextButton extends StatelessWidget {
         ),
       );
     
+  }
+
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
+    );
   }
 }

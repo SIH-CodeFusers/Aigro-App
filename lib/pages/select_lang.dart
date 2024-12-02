@@ -120,7 +120,6 @@ String? selectedLanguage;
                      GestureDetector(
                       onTap: (){
                         _speak("Select your Language");
-                        // checkSupportedLanguages();
                       },
                       child: voiceIcon(context),
                     )
@@ -186,8 +185,9 @@ String? selectedLanguage;
                               });
                             }
                           },
-                        child: const NextButton(
+                        child: NextButton(
                           text: "Proceed",
+                          lang: ldb.language,
                         ),
                       ),
                     ),
