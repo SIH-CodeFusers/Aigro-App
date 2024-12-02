@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:aigro/local_db/db.dart';
+import 'package:aigro/pages/group_chat_home.dart';
 import 'package:aigro/pages/your_posts.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/utils/translate.dart';
@@ -314,73 +315,7 @@ class _CommunityState extends State<Community> {
                   bottom: 16.0,
                   left: 16.0,
                   right: 16.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-
-                     Flexible(
-                       child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 1),
-                          child: GestureDetector(
-                            onTap: () {
-                              showCreatePostDialog();
-                            },
-                            child: Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: context.theme.primaryColorDark,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    translateHelper('Create Post', TextStyle(color: context.theme.highlightColor, fontSize: 14),ldb.language),
-                                    SizedBox(width: 5,),
-                                    Icon(FeatherIcons.plus,size: 16,color: context.theme.highlightColor,)
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      SizedBox(width: 10,),
-                     
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 1),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => YourPosts()),
-                                
-                              );  
-                            },
-                            child: Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: context.theme.primaryColorDark,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    translateHelper('Your Posts', TextStyle(color: context.theme.highlightColor, fontSize: 14),ldb.language),
-                                    SizedBox(width: 5,),
-                                    Icon(FeatherIcons.users,size: 16,color: context.theme.highlightColor,)
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: bottomButtonsCommunity(context),
                 ),
               ],
             );
@@ -388,6 +323,7 @@ class _CommunityState extends State<Community> {
             return Stack(
               children: [
                 ListView.builder(
+                  padding: EdgeInsets.only(bottom: 120.0),
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     final post = snapshot.data![index];
@@ -398,79 +334,117 @@ class _CommunityState extends State<Community> {
                   bottom: 16.0,
                   left: 16.0,
                   right: 16.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-
-                     Flexible(
-                       child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 1),
-                          child: GestureDetector(
-                            onTap: () {
-                              showCreatePostDialog();
-                            },
-                            child: Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: context.theme.primaryColorDark,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    translateHelper('Create Post', TextStyle(color: context.theme.highlightColor, fontSize: 14),ldb.language),
-                                    SizedBox(width: 5,),
-                                    Icon(FeatherIcons.plus,size: 16,color: context.theme.highlightColor,)
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      SizedBox(width: 10,),
-                     
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 1),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => YourPosts()),
-                                
-                              );  
-                            },
-                            child: Container(
-                              height: 50,
-                              decoration: BoxDecoration(
-                                color: context.theme.primaryColorDark,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    translateHelper('Your Posts', TextStyle(color: context.theme.highlightColor, fontSize: 14),ldb.language),                
-                                    SizedBox(width: 5,),
-                                    Icon(FeatherIcons.users,size: 16,color: context.theme.highlightColor,)
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: bottomButtonsCommunity(context),
                 ),
               ],
             );
           }
         },
       ),
+    );
+  }
+
+  Column bottomButtonsCommunity(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+        
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 1),
+                child: GestureDetector(
+                  onTap: () {
+                    showCreatePostDialog();
+                  },
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: context.theme.primaryColorDark,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          translateHelper('Create Post', TextStyle(color: context.theme.highlightColor, fontSize: 14),ldb.language),
+                          SizedBox(width: 5,),
+                          Icon(FeatherIcons.plus,size: 16,color: context.theme.highlightColor,)
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        
+            SizedBox(width: 10,),
+            
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 1),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => YourPosts()),
+                      
+                    );  
+                  },
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: context.theme.primaryColorDark,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          translateHelper('Your Posts', TextStyle(color: context.theme.highlightColor, fontSize: 14),ldb.language),                
+                          SizedBox(width: 5,),
+                          Icon(FeatherIcons.users,size: 16,color: context.theme.highlightColor,)
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 10,),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 1),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => GroupChatHome()),
+                
+              );  
+            },
+            child: Container(
+              height: 50,
+              decoration: BoxDecoration(
+                color: context.theme.primaryColorDark,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    translateHelper('View Groups', TextStyle(color: context.theme.highlightColor, fontSize: 14),ldb.language),                
+                    SizedBox(width: 5,),
+                    Icon(FeatherIcons.messageCircle,size: 16,color: context.theme.highlightColor,)
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),                  
+      ],
     );
   }
    FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
