@@ -121,10 +121,10 @@ class _GetStartedState extends State<GetStarted> {
                         decoration: const BoxDecoration(
                           color: Colors.transparent
                         ),
-                        child: Text(
-                          textAlign: TextAlign.center,
-                          "Empowering farmers for optimal and better outcomes.",
-                          style: TextStyle(
+                        child:
+                        translateHelperAlign(
+                          "Empowering farmers for optimal and better outcomes.",  
+                          TextStyle(
                             fontSize: 16, 
                             color: context.theme.splashColor,
                             fontFamily: 'FontMain',
@@ -132,8 +132,11 @@ class _GetStartedState extends State<GetStarted> {
                             wordSpacing: 2.0,
                             inherit: false,
                           ),
-                        ),
-                      ),      
+                          TextAlign.center,
+                          ldb.language)
+                      )
+                        
+                  
                     ),
                     
                    GestureDetector(
@@ -159,9 +162,7 @@ class _GetStartedState extends State<GetStarted> {
                             color: context.theme.cardColor,
                             borderRadius: BorderRadius.circular(40)
                           ),
-                          child: Center(child: Text("Get Started",
-                            style: TextStyle(color: context.theme.canvasColor,fontSize: 20,inherit: false,),
-                          )),
+                          child: Center(child:translateHelper("Get Started", TextStyle(color: context.theme.canvasColor,fontSize: 20,inherit: false,),ldb.language)),
                         ),
                       ),
                     ),
@@ -175,6 +176,30 @@ class _GetStartedState extends State<GetStarted> {
       ),
       );
     
+  }
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
+    );
+  }
+  FutureBuilder<String> translateHelperAlign(String title, TextStyle style, TextAlign  alignment, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style,textAlign: alignment,);
+      },
+    );
   }
 }
 
