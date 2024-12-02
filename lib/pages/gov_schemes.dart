@@ -30,8 +30,6 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
     await flutterTts.speak(translatedText);
   }
 
-
-
   @override
   void initState() {
     super.initState();
@@ -56,7 +54,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: const Text('Schemes for Farmers 🌱'),
+        title: translateHelper('Schemes for Farmers 🌱', const TextStyle(), ldb.language)
       ),
       body: SafeArea(
         child: FutureBuilder<List<Map<String, dynamic>>>(
@@ -127,6 +125,9 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
     );
   }
 
+ Future<String> _translateText(String text) async {
+    return await translateTextInput(text, ldb.language);
+  }
 
   Container schemeCard(BuildContext context, List<Map<String, dynamic>> filteredData, int index) {
     return Container(
@@ -185,16 +186,41 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                     scrollDirection: Axis.horizontal,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        filteredData[index]['title'] as String,
-                        maxLines:1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(                          
-                          fontSize: 18, 
-                          fontWeight: FontWeight.bold,
-                          color:context.theme.primaryColorDark
-                        ),
-                      ),
+                      child: FutureBuilder<String>(
+                        future: _translateText(filteredData[index]['title'] as String),
+                        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return Text(
+                              'Translating...',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: context.theme.primaryColorDark,
+                              ),
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text(
+                              'Error',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: context.theme.primaryColorDark,
+                              ),
+                            );
+                          } else {
+                            return Text(
+                              snapshot.data ?? '',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: context.theme.primaryColorDark,
+                              ),
+                            );
+                          }
+                        },
+                      )
                     ),
                   ),
                 ),
@@ -216,16 +242,45 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                 ),
                 const SizedBox(width: 4,),
                 Expanded(    
-                  child: Text(
-                    filteredData[index]['description'] as String,
-                    style: TextStyle(                          
-                      fontSize: 14, 
-                      color:Colors.grey[600]
-                    ),
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 3, 
-                  ),   
+                  child: FutureBuilder<String>(
+                    future: _translateText(filteredData[index]['description'] as String),
+                    builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Text(
+                          'Translating...',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text(
+                          'Error loading description',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        );
+                      } else {
+                        return Text(
+                          snapshot.data ?? '',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        );
+                      }
+                    },
+                  ),
                 ),  
               ],
             ),
@@ -252,7 +307,9 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                         color:context.theme.primaryColorDark,
                       ),
                       const SizedBox(width: 8,),
-                      Flexible(child: Text(keyPoint,style: const TextStyle(fontWeight: FontWeight.w600,fontSize: 12),)),
+                      Flexible(
+                        child: translateHelper(keyPoint, const TextStyle(fontWeight: FontWeight.w600,fontSize: 12), ldb.language)
+                      ),
                     ],
                   );
                 }).toList(),
@@ -276,16 +333,45 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                 ),
                 const SizedBox(width: 4,),
                 Expanded(    
-                  child: Text(
-                    'State: ${filteredData[index]['state'] as String}',
-                    style: TextStyle(                          
-                      fontSize: 14, 
-                      color:context.theme.primaryColorDark
-                    ),
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 3, 
-                  ),   
+                  child: FutureBuilder<String>(
+                    future: _translateText(filteredData[index]['state'] as String),
+                    builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Text(
+                          'Translating...',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: context.theme.primaryColorDark,
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text(
+                          'Error loading state',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: context.theme.primaryColorDark,
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        );
+                      } else {
+                        return Text(
+                          'State: ${snapshot.data ?? ''}',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: context.theme.primaryColorDark,
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        );
+                      }
+                    },
+                  )
                 ),  
               ],
             ),
@@ -307,16 +393,45 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                 ),
                 const SizedBox(width: 4,),
                 Expanded(    
-                  child: Text(
-                    'Owner: ${filteredData[index]['owner_of_scheme'] as String}',
-                    style: TextStyle(                          
-                      fontSize: 14, 
-                      color:context.theme.primaryColorDark
-                    ),
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 3, 
-                  ),   
+                  child: FutureBuilder<String>(
+                    future: _translateText(filteredData[index]['owner_of_scheme'] as String),
+                    builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Text(
+                          'Translating...',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: context.theme.primaryColorDark,
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text(
+                          'Error loading owner',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: context.theme.primaryColorDark,
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        );
+                      } else {
+                        return Text(
+                          'Owner: ${snapshot.data ?? ''}',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: context.theme.primaryColorDark,
+                          ),
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        );
+                      }
+                    },
+                  ),
                 ),  
               ],
             ),
@@ -338,10 +453,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Visit Here',
-                      style: TextStyle(color: context.theme.highlightColor, fontSize: 14),
-                    ),
+                    translateHelper('Visit Here',TextStyle(color: context.theme.highlightColor, fontSize: 14), ldb.language),
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
                       child: Icon(
@@ -355,7 +467,7 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
               ),
             ),
           ),
-          
+                
         ],
       ),
     );
@@ -368,6 +480,19 @@ class _GovernmentSchemesState extends State<GovernmentSchemes> {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
+    );
   }
 
 }

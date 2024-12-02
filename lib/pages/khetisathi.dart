@@ -160,7 +160,7 @@ class _KhetiSathiState extends State<KhetiSathi> {
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: const Text('Your Krishi AI'),
+        title: translateHelper('Your Krishi AI', const TextStyle(), ldb.language)
       ),
       body: Stack(
         children: [
