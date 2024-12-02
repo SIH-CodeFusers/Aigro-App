@@ -2,6 +2,7 @@ import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/home.dart';
 import 'package:aigro/pages/select_lang.dart';
 import 'package:aigro/utils/translate.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -152,53 +153,57 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _buildLanguageDropdown() {
-  return Container(
-    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-    width: double.infinity,
-    decoration: BoxDecoration(
-      color: Colors.grey[200],
-      borderRadius: BorderRadius.circular(8),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          "Language",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
-          ),
+    return Container(
+      padding:  const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+      width: double.infinity,
+       decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(8), 
         ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-          child: DropdownButton<String>(
-            value: selectedLanguageCode,
-            items: const [
-              DropdownMenuItem(value: 'en', child: Text('English')),
-              DropdownMenuItem(value: 'hi', child: Text('Hindi')),
-              DropdownMenuItem(value: 'bn', child: Text('Bengali')),
-              DropdownMenuItem(value: 'te', child: Text('Telegu')),
-            ],
-            onChanged: (String? newValue) {
-              setState(() {
-                selectedLanguageCode = newValue!;
-              });
-            },
-            style: const TextStyle(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Language",
+            style: TextStyle(
               fontSize: 16,
-              color: Colors.black87,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87, 
             ),
-            underline: const SizedBox(),
-            icon: const Icon(Icons.arrow_drop_down, color: Colors.black87),
           ),
-        ),
-      ],
-    ),
-  );
-}
-
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+           
+            child: IgnorePointer(
+              ignoring: false,
+              child: DropdownButton<String>(
+                value: selectedLanguageCode,
+                items: const [
+                  DropdownMenuItem(value: 'en', child: Text('English')),
+                  DropdownMenuItem(value: 'hi', child: Text('Hindi')),
+                  DropdownMenuItem(value: 'bn', child: Text('Bengali')),
+                  DropdownMenuItem(value: 'te', child: Text('Telegu')),
+                ],
+                onChanged: (String? newValue) {
+                  setState(() {
+                    selectedLanguageCode = newValue!;
+                  });
+                },
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.black87, 
+                ),
+                underline: const SizedBox(),
+                icon: const Icon(Icons.arrow_drop_down, color: Colors.black87), 
+              ),
+            ),
+            
+          ),
+        ],
+      ),
+    );
+  }
 
 
   Widget _buildProfileInfo() {
@@ -238,18 +243,25 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget _buildListTile(String title, String subtitle) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-      title: Text(
-        title,
-        style: const TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-        ),
-      ),
+      title: translateHelper(title, const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),ldb.language),
       subtitle: Text(subtitle),
       tileColor: Colors.grey[200],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
+    );
+  }
+
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
     );
   }
 }
