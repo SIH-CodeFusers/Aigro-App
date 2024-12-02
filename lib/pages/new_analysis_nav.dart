@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/image_analysis.dart';
 import 'package:aigro/secret.dart';
+import 'package:aigro/utils/analysis_translations.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
 import 'package:aigro/utils/translate.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
@@ -29,6 +30,9 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
   bool uploaded = false;
   bool isAnalyzing = false;
   String selectedCrop = "Corn";
+  late Map<String, String> translations = {};
+  late List<String> translatedCropOptions = [];
+  late List<String> translatedStageOptions = [];
 
   final List<String> cropOptions = [
     "Corn",
@@ -58,15 +62,23 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
   final languageBox = Hive.box("Language_db");
   LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
+
+  final infobox = Hive.box("BasicInfo-db");
+  BasicDB bdb = BasicDB();
+
+  Future<void> _loadTranslations() async {
+    translations = await AnalysisTranslations.getTranslations(ldb.language);
+    translatedCropOptions = await AnalysisTranslations.translateCropOptions(cropOptions, ldb.language);
+    translatedStageOptions = await AnalysisTranslations.translateCropOptions(cropStageOptions, ldb.language);
+    setState(() {});
+  }
+
   _speak(String text) async {
     String translatedText = await translateTextInput(text, ldb.language);
     await flutterTts.setLanguage(ldb.language);
     await flutterTts.setPitch(0.7);
     await flutterTts.speak(translatedText);
   }
-
-  final infobox = Hive.box("BasicInfo-db");
-  BasicDB bdb = BasicDB();
 
   @override
   void initState() {
@@ -76,6 +88,7 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
     } else {
       ldb.loadLang();
     }
+    _loadTranslations();
     super.initState();
   }
 
@@ -90,17 +103,17 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
             _cropImage = file;
           });
         } else {
-          _showAlert("File size exceeds 500kb limit.");
+          _showAlert(translations['file_size_error'] ?? 'File size exceeds 500kb limit.');
         }
       } else {
-        _showAlert("Please select a correct Image Format.");
+        _showAlert(translations['format_error'] ?? 'Please select a correct Image Format.');
       }
     }
   }
 
   Future<void> _uploadAndAnalyzeImage() async {
     if (_cropImage == null) {
-      _showAlert("Please upload a crop image.");
+      _showAlert(translations['upload_prompt'] ?? 'Please upload a crop image.');
       return;
     }
 
@@ -150,7 +163,7 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
     );
 
     if (response.statusCode == 200) {
-      _showSuccessMessage("New Analysis added successfully!");
+      _showSuccessMessage(await translateTextInput("New Analysis added successfully!", ldb.language));
     } else {
       print("Error: ${response.body}");
     }
@@ -164,11 +177,21 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        content: Text(message),
+        content: FutureBuilder<String>(
+          future: translateTextInput(message, ldb.language),
+          builder: (context, snapshot) {
+            return Text(snapshot.data ?? message);
+          },
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text("OK"),
+            child: FutureBuilder<String>(
+              future: translateTextInput('OK', ldb.language),
+              builder: (context, snapshot) {
+                return Text(snapshot.data ?? 'OK');
+              },
+            ),
           ),
         ],
       ),
@@ -177,275 +200,327 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
 
   void _showSuccessMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
+      SnackBar(
+        content: FutureBuilder<String>(
+          future: translateTextInput(message, ldb.language),
+          builder: (context, snapshot) {
+            return Text(snapshot.data ?? message);
+          },
+        ),
+      ),
     );
   }
 
   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: context.theme.canvasColor,
-    body: SafeArea(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "🌱 Create New Analysis",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: context.theme.primaryColorDark,
-                  ),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.volume_up),
-                  color: context.theme.primaryColorDark,
-                  onPressed: () {
-                    _speak("Create a new analysis by selecting the crop, growth stage, and uploading an image.");
-                  },
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 30),
-          Expanded(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // All existing widgets remain unchanged
-                    if (_cropImage != null)
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.file(
-                          File(_cropImage!.path),
-                          height: 250,
-                          width: 250,
-                          fit: BoxFit.cover,
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: context.theme.canvasColor,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  FutureBuilder<String>(
+                    future: translateTextInput(translations['title'] ?? '🌱 Create New Analysis', ldb.language),
+                    builder: (context, snapshot) {
+                      return Text(
+                        snapshot.data ?? '🌱 Create New Analysis',
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: context.theme.primaryColorDark,
                         ),
-                      )
-                    else
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: GestureDetector(
-                          onTap: _pickImage,
-                          child: Container(
-                            width: double.infinity,
-                            height: 150,
-                            decoration: BoxDecoration(
-                              color: context.theme.highlightColor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: DottedBorder(
-                              color: Colors.grey,
-                              dashPattern: const [8, 4],
-                              strokeWidth: 1,
-                              borderType: BorderType.RRect,
-                              radius: const Radius.circular(10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    width: 50,
-                                    height: 50,
-                                    "assets/images/upload_image.png",
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Pick a Image from your Gallery',
-                                      style: TextStyle(
-                                        color: context.theme.primaryColorDark,
-                                        fontSize: 14,
+                      );
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.volume_up),
+                    color: context.theme.primaryColorDark,
+                    onPressed: () => _speak(translations['voice_message'] ?? ''),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 30),
+            Expanded(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (_cropImage != null)
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.file(
+                            File(_cropImage!.path),
+                            height: 250,
+                            width: 250,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      else
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: GestureDetector(
+                            onTap: _pickImage,
+                            child: Container(
+                              width: double.infinity,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                color: context.theme.highlightColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: DottedBorder(
+                                color: Colors.grey,
+                                dashPattern: const [8, 4],
+                                strokeWidth: 1,
+                                borderType: BorderType.RRect,
+                                radius: const Radius.circular(10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      width: 50,
+                                      height: 50,
+                                      "assets/images/upload_image.png",
+                                      fit: BoxFit.cover,
+                                    ),
+                                    Center(
+                                      child: FutureBuilder<String>(
+                                        future: translateTextInput(
+                                          translations['pick_image'] ?? 'Pick a Image from your Gallery',
+                                          ldb.language
+                                        ),
+                                        builder: (context, snapshot) {
+                                          return Text(
+                                            snapshot.data ?? 'Pick a Image from your Gallery',
+                                            style: TextStyle(
+                                              color: context.theme.primaryColorDark,
+                                              fontSize: 14,
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    // Remaining widgets
-                    const SizedBox(height: 30),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: context.theme.primaryColorDark,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: context.theme.highlightColor,
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: DropdownButton<String>(
-                            value: selectedCrop,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                selectedCrop = newValue!;
-                              });
-                            },
-                            dropdownColor: context.theme.highlightColor,
-                            items: cropOptions.map<DropdownMenuItem<String>>((String crop) {
-                              return DropdownMenuItem<String>(
-                                value: crop,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                                  child: Text(
-                                    crop,
-                                    style: TextStyle(color: context.theme.primaryColorDark),
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                            isExpanded: true,
-                            underline: const SizedBox(),
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                            ),
-                            icon: const Icon(Icons.arrow_drop_down),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 30),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: context.theme.primaryColorDark,
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: context.theme.highlightColor,
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: DropdownButton<String>(
-                            value: selectedCropStage,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                selectedCropStage = newValue!;
-                              });
-                            },
-                            dropdownColor: context.theme.highlightColor,
-                            items: cropStageOptions.map<DropdownMenuItem<String>>((String crop) {
-                              return DropdownMenuItem<String>(
-                                value: crop,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                                  child: Text(
-                                    crop,
-                                    style: TextStyle(color: context.theme.primaryColorDark),
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                            isExpanded: true,
-                            underline: const SizedBox(),
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                            ),
-                            icon: const Icon(Icons.arrow_drop_down),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 40),
-                    if (uploaded == false && isAnalyzing == false)
+                      const SizedBox(height: 30),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: GestureDetector(
-                          onTap: () {
-                            _uploadAndAnalyzeImage();
-                            setState(() {
-                              isAnalyzing = true;
-                            });
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            height: 60,
-                            decoration: BoxDecoration(
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            border: Border.all(
                               color: context.theme.primaryColorDark,
-                              borderRadius: BorderRadius.circular(5),
+                              width: 1.5,
                             ),
-                            child: Center(
-                              child: Text(
-                                'Submit for Analysis',
-                                style: TextStyle(
-                                  color: context.theme.highlightColor,
-                                  fontSize: 18,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: context.theme.highlightColor,
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: DropdownButton<String>(
+                              value: selectedCrop,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  selectedCrop = newValue!;
+                                });
+                              },
+                              dropdownColor: context.theme.highlightColor,
+                              items: List.generate(
+                                cropOptions.length,
+                                (index) => DropdownMenuItem<String>(
+                                  value: cropOptions[index],
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                                    child: FutureBuilder<String>(
+                                      future: translateTextInput(cropOptions[index], ldb.language),
+                                      builder: (context, snapshot) {
+                                        return Text(
+                                          snapshot.data ?? cropOptions[index],
+                                          style: TextStyle(color: context.theme.primaryColorDark),
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ),
                               ),
+                              isExpanded: true,
+                              underline: const SizedBox(),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                              icon: const Icon(Icons.arrow_drop_down),
                             ),
                           ),
                         ),
                       ),
-                    if (uploaded == true)
+                      const SizedBox(height: 30),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (context) => ImageAnalysis()),
-                              (Route<dynamic> route) => route.isFirst,
-                            );
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            height: 60,
-                            decoration: BoxDecoration(
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            border: Border.all(
                               color: context.theme.primaryColorDark,
-                              borderRadius: BorderRadius.circular(5),
+                              width: 1.5,
                             ),
-                            child: Center(
-                              child: Text(
-                                'Image Analyzed Successfully',
-                                style: TextStyle(
-                                  color: context.theme.highlightColor,
-                                  fontSize: 20,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: context.theme.highlightColor,
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: DropdownButton<String>(
+                              value: selectedCropStage,
+                              onChanged: (String? newValue) {
+                                setState(() {
+                                  selectedCropStage = newValue!;
+                                });
+                              },
+                              dropdownColor: context.theme.highlightColor,
+                              items: List.generate(
+                                cropStageOptions.length,
+                                (index) => DropdownMenuItem<String>(
+                                  value: cropStageOptions[index],
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                                    child: FutureBuilder<String>(
+                                      future: translateTextInput(cropStageOptions[index], ldb.language),
+                                      builder: (context, snapshot) {
+                                        return Text(
+                                          snapshot.data ?? cropStageOptions[index],
+                                          style: TextStyle(color: context.theme.primaryColorDark),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              isExpanded: true,
+                              underline: const SizedBox(),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                              icon: const Icon(Icons.arrow_drop_down),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+                      if (uploaded == false && isAnalyzing == false)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: GestureDetector(
+                            onTap: () {
+                              _uploadAndAnalyzeImage();
+                              setState(() {
+                                isAnalyzing = true;
+                              });
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: context.theme.primaryColorDark,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: FutureBuilder<String>(
+                                  future: translateTextInput(
+                                    translations['submit_analysis'] ?? 'Submit for Analysis',
+                                    ldb.language
+                                  ),
+                                  builder: (context, snapshot) {
+                                    return Text(
+                                      snapshot.data ?? 'Submit for Analysis',
+                                      style: TextStyle(
+                                        color: context.theme.highlightColor,
+                                        fontSize: 18,
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    const SizedBox(height: 20),
-                    if (isAnalyzing == true) const Text("Analyzing Image. Please wait for few seconds...")
-                  ],
+                      if (uploaded == true)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => ImageAnalysis()),
+                                (Route<dynamic> route) => route.isFirst,
+                              );
+                            },
+                            child: Container(
+                              width: double.infinity,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: context.theme.primaryColorDark,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: FutureBuilder<String>(
+                                  future: translateTextInput(
+                                    translations['analysis_success'] ?? 'Image Analyzed Successfully',
+                                    ldb.language
+                                  ),
+                                  builder: (context, snapshot) {
+                                    return Text(
+                                      snapshot.data ?? 'Image Analyzed Successfully',
+                                      style: TextStyle(
+                                        color: context.theme.highlightColor,
+                                        fontSize: 20,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      const SizedBox(height: 20),
+                      if (isAnalyzing == true)
+                        FutureBuilder<String>(
+                          future: translateTextInput(
+                            translations['analyzing'] ?? 'Analyzing Image. Please wait for few seconds...',
+                            ldb.language
+                          ),
+                          builder: (context, snapshot) {
+                            return Text(snapshot.data ?? 'Analyzing Image. Please wait for few seconds...');
+                          },
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-    bottomNavigationBar: BottomNav(
-      pages: pages,
-      selectedInd: 2,
-    ),
-  );
-}
-
+      bottomNavigationBar: BottomNav(
+        pages: pages,
+        selectedInd: 2,
+      ),
+    );
+  }
 }
