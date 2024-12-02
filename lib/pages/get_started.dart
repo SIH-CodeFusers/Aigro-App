@@ -79,47 +79,47 @@ class _GetStartedState extends State<GetStarted> {
                     ),
                     const Spacer(),
                                     
-                     const Center(
-                       child: Text(
-                          "Cultivating Crops for a",
-                          style: TextStyle(fontSize: 28,fontFamily: 'FontMain',letterSpacing: 1,inherit: false,color: Colors.black, ),
-                        ),
+                    Center(
+                      child: 
+                      translateHelper(
+                        "Cultivating Crops for a",
+                        TextStyle(fontSize: 28,fontFamily: 'FontMain',letterSpacing: 1,inherit: false,color: Colors.black,),
+                        ldb.language)       
                      ),
-                      Center(
-                        child: Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: "greener ",
-                                style: TextStyle(
-                                  fontSize: 28,
-                                  fontFamily: 'FontMain',
-                                  letterSpacing: 1,
-                                  fontWeight: FontWeight.w600,
-                                  color: context.theme.cardColor, 
-                                  inherit: false,
-                                ),
-                              ),
-                              const TextSpan(
-                                text: "tommorow",
-                                style: TextStyle(
-                                  fontSize: 28,
-                                  fontFamily: 'FontMain',
-                                  letterSpacing: 1,
-                                  inherit: false,
-                                  color: Colors.black, 
-                                ),
-                              ),
-                            ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        translateHelper(
+                            "greener ",
+                            TextStyle(
+                            fontSize: 28,
+                            fontFamily: 'FontMain',
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.w600,
+                            color: context.theme.cardColor, 
+                            inherit: false,
                           ),
+                          ldb.language
+                        ),
+                        translateHelper(
+                            "tommorow ",
+                            TextStyle(
+                            fontSize: 28,
+                            fontFamily: 'FontMain',
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black, 
+                            inherit: false,
+                          ),
+                          ldb.language
                         )
-                    ),
-                           
+                      ],
+                    ),                    
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 15),
                       child: Container(
                         decoration: const BoxDecoration(
-                          color: Colors.transparent
+                          color: Color.fromARGB(0, 107, 87, 87)
                         ),
                         child:
                         translateHelperAlign(
@@ -133,7 +133,8 @@ class _GetStartedState extends State<GetStarted> {
                             inherit: false,
                           ),
                           TextAlign.center,
-                          ldb.language)
+                          ldb.language
+                        )
                       )
                         
                   
