@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/your_posts.dart';
 import 'package:aigro/secret.dart';
+import 'package:aigro/utils/translate.dart';
 import 'package:aigro/widgets/posts.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,7 +32,8 @@ class _CommunityState extends State<Community> {
   late final IO.Socket socket;
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
-
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
 
   @override
   void initState() {
@@ -39,6 +41,12 @@ class _CommunityState extends State<Community> {
     posts = fetchPosts();
     initializeSocket();
     bdb.loadDataInfo(); 
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
   }
 
   void initializeSocket() {
@@ -102,7 +110,7 @@ class _CommunityState extends State<Community> {
             borderRadius: BorderRadius.circular(15),
           ),
           title: Center(
-            child: Text('Create Post')
+            child: translateHelper('Create Post',const TextStyle(),ldb.language)
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -159,13 +167,10 @@ class _CommunityState extends State<Community> {
                           color: context.theme.highlightColor,
                         ),
                         SizedBox(width: 8),
-                        Text(
-                          "Upload Image",
-                          style: TextStyle(
+                        translateHelper("Upload Image", TextStyle(
                             color: context.theme.highlightColor,
                             fontSize: 16,
-                          ),
-                        ),
+                          ), ldb.language)
                       ],
                     ),
                   ),
@@ -286,7 +291,7 @@ class _CommunityState extends State<Community> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: Text('Community'),
+        title:translateHelper('Community', const TextStyle(), ldb.language)
       ),
       body: FutureBuilder<List<dynamic>>(
         future: posts,
@@ -305,7 +310,7 @@ class _CommunityState extends State<Community> {
                 Center(
                   child: Text('No posts available.')
                 ),
-                                Positioned(
+                Positioned(
                   bottom: 16.0,
                   left: 16.0,
                   right: 16.0,
@@ -330,10 +335,7 @@ class _CommunityState extends State<Community> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Create Post',
-                                      style: TextStyle(color: context.theme.highlightColor, fontSize: 14),
-                                    ),
+                                    translateHelper('Create Post', TextStyle(color: context.theme.highlightColor, fontSize: 14),ldb.language),
                                     SizedBox(width: 5,),
                                     Icon(FeatherIcons.plus,size: 16,color: context.theme.highlightColor,)
                                   ],
@@ -367,10 +369,7 @@ class _CommunityState extends State<Community> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Your Posts',
-                                      style: TextStyle(color: context.theme.highlightColor, fontSize: 14),
-                                    ),
+                                    translateHelper('Your Posts', TextStyle(color: context.theme.highlightColor, fontSize: 14),ldb.language),
                                     SizedBox(width: 5,),
                                     Icon(FeatherIcons.users,size: 16,color: context.theme.highlightColor,)
                                   ],
@@ -420,10 +419,7 @@ class _CommunityState extends State<Community> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Create Post',
-                                      style: TextStyle(color: context.theme.highlightColor, fontSize: 14),
-                                    ),
+                                    translateHelper('Create Post', TextStyle(color: context.theme.highlightColor, fontSize: 14),ldb.language),
                                     SizedBox(width: 5,),
                                     Icon(FeatherIcons.plus,size: 16,color: context.theme.highlightColor,)
                                   ],
@@ -457,10 +453,7 @@ class _CommunityState extends State<Community> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      'Your Posts',
-                                      style: TextStyle(color: context.theme.highlightColor, fontSize: 14),
-                                    ),
+                                    translateHelper('Your Posts', TextStyle(color: context.theme.highlightColor, fontSize: 14),ldb.language),                
                                     SizedBox(width: 5,),
                                     Icon(FeatherIcons.users,size: 16,color: context.theme.highlightColor,)
                                   ],
@@ -479,7 +472,18 @@ class _CommunityState extends State<Community> {
         },
       ),
     );
+  }
+   FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
 
+        return Text(displayText, style: style);
+      },
+    );
   }
 }
 

@@ -131,7 +131,7 @@ class _PostWidgetState extends State<PostWidget> {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: context.theme.highlightColor,
-        title:  const Center(child: Text('Add Comment')),
+        title:   Center(child:translateHelper('Add Comment', const TextStyle(), ldb.language)),
         content:  TextField(
           controller: _commentController,
           decoration: InputDecoration(
@@ -197,6 +197,10 @@ class _PostWidgetState extends State<PostWidget> {
     return Color(int.parse('0xFF$colorHex'));
   }
 
+  Future<String> _translateText(String text) async {
+    return await translateTextInput(text, ldb.language);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -234,10 +238,7 @@ class _PostWidgetState extends State<PostWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      widget.post['name'] ?? 'Unknown User',
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
+                    translateHelper(widget.post['name'] ?? 'Unknown User', const TextStyle(fontWeight: FontWeight.bold, fontSize: 16), ldb.language),
                     const SizedBox(height: 2),
                     Text(
                       DateFormat('MMM dd, yyyy h:mm a').format(DateTime.parse(widget.post['createdAt']).toLocal()),
@@ -271,20 +272,61 @@ class _PostWidgetState extends State<PostWidget> {
             const SizedBox(height: 8),
              Padding(
               padding: const EdgeInsets.symmetric(horizontal: 0),
-              child: Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: '${widget.post['name']}: ',
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                    ),
-                    TextSpan(
-                      text: widget.post['message'] ?? '',
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ],
-                ),
+              child: FutureBuilder<Map<String, String>>(
+                future: Future.wait([
+                  _translateText(widget.post['name'] as String),
+                  _translateText(widget.post['message'] as String? ?? ''),
+                ]).then((results) => {'name': results[0], 'message': results[1]}),
+                builder: (BuildContext context, AsyncSnapshot<Map<String, String>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Translating name: ',
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                          ),
+                          TextSpan(
+                            text: 'Translating message...',
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Error loading name: ',
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                          ),
+                          TextSpan(
+                            text: 'Error loading message',
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '${snapshot.data?['name']}: ',
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                          ),
+                          TextSpan(
+                            text: snapshot.data?['message'] ?? '',
+                            style: const TextStyle(fontSize: 14),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
               ),
+
             ),
             Divider(
               color: Colors.grey[300],
@@ -303,15 +345,14 @@ class _PostWidgetState extends State<PostWidget> {
                         size: 12,
                       ),
                       const SizedBox(width: 4),
-                      Text(
-                        showComments ? 'View Less' : 'View Comments',
-                        style: TextStyle(
+                      translateHelper(showComments ? 'View Less' : 'View Comments', 
+                        TextStyle(
                           color: context.theme.cardColor,
                           fontWeight: FontWeight.bold,
-                          fontSize: 12
-                        ),
-                      ),
-                      
+                          fontSize: 13
+                          ),
+                        ldb.language
+                      )                    
                     ],
                   ),
                 ),
@@ -326,15 +367,13 @@ class _PostWidgetState extends State<PostWidget> {
                         size: 13,
                       ),
                       const SizedBox(width: 4),
-                      Text(
-                        'Add Comment',
-                        style: TextStyle(
+                      translateHelper('Add Comment', TextStyle(
                           color: context.theme.cardColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 13
                         ),
-                      ),
-                      
+                        ldb.language
+                      )  
                     ],
                   ),
                 ),
@@ -342,10 +381,22 @@ class _PostWidgetState extends State<PostWidget> {
             ),
             const SizedBox(height: 8),
             if (showComments && widget.post['comments'] != null)
-              for (var comment in widget.post['comments']) CommentWidget(comment: comment),
+              for (var comment in widget.post['comments']) CommentWidget(comment: comment,language:ldb.language),
           ],
         ),
       ),
+    );
+  }
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
     );
   }
 }
@@ -353,8 +404,9 @@ class _PostWidgetState extends State<PostWidget> {
 
 class CommentWidget extends StatelessWidget {
   final Map<String, dynamic> comment;
+  final String language;
 
-  const CommentWidget({Key? key, required this.comment}) : super(key: key);
+  const CommentWidget({Key? key, required this.comment,required this.language}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -373,23 +425,31 @@ class CommentWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  comment['commenterName'] ?? 'Anonymous',
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-                ),
-                Text(
-                  comment['comment'] ?? '',
-                  style: const TextStyle(fontSize: 12),
-                ),
-                Text(
-                  DateFormat('MMM dd, yyyy h:mm a').format(DateTime.parse(comment['createdAt']).toLocal()),
-                  style: TextStyle(color: Colors.grey[600], fontSize: 10),
+                translateHelper(comment['commenterName'] ?? 'Anonymous',const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),language),
+                translateHelper(comment['comment'] ?? '',const TextStyle(fontSize: 12),language),
+                translateHelper(
+                  DateFormat('MMM dd, yyyy h:mm a').format(DateTime.parse(comment['createdAt']).toLocal()), 
+                  TextStyle(color: Colors.grey[600], fontSize: 10), 
+                  language
                 ),
               ],
             ),
           ),
         ],
       ),
+    );
+  }
+
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
     );
   }
 }

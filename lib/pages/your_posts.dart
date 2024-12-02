@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/secret.dart';
+import 'package:aigro/utils/translate.dart';
 import 'package:aigro/widgets/posts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,12 +21,20 @@ class _YourPostsState extends State<YourPosts> {
   late Future<List<dynamic>> posts;
   final infobox = Hive.box("BasicInfo-db");
   BasicDB bdb = BasicDB();
+  final languageBox = Hive.box("Language_db");
+  LanguageDB ldb = LanguageDB();
 
   @override
   void initState() {
     super.initState();
     bdb.loadDataInfo(); 
     posts = fetchPosts();
+    if(languageBox.get("LANG") == null){
+      ldb.createLang();
+    }
+    else{
+      ldb.loadLang();
+    }
   }
 
   Future<List<dynamic>> fetchPosts() async {
@@ -49,7 +58,7 @@ class _YourPostsState extends State<YourPosts> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: const Text('Your Posts'),
+        title: translateHelper('Your Posts',const TextStyle(),ldb.language),
       ),
       body: FutureBuilder<List<dynamic>>(
         future: posts,
@@ -79,5 +88,17 @@ class _YourPostsState extends State<YourPosts> {
     );
 
   
+  }
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
+    );
   }
 }
