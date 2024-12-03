@@ -5,6 +5,8 @@ import 'package:aigro/pages/dis_management.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/utils/translate.dart';
 import 'package:aigro/widgets/voice_icon.dart';
+import 'package:aigro/widgets/analysis_result_card.dart';
+import 'package:aigro/widgets/leafy_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -29,17 +31,49 @@ class ImageAnalysis extends StatefulWidget {
 class _ImageAnalysisState extends State<ImageAnalysis> {
   Map<String, dynamic>? _analysisData;
   List<Map<String, dynamic>> cropDiseaseList = [];
+  String _translatedTitle = "Analysis Results";
+  String _translatedNoData = "No analysis results found.";
+  String _translatedLoading = "Loading data...";
+  String _translatedNoDetails = "No analysis details found.";
+  String _translatedAnalyzeNew = "Analyze New Image";
+  String _translatedImageSaved = "Image saved successfully!";
+  String _translatedImageSavedTitle = "Image Saved";
+  String _translatedOpenImage = "Would you like to open the saved image?";
+  String _translatedCancel = "Cancel";
+  String _translatedOpen = "Open";
+  String _translatedSaveAsPNG = "Save as PNG";
+  String _translatedNoAnalysisData = "No analysis data available";
+  String _translatedDataRefreshed = "Data refreshed successfully.";
 
   final languageBox = Hive.box("Language_db");
   LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
+  final GlobalKey _pngKey = GlobalKey();
+
+  Future<void> _translateUITexts() async {
+    setState(() async {
+      _translatedTitle = await translateTextInput("Analysis Results", ldb.language);
+      _translatedNoData = await translateTextInput("No analysis results found.", ldb.language);
+      _translatedLoading = await translateTextInput("Loading data...", ldb.language);
+      _translatedNoDetails = await translateTextInput("No analysis details found.", ldb.language);
+      _translatedAnalyzeNew = await translateTextInput("Analyze New Image", ldb.language);
+      _translatedImageSaved = await translateTextInput("Image saved successfully!", ldb.language);
+      _translatedImageSavedTitle = await translateTextInput("Image Saved", ldb.language);
+      _translatedOpenImage = await translateTextInput("Would you like to open the saved image?", ldb.language);
+      _translatedCancel = await translateTextInput("Cancel", ldb.language);
+      _translatedOpen = await translateTextInput("Open", ldb.language);
+      _translatedSaveAsPNG = await translateTextInput("Save as PNG", ldb.language);
+      _translatedNoAnalysisData = await translateTextInput("No analysis data available", ldb.language);
+      _translatedDataRefreshed = await translateTextInput("Data refreshed successfully.", ldb.language);
+    });
+  }
+
   _speak(String text) async {
     String translatedText = await translateTextInput(text, ldb.language);
     await flutterTts.setLanguage(ldb.language);
     await flutterTts.setPitch(0.7);
     await flutterTts.speak(translatedText);
   }
-  final GlobalKey _pngKey = GlobalKey();
 
   Future<void> _captureAndSaveImage() async {
     try {
@@ -55,43 +89,43 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         await file.writeAsBytes(pngBytes);
         
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Image saved successfully!'),
-            duration: Duration(seconds: 2),
+          SnackBar(
+            content: Text(_translatedImageSaved),
+            duration: const Duration(seconds: 2),
           ),
         );
 
         showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title:  Text(
-              'Image Saved',
-              style: TextStyle(color: context.theme.cardColor),
-            ),
-            content: const Text('Would you like to open the saved image?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text('Cancel', style: TextStyle(color: context.theme.cardColor)),
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(
+                _translatedImageSavedTitle,
+                style: TextStyle(color: context.theme.cardColor),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  OpenFile.open(filePath);
-                },
-                child:  Text('Open', style: TextStyle(color: context.theme.highlightColor)),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: context.theme.cardColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+              content: Text(_translatedOpenImage),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(_translatedCancel, style: TextStyle(color: context.theme.cardColor)),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    OpenFile.open(filePath);
+                  },
+                  child: Text(_translatedOpen, style: TextStyle(color: context.theme.highlightColor)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: context.theme.cardColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
-      );
+              ],
+            );
+          },
+        );
       }
     } catch (e) {
       print("Error capturing image: $e");
@@ -102,69 +136,6 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         ),
       );
     }
-  }
-
-  Widget _buildLeafyUI(String cropName, String diseaseName, String symptoms, String cropImage) {
-    return RepaintBoundary(
-      key: _pngKey,
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            gradient:  LinearGradient(
-              colors: [context.theme.cardColor, Colors.lightGreen],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "Crop Analysis Result",
-                style: TextStyle(
-                  fontSize: 24,
-                  color: context.theme.highlightColor,
-                  fontWeight: FontWeight.bold,
-                  shadows: [
-                    Shadow(color: Colors.black26, blurRadius: 5, offset: Offset(2, 2)),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              if (cropImage.isNotEmpty)
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    cropImage,
-                    height: 150,
-                    width: 150,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              const SizedBox(height: 16),
-              Text(
-                "Crop: $cropName",
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                "Disease: $diseaseName",
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                "Symptoms: $symptoms",
-                style: TextStyle(fontSize: 14, color: Colors.white70),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 
   Future<void> loadCropDiseases() async {
@@ -225,17 +196,62 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
       print("Error: ${response.body}");
     }
   }
+
+  void _handleCardTap(Map<String, dynamic> result) {
+    final diseaseName = result['diseaseName'] ?? "Unknown";
+    final cropName = result['cropName'] ?? "Unknown";
+    final manStatus = result['managementStatus'] ?? '';
+    final soilDeficiency = result['soilDeficiency'] ?? {};
+    final weatherSeverity = result['weatherSeverity'] ?? {};
+    final severity = result['severity'] ?? '';
+    final recoveryDays = result['recoveryDays'] ?? 0;
+    final yieldLoss = result['yeildLoss'] ?? 0;
+    final cropid = result['id'] ?? 0;
+
+    final selectedDisease = cropDiseaseList.firstWhere(
+      (disease) => disease['diseaseName'] == diseaseName,
+      orElse: () => <String, Object>{},
+    );
+
+    if (manStatus == 'completed' && selectedDisease.isNotEmpty) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => DiseaseManagement(
+            soilDeficiency: soilDeficiency,
+            recoveryDays: recoveryDays,
+            weatherSeverity: weatherSeverity,
+            severity: severity,
+            yieldLoss: yieldLoss,
+            diseaseName: diseaseName,
+            cropId: cropid,
+            cropName: cropName,
+          ),
+        ),
+      );
+    } else if (manStatus == 'failed' && selectedDisease.isNotEmpty) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CropDetails(disease: selectedDisease),
+        ),
+      );
+    } else {
+      print("Disease not found: $diseaseName");
+    }
+  }
+
   @override
   void initState() {
     super.initState();
-     if(languageBox.get("LANG") == null){
+    if (languageBox.get("LANG") == null) {
       ldb.createLang();
-    }
-    else{
+    } else {
       ldb.loadLang();
     }
     loadCropDiseases();
-    _fetchAnalysisData(); 
+    _fetchAnalysisData();
+    _translateUITexts();
   }
 
   @override
@@ -247,22 +263,17 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         elevation: 0,
         title: Row(
           children: [
-            // const Icon(
-            //   Icons.spa,
-            //   color: context.theme.cardColor,
-            //   size: 24,
-            // ),
             const SizedBox(width: 8),
-            const Text(
-              "Analysis Results",
-              style: TextStyle(
+            Text(
+              _translatedTitle,
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 20,
               ),
             ),
             const SizedBox(width: 10),
             IconButton(
-              icon:  Icon(Icons.volume_up_rounded, color: context.theme.primaryColorDark),
+              icon: Icon(Icons.volume_up_rounded, color: context.theme.primaryColorDark),
               tooltip: 'Speak',
               onPressed: () {
                 final text = "Here are the Results of the Image Analysis";
@@ -274,24 +285,22 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         centerTitle: false,
         actions: [
           IconButton(
-            icon:  Icon(Icons.refresh, color: context.theme.primaryColorDark),
+            icon: Icon(Icons.refresh, color: context.theme.primaryColorDark),
             tooltip: 'Refresh',
             onPressed: () {
               setState(() {
                 _fetchAnalysisData();
               });
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Data refreshed successfully."),
-                  duration: Duration(seconds: 2),
+                SnackBar(
+                  content: Text(_translatedDataRefreshed),
+                  duration: const Duration(seconds: 2),
                 ),
               );
             },
           ),
         ],
       ),
-
-
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (_analysisData != null && _analysisData!['results'] != null) {
@@ -317,29 +326,37 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        _buildLeafyUI(cropName, diseaseName, symptoms, cropImage),
-                       Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: ElevatedButton.icon(
-                      onPressed: () {
-                        if (_analysisData != null && _analysisData!['results'] != null) {
-                          _captureAndSaveImage();
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("No analysis data available")),
-                          );
-                        }
-                      },
-                      icon:  Icon(Icons.save_alt, color: context.theme.highlightColor),
-                      label:  Text('Save as PNG', style: TextStyle(color: context.theme.highlightColor)),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: context.theme.cardColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                        LeafyUI(
+                          cropName: cropName,
+                          diseaseName: diseaseName,
+                          symptoms: symptoms,
+                          cropImage: cropImage,
+                          language: ldb.language,
+                          repaintKey: _pngKey,
                         ),
-                      ),
-                    ),
-                  ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              if (_analysisData != null && _analysisData!['results'] != null) {
+                                _captureAndSaveImage();
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(_translatedNoAnalysisData)),
+                                );
+                              }
+                            },
+                            icon: Icon(Icons.save_alt, color: context.theme.highlightColor),
+                            label: Text(_translatedSaveAsPNG,
+                                style: TextStyle(color: context.theme.highlightColor)),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: context.theme.cardColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -348,7 +365,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
             );
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("No analysis data available")),
+              SnackBar(content: Text(_translatedNoAnalysisData)),
             );
           }
         },
@@ -388,7 +405,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                   ),
                   child: Center(
                     child: Text(
-                      'Analyze New Image',
+                      _translatedAnalyzeNew,
                       style: TextStyle(color: context.theme.highlightColor, fontSize: 18),
                     ),
                   ),
@@ -403,143 +420,27 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
 
   Widget _buildAnalysisResult() {
     if (_analysisData == null) {
-      return const Center(child: Text("Loading data..."));
+      return Center(child: Text(_translatedLoading));
     }
 
     if (!_analysisData!['exists']) {
-      return const Center(child: Text("No analysis results found."));
+      return Center(child: Text(_translatedNoData));
     }
 
     final results = _analysisData!['results'];
     if (results.isEmpty) {
-      return const Center(child: Text("No analysis details found."));
+      return Center(child: Text(_translatedNoDetails));
     }
 
     return ListView.builder(
       itemCount: results.length,
       itemBuilder: (context, index) {
         final result = results[index];
-        final cropName = result['cropName'] ?? "Unknown";
-        final status = result['status'] ?? "Unknown";
-        final diseaseName = result['diseaseName'] ?? "Unknown";
-        final symptoms = result['symptoms'] ?? "Unknown";
-        final cropImage = result['cropImage'] ?? '';
-
-        final manStatus = result['managementStatus'] ?? '';
-        final soilDeficiency = result['soilDeficiency'] ?? {};
-        final weatherSeverity = result['weatherSeverity'] ?? {};
-        final severity = result['severity'] ?? '';
-        final recoveryDays = result['recoveryDays'] ?? 0;
-        final yieldLoss = result['yeildLoss'] ?? 0;
-        final cropid = result['id'] ?? 0;
-
-        return GestureDetector(
-           onTap: () {    
-            final selectedDisease = cropDiseaseList.firstWhere(
-              (disease) => disease['diseaseName'] == diseaseName, 
-              orElse: () => <String, Object>{} 
-            );
-
-            if (manStatus=='completed'&& selectedDisease.isNotEmpty) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => DiseaseManagement(
-                    soilDeficiency: soilDeficiency,
-                     recoveryDays: recoveryDays, 
-                     weatherSeverity: weatherSeverity, 
-                     severity: severity, 
-                     yieldLoss: yieldLoss,
-                     diseaseName:diseaseName,
-                     cropId:cropid,
-                     cropName:cropName,
-                    
-                  ),
-                ),
-              );
-            } else if (manStatus=='failed'&& selectedDisease.isNotEmpty) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CropDetails(disease: selectedDisease),
-                ),
-              );
-            }else {
-
-              print("Disease not found: $diseaseName");
-            }
-          },
-          child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 8.0),
-            decoration: BoxDecoration(
-              color: diseaseName == "Unknown" 
-                ? context.theme.highlightColor.withOpacity(0.8)
-                : context.theme.highlightColor,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (cropImage.isNotEmpty)
-                    Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            cropImage,
-                            width: double.infinity,
-                            height: 200,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Positioned(
-                          top: 8,
-                          right: 8, 
-                          child: GestureDetector(
-                            onTap: () {
-                              _speak("$diseaseName in $cropName. $symptoms ");
-                            },
-                            child: voiceIcon(context),
-                          )
-                        ),
-                      ],
-                    ),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "$diseaseName in $cropName",
-                          style: const TextStyle(fontSize: 18),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: context.theme.focusColor,
-                          borderRadius: BorderRadius.circular(10)
-                        ),
-                        child: Text(status),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    symptoms,
-                    style: const TextStyle(fontSize: 14, color: Colors.grey),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-          ),
+        return AnalysisResultCard(
+          result: result,
+          onTap: () => _handleCardTap(result),
+          onSpeak: _speak,
+          language: ldb.language,
         );
       },
     );
