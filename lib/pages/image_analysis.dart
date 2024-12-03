@@ -6,6 +6,7 @@ import 'package:aigro/secret.dart';
 import 'package:aigro/utils/translate.dart';
 import 'package:aigro/widgets/voice_icon.dart';
 import 'package:aigro/widgets/analysis_result_card.dart';
+import 'package:aigro/widgets/leafy_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -40,10 +41,6 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   String _translatedOpenImage = "Would you like to open the saved image?";
   String _translatedCancel = "Cancel";
   String _translatedOpen = "Open";
-  String _translatedCropAnalysis = "Crop Analysis Result";
-  String _translatedCrop = "Crop";
-  String _translatedDisease = "Disease";
-  String _translatedSymptoms = "Symptoms";
   String _translatedSaveAsPNG = "Save as PNG";
   String _translatedNoAnalysisData = "No analysis data available";
   String _translatedDataRefreshed = "Data refreshed successfully.";
@@ -51,6 +48,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   final languageBox = Hive.box("Language_db");
   LanguageDB ldb = LanguageDB();
   FlutterTts flutterTts = FlutterTts();
+  final GlobalKey _pngKey = GlobalKey();
 
   Future<void> _translateUITexts() async {
     setState(() async {
@@ -64,10 +62,6 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
       _translatedOpenImage = await translateTextInput("Would you like to open the saved image?", ldb.language);
       _translatedCancel = await translateTextInput("Cancel", ldb.language);
       _translatedOpen = await translateTextInput("Open", ldb.language);
-      _translatedCropAnalysis = await translateTextInput("Crop Analysis Result", ldb.language);
-      _translatedCrop = await translateTextInput("Crop", ldb.language);
-      _translatedDisease = await translateTextInput("Disease", ldb.language);
-      _translatedSymptoms = await translateTextInput("Symptoms", ldb.language);
       _translatedSaveAsPNG = await translateTextInput("Save as PNG", ldb.language);
       _translatedNoAnalysisData = await translateTextInput("No analysis data available", ldb.language);
       _translatedDataRefreshed = await translateTextInput("Data refreshed successfully.", ldb.language);
@@ -80,8 +74,6 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
     await flutterTts.setPitch(0.7);
     await flutterTts.speak(translatedText);
   }
-
-  final GlobalKey _pngKey = GlobalKey();
 
   Future<void> _captureAndSaveImage() async {
     try {
@@ -144,69 +136,6 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
         ),
       );
     }
-  }
-
-  Widget _buildLeafyUI(String cropName, String diseaseName, String symptoms, String cropImage) {
-    return RepaintBoundary(
-      key: _pngKey,
-      child: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [context.theme.cardColor, Colors.lightGreen],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                _translatedCropAnalysis,
-                style: TextStyle(
-                  fontSize: 24,
-                  color: context.theme.highlightColor,
-                  fontWeight: FontWeight.bold,
-                  shadows: const [
-                    Shadow(color: Colors.black26, blurRadius: 5, offset: Offset(2, 2)),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              if (cropImage.isNotEmpty)
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    cropImage,
-                    height: 150,
-                    width: 150,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              const SizedBox(height: 16),
-              Text(
-                "$_translatedCrop: $cropName",
-                style: const TextStyle(fontSize: 18, color: Colors.white),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                "$_translatedDisease: $diseaseName",
-                style: const TextStyle(fontSize: 18, color: Colors.white),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                "$_translatedSymptoms: $symptoms",
-                style: const TextStyle(fontSize: 14, color: Colors.white70),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 
   Future<void> loadCropDiseases() async {
@@ -397,7 +326,14 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        _buildLeafyUI(cropName, diseaseName, symptoms, cropImage),
+                        LeafyUI(
+                          cropName: cropName,
+                          diseaseName: diseaseName,
+                          symptoms: symptoms,
+                          cropImage: cropImage,
+                          language: ldb.language,
+                          repaintKey: _pngKey,
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: ElevatedButton.icon(
