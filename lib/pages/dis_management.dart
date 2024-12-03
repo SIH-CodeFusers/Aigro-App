@@ -136,17 +136,19 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   late double lat=27.0416;
   late double long=88.2664;
   bool isLoading = false;
-  final double organicProgress = Random().nextInt(11) + 50; 
-  final double inorganicProgress = Random().nextInt(11) + 70; 
+  double organicProgress = Random().nextInt(11) + 0; 
+  double inorganicProgress = Random().nextInt(11) + 0; 
   Map<String, dynamic>? treatmentData;
   final _quancontroller = TextEditingController();
   String? fertSel;
   bool updated=false;
   List<Map<String, dynamic>> cropDiseaseList = [];
+  int _selectedIndex = -1;
+  int recommended=-1;
 
   @override
   void initState() {
-    super.initState();
+    
     bdb.loadDataInfo(); 
     if(languageBox.get("LANG") == null){
       ldb.createLang();
@@ -155,19 +157,50 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
       ldb.loadLang();
     }
     getLatLongFromPincode(bdb.userPin).then((latLon) {
-      setState(() {
+     if (latLon != null) {
+        setState(() {
           lat = latLon['lat']!;
           long = latLon['lon']!;
           fetchWeatherData();
         });
+      }
       }); 
     fetchFarmDetails().then((data) {
-      setState(() {
-        treatmentData = data;
-        updated = isCurrentDateLater(treatmentData?['createdAt']!);
-      });
+      if (data != null) {
+         setState(() {
+            treatmentData = data;
+            updated = isCurrentDateLater(treatmentData?['updatedAt']!);
+            updateSelectionAndProgress(); 
+        });
+      }
+     
     });
     loadCropDiseases();
+    super.initState();
+  }
+
+  void updateSelectionAndProgress() {
+    if (widget.severity == "low" && widget.yieldLoss <= 21) {
+      _selectedIndex=0;
+      recommended=0;
+      organicProgress = Random().nextInt(11) + 70;
+      inorganicProgress = Random().nextInt(11) + 50;
+    } else if (widget.severity == "medium" && widget.yieldLoss <= 13) {
+      _selectedIndex=0;
+      recommended=0;
+      organicProgress = Random().nextInt(11) + 70;
+      inorganicProgress = Random().nextInt(11) + 50;
+    } else {
+     recommended=1;
+      recommended=1;
+      organicProgress = Random().nextInt(11) + 50;
+      inorganicProgress = Random().nextInt(11) + 70;
+    }
+  }
+
+
+   Future<String> _translateText(String text) async {
+    return await translateTextInput(text, ldb.language);
   }
 
   Future<void> fetchWeatherData() async {
@@ -385,9 +418,9 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
     return DateFormat('d MMM, yyyy').format(date);
   }
 
-  bool isCurrentDateLater(String createdAt) {
+  bool isCurrentDateLater(String updatedAt) {
     DateTime currentDate = DateTime.now();
-    DateTime formattedDate = DateTime.parse(createdAt);
+    DateTime formattedDate = DateTime.parse(updatedAt);
     if (!treatmentData?['farmerTreatmentEmpty']!) {
       formattedDate = formattedDate.add(const Duration(days: 5));
     } 
@@ -669,78 +702,83 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         const SizedBox(height: 20),
                         for (int week = 1; week <= calculateWeek(widget.recoveryDays); week++) 
                           _buildRecoveryWeek(week, calculateWeek(widget.recoveryDays)),
+                      ],
+                    ),
+                  ),
+                ),
 
+
+                const SizedBox(height: 30,),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: context.theme.highlightColor,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                         Row(
                           children: [
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 1,color: context.theme.canvasColor),
-                                  borderRadius: BorderRadius.circular(10)
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const Text("Organic", style: TextStyle(fontSize: 16)),
-                                        const Spacer(),
-                                        Text("${organicProgress.toStringAsFixed(0)}%")
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: LinearProgressIndicator(
-                                        value: organicProgress / 100,
-                                        backgroundColor: Colors.grey[300],
-                                        valueColor: const AlwaysStoppedAnimation<Color>(Colors.green),
-                                        minHeight: 6,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text("Safe for soil health", style: TextStyle(fontSize: 12)),
-                                  ],
-                                ),
-                              ),
+                            Icon(FontAwesomeIcons.handHoldingHeart,size: 18,color: Colors.grey[500],),
+                            const SizedBox(width: 10,),
+                            const Expanded(
+                              child: Text("Treatment Options",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
                             ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  border: Border.all(width: 1,color: context.theme.canvasColor),
-                                  borderRadius: BorderRadius.circular(10)
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        const Text("Inorganic", style: TextStyle(fontSize: 16)),
-                                        const Spacer(),
-                                        Text("${inorganicProgress.toStringAsFixed(0)}%")
-                                      ],
-                                    ),
-                                    const SizedBox(height: 8),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: LinearProgressIndicator(
-                                        value: inorganicProgress / 100,
-                                        backgroundColor: Colors.grey[300],
-                                        valueColor: const AlwaysStoppedAnimation<Color>(Color.fromARGB(255, 250, 171, 22)),
-                                        minHeight: 6,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    const Text("Fast acting solution", style: TextStyle(fontSize: 12)),
-                                  ],
-                                ),
-                              ),
+                             GestureDetector(
+                              onTap: () {
+                                _speak("View treatment options for your crops disease");
+                              },
+                              child: voiceIcon(context),
                             ),
                           ],
-                        )
+                        ),
+                        const SizedBox(height: 20),
+
+                        Column(
+                          children: 
+                          recommended==0?
+                            [
+                              buildProgressCard(
+                                title: "Organic",
+                                progress: organicProgress,
+                                description: "Safe for soil health",
+                                progressColor: Colors.green,
+                                index: 0,
+                                backgroundColor: Colors.green[50]!,
+                              ),
+                              const SizedBox(height: 10),
+                              buildProgressCard(
+                                title: "Inorganic",
+                                progress: inorganicProgress,
+                                description: "Fast acting solution",
+                                progressColor: const Color.fromARGB(255, 250, 171, 22),
+                                index: 1,
+                                backgroundColor: Colors.orange[50]!,
+                              ),
+                              ]:
+                              [
+                              buildProgressCard(
+                                title: "Inorganic",
+                                progress: inorganicProgress,
+                                description: "Fast acting solution",
+                                progressColor: const Color.fromARGB(255, 250, 171, 22),
+                                index: 1,
+                                backgroundColor: Colors.orange[50]!,
+                              ),
+                              const SizedBox(height: 10),
+                              buildProgressCard(
+                                title: "Organic",
+                                progress: organicProgress,
+                                description: "Safe for soil health",
+                                progressColor: Colors.green,
+                                index: 0,
+                                backgroundColor: Colors.green[50]!,
+                              ),        
+                            ],
+                          )
                       ],
                     ),
                   ),
@@ -754,8 +792,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                       children: [
                         Icon(FeatherIcons.clock,size: 18,color: Colors.grey[500],),
                         const SizedBox(width: 10,),
-                        const Expanded(
-                          child: Text("Previous Tracking",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),)
+                         Expanded(
+                          child: translateHelper("Previous Tracking", TextStyle(fontSize: 20,fontWeight: FontWeight.w600), ldb.language)
                         ),
                         GestureDetector(
                           onTap: () {
@@ -868,7 +906,60 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         ),
       ),
     );
+ 
   }
+
+  Widget buildProgressCard({
+      required String title,
+      required double progress,
+      required String description,
+      required Color progressColor,
+      required int index,
+      required Color backgroundColor,
+    }) {
+      return GestureDetector(
+        onTap: () {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: _selectedIndex == index ? backgroundColor : Colors.transparent,
+            border: Border.all(width: 1, color: context.theme.canvasColor),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(title, style: const TextStyle(fontSize: 16)),
+                  const Spacer(),
+                  Text("${progress.toStringAsFixed(0)}%"),
+                ],
+              ),
+              const SizedBox(height: 8),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: LinearProgressIndicator(
+                  value: progress / 100,
+                  backgroundColor: Colors.grey[300],
+                  valueColor: AlwaysStoppedAnimation<Color>(progressColor),
+                  minHeight: 6,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(description, style: const TextStyle(fontSize: 12)),
+            ],
+          ),
+        ),
+      );
+    }
+
+
+  
 
   Column treatment(BuildContext context) {
     return Column(
@@ -878,11 +969,9 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           children: [
             Icon(FontAwesomeIcons.disease, size: 18, color: Colors.grey[500]),
             const SizedBox(width: 10),
-            const Expanded(
-              child: Text(
-                "Treatment Tracking",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-              ),
+             Expanded(
+              child:
+              translateHelper("Treatment Tracking", TextStyle(fontSize: 18, fontWeight: FontWeight.w600), ldb.language)
             ),
             GestureDetector(
               onTap: () {
@@ -896,10 +985,10 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Last Treatment:", style: TextStyle(fontSize: 16)),
+             translateHelper("Last Treatment:",  TextStyle(fontSize: 16), ldb.language),
             Text(
               treatmentData?['farmerTreatmentEmpty']! ? "NA"
-              :formatDate(treatmentData?['createdAt']!), 
+              :formatDate(treatmentData?['updatedAt']!), 
             style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
           ],
         ),
@@ -907,16 +996,18 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Next Treatment:", style: TextStyle(fontSize: 16)),
+            translateHelper("Next Treatment:",  TextStyle(fontSize: 16), ldb.language),
+            // translateHelper( treatmentData?['farmerTreatmentEmpty']! ? formatDateNow(DateTime.now())
+            //   :formatAddDate(treatmentData?['updatedAt']!), const TextStyle(fontSize: 16, fontWeight: FontWeight.w500), ldb.l)
             Text(
                 treatmentData?['farmerTreatmentEmpty']! ? formatDateNow(DateTime.now())
-              :formatAddDate(treatmentData?['createdAt']!), 
+              :formatAddDate(treatmentData?['updatedAt']!), 
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)
             ),
           ],
         ),
         const SizedBox(height: 20),
-        const Text("Select Pesticide",style: TextStyle(fontSize: 16),),
+        translateHelper("Select Pesticide", TextStyle(fontSize: 16), ldb.language),
         const SizedBox(height: 8),
         IgnorePointer(
           ignoring: treatmentData?['farmerTreatmentEmpty']! ?false:true,
@@ -944,11 +1035,37 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                     .map<DropdownMenuItem<String>>(
                       (fertiliser) => DropdownMenuItem<String>(
                         value: fertiliser,
-                        child: Text(
-                          fertiliser.length > 30 ? fertiliser.substring(0, 30) + '...' : fertiliser,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          softWrap: false,
+                        child: FutureBuilder<String>(
+                          future: _translateText(fertiliser),
+                          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return Text(
+                                'Translating...',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                softWrap: false,
+                              );
+                            } else if (snapshot.hasError) {
+                              return Text(
+                                'Error loading text',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                softWrap: false,
+                              );
+                            } else {
+                              final translatedText = snapshot.data ?? '';
+                              final displayText = translatedText.length > 30 
+                                  ? '${translatedText.substring(0, 30)}...' 
+                                  : translatedText;
+
+                              return Text(
+                                displayText,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                softWrap: false,
+                              );
+                            }
+                          },
                         )
                       ),
                     )
@@ -963,7 +1080,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         ),
 
         const SizedBox(height: 20),
-        const Text("Quantity Used",style: TextStyle(fontSize: 16),),
+        translateHelper("Quantity Used",  TextStyle(fontSize: 16), ldb.language),
         const SizedBox(height: 8),
         TextField(
           controller: _quancontroller,
@@ -991,7 +1108,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
               minimumSize: const Size(double.infinity, 50),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             ),
-            child: const Text("Save Treatment Details"),
+            child: translateHelper("Save Treatment Details", const TextStyle(), ldb.language)
           ),
         ),
         const SizedBox(height: 20), 
@@ -1003,7 +1120,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
             minimumSize: const Size(double.infinity, 50),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           ),
-          child: const Text("Fertilizer Group"),
+          child:translateHelper("Fertilizer Group", const TextStyle(), ldb.language)
         ),
       ],
     );
@@ -1019,10 +1136,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           size: 10,
         ),
         const SizedBox(width: 10),
-        Text(
-          "$nutrient: $level%",
-          style: const TextStyle(fontSize: 16),
-        ),
+        translateHelper("$nutrient: $level%", const TextStyle(fontSize: 16), ldb.language)
       ],
     );
   }
@@ -1047,14 +1161,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    header,
-                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    '$value $unit',
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
+                  translateHelper(header, const TextStyle(fontSize: 18, fontWeight: FontWeight.bold), ldb.language),
+                  translateHelper('$value $unit',const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),ldb.language)
                 ],
               ),
             ],
@@ -1062,10 +1170,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           const SizedBox(height: 5),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              '${severity['text']}',
-              style: const TextStyle(fontSize: 14),
-            ),
+            child: translateHelper( '${severity['text']}', const TextStyle(fontSize: 14), ldb.language)
           ),
         ],
       ),
@@ -1104,26 +1209,33 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(14.0),
-                child: Text(week.toString(),style: TextStyle(color: context.theme.highlightColor,fontWeight: FontWeight.bold),),
+                child: translateHelper(week.toString(),TextStyle(color: context.theme.highlightColor,fontWeight: FontWeight.bold),ldb.language)
               ),
             ),
             const SizedBox(width: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Week $week',
-                  style: const TextStyle(fontSize: 16),
-                ),
-                Text(
-                  ' $weekText',
-                  style: TextStyle(fontSize: 16,color: Colors.grey[500]),
-                ),
+                translateHelper('Week $week',const TextStyle(fontSize: 16),ldb.language),
+                translateHelper( ' $weekText',TextStyle(fontSize: 16,color: Colors.grey[500]),ldb.language)
               ],  
             ),
           ],
         ),
       ),
+    );
+  }
+
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
     );
   }
 

@@ -1,0 +1,3112 @@
+[
+  {
+    "crop": "Rice",
+    "diseases": {
+      "Bacterial Panicle Blight": {
+        "Low": [
+          {
+            "method": "Neem Leaf Spray",
+            "preparation": "Boil 500g neem leaves in 2 liters of water for 30 minutes, strain, and spray on affected panicles",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Garlic and Turmeric Solution",
+            "preparation": "Blend 100g garlic and 50g turmeric with 1 liter water, strain, and spray",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Copper-based Bordeaux Mixture",
+            "preparation": "Mix 100g copper sulfate and 100g lime in 10 liters of water",
+            "frequency": "Every 10 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Spray",
+            "preparation": "Use Bacillus subtilis bio-fungicide, dilute as per manufacturer's instructions",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Hot Water Seed Treatment",
+            "preparation": "Soak seeds in water at 50-54°C for 10-12 minutes before planting",
+            "frequency": "One-time before planting"
+          },
+          {
+            "method": "Cow Urine Fungicide",
+            "preparation": "Mix 5% cow urine with water, add a pinch of lime",
+            "frequency": "Every 4-5 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and burn all infected plant debris, practice crop rotation",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "Trichoderma Biofungicide",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre as soil treatment",
+            "frequency": "Before planting and 30 days after"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace entire crop with disease-resistant rice varieties",
+            "frequency": "Immediate action"
+          }
+        ]
+      },
+      "Dead Heart": {
+        "Low": [
+          {
+            "method": "Neem Seed Kernel Extract",
+            "preparation": "Soak 500g neem seed kernel in water overnight, strain and spray",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Botanical Repellent Spray",
+            "preparation": "Mix 10ml eucalyptus oil in 1 liter water with few drops of liquid soap",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Wood Ash Dusting",
+            "preparation": "Sprinkle wood ash around plant base to deter insects",
+            "frequency": "Weekly"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Pheromone Traps",
+            "preparation": "Install yellow sticky traps to monitor and reduce pest population",
+            "frequency": "Continuous monitoring"
+          },
+          {
+            "method": "Cow Urine Pest Repellent",
+            "preparation": "Mix 20% cow urine with water and spray",
+            "frequency": "Every 4-5 days"
+          },
+          {
+            "method": "Marigold Intercropping",
+            "preparation": "Plant marigold between rice rows to repel stem borers",
+            "frequency": "One-time during planting"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Crop Destruction",
+            "preparation": "Remove and burn completely infested plants",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Beneficial Insect Introduction",
+            "preparation": "Release Trichogramma wasps as biological control",
+            "frequency": "Multiple releases during crop cycle"
+          },
+          {
+            "method": "Field Leveling and Water Management",
+            "preparation": "Ensure proper water levels and field drainage",
+            "frequency": "Continuous monitoring"
+          }
+        ]
+      },
+      "Brown Spot": {
+        "Low": [
+          {
+            "method": "Turmeric Spray",
+            "preparation": "Blend 100g turmeric in 1 liter water, strain and spray",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Buttermilk Spray",
+            "preparation": "Mix 10% buttermilk with water",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Garlic Extract",
+            "preparation": "Blend 100g garlic in 1 liter water, strain and spray",
+            "frequency": "Every 7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Copper Sulfate Solution",
+            "preparation": "Mix 5g copper sulfate in 1 liter water with lime",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Compost Tea Spray",
+            "preparation": "Ferment mature compost in water for 48 hours, strain and spray",
+            "frequency": "Every 4-5 days"
+          },
+          {
+            "method": "Cow Dung Liquid Manure",
+            "preparation": "Dilute fresh cow dung 1:10 with water",
+            "frequency": "Every 7 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitization",
+            "preparation": "Remove and destroy all infected plant material",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Trichoderma Bio-fungicide",
+            "preparation": "Apply Trichoderma @ 2.5 kg per acre",
+            "frequency": "Multiple applications"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace with brown spot resistant rice varieties",
+            "frequency": "Next planting season"
+          }
+        ]
+      },
+      "Tungro": {
+        "Low": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Mix 5ml neem oil in 1 liter water with liquid soap",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Yellow Sticky Traps",
+            "preparation": "Install traps to monitor and reduce vector population",
+            "frequency": "Continuous monitoring"
+          },
+          {
+            "method": "Botanical Repellent",
+            "preparation": "Spray mixture of garlic, chili, and neem extract",
+            "frequency": "Every 5 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Vector Control",
+            "preparation": "Remove alternate host plants around rice field",
+            "frequency": "Continuous management"
+          },
+          {
+            "method": "Delayed Planting",
+            "preparation": "Synchronize planting to break virus transmission cycle",
+            "frequency": "Seasonal strategy"
+          },
+          {
+            "method": "Cow Urine Spray",
+            "preparation": "Mix 20% cow urine with water",
+            "frequency": "Every 4-5 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Crop Destruction",
+            "preparation": "Uproot and burn entire infected crop",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Resistant Variety Deployment",
+            "preparation": "Replace with Tungro-resistant rice varieties",
+            "frequency": "Next planting season"
+          },
+          {
+            "method": "Comprehensive Vector Management",
+            "preparation": "Implement integrated pest management strategies",
+            "frequency": "Continuous monitoring"
+          }
+        ]
+      },
+      "Bacterial Leaf Streak": {
+        "Low": [
+          {
+            "method": "Copper-based Spray",
+            "preparation": "Prepare Bordeaux mixture (copper sulfate + lime)",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Garlic Extract",
+            "preparation": "Blend 100g garlic in 1 liter water, strain and spray",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Neem Leaf Extract",
+            "preparation": "Boil neem leaves, strain and spray the cooled solution",
+            "frequency": "Every 7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Control",
+            "preparation": "Apply Bacillus subtilis bio-fungicide",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Hot Water Seed Treatment",
+            "preparation": "Treat seeds at 50-54°C for 10-12 minutes",
+            "frequency": "Before planting"
+          },
+          {
+            "method": "Compost Tea Spray",
+            "preparation": "Ferment mature compost, strain and spray",
+            "frequency": "Every 4-5 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and burn all infected plant debris",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Crop Rotation",
+            "preparation": "Avoid rice in the same field for 2-3 seasons",
+            "frequency": "Multi-season strategy"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace with bacterial leaf streak resistant varieties",
+            "frequency": "Next planting season"
+          }
+        ]
+      },
+      "Leaf Mold": {
+        "Low": [
+          {
+            "method": "Neem Leaf Extract",
+            "preparation": "Boil 500g neem leaves in 2 liters of water, strain, and spray",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Turmeric Spray",
+            "preparation": "Blend 100g fresh turmeric in 1 liter water, strain and spray",
+            "frequency": "Every 5-6 days"
+          },
+          {
+            "method": "Garlic Fungicide",
+            "preparation": "Crush 100g garlic, soak in 1 liter water overnight, strain and spray",
+            "frequency": "Every 7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Control",
+            "preparation": "Apply Bacillus subtilis bio-fungicide @ 2 ml per liter",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Cow Milk Spray",
+            "preparation": "Mix 20% cow milk with water, add few drops of liquid soap",
+            "frequency": "Every 4-5 days"
+          },
+          {
+            "method": "Bordeaux Mixture",
+            "preparation": "Mix 100g copper sulfate and 100g lime in 10 liters of water",
+            "frequency": "Every 7-10 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and burn all infected plant debris, improve field drainage",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Trichoderma Bio-fungicide",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre as soil treatment",
+            "frequency": "Before planting and 30 days after"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace with leaf mold resistant rice varieties",
+            "frequency": "Next planting season"
+          }
+        ]
+      },
+      "Leaf Blast": {
+        "Low": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Mix 5ml neem oil in 1 liter water with liquid soap",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Turmeric Extract",
+            "preparation": "Blend 100g fresh turmeric in 1 liter water, strain and spray",
+            "frequency": "Every 5-6 days"
+          },
+          {
+            "method": "Garlic-Chili Spray",
+            "preparation": "Blend 50g garlic and 25g green chili in 1 liter water",
+            "frequency": "Every 7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Silica-rich Spray",
+            "preparation": "Use rice hull ash or banana pseudo-stem extract",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Probiotic Bacterial Control",
+            "preparation": "Apply Bacillus subtilis bio-fungicide @ 2 ml per liter",
+            "frequency": "Every 4-5 days"
+          },
+          {
+            "method": "Cow Urine Fungicide",
+            "preparation": "Mix 20% cow urine with water, add pinch of lime",
+            "frequency": "Every 5 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitization",
+            "preparation": "Remove and destroy all infected plant material",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Water Management",
+            "preparation": "Maintain proper water levels, avoid water stress",
+            "frequency": "Continuous monitoring"
+          },
+          {
+            "method": "Resistant Variety Deployment",
+            "preparation": "Replace with blast-resistant rice varieties",
+            "frequency": "Next planting season"
+          }
+        ]
+      },
+      "Hispa": {
+        "Low": [
+          {
+            "method": "Neem Seed Kernel Extract",
+            "preparation": "Soak 500g neem seed kernel in water overnight, strain and spray",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Botanical Repellent Spray",
+            "preparation": "Mix 10ml eucalyptus oil in 1 liter water with few drops of liquid soap",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Wood Ash Dusting",
+            "preparation": "Sprinkle wood ash around plant base to deter insects",
+            "frequency": "Weekly"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Pheromone Traps",
+            "preparation": "Install yellow sticky traps to monitor and reduce pest population",
+            "frequency": "Continuous monitoring"
+          },
+          {
+            "method": "Marigold Intercropping",
+            "preparation": "Plant marigold between rice rows to repel Hispa beetles",
+            "frequency": "One-time during planting"
+          },
+          {
+            "method": "Cow Urine Pest Repellent",
+            "preparation": "Mix 20% cow urine with water and spray",
+            "frequency": "Every 4-5 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Biological Control",
+            "preparation": "Release predatory beetles like Cybocephalus nibius",
+            "frequency": "Multiple releases during crop cycle"
+          },
+          {
+            "method": "Complete Crop Destruction",
+            "preparation": "Remove and burn completely infested plants",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Field Sanitation",
+            "preparation": "Remove alternate host plants, practice crop rotation",
+            "frequency": "Seasonal management"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "crop": "Banana",
+    "diseases": {
+      "Moko Disease": {
+        "Low": [
+          {
+            "method": "Neem Oil Disinfection",
+            "preparation": "Prepare 2% neem oil solution, spray on tools and around infected plants",
+            "frequency": "Weekly inspection and treatment"
+          },
+          {
+            "method": "Copper-based Sanitization",
+            "preparation": "Prepare Bordeaux mixture (copper sulfate + lime) for tool sterilization",
+            "frequency": "Before and after pruning"
+          },
+          {
+            "method": "Bacterial Antagonist Treatment",
+            "preparation": "Apply Bacillus subtilis solution around plant base",
+            "frequency": "Every 10 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Complete Infected Plant Removal",
+            "preparation": "Carefully uproot and burn entire infected plant, sterilize surrounding soil",
+            "frequency": "Immediate action upon detection"
+          },
+          {
+            "method": "Soil Biosolarization",
+            "preparation": "Cover soil with transparent plastic after thorough organic matter incorporation",
+            "frequency": "One-time before replanting"
+          },
+          {
+            "method": "Probiotic Soil Treatment",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre",
+            "frequency": "Before planting and 30 days after"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Quarantine",
+            "preparation": "Isolate entire field, destroy all plants within 10-meter radius",
+            "frequency": "Immediate and comprehensive action"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace with Moko-resistant banana cultivars",
+            "frequency": "Next planting cycle"
+          },
+          {
+            "method": "Comprehensive Soil Sterilization",
+            "preparation": "Use organic solar sterilization techniques, incorporate beneficial microbes",
+            "frequency": "Entire season management"
+          }
+        ]
+      },
+      "Bract Mosaic Virus Disease": {
+        "Low": [
+          {
+            "method": "Neem Extract Spray",
+            "preparation": "Blend 250g neem leaves, strain and spray",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Yellow Sticky Traps",
+            "preparation": "Install traps to reduce vector population",
+            "frequency": "Continuous monitoring"
+          },
+          {
+            "method": "Turmeric Leaf Extract",
+            "preparation": "Blend fresh turmeric leaves, dilute and spray",
+            "frequency": "Every 5-6 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Vector Control",
+            "preparation": "Remove alternate host plants, manage surrounding vegetation",
+            "frequency": "Continuous management"
+          },
+          {
+            "method": "Botanical Repellent",
+            "preparation": "Mix garlic, chili, and neem extract",
+            "frequency": "Every 4-5 days"
+          },
+          {
+            "method": "Cow Urine Spray",
+            "preparation": "Mix 20% cow urine with water",
+            "frequency": "Every 5 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Comprehensive Plant Destruction",
+            "preparation": "Uproot and burn entire infected crop",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Field Quarantine",
+            "preparation": "Isolate infected area, prevent new plantings",
+            "frequency": "Entire season"
+          },
+          {
+            "method": "Resistant Variety Deployment",
+            "preparation": "Replace with virus-resistant banana varieties",
+            "frequency": "Next planting season"
+          }
+        ]
+      },
+      "Black Sigatoka Disease": {
+        "Low": [
+          {
+            "method": "Neem Oil Foliar Spray",
+            "preparation": "Mix 5ml neem oil in 1 liter water with liquid soap",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Turmeric Fungicide",
+            "preparation": "Blend 100g fresh turmeric in 1 liter water, strain and spray",
+            "frequency": "Every 5-6 days"
+          },
+          {
+            "method": "Copper-based Bordeaux Mixture",
+            "preparation": "Mix 100g copper sulfate and 100g lime in 10 liters water",
+            "frequency": "Every 10 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Biological Control",
+            "preparation": "Apply Bacillus subtilis bio-fungicide @ 2 ml per liter",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Cow Milk Antifungal Spray",
+            "preparation": "Mix 20% cow milk with water, add few drops of liquid soap",
+            "frequency": "Every 4-5 days"
+          },
+          {
+            "method": "Compost Tea Treatment",
+            "preparation": "Ferment mature compost in water for 48 hours, strain and spray",
+            "frequency": "Every 6-7 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Leaf Pruning",
+            "preparation": "Remove and burn all severely infected leaves, sterilize cutting tools",
+            "frequency": "Immediate and repeated action"
+          },
+          {
+            "method": "Trichoderma Bio-fungicide",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre as soil and foliar treatment",
+            "frequency": "Before planting and every 30 days"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace with Black Sigatoka-resistant banana cultivars",
+            "frequency": "Next planting season"
+          }
+        ]
+      },
+      "Panama Disease": {
+        "Low": [
+          {
+            "method": "Neem Cake Soil Treatment",
+            "preparation": "Mix neem cake @ 250 kg per hectare into soil",
+            "frequency": "Before planting and mid-season"
+          },
+          {
+            "method": "Beneficial Microbe Inoculation",
+            "preparation": "Apply Pseudomonas fluorescens around plant base",
+            "frequency": "Every 15 days"
+          },
+          {
+            "method": "Turmeric Root Dip",
+            "preparation": "Soak banana suckers in turmeric solution before planting",
+            "frequency": "During planting"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Soil Biosolarization",
+            "preparation": "Cover soil with transparent plastic after incorporating organic matter",
+            "frequency": "One-time before replanting"
+          },
+          {
+            "method": "Trichoderma Soil Treatment",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre",
+            "frequency": "Before planting and 30 days after"
+          },
+          {
+            "method": "Crop Rotation Strategy",
+            "preparation": "Alternate with non-host crops for 3-4 years",
+            "frequency": "Seasonal management"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Quarantine",
+            "preparation": "Destroy entire infected plantation, avoid replanting bananas for 5-7 years",
+            "frequency": "Comprehensive long-term management"
+          },
+          {
+            "method": "Resistant Variety Deployment",
+            "preparation": "Replace with Panama disease-resistant banana cultivars",
+            "frequency": "Next planting cycle"
+          },
+          {
+            "method": "Comprehensive Soil Sterilization",
+            "preparation": "Use organic solar sterilization, incorporate beneficial microbes",
+            "frequency": "Entire season management"
+          }
+        ]
+      },
+      "Pseudostem Weevil": {
+        "Low": [
+          {
+            "method": "Neem Seed Kernel Extract",
+            "preparation": "Soak 500g neem seed kernel in water overnight, strain and spray",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Botanical Repellent Spray",
+            "preparation": "Mix 10ml eucalyptus oil in 1 liter water with liquid soap",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Wood Ash Dusting",
+            "preparation": "Sprinkle wood ash around plant base to deter insects",
+            "frequency": "Weekly"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Pheromone Traps",
+            "preparation": "Install yellow sticky traps to monitor and reduce weevil population",
+            "frequency": "Continuous monitoring"
+          },
+          {
+            "method": "Marigold Intercropping",
+            "preparation": "Plant marigold around banana plantation to repel weevils",
+            "frequency": "One-time during planting"
+          },
+          {
+            "method": "Cow Urine Pest Repellent",
+            "preparation": "Mix 20% cow urine with water and spray",
+            "frequency": "Every 4-5 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Biological Control",
+            "preparation": "Release predatory insects like Beauveria bassiana",
+            "frequency": "Multiple releases during crop cycle"
+          },
+          {
+            "method": "Complete Pseudostem Destruction",
+            "preparation": "Remove and burn completely infested pseudostems",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Field Sanitation",
+            "preparation": "Remove crop debris, practice crop rotation",
+            "frequency": "Seasonal management"
+          }
+        ]
+      },
+      "Yellow Sigatoka Disease": {
+        "Low": [
+          {
+            "method": "Cultural Practices",
+            "preparation": "Maintain good field hygiene by removing infected leaves and debris.",
+            "frequency": "Ongoing management"
+          },
+          {
+            "method": "Deleafing",
+            "preparation": "Remove leaves showing early signs of yellow streaks to reduce inoculum levels.",
+            "frequency": "As needed"
+          },
+          {
+            "method": "Neem Oil Application",
+            "preparation": "Dilute neem oil (5 ml/liter of water) and spray on the leaves.",
+            "frequency": "Every 15-20 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Fungicidal Treatment",
+            "preparation": "Apply fungicides such as Propiconazole or Carbendazim as per manufacturer's instructions.",
+            "frequency": "Every 2-3 weeks until symptoms improve"
+          },
+          {
+            "method": "Hot Water Treatment for Suckers",
+            "preparation": "Soak banana suckers in hot water (50°C) for 30 minutes before planting.",
+            "frequency": "One-time before planting"
+          },
+          {
+            "method": "Soil Management",
+            "preparation": "Improve soil drainage and fertility to promote healthy plant growth.",
+            "frequency": "Ongoing management"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plants and debris immediately.",
+            "frequency": "As needed"
+          },
+          {
+            "method": "Trichoderma Application",
+            "preparation": "Apply Trichoderma harzianum as a soil treatment to suppress fungal pathogens.",
+            "frequency": "Before planting and 30 days after"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace entire crop with disease-resistant banana varieties.",
+            "frequency": "Immediate action"
+          }
+        ]
+      },
+      "Black Rot": {
+        "Low": [
+          {
+            "method": "Cultural Practices",
+            "preparation": "Ensure proper field sanitation by removing infected plant debris.",
+            "frequency": "Ongoing management."
+          },
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Dilute neem oil with water (1:100) and spray on affected areas.",
+            "frequency": "Every 10 days."
+          },
+          {
+            "method": "Healthy Planting Material",
+            "preparation": "Use disease-free planting material to reduce risk of infection.",
+            "frequency": "One-time before planting."
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Fungicidal Treatment",
+            "preparation": "Apply a mixture of Mancozeb and Carbendazim as per label instructions.",
+            "frequency": "Every 2-3 weeks until control is achieved."
+          },
+          {
+            "method": "Hot Water Treatment",
+            "preparation": "Soak seeds or suckers in hot water (50°C) for 30 minutes.",
+            "frequency": "One-time before planting."
+          },
+          {
+            "method": "Crop Rotation",
+            "preparation": "Rotate with non-host crops to break the disease cycle.",
+            "frequency": "Season-long management."
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plants and debris from the field.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Chemical Control",
+            "preparation": "Apply systemic fungicides as per manufacturer’s instructions.",
+            "frequency": "Every 2-3 weeks until symptoms improve."
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace entire crop with resistant banana varieties.",
+            "frequency": "Immediate action."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "crop": "Mango",
+    "diseases": {
+      "Sooty Mould": {
+        "Low": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Mix 5ml neem oil in 1 liter water with liquid soap",
+            "frequency": "Every 7 days",
+            "target": "Reduces honeydew-producing insect population"
+          },
+          {
+            "method": "Garlic-Chili Insect Repellent",
+            "preparation": "Blend 50g garlic and 25g green chili in 1 liter water, strain",
+            "frequency": "Every 5-6 days",
+            "target": "Disrupts insect pest activity"
+          },
+          {
+            "method": "Soap Water Solution",
+            "preparation": "Mix 20ml liquid soap in 1 liter water",
+            "frequency": "Every 7 days",
+            "target": "Removes existing sooty mould and controls sucking insects"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Pruning and Sanitation",
+            "preparation": "Remove severely infected branches, improve air circulation",
+            "frequency": "Immediate action and seasonal pruning",
+            "target": "Reduce disease spread and humidity"
+          },
+          {
+            "method": "Beneficial Insect Introduction",
+            "preparation": "Release ladybugs and lacewings in the orchard",
+            "frequency": "Multiple releases during crop cycle",
+            "target": "Natural pest control"
+          },
+          {
+            "method": "Horticultural Oil Spray",
+            "preparation": "Use light mineral or vegetable-based horticultural oil",
+            "frequency": "Every 10-14 days",
+            "target": "Suffocates scale insects and mites"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Branch Removal",
+            "preparation": "Prune and burn heavily infected branches",
+            "frequency": "Immediate action",
+            "target": "Prevent disease spread"
+          },
+          {
+            "method": "Biological Fungicide Treatment",
+            "preparation": "Apply Bacillus subtilis solution",
+            "frequency": "Every 7 days",
+            "target": "Suppress fungal growth"
+          },
+          {
+            "method": "Comprehensive Pest Management",
+            "preparation": "Integrate multiple organic control methods",
+            "frequency": "Season-long management",
+            "target": "Holistic disease and pest control"
+          }
+        ]
+      },
+      "Anthracnose Mango": {
+        "Low": [
+          {
+            "method": "Copper-based Bordeaux Mixture",
+            "preparation": "Mix 100g copper sulfate and 100g lime in 10 liters water",
+            "frequency": "Every 10 days",
+            "target": "Fungal disease suppression"
+          },
+          {
+            "method": "Turmeric Fungicide Spray",
+            "preparation": "Blend 100g fresh turmeric in 1 liter water, strain",
+            "frequency": "Every 7 days",
+            "target": "Natural antifungal treatment"
+          },
+          {
+            "method": "Neem Leaf Extract",
+            "preparation": "Boil 500g neem leaves in 2 liters water, strain",
+            "frequency": "Every 7 days",
+            "target": "Fungal growth inhibition"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Biological Control",
+            "preparation": "Apply Bacillus subtilis bio-fungicide @ 2 ml per liter",
+            "frequency": "Every 5 days",
+            "target": "Suppress fungal pathogens"
+          },
+          {
+            "method": "Cow Milk Antifungal Spray",
+            "preparation": "Mix 20% cow milk with water",
+            "frequency": "Every 4-5 days",
+            "target": "Natural fungal disease management"
+          },
+          {
+            "method": "Pruning and Sanitation",
+            "preparation": "Remove infected fruits and branches, improve air circulation",
+            "frequency": "Continuous monitoring",
+            "target": "Reduce disease spread"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Tree Sanitization",
+            "preparation": "Remove and burn all infected plant parts",
+            "frequency": "Immediate action",
+            "target": "Prevent disease spread"
+          },
+          {
+            "method": "Trichoderma Bio-fungicide",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre",
+            "frequency": "Before flowering and fruit set",
+            "target": "Biological disease control"
+          },
+          {
+            "method": "Resistant Variety Management",
+            "preparation": "Replace with Anthracnose-resistant mango varieties",
+            "frequency": "Next planting season",
+            "target": "Long-term disease management"
+          }
+        ]
+      },
+      "Powdery Mildew": {
+        "Low": [
+          {
+            "method": "Milk Spray Treatment",
+            "preparation": "Mix 1 part milk with 9 parts water",
+            "frequency": "Every 7 days",
+            "target": "Natural fungal suppression"
+          },
+          {
+            "method": "Baking Soda Solution",
+            "preparation": "Mix 1 tablespoon baking soda in 1 liter water",
+            "frequency": "Every 5-6 days",
+            "target": "Alter leaf surface pH"
+          },
+          {
+            "method": "Garlic Extract",
+            "preparation": "Blend 100g garlic in 1 liter water, strain",
+            "frequency": "Every 7 days",
+            "target": "Natural fungicidal properties"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Sulfur Dust",
+            "preparation": "Apply organic sulfur powder on affected parts",
+            "frequency": "Every 10 days",
+            "target": "Direct fungal control"
+          },
+          {
+            "method": "Pruning and Ventilation",
+            "preparation": "Remove dense foliage, improve air circulation",
+            "frequency": "Continuous monitoring",
+            "target": "Reduce humidity and fungal growth"
+          },
+          {
+            "method": "Cow Urine Fungicide",
+            "preparation": "Mix 20% cow urine with water",
+            "frequency": "Every 5 days",
+            "target": "Natural fungal suppression"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Canopy Management",
+            "preparation": "Aggressive pruning, remove all infected parts",
+            "frequency": "Immediate action",
+            "target": "Prevent disease spread"
+          },
+          {
+            "method": "Biological Fungicide",
+            "preparation": "Apply Bacillus subtilis or Trichoderma solution",
+            "frequency": "Every 7 days",
+            "target": "Comprehensive fungal control"
+          },
+          {
+            "method": "Resistant Variety Selection",
+            "preparation": "Replace with powdery mildew-resistant mango varieties",
+            "frequency": "Next planting season",
+            "target": "Long-term disease management"
+          }
+        ]
+      },
+      "Bacterial Canker": {
+        "Low": [
+          {
+            "method": "Copper-based Sanitization",
+            "preparation": "Apply copper-based organic fungicide",
+            "frequency": "Every 10 days",
+            "target": "Bacterial growth suppression"
+          },
+          {
+            "method": "Neem Oil Treatment",
+            "preparation": "Mix 5ml neem oil in 1 liter water with liquid soap",
+            "frequency": "Every 7 days",
+            "target": "Natural antibacterial protection"
+          },
+          {
+            "method": "Garlic Extract Spray",
+            "preparation": "Blend 100g garlic in 1 liter water, strain",
+            "frequency": "Every 5-6 days",
+            "target": "Natural antimicrobial action"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Wound Disinfection",
+            "preparation": "Treat pruning wounds with copper-based organic solution",
+            "frequency": "Immediate after pruning",
+            "target": "Prevent bacterial entry"
+          },
+          {
+            "method": "Probiotic Bacterial Control",
+            "preparation": "Apply Pseudomonas fluorescens solution",
+            "frequency": "Every 10 days",
+            "target": "Competitive bacterial management"
+          },
+          {
+            "method": "Pruning and Sanitation",
+            "preparation": "Remove infected branches, sterilize tools",
+            "frequency": "Continuous monitoring",
+            "target": "Prevent disease spread"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Branch Removal",
+            "preparation": "Cut and burn severely infected branches",
+            "frequency": "Immediate action",
+            "target": "Stop bacterial spread"
+          },
+          {
+            "method": "Comprehensive Orchard Sanitization",
+            "preparation": "Remove all infected trees, sterilize surrounding area",
+            "frequency": "Seasonal management",
+            "target": "Prevent disease recurrence"
+          },
+          {
+            "method": "Resistant Variety Implementation",
+            "preparation": "Replace with bacterial canker-resistant mango varieties",
+            "frequency": "Next planting season",
+            "target": "Long-term disease resistance"
+          }
+        ]
+      },
+      "Die Back": {
+        "Low": [
+          {
+            "method": "Cultural Practices",
+            "preparation": "Maintain good orchard hygiene by removing and destroying infected plant debris.",
+            "frequency": "Ongoing management"
+          },
+          {
+            "method": "Pruning",
+            "preparation": "Prune infected branches 7-10 cm below the infection site and burn them.",
+            "frequency": "As needed"
+          },
+          {
+            "method": "Cow Dung Paste",
+            "preparation": "Apply a paste of cow dung on pruned ends to protect against infection.",
+            "frequency": "As needed after pruning"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Copper Oxychloride Spray",
+            "preparation": "Mix copper oxychloride with water as per label instructions and spray on affected areas.",
+            "frequency": "Every 2-3 weeks until symptoms improve"
+          },
+          {
+            "method": "Biological Control with Trichoderma",
+            "preparation": "Apply Trichoderma spp. to the soil to enhance plant resistance against fungal pathogens.",
+            "frequency": "Once before planting and then every 30 days"
+          },
+          {
+            "method": "Hot Water Treatment for Cuttings",
+            "preparation": "Soak mango cuttings in hot water (52°C) for 15 minutes before planting.",
+            "frequency": "One-time before planting"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected trees and debris immediately.",
+            "frequency": "As needed"
+          },
+          {
+            "method": "Systemic Fungicide Application",
+            "preparation": "Apply systemic fungicides like Flutriafol as per manufacturer's instructions.",
+            "frequency": "Every 2-3 weeks until control is achieved"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace affected trees with disease-resistant mango varieties.",
+            "frequency": "Immediate action"
+          }
+        ]
+      },
+      "Cutting Weevil": {
+        "Low": [
+          {
+            "method": "Cultural Control",
+            "preparation": "Maintain good field sanitation by removing weeds and debris.",
+            "frequency": "Ongoing management."
+          },
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Dilute neem oil with water (1:100) and spray on affected plants.",
+            "frequency": "Every 10-14 days."
+          },
+          {
+            "method": "Trap Cropping",
+            "preparation": "Plant trap crops like marigold to attract weevils away from mango.",
+            "frequency": "Season-long management."
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Insecticidal Soap",
+            "preparation": "Mix liquid soap with water (2 tablespoons per liter) and spray.",
+            "frequency": "Every week until control is achieved."
+          },
+          {
+            "method": "Handpicking",
+            "preparation": "Regularly inspect plants and handpick weevils.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Beneficial Insects",
+            "preparation": "Introduce natural predators like parasitic wasps.",
+            "frequency": "Season-long management."
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy heavily infested plants immediately.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Flooding Fields",
+            "preparation": "Flood fields temporarily to disrupt pest life cycles.",
+            "frequency": "As needed during critical periods."
+          },
+          {
+            "method": "Chemical Control",
+            "preparation": "Apply organic insecticides as per manufacturer’s instructions.",
+            "frequency": "Every 2-3 weeks until control is achieved."
+          }
+        ]
+      },
+      "Gall Midge": {
+        "Low": [
+          {
+            "method": "Cultural Practices",
+            "preparation": "Remove and destroy infested shoots promptly.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Neem Oil Application",
+            "preparation": "Spray neem oil on new growth to deter midge activity.",
+            "frequency": "Every 10-14 days during active growth."
+          },
+          {
+            "method": "Healthy Planting Material",
+            "preparation": "Use disease-free planting material to reduce risk of infestation.",
+            "frequency": "One-time before planting."
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Insecticidal Soap Spray",
+            "preparation": "Mix liquid soap with water (2 tablespoons per liter) and spray on affected areas.",
+            "frequency": "Every week until symptoms improve."
+          },
+          {
+            "method": "Companion Planting",
+            "preparation": "Plant companion plants that repel gall midges, such as basil.",
+            "frequency": "Season-long management."
+          },
+          {
+            "method": "Regular Monitoring",
+            "preparation": "Inspect plants regularly for early signs of infestation.",
+            "frequency": "Weekly during growing season."
+          }
+        ],
+        "High": [
+          {
+            "method": "Rogue Infested Plants",
+            "preparation": "Remove and destroy heavily infested plants immediately.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Chemical Control",
+            "preparation": "Apply systemic insecticides as per manufacturer’s instructions.",
+            "frequency": "Every 2-3 weeks until control is achieved."
+          },
+          {
+            "method": "Field Sanitation",
+            "preparation": "Clear debris and weeds that may harbor pests.",
+            "frequency": "Ongoing management."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "crop": "Apple",
+    "diseases": {
+      "Black Rot": {
+        "Low": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Mix 5ml neem oil with 1 liter of water, add 2-3 drops of liquid soap as an emulsifier",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Baking Soda Solution",
+            "preparation": "Dissolve 1 tablespoon of baking soda and 2.5 tablespoons of horticultural oil in 1 gallon of water",
+            "frequency": "Weekly during growing season"
+          },
+          {
+            "method": "Garlic Fungicide Spray",
+            "preparation": "Blend 4-5 garlic cloves in 1 liter of water, strain, and add 1 teaspoon of liquid soap",
+            "frequency": "Every 5-7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Hydrogen Peroxide Treatment",
+            "preparation": "Mix 1 cup of 3% hydrogen peroxide with 1 gallon of water",
+            "frequency": "Every 4-5 days"
+          },
+          {
+            "method": "Copper Sulfate Organic Spray",
+            "preparation": "Mix 3 tablespoons of copper sulfate with 1 gallon of water, add lime to neutralize",
+            "frequency": "Every 10-14 days"
+          },
+          {
+            "method": "Probiotic Microbial Spray",
+            "preparation": "Use Bacillus subtilis based bio-fungicide, dilute as per manufacturer's instructions",
+            "frequency": "Every 7 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Orchard Sanitation",
+            "preparation": "Remove and burn all infected branches, fruits, and fallen debris. Prune infected areas aggressively",
+            "frequency": "Continuous throughout season"
+          },
+          {
+            "method": "Biological Control with Trichoderma",
+            "preparation": "Apply Trichoderma harzianum as soil and foliar treatment @ 2.5 kg per acre",
+            "frequency": "Before bloom and post-harvest"
+          },
+          {
+            "method": "Resistant Variety Grafting",
+            "preparation": "Graft disease-resistant apple varieties onto existing rootstock",
+            "frequency": "During dormant season"
+          }
+        ]
+      },
+      "Apple Scab": {
+        "Low": [
+          {
+            "method": "Sulfur Dust Spray",
+            "preparation": "Apply micronized sulfur powder mixed with water, ensuring complete leaf coverage",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Apple Cider Vinegar Solution",
+            "preparation": "Mix 3 tablespoons of apple cider vinegar with 1 gallon of water",
+            "frequency": "Weekly during wet conditions"
+          },
+          {
+            "method": "Milk Spray Treatment",
+            "preparation": "Mix 1 part milk with 9 parts water, spray during early morning",
+            "frequency": "Every 5-7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Potassium Bicarbonate Spray",
+            "preparation": "Dissolve 1 tablespoon potassium bicarbonate in 1 gallon of water, add few drops of liquid soap",
+            "frequency": "Every 5-6 days"
+          },
+          {
+            "method": "Compost Tea Application",
+            "preparation": "Brew aerobic compost tea and spray on leaves, ensuring complete coverage",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Horsetail Herb Extract",
+            "preparation": "Boil horsetail herbs in water, strain, and use diluted solution",
+            "frequency": "Every 7 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Tree Pruning",
+            "preparation": "Remove all infected branches, create proper air circulation, dispose of infected material",
+            "frequency": "During dormant and growing season"
+          },
+          {
+            "method": "Biological Fungicide Treatment",
+            "preparation": "Apply Bacillus subtilis or Streptomyces lydicus based bio-fungicides",
+            "frequency": "Every 10 days"
+          },
+          {
+            "method": "Resistant Cultivar Management",
+            "preparation": "Replace susceptible varieties with scab-resistant apple cultivars",
+            "frequency": "Long-term orchard strategy"
+          }
+        ]
+      },
+      "Cedar Apple Rust": {
+        "Low": [
+          {
+            "method": "Baking Soda Preventive Spray",
+            "preparation": "Mix 1 tablespoon baking soda, 2.5 tablespoons horticultural oil in 1 gallon water",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Garlic-Chili Pepper Spray",
+            "preparation": "Blend 4 garlic cloves and 2 hot chili peppers in 1 liter water, strain",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Neem Oil Treatment",
+            "preparation": "Mix 5ml neem oil with 1 liter water, add few drops of liquid soap",
+            "frequency": "Weekly during susceptible periods"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Liquid Copper Fungicide",
+            "preparation": "Use organic copper fungicide, dilute as per manufacturer's recommendation",
+            "frequency": "Every 10-14 days"
+          },
+          {
+            "method": "Sulfur Dust Application",
+            "preparation": "Apply micronized sulfur powder ensuring complete leaf coverage",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Probiotic Microbial Spray",
+            "preparation": "Use Bacillus subtilis based bio-fungicide, dilute as per instructions",
+            "frequency": "Every 7 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Alternate Host Removal",
+            "preparation": "Remove nearby cedar or juniper trees that act as disease reservoirs",
+            "frequency": "Immediate and continuous"
+          },
+          {
+            "method": "Complete Orchard Sanitation",
+            "preparation": "Remove all infected plant material, burn or deeply bury infected leaves and fruits",
+            "frequency": "Throughout growing season"
+          },
+          {
+            "method": "Resistant Variety Strategy",
+            "preparation": "Replace susceptible apple varieties with rust-resistant cultivars",
+            "frequency": "Long-term orchard management"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "crop": "Tomato",
+    "diseases": {
+      "Spider Mites (Two-Spotted Spider Mite)": {
+        "Low": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Mix 5ml neem oil with 1 liter of water, add 2-3 drops of liquid soap as an emulsifier",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Garlic and Pepper Repellent",
+            "preparation": "Blend 4-5 garlic cloves and 2 hot chili peppers in 1 liter of water, strain, and add 1 teaspoon of liquid soap",
+            "frequency": "Every 4-6 days"
+          },
+          {
+            "method": "Hydrogen Peroxide Treatment",
+            "preparation": "Mix 1 cup of 3% hydrogen peroxide with 1 gallon of water",
+            "frequency": "Every 5-7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Predatory Mite Introduction",
+            "preparation": "Release Phytoseiulus persimilis or Neoseiulus californicus beneficial mites",
+            "frequency": "Immediate release and follow-up every 2 weeks"
+          },
+          {
+            "method": "Insecticidal Soap Solution",
+            "preparation": "Mix 5 tablespoons of pure liquid soap in 1 gallon of water",
+            "frequency": "Every 4-5 days"
+          },
+          {
+            "method": "Essential Oil Miticide",
+            "preparation": "Create a solution with 10 drops each of rosemary, peppermint, and eucalyptus essential oils in 1 liter of water",
+            "frequency": "Every 5-6 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Plant Isolation",
+            "preparation": "Immediately isolate and quarantine heavily infested plants, remove and destroy severely damaged plants",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Comprehensive Biological Control",
+            "preparation": "Combine predatory mite release with neem oil treatments and thorough plant cleaning",
+            "frequency": "Continuous monitoring and treatment"
+          },
+          {
+            "method": "Cultural Modification",
+            "preparation": "Increase plant spacing, improve air circulation, reduce nitrogen fertilization",
+            "frequency": "Season-long management"
+          }
+        ]
+      },
+      "Late Blight": {
+        "Low": [
+          {
+            "method": "Copper-Based Organic Fungicide",
+            "preparation": "Mix 3 tablespoons of copper sulfate with 1 gallon of water, add lime to neutralize",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Baking Soda Preventive Spray",
+            "preparation": "Dissolve 1 tablespoon baking soda and 2.5 tablespoons horticultural oil in 1 gallon of water",
+            "frequency": "Weekly during humid conditions"
+          },
+          {
+            "method": "Garlic and Turmeric Solution",
+            "preparation": "Blend 100g garlic and 50g turmeric with 1 liter water, strain, and spray",
+            "frequency": "Every 5-7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Biological Fungicide Treatment",
+            "preparation": "Apply Bacillus subtilis or Streptomyces lydicus based bio-fungicides",
+            "frequency": "Every 5-6 days"
+          },
+          {
+            "method": "Compost Tea Application",
+            "preparation": "Brew aerobic compost tea with beneficial microorganisms",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Milk Spray Treatment",
+            "preparation": "Mix 1 part milk with 9 parts water, spray during early morning",
+            "frequency": "Every 5-7 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Plant Removal",
+            "preparation": "Immediately remove and burn all infected plants, create isolation zone",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Soil Sterilization",
+            "preparation": "Use solarization techniques or apply beneficial microorganism treatments",
+            "frequency": "Pre-planting and post-harvest"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace with late blight-resistant tomato varieties",
+            "frequency": "Next planting season"
+          }
+        ]
+      },
+      "Bacterial Spot": {
+        "Low": [
+          {
+            "method": "Copper-Based Organic Spray",
+            "preparation": "Mix organic copper fungicide as per manufacturer's instructions",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Hydrogen Peroxide Treatment",
+            "preparation": "Mix 1 cup of 3% hydrogen peroxide with 1 gallon of water",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Apple Cider Vinegar Solution",
+            "preparation": "Mix 3 tablespoons of apple cider vinegar with 1 gallon of water",
+            "frequency": "Weekly during wet conditions"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Spray",
+            "preparation": "Use Bacillus subtilis bio-fungicide, dilute as per manufacturer's instructions",
+            "frequency": "Every 5-6 days"
+          },
+          {
+            "method": "Garlic and Turmeric Antiseptic Spray",
+            "preparation": "Blend 100g garlic and 50g turmeric with 1 liter water, strain, and spray",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Potassium Bicarbonate Solution",
+            "preparation": "Dissolve 1 tablespoon potassium bicarbonate in 1 gallon of water",
+            "frequency": "Every 5-6 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Plant Destruction",
+            "preparation": "Remove and burn all infected plants, create buffer zone between healthy and infected plants",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Crop Rotation Strategy",
+            "preparation": "Avoid planting tomatoes or related crops in the same area for 3-4 years",
+            "frequency": "Multi-year management"
+          },
+          {
+            "method": "Resistant Variety Implementation",
+            "preparation": "Replace with bacterial spot-resistant tomato varieties",
+            "frequency": "Next planting season"
+          }
+        ]
+      },
+      "Early Blight": {
+        "Low": [
+          {
+            "method": "Sulfur Dust Spray",
+            "preparation": "Apply micronized sulfur powder mixed with water, ensuring complete leaf coverage",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Baking Soda Preventive Solution",
+            "preparation": "Mix 1 tablespoon baking soda and 2.5 tablespoons horticultural oil in 1 gallon water",
+            "frequency": "Weekly during growing season"
+          },
+          {
+            "method": "Neem Oil Treatment",
+            "preparation": "Mix 5ml neem oil with 1 liter of water, add 2-3 drops of liquid soap",
+            "frequency": "Every 7-10 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Biological Fungicide Application",
+            "preparation": "Use Bacillus subtilis or Streptomyces lydicus based bio-fungicides",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Compost Tea Treatment",
+            "preparation": "Brew aerobic compost tea with beneficial microorganisms",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Milk and Whey Spray",
+            "preparation": "Mix 1 part milk with 9 parts water, spray during early morning",
+            "frequency": "Every 5-7 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plant materials, sanitize tools and surrounding area",
+            "frequency": "Immediate and continuous"
+          },
+          {
+            "method": "Soil Microbiome Restoration",
+            "preparation": "Apply beneficial microbial inoculants to restore soil health",
+            "frequency": "Pre-planting and post-harvest"
+          },
+          {
+            "method": "Resistant Variety Transition",
+            "preparation": "Replace with early blight-resistant tomato varieties",
+            "frequency": "Next planting season"
+          }
+        ]
+      },
+      "Septoria Leaf Spot": {
+        "Low": [
+          {
+            "method": "Cultural Practices",
+            "preparation": "Remove and destroy infected leaves to reduce the spread of spores.",
+            "frequency": "As needed"
+          },
+          {
+            "method": "Proper Spacing",
+            "preparation": "Ensure adequate spacing between plants to improve air circulation.",
+            "frequency": "Ongoing management"
+          },
+          {
+            "method": "Mulching",
+            "preparation": "Apply organic mulch around plants to prevent soil splash and reduce moisture on leaves.",
+            "frequency": "At planting and as needed"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Fungicidal Spray",
+            "preparation": "Apply a copper-based fungicide or potassium bicarbonate as per label instructions.",
+            "frequency": "Every 7-14 days until symptoms improve"
+          },
+          {
+            "method": "Neem Oil Application",
+            "preparation": "Dilute neem oil with water (1: 100) and spray on affected plants.",
+            "frequency": "Every 10-14 days"
+          },
+          {
+            "method": "Soil Management",
+            "preparation": "Improve soil drainage and avoid overhead watering to reduce leaf wetness.",
+            "frequency": "Ongoing management"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plants and debris immediately.",
+            "frequency": "As needed"
+          },
+          {
+            "method": "Trichoderma Application",
+            "preparation": "Apply Trichoderma spp. to the soil to enhance plant resistance against fungal pathogens.",
+            "frequency": "Before planting and every 30 days"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace affected plants with disease-resistant tomato varieties.",
+            "frequency": "Immediate action"
+          }
+        ]
+      },
+      "Leaf Mold": {
+        "Low": [
+          {
+            "method": "Cultural Practices",
+            "preparation": "Remove lower leaves that touch the ground to improve airflow.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Proper Watering",
+            "preparation": "Water early in the day to allow foliage to dry before nightfall.",
+            "frequency": "Ongoing management."
+          },
+          {
+            "method": "Mulching",
+            "preparation": "Use organic mulch to prevent soil splash on leaves.",
+            "frequency": "At planting and as needed."
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Fungicidal Treatment",
+            "preparation": "Apply a fungicide containing chlorothalonil or copper as per label instructions.",
+            "frequency": "Every 7-14 days until control is achieved."
+          },
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Dilute neem oil with water (1: 100) and spray on affected areas.",
+            "frequency": "Every 10-14 days."
+          },
+          {
+            "method": "Increase Air Circulation",
+            "preparation": "Prune dense foliage to improve airflow around plants.",
+            "frequency": "As needed."
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plants and debris immediately.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Soil Solarization",
+            "preparation": "Cover soil with clear plastic for several weeks to kill pathogens.",
+            "frequency": "Once per growing season."
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace affected plants with resistant tomato varieties.",
+            "frequency": "Immediate action."
+          }
+        ]
+      },
+      "Tomato Mosaic Virus": {
+        "Low": [
+          {
+            "method": "Cultural Practices",
+            "preparation": "Monitor for symptoms and remove any infected plants immediately.",
+            "frequency": "As needed"
+          },
+          {
+            "method": "Sanitation",
+            "preparation": "Disinfect tools and equipment with a bleach solution (1 part bleach to 4 parts water).",
+            "frequency": "After each use"
+          },
+          {
+            "method": "Weed Control",
+            "preparation": "Regularly remove weeds that may harbor the virus.",
+            "frequency": "Ongoing management"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Insect Control",
+            "preparation": "Use insecticidal soap or neem oil to control aphids, which can spread the virus.",
+            "frequency": "Every 7-10 days until control is achieved."
+          },
+          {
+            "method": "Crop Rotation",
+            "preparation": "Rotate crops every two years to reduce virus buildup in the soil.",
+            "frequency": "Season-long management."
+          },
+          {
+            "method": "Use Resistant Varieties",
+            "preparation": "Plant tomato varieties that are resistant to mosaic viruses.",
+            "frequency": "One-time before planting."
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plants immediately; do not compost.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Soil Management",
+            "preparation": "Tillage in autumn to bury plant debris that may harbor viruses.",
+            "frequency": "Once per growing season."
+          },
+          {
+            "method": "Disinfect Tools",
+            "preparation": "Clean all gardening tools with bleach solution after use.",
+            "frequency": "After each use."
+          }
+        ]
+      },
+      "Target Spot": {
+        "Low": [
+          {
+            "method": "Cultural Practices",
+            "preparation": "Remove lower leaves that show early signs of spots.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Proper Watering Techniques",
+            "preparation": "Water at the base of the plant to avoid wetting foliage.",
+            "frequency": "Ongoing management."
+          },
+          {
+            "method": "Mulching",
+            "preparation": "Apply organic mulch around plants to reduce soil splash onto leaves.",
+            "frequency": "At planting and as needed."
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Fungicidal Spray",
+            "preparation": "Apply a fungicide containing chlorothalonil or copper-based products as per label instructions.",
+            "frequency": "Every 7-14 days until symptoms improve."
+          },
+          {
+            "method": "Neem Oil Application",
+            "preparation": "Dilute neem oil with water (1: 100) and spray on affected areas.",
+            "frequency": "Every 10-14 days."
+          },
+          {
+            "method": "Increase Air Circulation",
+            "preparation": "Prune dense foliage to promote better airflow around plants.",
+            "frequency": "As needed."
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plants immediately.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Soil Solarization",
+            "preparation": "Cover soil with clear plastic for several weeks to kill pathogens.",
+            "frequency": "Once per growing season."
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace affected plants with resistant tomato varieties.",
+            "frequency": "Immediate action."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "crop": "Cotton",
+    "diseases": {
+      "Aphids": {
+        "Low": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Mix 5ml neem oil with 1 liter of water, add 2-3 drops of liquid soap as an emulsifier",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Garlic and Chili Pepper Repellent",
+            "preparation": "Blend 4-5 garlic cloves and 2 hot chili peppers in 1 liter of water, strain, and add 1 teaspoon of liquid soap",
+            "frequency": "Every 4-6 days"
+          },
+          {
+            "method": "Insecticidal Soap Solution",
+            "preparation": "Mix 5 tablespoons of pure liquid soap in 1 gallon of water",
+            "frequency": "Every 5-7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Beneficial Insect Release",
+            "preparation": "Introduce ladybugs, lacewings, or parasitic wasps to control aphid population",
+            "frequency": "Immediate release and follow-up every 2 weeks"
+          },
+          {
+            "method": "Essential Oil Repellent",
+            "preparation": "Create a solution with 10 drops each of peppermint, rosemary, and thyme essential oils in 1 liter of water",
+            "frequency": "Every 4-5 days"
+          },
+          {
+            "method": "Diatomaceous Earth Application",
+            "preparation": "Dust plants with food-grade diatomaceous earth, focusing on undersides of leaves",
+            "frequency": "Every 5-6 days after rain or irrigation"
+          }
+        ],
+        "High": [
+          {
+            "method": "Comprehensive Biological Control",
+            "preparation": "Combine beneficial insect release with neem oil treatments and thorough field sanitation",
+            "frequency": "Continuous monitoring and treatment"
+          },
+          {
+            "method": "Host Plant Resistance",
+            "preparation": "Implement aphid-resistant cotton varieties through careful selection and breeding",
+            "frequency": "Long-term breeding strategy"
+          },
+          {
+            "method": "Field Border Management",
+            "preparation": "Create trap crops and maintain biodiversity to disrupt aphid population dynamics",
+            "frequency": "Season-long management"
+          }
+        ]
+      },
+      "Army Worm": {
+        "Low": [
+          {
+            "method": "Bacillus thuringiensis (Bt) Spray",
+            "preparation": "Apply organic Bt solution as per manufacturer's instructions",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Neem Oil Treatment",
+            "preparation": "Mix 5ml neem oil with 1 liter of water, add 2-3 drops of liquid soap",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Garlic and Chili Pepper Repellent",
+            "preparation": "Blend 4-5 garlic cloves and 2 hot chili peppers in 1 liter of water, strain, and add 1 teaspoon of liquid soap",
+            "frequency": "Every 4-6 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Beneficial Predator Introduction",
+            "preparation": "Release predatory insects like ground beetles, minute pirate bugs, and parasitic wasps",
+            "frequency": "Every 2 weeks during active infestation"
+          },
+          {
+            "method": "Spinosad Organic Insecticide",
+            "preparation": "Apply organic spinosad-based insecticide as per manufacturer's recommendations",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Diatomaceous Earth Application",
+            "preparation": "Dust crop with food-grade diatomaceous earth, targeting larvae",
+            "frequency": "Every 5-6 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove crop residues, deep plowing, and create barriers to prevent reinfestation",
+            "frequency": "Immediate and continuous"
+          },
+          {
+            "method": "Integrated Pest Management",
+            "preparation": "Combine biological control, cultural practices, and targeted interventions",
+            "frequency": "Season-long strategic management"
+          },
+          {
+            "method": "Resistant Variety Development",
+            "preparation": "Implement long-term breeding program for army worm-resistant cotton varieties",
+            "frequency": "Multi-season breeding strategy"
+          }
+        ]
+      },
+      "Bacterial Blight": {
+        "Low": [
+          {
+            "method": "Copper-Based Organic Fungicide",
+            "preparation": "Mix 3 tablespoons of copper sulfate with 1 gallon of water, add lime to neutralize",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Garlic and Turmeric Solution",
+            "preparation": "Blend 100g garlic and 50g turmeric with 1 liter water, strain, and spray",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Hydrogen Peroxide Treatment",
+            "preparation": "Mix 1 cup of 3% hydrogen peroxide with 1 gallon of water",
+            "frequency": "Every 5-7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Spray",
+            "preparation": "Use Bacillus subtilis bio-fungicide, dilute as per manufacturer's instructions",
+            "frequency": "Every 5-6 days"
+          },
+          {
+            "method": "Compost Tea Application",
+            "preparation": "Brew aerobic compost tea with beneficial microorganisms",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Apple Cider Vinegar Solution",
+            "preparation": "Mix 3 tablespoons of apple cider vinegar with 1 gallon of water",
+            "frequency": "Every 5-7 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Plant Destruction",
+            "preparation": "Remove and destroy all infected plants, create isolation zone",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Crop Rotation Strategy",
+            "preparation": "Avoid planting cotton or related crops in the same area for 3-4 years",
+            "frequency": "Multi-year management"
+          },
+          {
+            "method": "Resistant Variety Implementation",
+            "preparation": "Develop and plant bacterial blight-resistant cotton varieties",
+            "frequency": "Long-term breeding approach"
+          }
+        ]
+      },
+
+      "Powdery Mildew": {
+        "Low": [
+          {
+            "method": "Cultural Practices",
+            "preparation": "Maintain good air circulation by spacing plants adequately and avoiding overcrowding.",
+            "frequency": "Ongoing management"
+          },
+          {
+            "method": "Remove Infected Leaves",
+            "preparation": "Regularly inspect and remove leaves showing early signs of powdery mildew.",
+            "frequency": "As needed"
+          },
+          {
+            "method": "Watering Techniques",
+            "preparation": "Water plants at the base to prevent moisture on leaves.",
+            "frequency": "Ongoing management"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Dilute neem oil with water (1:100) and spray on affected areas.",
+            "frequency": "Every 10-14 days"
+          },
+          {
+            "method": "Baking Soda Solution",
+            "preparation": "Mix 1 tablespoon of baking soda with 1 gallon of water and spray on affected plants.",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Fungicidal Treatment",
+            "preparation": "Apply a fungicide containing sulfur or potassium bicarbonate as per label instructions.",
+            "frequency": "Every 7-14 days until symptoms improve"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plant debris immediately.",
+            "frequency": "As needed"
+          },
+          {
+            "method": "Trichoderma Application",
+            "preparation": "Apply Trichoderma spp. to the soil to enhance plant resistance against fungal pathogens.",
+            "frequency": "Before planting and every 30 days"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace affected plants with disease-resistant cotton varieties.",
+            "frequency": "Immediate action"
+          }
+        ]
+      },
+      "Target Spot": {
+        "Low": [
+          {
+            "method": "Cultural Practices",
+            "preparation": "Remove lower leaves that show early signs of spots.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Proper Watering",
+            "preparation": "Water early in the day to allow foliage to dry before nightfall.",
+            "frequency": "Ongoing management."
+          },
+          {
+            "method": "Mulching",
+            "preparation": "Apply organic mulch around plants to reduce soil splash on leaves.",
+            "frequency": "At planting and as needed."
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Fungicidal Spray",
+            "preparation": "Apply a fungicide containing chlorothalonil or copper as per label instructions.",
+            "frequency": "Every 7-14 days until symptoms improve."
+          },
+          {
+            "method": "Neem Oil Application",
+            "preparation": "Dilute neem oil with water (1:100) and spray on affected areas.",
+            "frequency": "Every 10-14 days."
+          },
+          {
+            "method": "Increase Air Circulation",
+            "preparation": "Prune dense foliage to improve airflow around plants.",
+            "frequency": "As needed."
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plants immediately.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Soil Solarization",
+            "preparation": "Cover soil with clear plastic for several weeks to kill pathogens.",
+            "frequency": "Once per growing season."
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace affected plants with resistant cotton varieties.",
+            "frequency": "Immediate action."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "crop": "Jute",
+    "diseases": {
+      "Field Cricket": {
+        "Low": [
+          {
+            "method": "Neem Oil Repellent",
+            "preparation": "Mix 5ml neem oil with 1 liter of water, add 2-3 drops of liquid soap as an emulsifier",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Garlic and Chili Pepper Spray",
+            "preparation": "Blend 4-5 garlic cloves and 2 hot chili peppers in 1 liter of water, strain, and add 1 teaspoon of liquid soap",
+            "frequency": "Every 4-6 days"
+          },
+          {
+            "method": "Diatomaceous Earth Barrier",
+            "preparation": "Spread food-grade diatomaceous earth around plant bases and field boundaries",
+            "frequency": "Every 5-7 days, reapply after rain"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Beneficial Predator Introduction",
+            "preparation": "Release ground beetles, parasitic wasps, and predatory birds to control cricket population",
+            "frequency": "Every 2 weeks during active infestation"
+          },
+          {
+            "method": "Molasses Trap",
+            "preparation": "Create traps with molasses and water mixture to attract and drown crickets",
+            "frequency": "Continuous monitoring and trap replacement every 3-4 days"
+          },
+          {
+            "method": "Essential Oil Repellent",
+            "preparation": "Create a solution with 10 drops each of peppermint, eucalyptus, and citronella essential oils in 1 liter of water",
+            "frequency": "Every 4-5 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Comprehensive Field Management",
+            "preparation": "Implement deep plowing, remove crop residues, and create physical barriers around field",
+            "frequency": "Immediate and continuous action"
+          },
+          {
+            "method": "Biological Control Integration",
+            "preparation": "Combine predatory insect release, habitat modification, and targeted organic treatments",
+            "frequency": "Season-long strategic management"
+          },
+          {
+            "method": "Crop Diversity Strategy",
+            "preparation": "Implement intercropping and field border management to disrupt cricket habitat",
+            "frequency": "Long-term cultivation approach"
+          }
+        ]
+      },
+      "Jute Stem Weevil": {
+        "Low": [
+          {
+            "method": "Neem Oil Treatment",
+            "preparation": "Mix 5ml neem oil with 1 liter of water, add 2-3 drops of liquid soap",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Garlic Extract Spray",
+            "preparation": "Blend 100g garlic cloves in 1 liter water, strain, and add 1 teaspoon of liquid soap",
+            "frequency": "Every 4-6 days"
+          },
+          {
+            "method": "Sticky Trap Deployment",
+            "preparation": "Place yellow sticky traps around jute field to capture adult weevils",
+            "frequency": "Continuous monitoring, replace traps every 7-10 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Beneficial Predator Release",
+            "preparation": "Introduce parasitic wasps and predatory beetles that target stem weevils",
+            "frequency": "Every 2 weeks during active infestation"
+          },
+          {
+            "method": "Spinosad Organic Insecticide",
+            "preparation": "Apply organic spinosad-based insecticide as per manufacturer's recommendations",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Diatomaceous Earth Application",
+            "preparation": "Dust crop base and stems with food-grade diatomaceous earth",
+            "frequency": "Every 5-6 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy heavily infested plants, practice crop rotation",
+            "frequency": "Immediate and continuous action"
+          },
+          {
+            "method": "Integrated Pest Management",
+            "preparation": "Combine biological control, cultural practices, and targeted interventions",
+            "frequency": "Season-long strategic management"
+          },
+          {
+            "method": "Resistant Variety Development",
+            "preparation": "Implement long-term breeding program for weevil-resistant jute varieties",
+            "frequency": "Multi-season breeding strategy"
+          }
+        ]
+      },
+      "Bacterial Blight": {
+        "Low": [
+          {
+            "method": "Copper-Based Organic Fungicide",
+            "preparation": "Mix 3 tablespoons of copper sulfate with 1 gallon of water, add lime to neutralize",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Garlic and Turmeric Solution",
+            "preparation": "Blend 100g garlic and 50g turmeric with 1 liter water, strain, and spray",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Hydrogen Peroxide Treatment",
+            "preparation": "Mix 1 cup of 3% hydrogen peroxide with 1 gallon of water",
+            "frequency": "Every 5-7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Spray",
+            "preparation": "Use Bacillus subtilis bio-fungicide, dilute as per manufacturer's instructions",
+            "frequency": "Every 5-6 days"
+          },
+          {
+            "method": "Compost Tea Application",
+            "preparation": "Brew aerobic compost tea with beneficial microorganisms",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Apple Cider Vinegar Solution",
+            "preparation": "Mix 3 tablespoons of apple cider vinegar with 1 gallon of water",
+            "frequency": "Every 5-7 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Plant Destruction",
+            "preparation": "Remove and destroy all infected plants, create isolation zone",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Crop Rotation Strategy",
+            "preparation": "Avoid planting jute or related crops in the same area for 3-4 years",
+            "frequency": "Multi-year management"
+          },
+          {
+            "method": "Resistant Variety Implementation",
+            "preparation": "Develop and plant bacterial blight-resistant jute varieties",
+            "frequency": "Long-term breeding approach"
+          }
+        ]
+      },
+
+      "Yellow Mite Spilosoma": {
+        "Low": [
+          {
+            "method": "Cultural Practices",
+            "preparation": "Maintain field hygiene by removing weeds and debris that can harbor mites.",
+            "frequency": "Ongoing management"
+          },
+          {
+            "method": "Companion Planting",
+            "preparation": "Plant marigolds or other repellent plants to deter mite populations.",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "Regular Monitoring",
+            "preparation": "Inspect plants regularly for early signs of mite infestations.",
+            "frequency": "Weekly during the growing season"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Dilute neem oil with water (1:100) and spray on affected areas.",
+            "frequency": "Every 7-10 days until control is achieved"
+          },
+          {
+            "method": "Insecticidal Soap",
+            "preparation": "Mix liquid soap with water (2 tablespoons per liter) and spray on infested plants.",
+            "frequency": "Every week until symptoms improve"
+          },
+          {
+            "method": "Introduce Beneficial Insects",
+            "preparation": "Release predatory mites or ladybugs to naturally control mite populations.",
+            "frequency": "As needed"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy heavily infested plants to prevent further spread.",
+            "frequency": "As needed"
+          },
+          {
+            "method": "Chemical Control",
+            "preparation": "Apply a suitable miticide as per manufacturer's instructions.",
+            "frequency": "Every 2-3 weeks until control is achieved"
+          },
+          {
+            "method": "Crop Rotation",
+            "preparation": "Rotate jute with non-host crops to disrupt the life cycle of the mites.",
+            "frequency": "Season-long management"
+          }
+        ]
+      },
+      "Obliqua Disease": {
+        "Low": [
+          {
+            "method": "Cultural Practices",
+            "preparation": "Remove and destroy infected leaves to reduce disease spread.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Proper Spacing",
+            "preparation": "Ensure adequate spacing between plants to improve air circulation.",
+            "frequency": "Ongoing management."
+          },
+          {
+            "method": "Mulching",
+            "preparation": "Apply organic mulch around plants to prevent soil splash.",
+            "frequency": "At planting and as needed."
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Fungicidal Spray",
+            "preparation": "Apply a fungicide containing copper or sulfur as per label instructions.",
+            "frequency": "Every 7-14 days until symptoms improve."
+          },
+          {
+            "method": "Neem Oil Application",
+            "preparation": "Dilute neem oil with water (1:100) and spray on affected areas.",
+            "frequency": "Every 10-14 days."
+          },
+          {
+            "method": "Increase Air Circulation",
+            "preparation": "Prune dense foliage to improve airflow around plants.",
+            "frequency": "As needed."
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plants immediately.",
+            "frequency": "As needed."
+          },
+          {
+            "method": "Soil Solarization",
+            "preparation": "Cover soil with clear plastic for several weeks to kill pathogens.",
+            "frequency": "Once per growing season."
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace affected plants with resistant jute varieties.",
+            "frequency": "Immediate action."
+          }
+        ]
+      }
+    }
+  },
+
+  {
+    "crop": "Tea",
+    "diseases": {
+      "Anthracnose Disease": {
+        "Low": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Mix 5 ml neem oil with 1 liter of water, add 2-3 drops of liquid soap as an emulsifier",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Garlic Chili Spray",
+            "preparation": "Blend 100g garlic, 50g green chilies in 1 liter water, strain and add 10ml liquid soap",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Cow Milk Fungicide",
+            "preparation": "Mix 20% fresh cow milk with water, spray on affected leaves",
+            "frequency": "Every 5-6 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Copper Sulfate Solution",
+            "preparation": "Prepare Bordeaux mixture: 100g copper sulfate + 100g lime in 10 liters water",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Trichoderma Biological Control",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre as soil and foliar treatment",
+            "frequency": "Every 10 days"
+          },
+          {
+            "method": "Pruning and Sanitation",
+            "preparation": "Remove and destroy infected branches, maintain proper canopy spacing",
+            "frequency": "Continuous monitoring"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Quarantine",
+            "preparation": "Completely isolate infected area, remove and burn all infected plant materials",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace susceptible tea plants with disease-resistant cultivars",
+            "frequency": "Next planting season"
+          },
+          {
+            "method": "Systemic Biological Treatment",
+            "preparation": "Apply Bacillus subtilis + Trichoderma harzianum mixed bio-fungicide @ 3 kg per acre",
+            "frequency": "Two applications 10 days apart"
+          }
+        ]
+      },
+      "Algal Leaf": {
+        "Low": [
+          {
+            "method": "Improved Drainage",
+            "preparation": "Create proper drainage in tea plantation, reduce water stagnation",
+            "frequency": "Continuous management"
+          },
+          {
+            "method": "Sulfur Dust",
+            "preparation": "Apply micronized sulfur powder on affected leaves during dry conditions",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Sunlight Exposure",
+            "preparation": "Prune surrounding vegetation to increase sunlight penetration in tea plantation",
+            "frequency": "Seasonal adjustment"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Hydrogen Peroxide Treatment",
+            "preparation": "Spray 3% hydrogen peroxide solution diluted to 1:10 with water",
+            "frequency": "Every 5-6 days"
+          },
+          {
+            "method": "Baking Soda Solution",
+            "preparation": "Mix 1 tablespoon baking soda, 1 teaspoon liquid soap in 1 gallon water",
+            "frequency": "Every 4-5 days"
+          },
+          {
+            "method": "Milk Whey Spray",
+            "preparation": "Use 20% milk whey solution as a natural fungistatic treatment",
+            "frequency": "Every 5-7 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Renovation",
+            "preparation": "Completely remove infected plants, sterilize soil, replant with resistant varieties",
+            "frequency": "Seasonal intervention"
+          },
+          {
+            "method": "Biological Micronutrient Treatment",
+            "preparation": "Apply silicon and copper-based micronutrient solutions to strengthen plant immunity",
+            "frequency": "Two applications 15 days apart"
+          },
+          {
+            "method": "Comprehensive Ecosystem Management",
+            "preparation": "Modify microclimate, improve air circulation, reduce humidity in plantation",
+            "frequency": "Ongoing management"
+          }
+        ]
+      },
+      "Brown Blight": {
+        "Low": [
+          {
+            "method": "Neem Leaf Extract",
+            "preparation": "Boil 500g neem leaves in 2 liters water for 30 minutes, strain and spray",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Turmeric Powder Spray",
+            "preparation": "Mix 50g turmeric powder in 1 liter water, add few drops of liquid soap",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Compost Tea",
+            "preparation": "Brew compost tea, strain and spray on tea plants to boost natural immunity",
+            "frequency": "Every 7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Copper Oxychloride Organic Spray",
+            "preparation": "Use organic copper-based fungicide @ 2g per liter of water",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Probiotic Bacterial Treatment",
+            "preparation": "Apply Bacillus subtilis bio-fungicide as per manufacturer's recommendation",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Pruning and Canopy Management",
+            "preparation": "Remove infected leaves, improve air circulation in tea plantation",
+            "frequency": "Continuous monitoring"
+          }
+        ],
+        "High": [
+          {
+            "method": "Total Field Sanitation",
+            "preparation": "Remove and burn all infected plant materials, deep plowing of field",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Resistant Variety Implementation",
+            "preparation": "Replace entire plantation with Brown Blight resistant tea cultivars",
+            "frequency": "Next planting cycle"
+          },
+          {
+            "method": "Integrated Biological Control",
+            "preparation": "Combine Trichoderma harzianum, Bacillus subtilis treatments with soil amendments",
+            "frequency": "Two applications 15 days apart"
+          }
+        ]
+      },
+      "Red Leaf Spot": {
+        "Low": [
+          {
+            "method": "Bacillus subtilis Spray",
+            "preparation": "Dilute Bacillus subtilis bio-fungicide as per manufacturer's instructions and spray on affected leaves.",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Neem Oil Solution",
+            "preparation": "Mix 5% neem oil with water and a few drops of soap, then spray on the leaves.",
+            "frequency": "Every 10 days"
+          },
+          {
+            "method": "Garlic Extract Spray",
+            "preparation": "Blend 100g garlic with 1 liter of water, strain, and spray on the affected areas.",
+            "frequency": "Every 7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Trichoderma Application",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre as soil treatment.",
+            "frequency": "Before planting and every month"
+          },
+          {
+            "method": "Hot Water Treatment",
+            "preparation": "Soak seeds in hot water at 50°C for 10 minutes before planting.",
+            "frequency": "One-time before planting"
+          },
+          {
+            "method": "Copper-based Fungicide",
+            "preparation": "Prepare a Bordeaux mixture with 100g copper sulfate and 100g lime in 10 liters of water.",
+            "frequency": "Every 14 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plant debris to prevent further spread.",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace susceptible tea varieties with resistant ones.",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Probiotic Soil Treatment",
+            "preparation": "Incorporate beneficial microbes like Pseudomonas fluorescens into the soil.",
+            "frequency": "Before planting and every month"
+          }
+        ]
+      },
+      "Bird Eye Spot": {
+        "Low": [
+          {
+            "method": "Neem Leaf Extract Spray",
+            "preparation": "Boil 500g neem leaves in 2 liters of water for 30 minutes, strain, and spray on affected plants.",
+            "frequency": "Every week"
+          },
+          {
+            "method": "Vermicompost Tea",
+            "preparation": "Soak vermicompost in water for 24 hours, strain, and use as a foliar spray.",
+            "frequency": "Every 10 days"
+          },
+          {
+            "method": "Milk Spray",
+            "preparation": "Dilute milk with water (1:3 ratio) and spray on leaves to enhance plant immunity.",
+            "frequency": "Every 10 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Spray",
+            "preparation": "Use a solution of Bacillus subtilis as per manufacturer's instructions for foliar application.",
+            "frequency": "Every week"
+          },
+          {
+            "method": "Fungicidal Soap Solution",
+            "preparation": "Mix potassium soap with water (5%) and spray on affected areas.",
+            "frequency": "Every week until symptoms improve."
+          },
+          {
+            "method": "Compost Tea Application'",
+            "preparation": "Dilute compost tea with water (1:5) and apply to soil around the plants.",
+            "frequency": "Every two weeks."
+          }
+        ],
+        "High": [
+          {
+            "method": "Crop Rotation",
+            "preparation": "Rotate tea crops with non-host plants to disrupt disease cycles.",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove all infected plant material and practice good hygiene in the field.",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "Trichoderma Biofungicide",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre as a soil treatment.",
+            "frequency": "Before planting and every month"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "crop": "Corn",
+    "diseases": {
+      "Leaf Spot": {
+        "Low": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Mix 5 ml neem oil with 1 liter water, add 2-3 drops liquid soap as emulsifier",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Garlic Chili Spray",
+            "preparation": "Blend 100g garlic, 50g green chilies in 1 liter water, strain and add 10ml liquid soap",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Compost Tea Spray",
+            "preparation": "Brew compost tea, strain and spray on corn leaves to boost plant immunity",
+            "frequency": "Every 7 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Copper Sulfate Solution",
+            "preparation": "Prepare Bordeaux mixture: 100g copper sulfate + 100g lime in 10 liters water",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Pruning and Sanitation",
+            "preparation": "Remove and destroy infected leaves, maintain proper plant spacing",
+            "frequency": "Continuous monitoring"
+          },
+          {
+            "method": "Baking Soda Fungicide",
+            "preparation": "Mix 1 tablespoon baking soda, 1 teaspoon liquid soap in 1 gallon water",
+            "frequency": "Every 4-5 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and burn all infected plant materials, practice crop rotation",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Biological Fungicide Treatment",
+            "preparation": "Apply Bacillus subtilis + Trichoderma harzianum mixed bio-fungicide @ 3 kg per acre",
+            "frequency": "Two applications 10 days apart"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace susceptible corn plants with disease-resistant cultivars",
+            "frequency": "Next planting season"
+          }
+        ]
+      },
+      "Common Rust": {
+        "Low": [
+          {
+            "method": "Sulfur Dust",
+            "preparation": "Apply micronized sulfur powder on affected leaves during dry conditions",
+            "frequency": "Every 7-10 days"
+          },
+          {
+            "method": "Milk Whey Spray",
+            "preparation": "Use 20% milk whey solution as a natural antifungal treatment",
+            "frequency": "Every 5-7 days"
+          },
+          {
+            "method": "Enhanced Ventilation",
+            "preparation": "Improve air circulation by proper plant spacing and removing surrounding weeds",
+            "frequency": "Continuous management"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Hydrogen Peroxide Treatment",
+            "preparation": "Spray 3% hydrogen peroxide solution diluted to 1:10 with water",
+            "frequency": "Every 5-6 days"
+          },
+          {
+            "method": "Turmeric Powder Spray",
+            "preparation": "Mix 50g turmeric powder in 1 liter water, add few drops of liquid soap",
+            "frequency": "Every 4-5 days"
+          },
+          {
+            "method": "Probiotic Bacterial Treatment",
+            "preparation": "Apply Bacillus subtilis bio-fungicide as per manufacturer's recommendation",
+            "frequency": "Every 7 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Total Field Quarantine",
+            "preparation": "Completely isolate infected area, remove and burn all infected plant materials",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Micronutrient Immunity Boost",
+            "preparation": "Apply silicon and copper-based micronutrient solutions to strengthen plant resistance",
+            "frequency": "Two applications 15 days apart"
+          },
+          {
+            "method": "Comprehensive Ecosystem Management",
+            "preparation": "Modify microclimate, improve overall field conditions, reduce humidity",
+            "frequency": "Ongoing management"
+          }
+        ]
+      },
+      "Corn Rot": {
+        "Low": [
+          {
+            "method": "Improved Soil Drainage",
+            "preparation": "Enhance field drainage, prevent water stagnation around corn plants",
+            "frequency": "Continuous management"
+          },
+          {
+            "method": "Neem Cake Soil Treatment",
+            "preparation": "Mix neem cake @ 500 kg per acre into soil before planting",
+            "frequency": "Before planting season"
+          },
+          {
+            "method": "Beneficial Microorganism Inoculation",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre as soil treatment",
+            "frequency": "Before planting and 30 days after"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Compost and Biochar Amendment",
+            "preparation": "Mix well-decomposed compost and biochar into soil to improve soil health",
+            "frequency": "Before planting and mid-season"
+          },
+          {
+            "method": "Garlic Extract Soil Treatment",
+            "preparation": "Prepare garlic extract by soaking 200g crushed garlic in 1 liter water for 24 hours, strain and apply to soil",
+            "frequency": "Every 15 days"
+          },
+          {
+            "method": "Crop Rotation Strategy",
+            "preparation": "Implement strategic crop rotation with non-host crops to break disease cycle",
+            "frequency": "Seasonal management"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Soil Sterilization",
+            "preparation": "Solarize soil by covering with transparent plastic for 4-6 weeks during peak summer",
+            "frequency": "One-time intensive treatment"
+          },
+          {
+            "method": "Comprehensive Biological Control",
+            "preparation": "Integrate multiple biological agents: Trichoderma, Bacillus subtilis, and Pseudomonas fluorescens",
+            "frequency": "Multiple applications across growing season"
+          },
+          {
+            "method": "Field Rehabilitation",
+            "preparation": "Complete removal of infected crop, deep plowing, and replanting with resistant varieties",
+            "frequency": "Entire crop cycle intervention"
+          }
+        ]
+      },
+      "Anthracnose": {
+        "Low": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Mix 5% neem oil with water and a few drops of soap, then spray on affected plants.",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Garlic Extract Solution",
+            "preparation": "Blend 100g garlic with 1 liter of water, strain, and spray on affected areas.",
+            "frequency": "Every week"
+          },
+          {
+            "method": "Baking Soda Solution",
+            "preparation": "Dissolve 1 tablespoon of baking soda in 1 liter of water and spray on leaves.",
+            "frequency": "Every 10 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Spray",
+            "preparation": "Use Bacillus subtilis bio-fungicide diluted as per manufacturer's instructions.",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Hot Water Seed Treatment",
+            "preparation": "Soak seeds in hot water at 50°C for 10-15 minutes before planting.",
+            "frequency": "One-time before planting"
+          },
+          {
+            "method": "Copper-based Fungicide",
+            "preparation": "Prepare a Bordeaux mixture with 100g copper sulfate and 100g lime in 10 liters of water.",
+            "frequency": "Every 14 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plant debris to prevent further spread.",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "Trichoderma Biofungicide",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre as soil treatment.",
+            "frequency": "Before planting and every month"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace susceptible corn varieties with resistant ones.",
+            "frequency": "Immediate action"
+          }
+        ]
+      },
+      "Corn Leaf Blight": {
+        "Low": [
+          {
+            "method": "Neem Leaf Extract Spray",
+            "preparation": "Boil 500g neem leaves in 2 liters of water for 30 minutes, strain, and spray on affected plants.",
+            "frequency": "'Every week'"
+          },
+          {
+            "method": "'Milk Solution'",
+            "preparation": "Dilute milk with water (1:3 ratio) and spray on leaves to enhance plant immunity.",
+            "frequency": "Every week.'"
+          },
+          {
+            "method": "Baking Soda Solution",
+            "preparation": "Dissolve 1 tablespoon of baking soda in 1 liter of water and spray on leaves.",
+            "frequency": "Every 10 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Spray",
+            "preparation": "Use a solution of Bacillus subtilis as per manufacturer’s instructions for foliar application.",
+            "frequency": "Every week"
+          },
+          {
+            "method": "Copper-based Fungicide",
+            "preparation": "Prepare a Bordeaux mixture with 100g copper sulfate and 100g lime in 10 liters of water.",
+            "frequency": "Every two weeks"
+          },
+          {
+            "method": "Compost Tea Application",
+            "preparation": "Dilute compost tea with water (1:5) and apply to soil around the plants.",
+            "frequency": "Every two weeks"
+          }
+        ],
+        "High": [
+          {
+            "method": "Crop Rotation",
+            "preparation": "Rotate corn crops with non-host plants to disrupt disease cycles.",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove all infected plant material and practice good hygiene in the field.",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "Trichoderma Biofungicide",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre as a soil treatment.",
+            "frequency": "Before planting and every month"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "crop": "Sugarcane",
+    "diseases": {
+      "Yellow disease": {
+        "Low": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Mix 5% neem oil with water and a few drops of soap, then spray on affected plants.",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Garlic Extract Solution",
+            "preparation": "Blend 100g garlic with 1 liter of water, strain, and spray on affected areas.",
+            "frequency": "Every week"
+          },
+          {
+            "method": "Baking Soda Solution",
+            "preparation": "Dissolve 1 tablespoon of baking soda in 1 liter of water and spray on leaves.",
+            "frequency": "Every 10 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Spray",
+            "preparation": "Use Bacillus subtilis bio-fungicide diluted as per manufacturer's instructions.",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Hot Water Treatment for Seedlings",
+            "preparation": "Soak seedlings in hot water at 50°C for 10-15 minutes before planting.",
+            "frequency": "One-time before planting"
+          },
+          {
+            "method": "Copper-based Fungicide",
+            "preparation": "Prepare a Bordeaux mixture with 100g copper sulfate and 100g lime in 10 liters of water.",
+            "frequency": "Every 14 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plant debris to prevent further spread.",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "'Resistant Variety Replacement'",
+            "preparation": "Replace susceptible sugarcane varieties with resistant ones.",
+            "frequency": "Immediate action."
+          },
+          {
+            "method": "'Trichoderma Biofungicide'",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre as soil treatment.",
+            "frequency": "Before planting and every month."
+          }
+        ]
+      },
+      "Rust disease": {
+        "Low": [
+          {
+            "method": "'Neem Oil Spray'",
+            "preparation": "Mix 5% neem oil with water and spray on affected plants.",
+            "frequency": "Every week."
+          },
+          {
+            "method": "Garlic Extract Solution",
+            "preparation": "Blend 100g garlic with 1 liter of water, strain, and spray on affected areas.",
+            "frequency": "Every week"
+          },
+          {
+            "method": "Baking Soda Solution",
+            "preparation": "Dissolve 1 tablespoon of baking soda in 1 liter of water and spray on leaves.",
+            "frequency": "Every 10 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Spray",
+            "preparation": "Use a solution of Bacillus subtilis as per manufacturer’s instructions for foliar application.",
+            "frequency": "Every week"
+          },
+          {
+            "method": "Copper-based Fungicide",
+            "preparation": "Prepare a Bordeaux mixture with 100g copper sulfate and 100g lime in 10 liters of water.",
+            "frequency": "Every two weeks"
+          },
+          {
+            "method": "Compost Tea Application",
+            "preparation": "Dilute compost tea with water (1:5) and apply to soil around the plants.",
+            "frequency": "Every two weeks"
+          }
+        ],
+        "High": [
+          {
+            "method": "Crop Rotation",
+            "preparation": "Rotate sugarcane crops with non-host plants to disrupt disease cycles.",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove all infected plant material and practice good hygiene in the field.",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "Trichoderma Biofungicide",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre as a soil treatment.",
+            "frequency": "Before planting and every month"
+          }
+        ]
+      },
+      "Mosaic disease": {
+        "Low": [
+          {
+            "method": "Neem Leaf Extract Spray'",
+            "preparation": "Boil 500g neem leaves in 2 liters of water for 30 minutes, strain, and spray on affected plants.",
+            "frequency": "Every week."
+          },
+          {
+            "method": "Milk Solution",
+            "preparation": "Dilute milk with water (1:3 ratio) and spray on leaves to enhance plant immunity.",
+            "frequency": "Every week"
+          },
+          {
+            "method": "Baking Soda Solution",
+            "preparation": "Dissolve 1 tablespoon of baking soda in 1 liter of water and spray on leaves.",
+            "frequency": "Every 10 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Spray",
+            "preparation": "Use Bacillus subtilis bio-fungicide diluted as per manufacturer's instructions.",
+            "frequency": "Every week"
+          },
+          {
+            "method": "Copper-based Fungicide",
+            "preparation": "Prepare a Bordeaux mixture with 100g copper sulfate and 100g lime in 10 liters of water.",
+            "frequency": "Every two weeks"
+          },
+          {
+            "method": "Compost Tea Application",
+            "preparation": "Dilute compost tea with water (1:5) and apply to soil around the plants.",
+            "frequency": "Every two weeks"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove all infected plant material and practice good hygiene in the field.",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace susceptible sugarcane varieties with resistant ones.",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Trichoderma Biofungicide",
+            "preparation": "Apply Trichoderma harzianum @2.5 kg per acre as soil treatment.",
+            "frequency": "Before planting and every month."
+          }
+        ]
+      },
+      "RedRot disease": {
+        "Low": [
+          {
+            "method": "Neem Oil Spray",
+            "preparation": "Mix 5% neem oil with water and a few drops of soap, then spray on affected plants.",
+            "frequency": "Every 7 days"
+          },
+          {
+            "method": "Garlic Extract Solution",
+            "preparation": "Blend 100g garlic with 1 liter of water, strain, and spray on affected areas.",
+            "frequency": "Every week"
+          },
+          {
+            "method": "Baking Soda Solution",
+            "preparation": "Dissolve 1 tablespoon of baking soda in 1 liter of water and spray on leaves.",
+            "frequency": "Every 10 days"
+          }
+        ],
+        "Medium": [
+          {
+            "method": "Probiotic Bacterial Spray",
+            "preparation": "Use Bacillus subtilis bio-fungicide diluted as per manufacturer's instructions.",
+            "frequency": "Every 5 days"
+          },
+          {
+            "method": "Hot Water Treatment for Seedlings",
+            "preparation": "Soak seedlings in hot water at 50°C for 10-15 minutes before planting.",
+            "frequency": "One-time before planting"
+          },
+          {
+            "method": "Copper-based Fungicide",
+            "preparation": "Prepare a Bordeaux mixture with 100g copper sulfate and 100g lime in 10 liters of water.",
+            "frequency": "Every 14 days"
+          }
+        ],
+        "High": [
+          {
+            "method": "Complete Field Sanitation",
+            "preparation": "Remove and destroy all infected plant debris to prevent further spread.",
+            "frequency": "Season-long management"
+          },
+          {
+            "method": "Resistant Variety Replacement",
+            "preparation": "Replace susceptible sugarcane cultivars with resistant ones.",
+            "frequency": "Immediate action"
+          },
+          {
+            "method": "Trichoderma Biofungicide",
+            "preparation": "Apply Trichoderma harzianum @ 2.5 kg per acre as soil treatment.",
+            "frequency": "Before planting and every month"
+          }
+        ]
+      }
+    }
+  }
+]
