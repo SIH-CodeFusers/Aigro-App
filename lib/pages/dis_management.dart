@@ -165,7 +165,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         });
       }
       }); 
-    fetchFarmDetails().then((data) {
+     fetchFarmDetails().then((data) {
       if (data != null) {
          setState(() {
             treatmentData = data;
@@ -271,11 +271,15 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           'fertilisers': List<String>.from(
             result['fertilisers'].map((fertilizer) => fertilizer['name'])
           ),
+          'fertilisersPrice': List<String>.from(
+            result['fertilisers'].map((fertilizer) => fertilizer['products'][0]['price'])
+          ),
           'farmerTreatmentEmpty': result['farmerTreatment'].isEmpty,
           'createdAt': result['createdAt'],
           'updatedAt': result['updatedAt'],
           'farmerTreatment': result['farmerTreatment'] ?? [],
         };
+        print(resultDetails);
         return resultDetails;
       } else {
         // print('Failed to load data');
@@ -779,6 +783,121 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                               ),        
                             ],
                           )
+                      ],
+                    ),
+                  ),
+                ),
+
+
+               const SizedBox(height: 30,),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: context.theme.highlightColor,
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(FontAwesomeIcons.handHoldingHeart,size: 18,color: Colors.grey[500],),
+                            const SizedBox(width: 10,),
+                            const Expanded(
+                              child: Text("Methods",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
+                            ),
+                             GestureDetector(
+                              onTap: () {
+                                _speak("Hello");
+                              },
+                              child: voiceIcon(context),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 20),
+
+                        treatmentData != null && treatmentData?['fertilisers'] != null
+                        ? Column(
+                            children: List.generate(
+                              treatmentData?['fertilisers'].length,
+                              (index) {
+                                final name = treatmentData?['fertilisers'][index];
+                                final price = treatmentData?['fertilisersPrice'][index];
+
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 16.0),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(16.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.2),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [                                  
+                                        Row(    
+                                          children: [
+                                            Icon(FeatherIcons.tag,size: 14,),
+                                            SizedBox(width: 10,),
+                                            Flexible(
+                                              child: Text(
+                                                  name,
+                                                  style: const TextStyle(
+                                                      fontSize: 16, fontWeight: FontWeight.w600),
+                                                  overflow: TextOverflow.ellipsis, 
+                                                ),
+                                            ),
+                                          ],
+                                        ),  
+                                        const SizedBox(width: 10),
+                                         Row(    
+                                          children: [
+                                            Icon(FeatherIcons.dollarSign,size: 14,),
+                                            SizedBox(width: 10,),
+                                            Flexible(
+                                              child: Text(
+                                                  price,
+                                                  style: const TextStyle(
+                                                      fontSize: 14),
+                                                  overflow: TextOverflow.ellipsis,
+                                                ),
+                                            ),
+                                          ],
+                                        ),
+                                         const SizedBox(width: 10),
+                                         Row(    
+                                          children: [
+                                            Icon(FeatherIcons.box,size: 14,),
+                                            SizedBox(width: 10,),
+                                            Flexible(
+                                              child: Text(
+                                                  "Quantity: 20",
+                                                  style: const TextStyle(
+                                                      fontSize: 14),
+                                                  overflow: TextOverflow.ellipsis, // For text overflow handling
+                                                ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          )
+                          : SizedBox.shrink(),
                       ],
                     ),
                   ),

@@ -76,16 +76,16 @@ class _GroupChatHomeState extends State<GroupChatHome> {
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
         title: FutureBuilder<String>(
-  future: _translateText("View Your Groups"),
-  builder: (context, snapshot) {
-    return Flexible(
-      child: Text(
-        snapshot.data ?? "View Your Groups",
-        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-      ),
-    );
-  },
-),
+      future: _translateText("All Chats"),
+      builder: (context, snapshot) {
+        return Flexible(
+          child: Text(
+            snapshot.data ?? "All Chats",
+            style: const TextStyle(fontSize: 22),
+          ),
+        );
+      },
+    ),
 
       ),
       body: _isLoading
