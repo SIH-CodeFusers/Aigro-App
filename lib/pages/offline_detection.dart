@@ -1,6 +1,5 @@
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/utils/translate.dart';
-import 'package:aigro/widgets/voice_icon.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';

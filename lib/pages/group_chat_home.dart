@@ -82,8 +82,7 @@ class _GroupChatHomeState extends State<GroupChatHome> {
            Text(
             snapshot.data ?? "All Chats",
             style: const TextStyle(fontSize: 22),
-          );
-        
+          ); 
       },
     ),
 
