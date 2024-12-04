@@ -201,7 +201,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   }
 
 
-   Future<String> _translateText(String text) async {
+  Future<String> _translateText(String text) async {
     return await translateTextInput(text, ldb.language);
   }
 
@@ -263,7 +263,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   }
 
   Future<Map<String, dynamic>> fetchFarmDetails() async {
-    final url = 'https://api.thefuturetech.xyz/api/imageAnalysis/fetchDetails/${widget.cropId}';
+    final url = '$BACKEND_URL/api/imageAnalysis/fetchDetails/${widget.cropId}';
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
@@ -310,7 +310,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
 
     try {
       final response = await http.post(
-        Uri.parse('https://api.thefuturetech.xyz/api/imageAnalysis/updateTreatment'),
+        Uri.parse('$BACKEND_URL/api/imageAnalysis/updateTreatment'),
         headers: {
           'Content-Type': 'application/json',
         },

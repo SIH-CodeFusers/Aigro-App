@@ -17,9 +17,9 @@ class _SelectLangState extends State<SelectLang> {
   //other language commneted for now
   final Map<String, String> languages = {
     "English": "en",
-    "Hindi": "hi",
-    "Bengali": "bn",
-    "Telugu": "te",
+    // "Hindi": "hi",
+    // "Bengali": "bn",
+    // "Telugu": "te",
   };
 
 String? selectedLanguage;

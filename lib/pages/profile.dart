@@ -174,7 +174,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-           
             child: IgnorePointer(
               ignoring: false,
               child: DropdownButton<String>(

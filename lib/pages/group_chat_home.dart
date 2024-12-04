@@ -88,99 +88,99 @@ class _GroupChatHomeState extends State<GroupChatHome> {
 
       ),
       body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(
-                color: context.theme.primaryColorDark,
-              ),
+      ? Center(
+          child: CircularProgressIndicator(
+            color: context.theme.primaryColorDark,
+          ),
+        )
+      : _groups.isEmpty
+          ? FutureBuilder<String>(
+              future: _translateText("No groups found"),
+              builder: (context, snapshot) {
+                return Center(
+                  child: Text(snapshot.data ?? "No groups found"),
+                );
+              },
             )
-          : _groups.isEmpty
-              ? FutureBuilder<String>(
-                  future: _translateText("No groups found"),
-                  builder: (context, snapshot) {
-                    return Center(
-                      child: Text(snapshot.data ?? "No groups found"),
-                    );
-                  },
-                )
-              : SingleChildScrollView(
-                  child: Column(
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 30),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(height: 30),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FutureBuilder<String>(
-                            future: _translateText("View Your Groups"),
-                            builder: (context, snapshot) {
-                              return Flexible(
-                                child: Text(
-                                  snapshot.data ?? "View Your Groups",
-                                  style: const TextStyle(
-                                      fontSize: 24, fontWeight: FontWeight.w600),
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(width: 20),
-                          GestureDetector(
-                            onTap: () {
-                              _speak("View all your groups here");
-                            },
-                            child: voiceIcon(context),
-                          ),
-                        ],
+                      FutureBuilder<String>(
+                        future: _translateText("View Your Groups"),
+                        builder: (context, snapshot) {
+                          return Flexible(
+                            child: Text(
+                              snapshot.data ?? "View Your Groups",
+                              style: const TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.w600),
+                            ),
+                          );
+                        },
                       ),
-                      const SizedBox(height: 20),
-                      ..._groups.map((group) {
-                        return Card(
-                          color: Theme.of(context).highlightColor,
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 8),
-                          child: ListTile(
-                            leading: CircleAvatar(
-                              backgroundColor: Theme.of(context).cardColor,
-                              child: Text(
-                                group['diseaseName'][0],
-                                style: TextStyle(
-                                  color: context.theme.highlightColor,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
-                            title: FutureBuilder<String>(
-                              future: _translateText(group['diseaseName']),
-                              builder: (context, snapshot) {
-                                return Text(
-                                  snapshot.data ?? group['diseaseName'],
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                );
-                              },
-                            ),
-                            subtitle: FutureBuilder<String>(
-                              future: _translateText(
-                                  'Pincode: ${group['pincode']}'),
-                              builder: (context, snapshot) {
-                                return Text(snapshot.data ??
-                                    'Pincode: ${group['pincode']}');
-                              },
-                            ),
-                            trailing: const Icon(Icons.arrow_forward_ios),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      GroupChatPage(groupId: group['_id']),
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                      }).toList(),
+                      const SizedBox(width: 20),
+                      GestureDetector(
+                        onTap: () {
+                          _speak("View all your groups here");
+                        },
+                        child: voiceIcon(context),
+                      ),
                     ],
                   ),
-                ),
+                  const SizedBox(height: 20),
+                  ..._groups.map((group) {
+                    return Card(
+                      color: Theme.of(context).highlightColor,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 8),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Theme.of(context).cardColor,
+                          child: Text(
+                            group['diseaseName'][0],
+                            style: TextStyle(
+                              color: context.theme.highlightColor,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                        title: FutureBuilder<String>(
+                          future: _translateText(group['diseaseName']),
+                          builder: (context, snapshot) {
+                            return Text(
+                              snapshot.data ?? group['diseaseName'],
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold),
+                            );
+                          },
+                        ),
+                        subtitle: FutureBuilder<String>(
+                          future: _translateText(
+                              'Pincode: ${group['pincode']}'),
+                          builder: (context, snapshot) {
+                            return Text(snapshot.data ??
+                                'Pincode: ${group['pincode']}');
+                          },
+                        ),
+                        trailing: const Icon(Icons.arrow_forward_ios),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  GroupChatPage(groupId: group['_id']),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }).toList(),
+                ],
+              ),
+            ),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:aigro/utils/translate.dart';
-import 'package:flutter/material.dart';
 
 Future<String> getTranslatedText(String title,String futureLang) async {
   try {

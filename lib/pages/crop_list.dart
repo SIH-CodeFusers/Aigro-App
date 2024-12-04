@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:aigro/utils/bottom_pages_list.dart';
-// import 'package:aigro/secret.dart';
-// import 'package:aigro/utils/translate.dart';
 import 'package:hive/hive.dart';
 import 'package:aigro/local_db/db.dart';
 
