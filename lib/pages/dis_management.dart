@@ -143,6 +143,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   String? fertSel;
   bool updated=false;
   List<Map<String, dynamic>> cropDiseaseList = [];
+  List<Map<String, dynamic>> treatmentList = [];
   int _selectedIndex = -1;
   int recommended=-1;
 
@@ -171,6 +172,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
             treatmentData = data;
             updated = isCurrentDateLater(treatmentData?['updatedAt']!);
             updateSelectionAndProgress(); 
+            fetchAndStoreTreatments();
         });
       }
      
@@ -191,7 +193,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
       organicProgress = Random().nextInt(11) + 70;
       inorganicProgress = Random().nextInt(11) + 50;
     } else {
-     recommended=1;
+     _selectedIndex=1;
       recommended=1;
       organicProgress = Random().nextInt(11) + 50;
       inorganicProgress = Random().nextInt(11) + 70;
@@ -329,7 +331,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
     }
   }
 
-    Future<void> loadCropDiseases() async {
+  Future<void> loadCropDiseases() async {
     final data = await DefaultAssetBundle.of(context)
         .loadString('assets/others/crop_disease_18nov.json');
     final Map<String, dynamic> jsonResult = json.decode(data);
@@ -368,7 +370,69 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                 };
               }))
           .toList();
-    });
+    });  
+  }
+
+  Future<void> fetchAndStoreTreatments() async {
+    try {
+
+      final String response = await rootBundle.loadString('assets/others/organic_control.json');
+      final List<dynamic> data = jsonDecode(response);
+
+      final String normalizedCropName = widget.cropName.toLowerCase();
+      final String normalizedDiseaseName = widget.diseaseName.toLowerCase().replaceAll(RegExp(r'\s+'), "");
+      final String normalizedSeverity = widget.severity.isNotEmpty
+      ? widget.severity[0].toUpperCase() + widget.severity.substring(1).toLowerCase()
+      : '';
+
+
+      final Map<String, dynamic>? cropData = data.firstWhere(
+        (item) => (item['crop'] as String).toLowerCase() == normalizedCropName,
+        orElse: () => null, // Return null if crop is not found
+      );
+
+      if (cropData == null) {
+        throw Exception('Crop not found: ${widget.cropName}');
+      }
+
+      final Map<String, dynamic> diseases = cropData['diseases'];
+
+      print("Searching for disease: ${widget.diseaseName}");
+      final String? diseaseKey = diseases.keys.firstWhere(
+        (key) => key.toLowerCase().replaceAll(RegExp(r'\s+'), "") == normalizedDiseaseName,
+        orElse: () => throw Exception('Error'), 
+      );
+
+      if (diseaseKey == null) {
+        throw Exception('Disease not found: ${widget.diseaseName}');
+      }
+      print("Disease found: $diseaseKey");
+
+      final Map<String, dynamic>? treatmentsMap = diseases[diseaseKey];
+      
+      final List<dynamic>? treatments = treatmentsMap?[normalizedSeverity];
+
+      if (treatments == null || treatments.isEmpty) {
+        throw Exception('No treatments found for severity: ${widget.severity}');
+      }
+      print("Treatments found for severity: ${widget.severity}");
+
+
+      treatmentList.clear();
+      print("Storing treatments...");
+      for (var treatment in treatments) {
+        treatmentList.add({
+          'method': treatment['method'],
+          'preparation': treatment['preparation'],
+          'frequency': treatment['frequency'],
+        });
+        print("Stored treatment: ${treatment['method']}");
+      }
+
+      print('Data fetched and stored successfully!');
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 
   Future<void> handleGroupComm(BuildContext context) async {
@@ -810,7 +874,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                             ),
                              GestureDetector(
                               onTap: () {
-                                _speak("Hello");
+                                _speak("If the method is organic you can check out the product and if it is chemical you can check out the product and its prices");
                               },
                               child: voiceIcon(context),
                             ),
@@ -818,7 +882,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         ),
                         const SizedBox(height: 20),
 
-                        treatmentData != null && treatmentData?['fertilisers'] != null
+                        treatmentData != null && treatmentData?['fertilisers'] != null && _selectedIndex==1
                         ? Column(
                             children: List.generate(
                               treatmentData?['fertilisers'].length,
@@ -898,10 +962,92 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                             ),
                           )
                           : SizedBox.shrink(),
-                      ],
+
+                          _selectedIndex==0?
+                          Column(
+                            children: List.generate(
+                              treatmentList.length,
+                              (index) {
+                                var treatment = treatmentList[index];
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Container(
+                                     padding: const EdgeInsets.all(16.0),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.2),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 3),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon( FontAwesomeIcons.seedling,size: 16,color: context.theme.primaryColorDark,),
+                                            SizedBox(width: 5,),
+                                            Flexible(
+                                              child: Text(
+                                                '${treatment['method']}',
+                                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: context.theme.primaryColorDark,),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 10),
+                                        Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [ 
+                                             Text(
+                                                'Preperation:',
+                                                style: TextStyle(fontSize: 12,color: context.theme.primaryColorDark,fontWeight: FontWeight.bold),
+                                            ),              
+                                            Expanded(
+                                              child: Text(
+                                                ' ${treatment['preparation']}',
+                                                style: TextStyle(fontSize: 12,),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                         Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [ 
+                                             Text(
+                                                'Frequency:',
+                                                style: TextStyle(fontSize: 12,color: context.theme.primaryColorDark,fontWeight: FontWeight.bold),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                ' ${treatment['frequency']}',
+                                                style: TextStyle(fontSize: 12,),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 10),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          )
+                          :SizedBox.shrink(),
+                        ],
                     ),
                   ),
                 ),
+
+
+
+
 
                 treatmentData?['farmerTreatmentEmpty']==false?
                 Column(
