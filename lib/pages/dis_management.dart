@@ -503,7 +503,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-         title: const Text("Disease Management",style: TextStyle(fontSize: 20),),
+         title: translateHelper("Disease Management", TextStyle(fontSize: 20), ldb.language)
       ),
       body: SafeArea(
         child: isLoading?
@@ -517,10 +517,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Flexible(       
-                      child: Text(
-                        widget.diseaseName,
-                        style: TextStyle(fontSize: 24,color: context.theme.primaryColorDark),
-                      ),                   
+                      child: translateHelper(widget.diseaseName,TextStyle(fontSize: 24,color: context.theme.primaryColorDark),ldb.language)                 
                     ),
                     const SizedBox(width: 10,),
                     GestureDetector(
@@ -553,10 +550,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Center(
-                      child: Text(
-                        "See More",
-                        style: TextStyle(color: context.theme.highlightColor,fontSize: 12),
-                      ),
+                      child: translateHelper( "See More", TextStyle(color: context.theme.highlightColor,fontSize: 12), ldb.language)
                     ),
                   ),
                 ),
@@ -575,7 +569,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         Icon(severityData?['icon'],color: severityData?['iconColor'],),
                         const SizedBox(width: 10,),
                         Flexible(
-                          child: Text("${widget.severity.upperCamelCase} severity detected. Expected reccovery: ${calculateWeek(widget.recoveryDays)-1} - ${calculateWeek(widget.recoveryDays)} weeks" )
+                          child: translateHelper("${widget.severity.upperCamelCase} severity detected. Expected reccovery: ${calculateWeek(widget.recoveryDays)-1} - ${calculateWeek(widget.recoveryDays)} weeks",const TextStyle(),ldb.language),
                         )
                       ],
                     ),
@@ -598,8 +592,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           children: [
                             Icon(FeatherIcons.activity,color: severityData?['iconColor'],),
                             const SizedBox(width: 10,),              
-                            const Expanded(
-                              child: Text("Disease Severity",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
+                            Expanded(
+                              child: translateHelper("Disease Severity", TextStyle(fontSize: 18,fontWeight: FontWeight.w600),ldb.language)
                             ),
                             GestureDetector(
                               onTap: () {
@@ -612,12 +606,12 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         const SizedBox(height: 10,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("${widget.severity.upperCamelCase} Risk",style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                          child: translateHelper("${widget.severity.upperCamelCase} Risk",const TextStyle(fontSize: 18,fontWeight: FontWeight.w600),ldb.language)
                         ),
                         const SizedBox(height: 5,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("Around ${severityData?['perc']} % of crops affected",style: const TextStyle(fontSize: 14,),),
+                          child: translateHelper("Around ${severityData?['perc']} % of crops affected", const TextStyle(fontSize: 14,),ldb.language)
                         )    
                       ],
                     ),
@@ -640,8 +634,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           children: [
                             Icon(FontAwesomeIcons.seedling,color: severityData?['iconColor'],size: 16,),
                             const SizedBox(width: 10,),
-                            const Expanded(
-                              child: Text("Expected Crop Loss",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
+                            Expanded(
+                              child: translateHelper("Expected Crop Loss", TextStyle(fontSize: 18,fontWeight: FontWeight.w600),ldb.language)
                             ),
                             GestureDetector(
                               onTap: () {
@@ -654,12 +648,12 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         const SizedBox(height: 10,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("${widget.yieldLoss} %",style: const TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                          child:translateHelper("${widget.yieldLoss} %", const TextStyle(fontSize: 18,fontWeight: FontWeight.w600),ldb.language)
                         ),
                         const SizedBox(height: 5,),
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10.0),
-                          child: Text("of your crop will be affected if untreated",style: TextStyle(fontSize: 14,),),
+                          child: translateHelper("of your crop will be affected if untreated", TextStyle(fontSize: 14,),ldb.language)
                         )    
                       ],
                     ),
@@ -682,8 +676,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           children: [
                             Icon(FontAwesomeIcons.tree,color: severityData?['iconColor'],size: 16,),
                             const SizedBox(width: 10,),
-                            const Expanded(
-                              child: Text("Soil Health Status",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
+                            Expanded(
+                              child: translateHelper("Soil Health Status", TextStyle(fontSize: 18,fontWeight: FontWeight.w600),ldb.language)
                             ),
                             GestureDetector(
                               onTap: () {
@@ -719,8 +713,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           children: [
                             Icon(FontAwesomeIcons.buildingColumns,size: 16,color: Colors.grey[500],),
                             const SizedBox(width: 10,),
-                            const Expanded(
-                              child: Text("Weather Conditions for next 5 days",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
+                            Expanded(
+                              child: translateHelper("Weather Conditions for next 5 days", TextStyle(fontSize: 18,fontWeight: FontWeight.w600),ldb.language)
                             ),
                             GestureDetector(
                               onTap: () {
@@ -756,8 +750,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           children: [
                             Icon(FeatherIcons.clock,size: 18,color: Colors.grey[500],),
                             const SizedBox(width: 10,),
-                            const Expanded(
-                              child: Text("Recovery Timeline",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
+                            Expanded(
+                              child: translateHelper("Recovery Timeline", TextStyle(fontSize: 18,fontWeight: FontWeight.w600),ldb.language)
                             ),
                              GestureDetector(
                               onTap: () {
@@ -792,8 +786,8 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           children: [
                             Icon(FontAwesomeIcons.handHoldingHeart,size: 18,color: Colors.grey[500],),
                             const SizedBox(width: 10,),
-                            const Expanded(
-                              child: Text("Treatment Options",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
+                            Expanded(
+                              child: translateHelper("Treatment Options", TextStyle(fontSize: 18,fontWeight: FontWeight.w600),ldb.language)
                             ),
                              GestureDetector(
                               onTap: () {
@@ -852,7 +846,6 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                   ),
                 ),
 
-
                const SizedBox(height: 30,),
                 Container(
                   width: double.infinity,
@@ -867,10 +860,10 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                       children: [
                         Row(
                           children: [
-                            Icon(FontAwesomeIcons.handHoldingHeart,size: 18,color: Colors.grey[500],),
+                            Icon(FontAwesomeIcons.leaf,size: 18,color: Colors.grey[500],),
                             const SizedBox(width: 10,),
-                            const Expanded(
-                              child: Text("Methods",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),)
+                            Expanded(
+                              child: translateHelper("Methods",TextStyle(fontSize: 18,fontWeight: FontWeight.w600),ldb.language),       
                             ),
                              GestureDetector(
                               onTap: () {
@@ -883,170 +876,16 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                         const SizedBox(height: 20),
 
                         treatmentData != null && treatmentData?['fertilisers'] != null && _selectedIndex==1
-                        ? Column(
-                            children: List.generate(
-                              treatmentData?['fertilisers'].length,
-                              (index) {
-                                final name = treatmentData?['fertilisers'][index];
-                                final price = treatmentData?['fertilisersPrice'][index];
-
-                                return Padding(
-                                  padding: const EdgeInsets.only(bottom: 16.0),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(16.0),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.2),
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: Offset(0, 3),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [                                  
-                                        Row(    
-                                          children: [
-                                            Icon(FeatherIcons.tag,size: 14,),
-                                            SizedBox(width: 10,),
-                                            Flexible(
-                                              child: Text(
-                                                  name,
-                                                  style: const TextStyle(
-                                                      fontSize: 16, fontWeight: FontWeight.w600),
-                                                  overflow: TextOverflow.ellipsis, 
-                                                ),
-                                            ),
-                                          ],
-                                        ),  
-                                        const SizedBox(width: 10),
-                                         Row(    
-                                          children: [
-                                            Icon(FeatherIcons.dollarSign,size: 14,),
-                                            SizedBox(width: 10,),
-                                            Flexible(
-                                              child: Text(
-                                                  price,
-                                                  style: const TextStyle(
-                                                      fontSize: 14),
-                                                  overflow: TextOverflow.ellipsis,
-                                                ),
-                                            ),
-                                          ],
-                                        ),
-                                         const SizedBox(width: 10),
-                                         Row(    
-                                          children: [
-                                            Icon(FeatherIcons.box,size: 14,),
-                                            SizedBox(width: 10,),
-                                            Flexible(
-                                              child: Text(
-                                                  "Quantity: 20",
-                                                  style: const TextStyle(
-                                                      fontSize: 14),
-                                                  overflow: TextOverflow.ellipsis, // For text overflow handling
-                                                ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          )
+                        ? buildChemicalFert()
                           : SizedBox.shrink(),
 
                           _selectedIndex==0?
-                          Column(
-                            children: List.generate(
-                              treatmentList.length,
-                              (index) {
-                                var treatment = treatmentList[index];
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Container(
-                                     padding: const EdgeInsets.all(16.0),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.2),
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: Offset(0, 3),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon( FontAwesomeIcons.seedling,size: 16,color: context.theme.primaryColorDark,),
-                                            SizedBox(width: 5,),
-                                            Flexible(
-                                              child: Text(
-                                                '${treatment['method']}',
-                                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: context.theme.primaryColorDark,),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 10),
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [ 
-                                             Text(
-                                                'Preperation:',
-                                                style: TextStyle(fontSize: 12,color: context.theme.primaryColorDark,fontWeight: FontWeight.bold),
-                                            ),              
-                                            Expanded(
-                                              child: Text(
-                                                ' ${treatment['preparation']}',
-                                                style: TextStyle(fontSize: 12,),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                         Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [ 
-                                             Text(
-                                                'Frequency:',
-                                                style: TextStyle(fontSize: 12,color: context.theme.primaryColorDark,fontWeight: FontWeight.bold),
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                ' ${treatment['frequency']}',
-                                                style: TextStyle(fontSize: 12,),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 10),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          )
+                          buildOrganicFert(context)
                           :SizedBox.shrink(),
                         ],
                     ),
                   ),
                 ),
-
-
-
 
 
                 treatmentData?['farmerTreatmentEmpty']==false?
@@ -1171,7 +1010,204 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         ),
       ),
     );
- 
+  }
+
+  Column buildOrganicFert(BuildContext context) {
+    return Column(
+      children: List.generate(
+        treatmentList.length,
+        (index) {
+          var treatment = treatmentList[index];
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Container(
+                padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon( FontAwesomeIcons.seedling,size: 16,color: context.theme.primaryColorDark,),
+                      SizedBox(width: 5,),
+                      Flexible(
+                        child: translateHelper('${treatment['method']}',TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: context.theme.primaryColorDark,),ldb.language)
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                 Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [ 
+                      translateHelper('Preparation:', TextStyle(fontSize: 12,color: context.theme.primaryColorDark,fontWeight: FontWeight.bold), ldb.language),    
+                      Expanded(
+                        child: translateHelper(' ${treatment['preparation']}',TextStyle(fontSize: 12,),ldb.language)
+                      ),
+                    ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [ 
+                      translateHelper('Frequency:', TextStyle(fontSize: 12,color: context.theme.primaryColorDark,fontWeight: FontWeight.bold), ldb.language),    
+                      Expanded(
+                        child: translateHelper(' ${treatment['frequency']}',TextStyle(fontSize: 12,),ldb.language)
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Column buildChemicalFert() {
+    return Column(
+      children: List.generate(
+        treatmentData?['fertilisers'].length,
+        (index) {
+          final name = treatmentData?['fertilisers'][index];
+          final price = treatmentData?['fertilisersPrice'][index];
+
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Container(
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [                                  
+                  Row(    
+                    children: [
+                      Icon(FeatherIcons.tag,size: 14,),
+                      SizedBox(width: 10,),
+                      Flexible(
+                        child: FutureBuilder<String>(
+                            future: _translateText(name),
+                            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return Text(
+                                  'Translating...',
+                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                  overflow: TextOverflow.ellipsis,
+                                );
+                              } else if (snapshot.hasError) {
+                                return Text(
+                                  'Error loading name',
+                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                  overflow: TextOverflow.ellipsis,
+                                );
+                              } else {
+                                return Text(
+                                  snapshot.data ?? name, 
+                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                  overflow: TextOverflow.ellipsis,
+                                );
+                              }
+                            },
+                          ),
+                      ),
+                    ],
+                  ),  
+                  const SizedBox(width: 10),
+                    Row(    
+                    children: [
+                      Icon(FeatherIcons.dollarSign,size: 14,),
+                      SizedBox(width: 10,),
+                      Flexible(
+                        child: FutureBuilder<String>(
+                          future: _translateText(price), 
+                          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return Text(
+                                'Translating...',
+                                style: const TextStyle(fontSize: 14),
+                                overflow: TextOverflow.ellipsis,
+                              );
+                            } else if (snapshot.hasError) {
+                              return Text(
+                                'Error loading price',
+                                style: const TextStyle(fontSize: 14),
+                                overflow: TextOverflow.ellipsis,
+                              );
+                            } else {
+                              return Text(
+                                snapshot.data ?? price, 
+                                style: const TextStyle(fontSize: 14),
+                                overflow: TextOverflow.ellipsis,
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                    const SizedBox(width: 10),
+                    Row(    
+                    children: [
+                      Icon(FeatherIcons.box,size: 14,),
+                      SizedBox(width: 10,),
+                      Flexible(
+                        child: FutureBuilder<String>(
+                          future: _translateText('20'), 
+                          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return Text(
+                                'Translating...',
+                                style: const TextStyle(fontSize: 14),
+                                overflow: TextOverflow.ellipsis,
+                              );
+                            } else if (snapshot.hasError) {
+                              return Text(
+                                'Error loading quantity',
+                                style: const TextStyle(fontSize: 14),
+                                overflow: TextOverflow.ellipsis,
+                              );
+                            } else {
+                              return Text(
+                                'Quantity: ${snapshot.data ?? '20'}', 
+                                style: const TextStyle(fontSize: 14),
+                                overflow: TextOverflow.ellipsis,
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 
   Widget buildProgressCard({
@@ -1200,7 +1236,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
             children: [
               Row(
                 children: [
-                  Text(title, style: const TextStyle(fontSize: 16)),
+                  translateHelper(title, TextStyle(fontSize: 16), ldb.language),
                   const Spacer(),
                   Text("${progress.toStringAsFixed(0)}%"),
                 ],
@@ -1216,15 +1252,12 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                 ),
               ),
               const SizedBox(height: 8),
-              Text(description, style: const TextStyle(fontSize: 12)),
+              translateHelper(description, const TextStyle(fontSize: 12), ldb.language)
             ],
           ),
         ),
       );
     }
-
-
-  
 
   Column treatment(BuildContext context) {
     return Column(
@@ -1262,8 +1295,6 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             translateHelper("Next Treatment:",  TextStyle(fontSize: 16), ldb.language),
-            // translateHelper( treatmentData?['farmerTreatmentEmpty']! ? formatDateNow(DateTime.now())
-            //   :formatAddDate(treatmentData?['updatedAt']!), const TextStyle(fontSize: 16, fontWeight: FontWeight.w500), ldb.l)
             Text(
                 treatmentData?['farmerTreatmentEmpty']! ? formatDateNow(DateTime.now())
               :formatAddDate(treatmentData?['updatedAt']!), 
@@ -1390,7 +1421,6 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
       ],
     );
   }
-
 
   Widget _buildSoilNutrientRow(String nutrient, int level, Color color) {
     return Row(
