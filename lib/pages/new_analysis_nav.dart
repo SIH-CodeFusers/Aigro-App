@@ -10,6 +10,7 @@ import 'package:aigro/widgets/bottom_nav.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
@@ -237,7 +238,7 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                     },
                   ),
                   IconButton(
-                    icon: const Icon(Icons.volume_up),
+                    icon:  Icon(FeatherIcons.volume2),
                     color: context.theme.primaryColorDark,
                     onPressed: () => _speak(translations['voice_message'] ?? ''),
                   ),

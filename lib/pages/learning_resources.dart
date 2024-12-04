@@ -95,23 +95,17 @@ class _LearningResourcesState extends State<LearningResources> {
 
     if (targetLanguage == "en") return;
 
-    try {
-     
+    try {  
       String translatedHint = await translateText(hint, targetLanguage, apiKey);
-
-
       List<String> translatedCategories = await Future.wait(
         categories.map((category) {
           return translateText(category, targetLanguage, apiKey);
         }).toList(),
       );
-
-
       List<MapEntry<String, Map<String, dynamic>>> translatedCourses = [];
       for (var entry in courseMap.entries) {
         String key = entry.key;
         var value = entry.value;
-
         String translatedTitle = await translateText(value['title'], targetLanguage, apiKey);
         String translatedDomain = await translateText(value['domain'], targetLanguage, apiKey);
         List<String> translatedItems = await Future.wait(
@@ -119,7 +113,6 @@ class _LearningResourcesState extends State<LearningResources> {
             return translateText(item, targetLanguage, apiKey);
           }).toList(),
         );
-
         translatedCourses.add(MapEntry(key, {
           "title": translatedTitle,
           "domain": translatedDomain,
@@ -127,7 +120,6 @@ class _LearningResourcesState extends State<LearningResources> {
           "image": value['image'],
         }));
       }
-
       setState(() {
         hint = translatedHint;
         categories = translatedCategories;
@@ -162,7 +154,7 @@ class _LearningResourcesState extends State<LearningResources> {
     return Scaffold(
       backgroundColor: context.theme.canvasColor,
       appBar: AppBar(
-        title: Text('Courses'),
+        title: translateHelper("Courses", TextStyle(fontSize: 20), ldb.language),
       ),
       body: SafeArea(
         child: Padding(
@@ -191,7 +183,7 @@ class _LearningResourcesState extends State<LearningResources> {
                       ),
                       child: TextField(
                         cursorColor: context.theme.cardColor,
-                        style: TextStyle(color: context.theme.splashColor),
+                        style: TextStyle(color: context.theme.primaryColorDark),
                         onChanged: (newQuery) {
                           setState(() {
                             query = newQuery;
@@ -229,6 +221,7 @@ class _LearningResourcesState extends State<LearningResources> {
                     return Padding(
                       padding: const EdgeInsets.all(6),
                       child: FilterChip(
+                        selectedColor: context.theme.focusColor,
                         selected: selectedCategories.contains(cat),
                         label: Text(cat),
                         onSelected: (selected) {
@@ -277,33 +270,66 @@ class _LearningResourcesState extends State<LearningResources> {
         decoration: BoxDecoration(
           color: context.theme.highlightColor,
           borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.3), 
+              offset: Offset(0, 2),
+              blurRadius: 4,
+              spreadRadius: 1,
+            ),
+          ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-            Container(
-              height: 230,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(courseData['image']),
-                  fit: BoxFit.cover,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                height: 230,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(courseData['image']),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
+            SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(courseData['title'], style: TextStyle(fontSize: 20)),
-                  ...courseData['items'].map((item) => Text("* $item")).toList(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0), 
+                    child: Text(
+                      courseData['title'],
+                      style: TextStyle(fontSize: 20,color: context.theme.primaryColorDark),
+                    ),
+                  ),
+                  ...courseData['items'].map((item) => Padding(
+                    padding: const EdgeInsets.only(bottom: 4.0), 
+                    child: Text("* $item"),
+                  ))
                 ],
               ),
             ),
+            SizedBox(height: 10,)
           ],
         ),
       ),
+    );
+  }
+  FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
+    return FutureBuilder<String>(
+      future: translateTextInput(title, lang),
+      builder: (context, snapshot) {
+        String displayText = snapshot.connectionState == ConnectionState.waiting || snapshot.hasError
+            ? title
+            : snapshot.data ?? title;
+
+        return Text(displayText, style: style);
+      },
     );
   }
 }

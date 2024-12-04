@@ -197,7 +197,7 @@ class _OfflineDetectionState extends State<OfflineDetection> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: IconButton(
-                icon: const Icon(Icons.volume_up),
+                icon: const Icon(FeatherIcons.volume2),
                 color: context.theme.primaryColorDark,
                 onPressed: () => _speak('Upload any image and get crop disease results instantly'),
               ),

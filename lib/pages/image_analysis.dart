@@ -273,7 +273,7 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
             ),
             const SizedBox(width: 10),
             IconButton(
-              icon: Icon(Icons.volume_up_rounded, color: context.theme.primaryColorDark),
+              icon: Icon(FeatherIcons.volume2, color: context.theme.primaryColorDark),
               tooltip: 'Speak',
               onPressed: () {
                 final text = "Here are the Results of the Image Analysis";
