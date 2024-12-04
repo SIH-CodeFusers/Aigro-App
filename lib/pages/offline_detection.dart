@@ -195,7 +195,7 @@ class _OfflineDetectionState extends State<OfflineDetection> {
         title:  translateHelper('Offline Model', TextStyle(), ldb.language),
         actions: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.only(right: 20),
             child: IconButton(
                 icon: const Icon(FeatherIcons.volume2),
                 color: context.theme.primaryColorDark,

@@ -51,6 +51,10 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
   final GlobalKey _pngKey = GlobalKey();
 
   Future<void> _translateUITexts() async {
+    String targetLanguage = ldb.language;
+    if(targetLanguage=="en"){
+      return;
+    }
     setState(() async {
       _translatedTitle = await translateTextInput("Analysis Results", ldb.language);
       _translatedNoData = await translateTextInput("No analysis results found.", ldb.language);

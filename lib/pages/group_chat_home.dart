@@ -78,12 +78,12 @@ class _GroupChatHomeState extends State<GroupChatHome> {
         title: FutureBuilder<String>(
       future: _translateText("All Chats"),
       builder: (context, snapshot) {
-        return Flexible(
-          child: Text(
+        return 
+           Text(
             snapshot.data ?? "All Chats",
             style: const TextStyle(fontSize: 22),
-          ),
-        );
+          );
+        
       },
     ),
 
@@ -117,7 +117,7 @@ class _GroupChatHomeState extends State<GroupChatHome> {
                                 child: Text(
                                   snapshot.data ?? "View Your Groups",
                                   style: const TextStyle(
-                                      fontSize: 24, fontWeight: FontWeight.bold),
+                                      fontSize: 24, fontWeight: FontWeight.w600),
                                 ),
                               );
                             },

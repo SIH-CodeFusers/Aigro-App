@@ -69,7 +69,7 @@ class _GroupChatPageState extends State<GroupChatPage> {
     }
     print("hello");
 
-    // Fetch data first
+  
     fetchGroups(widget.groupId).then((_) {
       // After fetchGroups completes, initialize the _messages and _isCommentsVisible list
       setState(() {
@@ -175,9 +175,11 @@ class _GroupChatPageState extends State<GroupChatPage> {
     try {
       socket.emit('createMessage', messageData);
       _messageController.clear();
+      refreshPage();
     } catch (error) {
       print('Error sending message: $error');
     }
+
   }
 
   void _addComment(String messageId) {
@@ -199,10 +201,12 @@ class _GroupChatPageState extends State<GroupChatPage> {
     try {
       socket.emit('addCommentGroup', commentData);
       _messageController.clear();
+
     } catch (error) {
       print('Error sending message: $error');
     }
     _commentControllers[messageId]?.clear();
+    refreshPage();
   }
 
   Map<String, dynamic> _decodeMessage(String data) {
@@ -232,6 +236,15 @@ class _GroupChatPageState extends State<GroupChatPage> {
     });
   }
 
+  void refreshPage(){
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => GroupChatPage(groupId: widget.groupId,),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -243,6 +256,18 @@ class _GroupChatPageState extends State<GroupChatPage> {
             return Text(snapshot.data ?? 'Chat');
           },
         ),
+        actions: [
+           Padding(
+             padding: const EdgeInsets.only(right: 20),
+             child: IconButton(
+              icon: Icon(Icons.refresh, color: context.theme.primaryColorDark),
+                onPressed: () {
+                  refreshPage();
+                },
+              ),
+           ),
+          
+        ]   
       ),
       body: Column(
         children: [
