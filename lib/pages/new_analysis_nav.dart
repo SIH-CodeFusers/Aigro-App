@@ -53,11 +53,9 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
   final List<String> cropStageOptions = [
     "Vegetative Growth",
     "Reproductive Stage",
-    "Seeding Stage",
+    "Seedling Stage",
     "Sowing",
     "Harvesting",
-    "Banana",
-    "Tea",
   ];
 
   final languageBox = Hive.box("Language_db");
