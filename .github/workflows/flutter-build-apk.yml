@@ -1,45 +1,45 @@
-name: Flutter Build APK
+# name: Flutter Build APK
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
 
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 3.24.3
+#       - name: Checkout code
+#         uses: actions/checkout@v3
 
 
-      - name: Install dependencies
-        run: flutter pub get
+#       - name: Set up Flutter
+#         uses: subosito/flutter-action@v2
+#         with:
+#           flutter-version: 3.24.3
 
 
-      - name: Set secret content
-        run: echo "$SECRET_DART_CONTENT" > lib/secret.dart
-        env:
-          SECRET_DART_CONTENT: ${{ secrets.SECRET_DART_CONTENT }}
+#       - name: Install dependencies
+#         run: flutter pub get
 
 
-      - name: Build APK
-        run: flutter build apk --release
+#       - name: Set secret content
+#         run: echo "$SECRET_DART_CONTENT" > lib/secret.dart
+#         env:
+#           SECRET_DART_CONTENT: ${{ secrets.SECRET_DART_CONTENT }}
 
 
-      - name: Verify APK exists
-        run: ls -l build/app/outputs/flutter-apk/app-release.apk
+#       - name: Build APK
+#         run: flutter build apk --release
+
+
+#       - name: Verify APK exists
+#         run: ls -l build/app/outputs/flutter-apk/app-release.apk
 
       
-      - name: Upload APK as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-release
-          path: build/app/outputs/flutter-apk/app-release.apk
+#       - name: Upload APK as artifact
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: app-release
+#           path: build/app/outputs/flutter-apk/app-release.apk
