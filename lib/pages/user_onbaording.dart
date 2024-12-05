@@ -108,7 +108,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
       db.startHome = true;
       bdb.userName = _namecontroller.text;
       bdb.userPhn = _phonecontroller.text;
-      bdb.userCountry = selectedCountry ?? "";
+      bdb.userCountry = selectedCountry;
       bdb.userPin=_pincontroller.text;
       bdb.userState = selectedState ?? ""; 
       bdb.userDistrict = selectedDistrict ?? "";
@@ -171,8 +171,6 @@ class _UserOnboardingState extends State<UserOnboarding> {
       ),
     );
   }
-
-
 
 
   //User Name

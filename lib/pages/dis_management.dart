@@ -163,6 +163,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           lat = latLon['lat']!;
           long = latLon['lon']!;
           fetchWeatherData();
+          print("Weather done");
         });
       }
       }); 
@@ -172,12 +173,16 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
             treatmentData = data;
             updated = isCurrentDateLater(treatmentData?['updatedAt']!);
             updateSelectionAndProgress(); 
+            print("update SelectionAnd Progress");
             fetchAndStoreTreatments();
+            print("fetch AndStore Treatments");
         });
       }
      
     });
+     print("load Crop Diseases");
     loadCropDiseases();
+     print("load Crop Diseases");
     super.initState();
   }
 
@@ -332,9 +337,12 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   }
 
   Future<void> loadCropDiseases() async {
+        print("loaded");
     final data = await DefaultAssetBundle.of(context)
         .loadString('assets/others/crop_disease_18nov.json');
     final Map<String, dynamic> jsonResult = json.decode(data);
+
+    print("loaded");
 
     setState(() {
       cropDiseaseList = (jsonResult['cropDiseases'] as List)
@@ -388,7 +396,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
 
       final Map<String, dynamic>? cropData = data.firstWhere(
         (item) => (item['crop'] as String).toLowerCase() == normalizedCropName,
-        orElse: () => null, // Return null if crop is not found
+        orElse: () => null, 
       );
 
       if (cropData == null) {
@@ -688,9 +696,9 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                           ],
                         ),
                         const SizedBox(height: 15,),
-                        _buildSoilNutrientRow("Nitrogen (N)", widget.soilDeficiency['n'], getColorForNutrient(widget.soilDeficiency['n'])),
-                        _buildSoilNutrientRow("Phosphorus (P)", widget.soilDeficiency['p'], getColorForNutrient(widget.soilDeficiency['p'])),
-                        _buildSoilNutrientRow("Potassium (K)",widget.soilDeficiency['k'], getColorForNutrient(widget.soilDeficiency['k'])),              
+                        _buildSoilNutrientRow("Nitrogen (N)", widget.soilDeficiency['n'].round(), getColorForNutrient(widget.soilDeficiency['n'].round())),
+                        _buildSoilNutrientRow("Phosphorus (P)", widget.soilDeficiency['p'].round(), getColorForNutrient(widget.soilDeficiency['p'].round())),
+                        _buildSoilNutrientRow("Potassium (K)",widget.soilDeficiency['k'].round(), getColorForNutrient(widget.soilDeficiency['k'].round())),              
                       ],
                     ),
                   ),

@@ -20,6 +20,7 @@ class OfflineDetection extends StatefulWidget {
 }
 
 class _OfflineDetectionState extends State<OfflineDetection> {
+
   final ImagePicker _picker = ImagePicker();
   XFile? _image;
   File? file;
@@ -53,9 +54,13 @@ class _OfflineDetectionState extends State<OfflineDetection> {
   }
 
 
+  int getRed(img.Pixel pixel) => pixel.r.toInt();
+  int getGreen(img.Pixel pixel) => pixel.g.toInt();
+  int getBlue(img.Pixel pixel) => pixel.b.toInt();
 
-  Future<double> calculateMean(File imageFile)  async{
 
+
+  Future<double> calculateMean(File imageFile) async {
     final imageBytes = await imageFile.readAsBytes();
     final img.Image? decodedImage = img.decodeImage(imageBytes);
 
@@ -63,19 +68,24 @@ class _OfflineDetectionState extends State<OfflineDetection> {
       print("Could not decode image.");
       return 0.0;
     }
-    List<int> pixels = [];
+
+    int sum = 0;
+    int totalPixels = decodedImage.width * decodedImage.height;
+
     for (int y = 0; y < decodedImage.height; y++) {
       for (int x = 0; x < decodedImage.width; x++) {
-        int pixel = decodedImage.getPixel(x, y) as int;
-        pixels.add(pixel);
+        final pixel = decodedImage.getPixel(x, y);
+        int intensity =
+            ((getRed(pixel) + getGreen(pixel) + getBlue(pixel)) / 3).round();
+        sum += intensity;
       }
     }
-    double mean = pixels.reduce((a, b) => a + b) / pixels.length;
 
+    double mean = sum / totalPixels;
     return mean;
-}
+  }
 
-  Future<double> calculateStdDev(File imageFile) async  {
+  Future<double> calculateStdDev(File imageFile) async {
     final imageBytes = await imageFile.readAsBytes();
     final img.Image? decodedImage = img.decodeImage(imageBytes);
 
@@ -84,21 +94,32 @@ class _OfflineDetectionState extends State<OfflineDetection> {
       return 0.0;
     }
 
-    List<int> pixels = [];
+    int totalPixels = decodedImage.width * decodedImage.height;
+
+    // Step 1: Calculate mean
+    int sum = 0;
     for (int y = 0; y < decodedImage.height; y++) {
       for (int x = 0; x < decodedImage.width; x++) {
-        int pixel = decodedImage.getPixel(x, y) as int;
-        pixels.add(pixel);
+        final pixel = decodedImage.getPixel(x, y);
+        int intensity =
+            ((getRed(pixel) + getGreen(pixel) + getBlue(pixel)) / 3).round();
+        sum += intensity;
+      }
+    }
+    double mean = sum / totalPixels;
+
+    // Step 2: Calculate variance
+    double varianceSum = 0.0;
+    for (int y = 0; y < decodedImage.height; y++) {
+      for (int x = 0; x < decodedImage.width; x++) {
+        final pixel = decodedImage.getPixel(x, y);
+        int intensity =
+            ((getRed(pixel) + getGreen(pixel) + getBlue(pixel)) / 3).round();
+        varianceSum += pow(intensity - mean, 2);
       }
     }
 
-    double mean = pixels.reduce((a, b) => a + b) / pixels.length;
-
-
-    double variance = pixels
-        .map((pixel) => pow(pixel - mean, 2))
-        .reduce((a, b) => a + b) /
-        pixels.length;
+    double variance = varianceSum / totalPixels;
     double stdDev = sqrt(variance);
 
     return stdDev;
@@ -176,8 +197,8 @@ class _OfflineDetectionState extends State<OfflineDetection> {
       path: image.path,
       numResults: 1,
       threshold: 0.05,
-      imageMean: 100,
-      imageStd:100,
+      imageMean: await calculateMean(image),
+      imageStd:await calculateStdDev(image),
     );
     setState(() {
       _recognitions = recognitions;

@@ -479,7 +479,6 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                 ),
               );
             }else {
-
               print("Disease not found: $diseaseName");
             }
           },
