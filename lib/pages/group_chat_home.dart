@@ -115,8 +115,19 @@ class _GroupChatHomeState extends State<GroupChatHome> {
                           return Flexible(
                             child: Text(
                               snapshot.data ?? "View Your Groups",
-                              style: const TextStyle(
-                                  fontSize: 24, fontWeight: FontWeight.w600),
+                              style:  TextStyle(
+                                  fontSize: 26, 
+                                  fontWeight: FontWeight.w600,
+                                  foreground: Paint()
+                                  ..shader = LinearGradient(
+                                    colors: <Color>[
+                                      context.theme.cardColor,
+                                       context.theme.primaryColorDark,
+                                    ],
+                                  ).createShader(
+                                    Rect.fromLTWH(0.0, 0.0, 200.0, 70.0),
+                                  ),
+                                ),
                             ),
                           );
                         },
@@ -130,10 +141,22 @@ class _GroupChatHomeState extends State<GroupChatHome> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
                   ..._groups.map((group) {
-                    return Card(
-                      color: Theme.of(context).highlightColor,
+                    return Container(
+                      decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [Colors.white, const Color.fromARGB(255, 236, 239, 231),context.theme.focusColor],),
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1), 
+                          offset: Offset(0, 4),
+                          blurRadius: 8,
+                          spreadRadius: 0,
+                        ),
+                      ],
+                      ),
+                     
                       margin: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 8),
                       child: ListTile(

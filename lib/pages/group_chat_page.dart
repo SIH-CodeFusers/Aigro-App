@@ -285,7 +285,9 @@ class _GroupChatPageState extends State<GroupChatPage> {
 
                 return Container(
                   decoration: BoxDecoration(
-                    color: context.theme.highlightColor,
+                    gradient: LinearGradient(
+                      colors: [Colors.white, const Color.fromARGB(255, 236, 239, 231),context.theme.focusColor],
+                    ),
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
@@ -322,7 +324,7 @@ class _GroupChatPageState extends State<GroupChatPage> {
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                                        color: context.theme.highlightColor,
                                       ),
                                     );
                                   },
@@ -493,6 +495,13 @@ class _GroupChatPageState extends State<GroupChatPage> {
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(8),
                                         borderSide: BorderSide(color: Colors.grey[200]!, width: 1),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8),
+                                        borderSide: BorderSide(
+                                          color: context.theme.cardColor,
+                                          width: 1.0,
+                                        ),
                                       ),
                                       filled: true,
                                       fillColor: Colors.grey[100],

@@ -149,42 +149,53 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
 
   @override
   void initState() {
-    
-    bdb.loadDataInfo(); 
-    if(languageBox.get("LANG") == null){
-      ldb.createLang();
-    }
-    else{
-      ldb.loadLang();
-    }
-    getLatLongFromPincode(bdb.userPin).then((latLon) {
-     if (latLon != null) {
-        setState(() {
-          lat = latLon['lat']!;
-          long = latLon['lon']!;
-          fetchWeatherData();
-          print("Weather done");
-        });
-      }
-      }); 
-     fetchFarmDetails().then((data) {
-      if (data != null) {
-         setState(() {
-            treatmentData = data;
-            updated = isCurrentDateLater(treatmentData?['updatedAt']!);
-            updateSelectionAndProgress(); 
-            print("update SelectionAnd Progress");
-            fetchAndStoreTreatments();
-            print("fetch AndStore Treatments");
-        });
-      }
-     
-    });
-     print("load Crop Diseases");
-    loadCropDiseases();
-     print("load Crop Diseases");
     super.initState();
+    initializeData(); 
+
   }
+
+  Future<void> initializeData() async {
+  // Load user data info
+   bdb.loadDataInfo();
+
+  // Check and load language preferences
+  if (languageBox.get("LANG") == null) {
+     ldb.createLang();
+  } else {
+     ldb.loadLang();
+  }
+
+  // Fetch latitude and longitude from pincode
+  final latLon = await getLatLongFromPincode(bdb.userPin);
+  if (latLon != null) {
+    setState(() {
+      lat = latLon['lat']!;
+      long = latLon['lon']!;
+    });
+    await fetchWeatherData();
+    print("Weather done");
+  }
+
+  // Fetch farm details
+  final data = await fetchFarmDetails();
+  if (data != null) {
+    setState(() {
+      treatmentData = data;
+      updated = isCurrentDateLater(treatmentData?['updatedAt']!);
+    });
+    updateSelectionAndProgress();
+    print("Update Selection and Progress");
+    await fetchAndStoreTreatments();
+    print("Fetch and Store Treatments");
+  }
+
+  // Load crop diseases
+  await loadCropDiseases();
+  setState(() {
+    isLoading=true;
+  });
+  print("Load Crop Diseases");
+}
 
   void updateSelectionAndProgress() {
     if (widget.severity == "low" && widget.yieldLoss <= 21) {
@@ -259,7 +270,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
     } catch (e) {
       // print('Error fetching weather data: $e');
     }
-    isLoading=true;
+    // isLoading=true;
   }
 
 
@@ -444,9 +455,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
   }
 
   Future<void> handleGroupComm(BuildContext context) async {
-    setState(() {
-      isLoading=true;
-    });
+
     final data = {
       'diseaseName': widget.diseaseName,
       'userClerkId': BACKEND_UID,
@@ -466,10 +475,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
         body: jsonEncode(data),
       );
 
-      // print(response.body);
-      setState(() {
-        isLoading=true;
-      });
+
       Future.delayed(const Duration(milliseconds: 1200), () {
         Navigator.pushNamed(context, '/grpHomeRoute');
       });
