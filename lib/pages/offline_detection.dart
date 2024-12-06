@@ -1,5 +1,6 @@
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/utils/translate.dart';
+import 'package:aigro/widgets/dotted_divider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -171,17 +172,36 @@ class _OfflineDetectionState extends State<OfflineDetection> {
     );
   }
 
-  Future<void> _pickImage() async {
+  Future<void> _pickImageCamera() async {
     try {
-      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-      setState(() {
-        _image = image;
-        file = File(image!.path);
-      });
-      detectimage(file!);
+      final XFile? image = await _picker.pickImage(
+        source: ImageSource.camera,
+        maxWidth: 600,
+        imageQuality: 85, // Adjust quality to reduce file size
+      );
+      if (image != null) {
+        setState(() {
+          _image = image;
+          file=File(image.path);
+        });
+        detectimage(file!);
+      }
     } catch (e) {
-      print('Error picking image: $e');
+      print("Error picking image: $e");
     }
+  }
+
+    Future<void> _pickImageGallery() async {
+      try {
+        final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+        setState(() {
+          _image = image;
+          file = File(image!.path);
+        });
+        detectimage(file!);
+      } catch (e) {
+        print('Error picking image: $e');
+      }
   }
 
   Future<void> _removeImage() async {
@@ -229,74 +249,129 @@ class _OfflineDetectionState extends State<OfflineDetection> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              if (_image != null)
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.file(
-                        File(_image!.path),
-                        height: 250,
-                        width: 250,
-                        fit: BoxFit.cover,
+            _image != null
+                ? Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          File(_image!.path),
+                          height: 250,
+                          width: 250,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    Positioned(
-                      top: 8,
-                      right: 8, 
-                      child: GestureDetector(
-                        onTap: (){
-                         _removeImage();
-                        },
-                        child: CircleAvatar(
-                          radius: 14,
-                          backgroundColor: Colors.grey[300],
-                          child: Icon(
-                            FeatherIcons.x,
-                            size: 16,
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: GestureDetector(
+                          onTap: _removeImage,
+                          child: CircleAvatar(
+                            radius: 14,
+                            backgroundColor: Colors.grey[300],
+                            child: Icon(
+                              FeatherIcons.x,
+                              size: 16,
+                            ),
                           ),
                         ),
-                      )
-                    ),
-                  ],
-                )
-              else
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: GestureDetector(
-                  onTap: _pickImage,
-                    child: Container(
-                    width: double.infinity,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      color: context.theme.highlightColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),  
-                    child: DottedBorder(
-                      color: Colors.grey,
-                      dashPattern: const [8, 4],
-                      strokeWidth: 1,
-                        borderType: BorderType.RRect, 
-                        radius: const Radius.circular(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            width: 50,
-                            height: 50,
-                            "assets/images/upload_image.png",
-                            fit: BoxFit.cover,
-                          ),
-                          Center(
-                            child: translateHelper('Pick a Image from your Gallery',TextStyle(color: context.theme.primaryColorDark,fontSize: 14),ldb.language)
-                          ),
-                        ],
                       ),
-                    ),
-                  ),  
-                ),
+                    ],
+                  )
+                : Column(
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: GestureDetector(
+                          onTap: _pickImageGallery,
+                          child: Container(
+                            width: double.infinity,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              color: context.theme.highlightColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: DottedBorder(
+                              color: Colors.grey,
+                              dashPattern: const [8, 4],
+                              strokeWidth: 1,
+                              borderType: BorderType.RRect,
+                              radius: const Radius.circular(10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/images/upload_image.png",
+                                    width: 50,
+                                    height: 50,
+                                    fit: BoxFit.contain,
+                                  ),
+                                  Center(
+                                    child: translateHelper(
+                                      'Pick an Image from your Gallery',
+                                      TextStyle(
+                                        color: context.theme.primaryColorDark,
+                                        fontSize: 14,
+                                      ),
+                                      ldb.language,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10,),
+                      dottedDivider(),
+                      SizedBox(height: 10,),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: GestureDetector(
+                          onTap: _pickImageCamera,
+                          child: Container(
+                            width: double.infinity,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              color: context.theme.highlightColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: DottedBorder(
+                              color: Colors.grey,
+                              dashPattern: const [8, 4],
+                              strokeWidth: 1,
+                              borderType: BorderType.RRect,
+                              radius: const Radius.circular(10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/images/camera.png",
+                                    width: 50,
+                                    height: 50,
+                                    fit: BoxFit.contain,
+                                  ),
+                                  Center(
+                                    child: translateHelper(
+                                      'Pick an Image from your Camera',
+                                      TextStyle(
+                                        color: context.theme.primaryColorDark,
+                                        fontSize: 14,
+                                      ),
+                                      ldb.language,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
               ),
+
               const SizedBox(height: 30),
               if (_image == null)
               translateHelper('No image selected', const TextStyle(), ldb.language),
@@ -341,6 +416,8 @@ class _OfflineDetectionState extends State<OfflineDetection> {
       ),
     );
   }
+
+
   FutureBuilder<String> translateHelper(String title, TextStyle style, String lang) {
     return FutureBuilder<String>(
       future: translateTextInput(title, lang),
