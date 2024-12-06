@@ -338,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        Navigator.pushNamed(context, '/imageAnalysis');
+                                        Navigator.pushNamed(context, '/newAnalysis');
                                       },
                                       child: Container(
                                         width: MediaQuery.of(context).size.width * 0.25, 
