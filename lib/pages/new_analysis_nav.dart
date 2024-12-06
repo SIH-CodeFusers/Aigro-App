@@ -508,38 +508,71 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                         ),
                         const SizedBox(height: 40),
                         if (uploaded == false && isAnalyzing == false)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: GestureDetector(
-                              onTap: () {
-                                _uploadAndAnalyzeImage();
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  color: context.theme.primaryColorDark,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Center(
-                                  child: FutureBuilder<String>(
-                                    future: translateTextInput(
-                                      translations['submit_analysis'] ?? 'Submit for Analysis',
-                                      ldb.language
+                          Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 30),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    _uploadAndAnalyzeImage();
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      color: context.theme.primaryColorDark,
+                                      borderRadius: BorderRadius.circular(5),
                                     ),
-                                    builder: (context, snapshot) {
-                                      return Text(
-                                        snapshot.data ?? 'Submit for Analysis',
+                                    child: Center(
+                                      child: FutureBuilder<String>(
+                                        future: translateTextInput(
+                                          translations['submit_analysis'] ?? 'Submit for Analysis',
+                                          ldb.language
+                                        ),
+                                        builder: (context, snapshot) {
+                                          return Text(
+                                            snapshot.data ?? 'Submit for Analysis',
+                                            style: TextStyle(
+                                              color: context.theme.highlightColor,
+                                              fontSize: 18,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 30),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => ImageAnalysis()),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      color: context.theme.primaryColorDark,
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'History of Analysis',
                                         style: TextStyle(
                                           color: context.theme.highlightColor,
                                           fontSize: 18,
                                         ),
-                                      );
-                                    },
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
                         if (uploaded == true)
                           Padding(
