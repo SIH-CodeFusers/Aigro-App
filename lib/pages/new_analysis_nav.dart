@@ -523,7 +523,7 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                                       color: context.theme.primaryColorDark,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
-                                    child: Center(
+                                   child: Center(
                                       child: FutureBuilder<String>(
                                         future: translateTextInput(
                                           translations['submit_analysis'] ?? 'Submit for Analysis',
@@ -561,12 +561,20 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: Center(
-                                      child: Text(
-                                        'History of Analysis',
-                                        style: TextStyle(
-                                          color: context.theme.highlightColor,
-                                          fontSize: 18,
+                                      child: FutureBuilder<String>(
+                                        future: translateTextInput(
+                                          translations['history_analysis'] ?? 'History of Analysis',
+                                          ldb.language
                                         ),
+                                        builder: (context, snapshot) {
+                                          return Text(
+                                            snapshot.data ?? 'History of Analysis',
+                                            style: TextStyle(
+                                              color: context.theme.highlightColor,
+                                              fontSize: 18,
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   ),
@@ -624,6 +632,7 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                             },
                           ),
                       ],
+
                     ),
                   ),
                 ),
