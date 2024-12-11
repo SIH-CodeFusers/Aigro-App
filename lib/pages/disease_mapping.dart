@@ -197,7 +197,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
   }
 
   Future<void> getNearbyAlerts(String pincode) async {
-    const String apiUrl = 'https://aigro-backend-alpha.vercel.app/api/futurePred/fetchNearbyAlerts';
+    const String apiUrl = '$BACKEND_URL/api/cropDiseases/fetchNearbyDiseases';
 
     final response = await http.post(
       Uri.parse(apiUrl),
