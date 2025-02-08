@@ -15,7 +15,7 @@ Future<Map<String, double>> getLatLongFromPincode(String pincode) async {
       if (data != null) {
         double lat = data['lat'];
         double lon = data['lon'];
-        return {'lat': lat, 'lon': lon}; // Return lat and lon as a map
+        return {'lat': lat, 'lon': lon}; 
       } else {
         print('No data found for this pincode.');
       }

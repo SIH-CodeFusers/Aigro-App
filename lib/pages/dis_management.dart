@@ -970,7 +970,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
                             ),
                           ),
                           minY: 0,
-                          maxY: 20,
+                          maxY: 100,
                           lineBarsData: [
                             LineChartBarData(
                               spots: treatmentData!['farmerTreatment']
@@ -1400,7 +1400,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: context.theme.primaryColorDark)),
             focusedBorder: OutlineInputBorder( borderRadius: BorderRadius.circular(8),borderSide: BorderSide(color: context.theme.primaryColorDark,width: 2),),
           ),
-          maxLines: 1,
+          maxLength: 2,
           keyboardType: TextInputType.number,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly], 
         ),
@@ -1410,7 +1410,7 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
           child: ElevatedButton(
             onPressed: () {
             int quantity = int.tryParse(_quancontroller.text) ?? 0;
-            handleFarmerDBUpload(fertSel: fertSel ?? '', quantity:quantity,);
+            handleFarmerDBUpload(fertSel: fertSel ?? treatmentData!['fertilisers'][0], quantity:quantity,);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor:updated? context.theme.primaryColorDark:const Color.fromRGBO(109, 143, 132,1),
@@ -1421,17 +1421,17 @@ class _DiseaseManagementState extends State<DiseaseManagement> {
             child: translateHelper("Save Treatment Details", const TextStyle(), ldb.language)
           ),
         ),
-        const SizedBox(height: 20), 
-        ElevatedButton(
-          onPressed: () => handleGroupComm(context),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: context.theme.primaryColorDark,
-            foregroundColor: context.theme.highlightColor,
-            minimumSize: const Size(double.infinity, 50),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          ),
-          child:translateHelper("Fertilizer Group", const TextStyle(), ldb.language)
-        ),
+         const SizedBox(height: 20), 
+          ElevatedButton(
+            onPressed: () => handleGroupComm(context),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: context.theme.primaryColorDark,
+              foregroundColor: context.theme.highlightColor,
+              minimumSize: const Size(double.infinity, 50),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            ),
+            child:translateHelper("Fertilizer Group", const TextStyle(), ldb.language)
+          ), 
       ],
     );
   }

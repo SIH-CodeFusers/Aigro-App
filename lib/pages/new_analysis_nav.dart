@@ -31,22 +31,17 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
   File? _cropImage;
   bool uploaded = false;
   bool isAnalyzing = false;
-  String selectedCrop = "Corn";
+  String selectedCrop = "Tomato";
   late Map<String, String> translations = {};
   late List<String> translatedCropOptions = [];
   late List<String> translatedStageOptions = [];
 
   final List<String> cropOptions = [
-    "Corn",
     "Tomato",
-    "Rice",
     "Apple",
     "Mango",
     "Banana",
-    "Tea",
-    "Cotton",
     "Sugarcane",
-    "Jute"
   ];
 
   String selectedCropStage = "Vegetative Growth";
@@ -323,12 +318,12 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                                           Center(
                                             child: FutureBuilder<String>(
                                               future: translateTextInput(
-                                                translations['pick_image'] ?? 'Pick a Image from your Gallery',
+                                                translations['pick_image'] ?? 'Pick a Image from your Gay',
                                                 ldb.language
                                               ),
                                               builder: (context, snapshot) {
                                                 return Text(
-                                                  snapshot.data ?? 'Pick a Image from your Gallery',
+                                                  'Pick a Image from your Gallery',
                                                   style: TextStyle(
                                                     color: context.theme.primaryColorDark,
                                                     fontSize: 14,
@@ -376,12 +371,12 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                                           Center(
                                             child: FutureBuilder<String>(
                                               future: translateTextInput(
-                                                translations['pick_image'] ?? 'Pick a Image from your Gallery',
+                                                translations['pick_image'] ?? 'Pick a Image from your Camera',
                                                 ldb.language
                                               ),
                                               builder: (context, snapshot) {
                                                 return Text(
-                                                  snapshot.data ?? 'Pick a Image from your Gallery',
+                                                   'Pick a Image from your Camera',
                                                   style: TextStyle(
                                                     color: context.theme.primaryColorDark,
                                                     fontSize: 14,
@@ -523,7 +518,7 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                                       color: context.theme.primaryColorDark,
                                       borderRadius: BorderRadius.circular(5),
                                     ),
-                                   child: Center(
+                                    child: Center(
                                       child: FutureBuilder<String>(
                                         future: translateTextInput(
                                           translations['submit_analysis'] ?? 'Submit for Analysis',
@@ -561,20 +556,12 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                                       borderRadius: BorderRadius.circular(5),
                                     ),
                                     child: Center(
-                                      child: FutureBuilder<String>(
-                                        future: translateTextInput(
-                                          translations['history_analysis'] ?? 'History of Analysis',
-                                          ldb.language
+                                      child: Text(
+                                        'History of Analysis',
+                                        style: TextStyle(
+                                          color: context.theme.highlightColor,
+                                          fontSize: 18,
                                         ),
-                                        builder: (context, snapshot) {
-                                          return Text(
-                                            snapshot.data ?? 'History of Analysis',
-                                            style: TextStyle(
-                                              color: context.theme.highlightColor,
-                                              fontSize: 18,
-                                            ),
-                                          );
-                                        },
                                       ),
                                     ),
                                   ),
@@ -632,7 +619,6 @@ class _NewAnalysisNavState extends State<NewAnalysisNav> {
                             },
                           ),
                       ],
-
                     ),
                   ),
                 ),

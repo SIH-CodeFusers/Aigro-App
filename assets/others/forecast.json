@@ -1,0 +1,3184 @@
+
+[
+    {
+      "disease_name": "Algal Leaf",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper-based fungicide",
+              "application_method": "Foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial algal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Phosphorous acid solution",
+              "application_method": "Soil drench",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Root zone protection against algal colonization"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Hydrogen peroxide solution",
+              "application_method": "Light surface spray",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Surface disinfection and algal spore reduction"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Copper hydroxide fungicide",
+              "application_method": "Full coverage foliar spray",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Broad-spectrum algal growth inhibition"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Potassium phosphite",
+              "application_method": "Systemic application",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Enhanced plant defense mechanism"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Chlorine dioxide solution",
+              "application_method": "Targeted surface treatment",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Aggressive algal spore elimination"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Zinc-based fungicide",
+              "application_method": "Foliar spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Micronutrient-based disease resistance"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Silicon-based plant fortifier",
+              "application_method": "Soil and foliar application",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Structural plant defense enhancement"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper sulfate pentahydrate",
+              "application_method": "Intensive foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Comprehensive algal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Hydrogen peroxide with surfactant",
+              "application_method": "High-pressure spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Aggressive surface decontamination"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Quaternary ammonium compound",
+              "application_method": "Thorough surface disinfection",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Microbial growth inhibition"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Potassium silicate solution",
+              "application_method": "Systemic and foliar treatment",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Extreme plant structural reinforcement"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Chlorhexidine-based fungicide",
+              "application_method": "Precision targeted spray",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Advanced pathogen control"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Nano-copper colloidal solution",
+              "application_method": "Advanced penetrative spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Deep tissue algal invasion prevention"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Multi-mineral plant protectant",
+              "application_method": "Comprehensive soil and foliar application",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Holistic plant immune system boost"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Anthracnose Mango",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper oxychloride",
+              "application_method": "Foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial fungal growth inhibition"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Mancozeb-based fungicide",
+              "application_method": "Light surface coverage",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Protective barrier against spore germination"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Propineb fungicide",
+              "application_method": "Targeted spray",
+              "dosage": "1.8 ml per liter of water",
+              "target_prevention": "Surface contamination reduction"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Azoxystrobin",
+              "application_method": "Full canopy spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Systemic fungal growth prevention"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Carbendazim fungicide",
+              "application_method": "Comprehensive foliar treatment",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Broad-spectrum disease control"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Propiconazole",
+              "application_method": "Penetrative spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Deep tissue fungal invasion prevention"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Copper hydroxide",
+              "application_method": "Dense foliage coverage",
+              "dosage": "3.2 ml per liter of water",
+              "target_prevention": "Enhanced protective shield"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Tebuconazole",
+              "application_method": "Systemic application",
+              "dosage": "3.8 ml per liter of water",
+              "target_prevention": "Comprehensive plant defense mechanism"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Metalaxyl-Mancozeb combination",
+              "application_method": "Intensive foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Aggressive fungal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Difenoconazole",
+              "application_method": "High-pressure total coverage",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Comprehensive disease management"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Copper sulfate pentahydrate",
+              "application_method": "Thorough surface treatment",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Extreme pathogen control"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Hexaconazole",
+              "application_method": "Precision targeted spray",
+              "dosage": "4.8 ml per liter of water",
+              "target_prevention": "Advanced fungal resistance breaking"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Captan fungicide",
+              "application_method": "Multi-directional application",
+              "dosage": "5.2 ml per liter of water",
+              "target_prevention": "Protective barrier reinforcement"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Thiabendazole",
+              "application_method": "Systemic deep penetration",
+              "dosage": "4.6 ml per liter of water",
+              "target_prevention": "Internal plant tissue protection"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Copper-zinc complex fungicide",
+              "application_method": "Comprehensive plant coverage",
+              "dosage": "5.7 ml per liter of water",
+              "target_prevention": "Holistic disease management strategy"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Aphids",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Neem oil concentrate",
+              "application_method": "Light foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial aphid population suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Insecticidal soap solution",
+              "application_method": "Targeted surface application",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Soft-bodied insect control"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Pyrethrin-based organic insecticide",
+              "application_method": "Fine mist spray",
+              "dosage": "1.8 ml per liter of water",
+              "target_prevention": "Natural pest deterrence"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Imidacloprid systemic insecticide",
+              "application_method": "Soil drench",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Comprehensive root zone protection"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Spirotetramat insecticide",
+              "application_method": "Full canopy spray",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Disruption of aphid reproductive cycle"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Acetamiprid contact insecticide",
+              "application_method": "Dense foliage coverage",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Rapid knockdown of active populations"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Horticultural oil mixture",
+              "application_method": "Thorough plant coating",
+              "dosage": "3.2 ml per liter of water",
+              "target_prevention": "Suffocation and barrier protection"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Thiamethoxam systemic insecticide",
+              "application_method": "Comprehensive plant treatment",
+              "dosage": "3.8 ml per liter of water",
+              "target_prevention": "Extended protection against reinfestation"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Chlorpyrifos organophosphate insecticide",
+              "application_method": "Intensive perimeter spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Aggressive population control"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Dinotefuran ultra-fast acting insecticide",
+              "application_method": "High-pressure total coverage",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Immediate and extensive pest elimination"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Bifenthrin synthetic pyrethroid",
+              "application_method": "Comprehensive field treatment",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Extreme pest population reduction"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Lambda-cyhalothrin broad-spectrum insecticide",
+              "application_method": "Precision targeted spray",
+              "dosage": "4.8 ml per liter of water",
+              "target_prevention": "Advanced resistance management"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Flonicamid selective insecticide",
+              "application_method": "Multi-directional application",
+              "dosage": "5.2 ml per liter of water",
+              "target_prevention": "Specific aphid metabolism disruption"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Sulfoxaflor systemic insecticide",
+              "application_method": "Deep penetrative treatment",
+              "dosage": "4.6 ml per liter of water",
+              "target_prevention": "Internal plant tissue protection"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Pymetrozine feeding inhibitor",
+              "application_method": "Comprehensive plant coverage",
+              "dosage": "5.7 ml per liter of water",
+              "target_prevention": "Holistic aphid control strategy"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Apple Scab",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper hydroxide fungicide",
+              "application_method": "Light foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial fungal spore suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Lime sulfur solution",
+              "application_method": "Targeted surface application",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Protective barrier against fungal growth"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Potassium bicarbonate",
+              "application_method": "Fine mist spray",
+              "dosage": "1.8 ml per liter of water",
+              "target_prevention": "Disruption of fungal cell membrane"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Chlorothalonil fungicide",
+              "application_method": "Full canopy spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Broad-spectrum fungal protection"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Mancozeb-based fungicide",
+              "application_method": "Comprehensive leaf coverage",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Preventive fungal growth inhibition"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Captan fungicide",
+              "application_method": "Dense foliage treatment",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Advanced scab spore control"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Propiconazole systemic fungicide",
+              "application_method": "Penetrative spray",
+              "dosage": "3.2 ml per liter of water",
+              "target_prevention": "Internal tissue protection"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Azoxystrobin fungicide",
+              "application_method": "Systemic application",
+              "dosage": "3.8 ml per liter of water",
+              "target_prevention": "Comprehensive disease resistance"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper sulfate pentahydrate",
+              "application_method": "Intensive foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Aggressive fungal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Tebuconazole-based fungicide",
+              "application_method": "High-pressure total coverage",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Comprehensive disease management"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Difenoconazole systemic fungicide",
+              "application_method": "Thorough surface treatment",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Extreme pathogen control"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Hexaconazole multi-site fungicide",
+              "application_method": "Precision targeted spray",
+              "dosage": "4.8 ml per liter of water",
+              "target_prevention": "Advanced fungal resistance breaking"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Metalaxyl-Mancozeb combination",
+              "application_method": "Multi-directional application",
+              "dosage": "5.2 ml per liter of water",
+              "target_prevention": "Protective barrier reinforcement"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Trifloxystrobin contact fungicide",
+              "application_method": "Systemic deep penetration",
+              "dosage": "4.6 ml per liter of water",
+              "target_prevention": "Internal plant tissue protection"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Copper-zinc complex fungicide",
+              "application_method": "Comprehensive plant coverage",
+              "dosage": "5.7 ml per liter of water",
+              "target_prevention": "Holistic disease management strategy"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Bacterial Leaf Blight",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper hydroxide bactericide",
+              "application_method": "Light foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial bacterial population suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Streptomycin sulfate",
+              "application_method": "Targeted surface application",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Protective barrier against bacterial spread"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Hydrogen peroxide solution",
+              "application_method": "Fine mist spray",
+              "dosage": "1.8 ml per liter of water",
+              "target_prevention": "Surface bacterial contamination reduction"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Copper oxychloride",
+              "application_method": "Full canopy spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Comprehensive bacterial growth inhibition"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Oxytetracycline hydrochloride",
+              "application_method": "Comprehensive leaf coverage",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Broad-spectrum bacterial control"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Kasugamycin bactericide",
+              "application_method": "Dense foliage treatment",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Advanced bacterial invasion prevention"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Fixed copper fungicide",
+              "application_method": "Penetrative spray",
+              "dosage": "3.2 ml per liter of water",
+              "target_prevention": "Internal tissue bacterial protection"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Bordeaux mixture",
+              "application_method": "Systemic application",
+              "dosage": "3.8 ml per liter of water",
+              "target_prevention": "Comprehensive disease resistance"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper sulfate pentahydrate",
+              "application_method": "Intensive foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Aggressive bacterial growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Gentamicin sulfate",
+              "application_method": "High-pressure total coverage",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Comprehensive bacterial disease management"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Copper-zinc complex bactericide",
+              "application_method": "Thorough surface treatment",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Extreme pathogen control"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Bacillus subtilis biological control",
+              "application_method": "Precision targeted spray",
+              "dosage": "4.8 ml per liter of water",
+              "target_prevention": "Advanced bacterial resistance management"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Silver nanoparticle solution",
+              "application_method": "Multi-directional application",
+              "dosage": "5.2 ml per liter of water",
+              "target_prevention": "Protective barrier reinforcement"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Potassium phosphite",
+              "application_method": "Systemic deep penetration",
+              "dosage": "4.6 ml per liter of water",
+              "target_prevention": "Internal plant tissue protection"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Chlorine dioxide solution",
+              "application_method": "Comprehensive plant coverage",
+              "dosage": "5.7 ml per liter of water",
+              "target_prevention": "Holistic bacterial control strategy"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Bacterial Panicle Blight",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper hydroxide bactericide",
+              "application_method": "Light foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial bacterial population suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Streptomycin sulfate",
+              "application_method": "Targeted panicle application",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Protective barrier against bacterial spread"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Hydrogen peroxide solution",
+              "application_method": "Fine mist spray",
+              "dosage": "1.8 ml per liter of water",
+              "target_prevention": "Surface bacterial contamination reduction"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Copper oxychloride",
+              "application_method": "Full panicle coverage spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Comprehensive bacterial growth inhibition"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Oxytetracycline hydrochloride",
+              "application_method": "Comprehensive panicle treatment",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Broad-spectrum bacterial control"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Kasugamycin bactericide",
+              "application_method": "Dense panicle foliage treatment",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Advanced bacterial invasion prevention"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Fixed copper fungicide",
+              "application_method": "Penetrative panicle spray",
+              "dosage": "3.2 ml per liter of water",
+              "target_prevention": "Internal tissue bacterial protection"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Bordeaux mixture",
+              "application_method": "Systemic panicle application",
+              "dosage": "3.8 ml per liter of water",
+              "target_prevention": "Comprehensive disease resistance"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper sulfate pentahydrate",
+              "application_method": "Intensive panicle foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Aggressive bacterial growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Gentamicin sulfate",
+              "application_method": "High-pressure total panicle coverage",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Comprehensive bacterial disease management"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Copper-zinc complex bactericide",
+              "application_method": "Thorough panicle surface treatment",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Extreme pathogen control"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Bacillus subtilis biological control",
+              "application_method": "Precision targeted panicle spray",
+              "dosage": "4.8 ml per liter of water",
+              "target_prevention": "Advanced bacterial resistance management"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Silver nanoparticle solution",
+              "application_method": "Multi-directional panicle application",
+              "dosage": "5.2 ml per liter of water",
+              "target_prevention": "Protective barrier reinforcement"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Potassium phosphite",
+              "application_method": "Systemic deep panicle penetration",
+              "dosage": "4.6 ml per liter of water",
+              "target_prevention": "Internal panicle tissue protection"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Chlorine dioxide solution",
+              "application_method": "Comprehensive panicle coverage",
+              "dosage": "5.7 ml per liter of water",
+              "target_prevention": "Holistic bacterial control strategy"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Bacterial Spot",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper hydroxide solution",
+              "application_method": "Light foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial bacterial growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Streptomycin sulfate",
+              "application_method": "Targeted spray",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Early bacterial population control"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Hydrogen peroxide solution",
+              "application_method": "Surface disinfection",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Surface bacterial reduction"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Copper oxychloride",
+              "application_method": "Full coverage foliar spray",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Comprehensive bacterial spread inhibition"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Potassium phosphite",
+              "application_method": "Systemic treatment",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Plant defense mechanism enhancement"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Oxytetracycline hydrochloride",
+              "application_method": "Precision targeted spray",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Bacterial growth interruption"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Bacillus subtilis solution",
+              "application_method": "Biological control spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Competitive bacterial inhibition"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Zinc-based bactericide",
+              "application_method": "Foliar and soil application",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Micronutrient-based disease resistance"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper sulfate pentahydrate",
+              "application_method": "Intensive foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Aggressive bacterial growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Hydrogen peroxide with surfactant",
+              "application_method": "High-pressure spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Deep surface decontamination"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Quaternary ammonium compound",
+              "application_method": "Comprehensive surface disinfection",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Extensive bacterial population control"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Advanced bacteriophage solution",
+              "application_method": "Precision targeted treatment",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Specific bacterial strain elimination"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Silver nanoparticle solution",
+              "application_method": "Advanced penetrative spray",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Nano-level bacterial invasion prevention"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Potassium silicate fortifier",
+              "application_method": "Systemic and foliar treatment",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Plant structural and immune enhancement"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Multi-mineral bacteriostatic compound",
+              "application_method": "Comprehensive soil and foliar application",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Holistic plant protection mechanism"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Bird Eye Spot",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper hydroxide fungicide",
+              "application_method": "Light foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial fungal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Sulfur-based fungicide",
+              "application_method": "Targeted spray",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Early fungal spot development control"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Hydrogen peroxide solution",
+              "application_method": "Surface disinfection",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Surface fungal spore reduction"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Azoxystrobin fungicide",
+              "application_method": "Full coverage foliar spray",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Comprehensive fungal spread inhibition"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Potassium phosphite",
+              "application_method": "Systemic treatment",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Plant defense mechanism enhancement"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Tebuconazole solution",
+              "application_method": "Precision targeted spray",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Fungal growth interruption"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Bacillus subtilis biological control",
+              "application_method": "Protective spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Competitive fungal inhibition"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Copper-zinc complex fungicide",
+              "application_method": "Foliar and soil application",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Micronutrient-based disease resistance"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper sulfate pentahydrate",
+              "application_method": "Intensive foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Aggressive fungal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Hydrogen peroxide with surfactant",
+              "application_method": "High-pressure spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Deep surface decontamination"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Propiconazole fungicide",
+              "application_method": "Comprehensive surface treatment",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Extensive fungal population control"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Trichoderma-based biological fungicide",
+              "application_method": "Precision targeted treatment",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Specific fungal strain elimination"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Silver nanoparticle antifungal solution",
+              "application_method": "Advanced penetrative spray",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Nano-level fungal invasion prevention"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Potassium silicate plant fortifier",
+              "application_method": "Systemic and foliar treatment",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Plant structural and immune enhancement"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Multi-mineral fungistatic compound",
+              "application_method": "Comprehensive soil and foliar application",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Holistic plant protection mechanism"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Brown Blight",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper hydroxide fungicide",
+              "application_method": "Light foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial fungal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Sulfur-based fungicide",
+              "application_method": "Targeted spray",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Early blight spot development control"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Hydrogen peroxide solution",
+              "application_method": "Surface disinfection",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Surface fungal spore reduction"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Chlorothalonil fungicide",
+              "application_method": "Full coverage foliar spray",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Comprehensive fungal spread inhibition"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Potassium phosphite",
+              "application_method": "Systemic treatment",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Plant defense mechanism enhancement"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Mancozeb-based fungicide",
+              "application_method": "Precision targeted spray",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Fungal growth interruption"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Bacillus subtilis biological control",
+              "application_method": "Protective spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Competitive fungal inhibition"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Copper-zinc complex fungicide",
+              "application_method": "Foliar and soil application",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Micronutrient-based disease resistance"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper sulfate pentahydrate",
+              "application_method": "Intensive foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Aggressive fungal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Hydrogen peroxide with surfactant",
+              "application_method": "High-pressure spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Deep surface decontamination"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Propiconazole fungicide",
+              "application_method": "Comprehensive surface treatment",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Extensive fungal population control"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Metconazole systemic fungicide",
+              "application_method": "Precision targeted treatment",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Specific fungal strain elimination"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Silver nanoparticle antifungal solution",
+              "application_method": "Advanced penetrative spray",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Nano-level fungal invasion prevention"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Potassium silicate plant fortifier",
+              "application_method": "Systemic and foliar treatment",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Plant structural and immune enhancement"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Multi-mineral fungistatic compound",
+              "application_method": "Comprehensive soil and foliar application",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Holistic plant protection mechanism"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Brown Spot",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper hydroxide fungicide",
+              "application_method": "Light foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial fungal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Sulfur-based fungicide",
+              "application_method": "Targeted spray",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Early spot development control"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Hydrogen peroxide solution",
+              "application_method": "Surface disinfection",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Surface fungal spore reduction"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Pyraclostrobin fungicide",
+              "application_method": "Full coverage foliar spray",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Comprehensive fungal spread inhibition"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Potassium phosphite",
+              "application_method": "Systemic treatment",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Plant defense mechanism enhancement"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Boscalid fungicide",
+              "application_method": "Precision targeted spray",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Fungal growth interruption"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Bacillus subtilis biological control",
+              "application_method": "Protective spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Competitive fungal inhibition"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Copper-zinc complex fungicide",
+              "application_method": "Foliar and soil application",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Micronutrient-based disease resistance"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper sulfate pentahydrate",
+              "application_method": "Intensive foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Aggressive fungal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Hydrogen peroxide with surfactant",
+              "application_method": "High-pressure spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Deep surface decontamination"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Tebuconazole fungicide",
+              "application_method": "Comprehensive surface treatment",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Extensive fungal population control"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Azoxystrobin-metalaxyl combination",
+              "application_method": "Precision targeted treatment",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Specific fungal strain elimination"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Silver nanoparticle antifungal solution",
+              "application_method": "Advanced penetrative spray",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Nano-level fungal invasion prevention"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Potassium silicate plant fortifier",
+              "application_method": "Systemic and foliar treatment",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Plant structural and immune enhancement"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Multi-mineral fungistatic compound",
+              "application_method": "Comprehensive soil and foliar application",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Holistic plant protection mechanism"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Die Back",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper hydroxide fungicide",
+              "application_method": "Light foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial fungal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Thiophanate-methyl fungicide",
+              "application_method": "Targeted spray",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Early die back symptom control"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Hydrogen peroxide solution",
+              "application_method": "Surface disinfection",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Surface pathogen reduction"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Carbendazim fungicide",
+              "application_method": "Full coverage foliar spray",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Comprehensive pathogen spread inhibition"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Potassium phosphite",
+              "application_method": "Systemic treatment",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Plant defense mechanism enhancement"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Propiconazole fungicide",
+              "application_method": "Precision targeted spray",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Fungal growth interruption"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Trichoderma-based biological control",
+              "application_method": "Protective spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Competitive pathogen inhibition"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Copper-zinc complex fungicide",
+              "application_method": "Foliar and soil application",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Micronutrient-based disease resistance"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper sulfate pentahydrate",
+              "application_method": "Intensive foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Aggressive pathogen growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Hydrogen peroxide with surfactant",
+              "application_method": "High-pressure spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Deep surface decontamination"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Tebuconazole systemic fungicide",
+              "application_method": "Comprehensive surface treatment",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Extensive pathogen population control"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Metalaxyl-mancozeb combination",
+              "application_method": "Precision targeted treatment",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Specific pathogen strain elimination"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Silver nanoparticle antifungal solution",
+              "application_method": "Advanced penetrative spray",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Nano-level pathogen invasion prevention"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Potassium silicate plant fortifier",
+              "application_method": "Systemic and foliar treatment",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Plant structural and immune enhancement"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Multi-mineral fungistatic compound",
+              "application_method": "Comprehensive soil and foliar application",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Holistic plant protection mechanism"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Jute Stem Weevil",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Neem oil-based insecticide",
+              "application_method": "Light foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial weevil population suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Pyrethrin-based insecticide",
+              "application_method": "Targeted spray",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Early weevil migration control"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Diatomaceous earth suspension",
+              "application_method": "Surface application",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Physical barrier against weevil movement"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Imidacloprid systemic insecticide",
+              "application_method": "Full coverage foliar spray",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Comprehensive weevil spread inhibition"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Spinosad organic insecticide",
+              "application_method": "Systemic treatment",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Stem and leaf protection"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Chlorpyrifos-based insecticide",
+              "application_method": "Precision targeted spray",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Weevil population interruption"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Beauveria bassiana biological control",
+              "application_method": "Protective spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Fungal-based weevil suppression"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Azadirachtin concentrated extract",
+              "application_method": "Foliar and stem application",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Natural growth inhibitor and repellent"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Deltamethrin synthetic pyrethroid",
+              "application_method": "Intensive foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Aggressive weevil eradication"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Fipronil concentrated insecticide",
+              "application_method": "High-pressure spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Deep tissue and stem protection"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Lambda-cyhalothrin contact insecticide",
+              "application_method": "Comprehensive surface treatment",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Extensive weevil population control"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Emamectin benzoate systemic insecticide",
+              "application_method": "Precision targeted treatment",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Specific weevil strain elimination"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Silver nanoparticle insecticidal solution",
+              "application_method": "Advanced penetrative spray",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Nano-level pest invasion prevention"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Potassium silicate plant fortifier",
+              "application_method": "Systemic and foliar treatment",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Plant structural and defensive enhancement"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Multi-mineral insect repellent compound",
+              "application_method": "Comprehensive soil and foliar application",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Holistic plant protection mechanism"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Root Rot",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper-based fungicide",
+              "application_method": "Soil drench",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial fungal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Neem oil solution",
+              "application_method": "Foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Natural insect repellent and fungal growth inhibitor"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Bacillus subtilis",
+              "application_method": "Soil application",
+              "dosage": "10 grams per liter of water",
+              "target_prevention": "Beneficial bacteria to outcompete pathogens"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Fungicide containing Carbendazim",
+              "application_method": "Soil drench",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Broad-spectrum fungal disease control"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Potassium phosphite",
+              "application_method": "Foliar spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Enhances plant defense against pathogens"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Chlorothalonil fungicide",
+              "application_method": "Preventive soil treatment",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Control of various fungal pathogens"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Hydrogen peroxide solution",
+              "application_method": "Soil drench",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Disinfection and oxygenation of soil"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Trichoderma harzianum",
+              "application_method": "Soil application",
+              "dosage": "$10 grams per liter of water$",
+              "target_prevention": "Biological control agent against root pathogens"
+            }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": "1",
+              "chemical_treatment": "Copper sulfate",
+              "application_method": "Intensive soil drench",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Comprehensive fungal growth suppression"
+            },
+            {
+              "day": "3",
+              "chemical_treatment": "Fosetyl-Al fungicide",
+              "application_method": "Foliar and soil application",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Systemic protection against root rot fungi"
+            },
+            {
+              "day": "5",
+              "chemical_treatment": "Sodium bicarbonate solution",
+              "application_method": "Soil drench",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Alkaline treatment to inhibit fungal growth"
+            },
+            {
+              "day": "7",
+              "chemical_treatment": "Azoxystrobin fungicide",
+              "application_method": "Preventive soil treatment",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Broad-spectrum disease control"
+            },
+            {
+              "day": "9",
+              "chemical_treatment": "Chlorine dioxide solution",
+              "application_method": "Surface and soil treatment",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Aggressive pathogen elimination"
+            },
+            {
+              "day": "11",
+              "chemical_treatment": "Fungicidal soap solution",
+              "application_method": "Foliar spray and soil drench",
+              "dosage": "6 ml per liter of water",
+              "target_prevention": "Effective against surface pathogens and spores"
+            },
+            {
+              "day": "13",
+              "chemical_treatment": "Multi-mineral plant protectant",
+              "application_method": "Comprehensive soil and foliar application",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Holistic plant immune system boost"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Rust Disease",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Neem oil solution",
+              "application_method": "Foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Natural fungicide to inhibit rust development"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Sulfur dust",
+              "application_method": "Dusting on foliage",
+              "dosage": "Weekly application as needed",
+              "target_prevention": "Preventative measure against rust fungus"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Baking soda solution",
+              "application_method": "Foliar spray",
+              "dosage": "1 teaspoon per liter of water",
+              "target_prevention": "Fungal growth suppression"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Chlorothalonil fungicide",
+              "application_method": "Preventive foliar spray",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Broad-spectrum rust control"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Mancozeb fungicide",
+              "application_method": "Soil drench",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Protectant against multiple fungal diseases"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Myclobutanil fungicide",
+              "application_method": "Foliar application",
+              "dosage": "$4 ml per liter of water$",
+              "target_prevention":"Eradicates established rust infections"
+            },
+            {
+              "day":"8", 
+               "chemical_treatment":"Trifloxystrobin", 
+               "application_method":"Foliar spray", 
+               "dosage":"3 ml per liter of water", 
+               "target_prevention":"Inhibits fungal respiration and growth"
+             },
+             {
+               "day":"10", 
+               "chemical_treatment":"Potassium phosphite", 
+               "application_method":"Systemic treatment", 
+               "dosage":"4 ml per liter of water", 
+               "target_prevention":"Enhances plant defense mechanisms"
+             }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day":"1", 
+               "chemical_treatment":"Daconil fungicide", 
+               "application_method":"Intensive foliar spray", 
+               "dosage":"5 ml per liter of water", 
+               "target_prevention":"Comprehensive rust disease control"
+             },
+             {
+               "day":"3", 
+               "chemical_treatment":"Azoxystrobin fungicide", 
+               "application_method":"Preventive application", 
+               "dosage":"4.5 ml per liter of water", 
+               "target_prevention":"Systemic protection against rust pathogens"
+             },
+             {
+               "day":"5", 
+               "chemical_treatment":"Fosetyl-Al fungicide", 
+               "application_method":"Soil and foliar application", 
+               "dosage":"4 ml per liter of water", 
+               "target_prevention":"Long-lasting protection against rust"
+             },
+             {
+               "day":"7", 
+               "chemical_treatment":"Chlorine dioxide solution", 
+               "application_method":"Surface treatment and soil drench", 
+               "dosage":"5 ml per liter of water", 
+               "target_prevention":"Aggressive pathogen elimination"
+             },
+             {
+               "day":"9", 
+               "chemical_treatment":"Copper sulfate solution", 
+               "application_method":"Intensive foliar spray", 
+               "dosage":"6 ml per liter of water", 
+               "target_prevention":"Comprehensive fungal growth suppression"
+             },
+             {
+               "day":"11", 
+               "chemical_treatment":"Systhane 20EW fungicide", 
+               "application_method":"Preventive and curative treatment", 
+               "dosage":"3.5 ml per liter of water", 
+               "target_prevention":"Effective against various rust diseases"
+             },
+             {
+               "day":"13", 
+               "chemical_treatment":"Multi-mineral plant protectant", 
+               "application_method":"Comprehensive soil and foliar application", 
+               "dosage":"5 ml per liter of water", 
+               "target_prevention":"Boosts overall plant immunity"
+             }
+           ]
+         }
+       }
+    },
+    {
+      "disease_name": "Leaf Blast",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Copper hydroxide fungicide",
+              "application_method": "Foliar spray",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial fungal growth suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Phosphorous acid solution",
+              "application_method": "Soil drench",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Root zone protection against blast disease"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Sulfur-based protective spray",
+              "application_method": "Light surface spray",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Fungal spore germination inhibition"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Azoxystrobin fungicide",
+              "application_method": "Full coverage foliar spray",
+              "dosage": "3 ml per liter of water",
+              "target_prevention": "Broad-spectrum blast disease inhibition"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Propiconazole treatment",
+              "application_method": "Systemic application",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Enhanced plant defense mechanism"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Mancozeb protective spray",
+              "application_method": "Targeted surface treatment",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Aggressive fungal spore elimination"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Tebuconazole solution",
+              "application_method": "Foliar spray",
+              "dosage": "3.5 ml per liter of water",
+              "target_prevention": "Systemic disease resistance"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Copper oxychloride fungicide",
+              "application_method": "Soil and foliar application",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Comprehensive pathogen control"
+            }
+          ]
+        },
+        "High": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Trifloxystrobin advanced fungicide",
+              "application_method": "Intensive foliar spray",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Comprehensive blast disease suppression"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Difenoconazole intensive treatment",
+              "application_method": "High-pressure spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Aggressive fungal spread halting"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Boscalid combination spray",
+              "application_method": "Thorough surface treatment",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Multi-point fungal infection blocking"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Metalaxyl-M systemic protection",
+              "application_method": "Systemic and foliar treatment",
+              "dosage": "4.5 ml per liter of water",
+              "target_prevention": "Advanced internal plant protection"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Hexaconazole concentrated solution",
+              "application_method": "Precision targeted spray",
+              "dosage": "5.5 ml per liter of water",
+              "target_prevention": "Advanced pathogen control"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Carbendazim advanced treatment",
+              "application_method": "Deep penetrative spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Systemic fungal invasion prevention"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Iprodione protective spray",
+              "application_method": "Comprehensive soil and foliar application",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Holistic plant immune system boost"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Leaf Mold",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Neem oil",
+              "application_method": "Foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Mild antifungal properties to reduce initial infection"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Bacillus subtilis",
+              "application_method": "Soil drench",
+              "dosage": "10 ml per liter of water",
+              "target_prevention": "Promotes beneficial microbial activity in the soil"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Potassium bicarbonate",
+              "application_method": "Foliar spray",
+              "dosage": "3 g per liter of water",
+              "target_prevention": "Suppresses fungal growth on leaf surfaces"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Copper hydroxide fungicide",
+              "application_method": "Full coverage foliar spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Broad-spectrum control against fungal pathogens"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Chlorothalonil",
+              "application_method": "Preventive foliar application",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Provides protective barrier against fungal spores"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Sulfur-based fungicide",
+              "application_method": "Dust or spray application",
+              "dosage": "5 g per liter of water",
+              "target_prevention": "Inhibits fungal growth and reproduction"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Azoxystrobin",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Systemic protection against a wide range of fungi"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "Trifloxystrobin",
+              "application_method": "Foliar application",
+              "dosage": ".75 ml per liter of water",
+              "target_prevention": ".Prevents the spread of leaf mold and other diseases"
+            }
+          ]
+        },
+        "High": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "-Mefenoxam",
+              "application_method": ".Soil drench",
+              ".dosage": "0.75 ml per liter of water",
+              "target_prevention": "Effective against root and foliar infections"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Fosetyl-Aluminum (Aliette)",
+              "application_method": "Systemic foliar application",
+              "dosage": "2 g per liter of water",
+              "target_prevention": "Enhances plant resistance to diseases"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Difenoconazole",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Controls various fungal diseases effectively"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Tebuconazole",
+              "application_method": "Foliar application",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Long-lasting protection against leaf mold"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Propiconazole",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Effective against systemic fungal infections"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Carbendazim",
+              "application_method": "Soil and foliar application",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Broad-spectrum fungicide for severe outbreaks"
+            },
+            {
+              "day": 13,
+              "chemical_treatment": "Fenhexamid",
+              "application_method": "Targeted foliar application",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Specifically targets leaf mold pathogens"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Leaf Spot",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Neem oil",
+              "application_method": "Foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Mild antifungal properties to reduce initial infection"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Potassium bicarbonate",
+              "application_method": "Foliar spray",
+              "dosage": "3 g per liter of water",
+              "target_prevention": "Suppresses fungal growth on leaf surfaces"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Bacillus subtilis",
+              "application_method": "Soil drench",
+              "dosage": "10 ml per liter of water",
+              "target_prevention": "Promotes beneficial microbial activity in the soil"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Copper hydroxide fungicide",
+              "application_method": "Full coverage foliar spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Broad-spectrum control against fungal pathogens"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Chlorothalonil",
+              "application_method": "Preventive foliar application",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Provides protective barrier against fungal spores"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "Sulfur-based fungicide",
+              "application_method": "Dust or spray application",
+              "dosage": "5 g per liter of water",
+              "target_prevention": "Inhibits fungal growth and reproduction"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "Azoxystrobin",
+              "application_method": "Foliar spray",
+              "dosage": ".75 ml per liter of water",
+              "target_prevention": ".Systemic protection against a wide range of fungi"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "-Mefenoxam",
+              "application_method": ".Soil drench",
+              "dosage": "0.75 ml per liter of water",
+              "target_prevention": "Effective against root and foliar infections"
+            }
+          ]
+        },
+        "High": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "-Fosetyl-Aluminum (Aliette)",
+              "application_method": "Systemic foliar application",
+              "dosage": "2 g per liter of water",
+              "target_prevention": "Enhances plant resistance to diseases"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Difenoconazole",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Controls various fungal diseases effectively"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Tebuconazole",
+              "application_method": "Foliar application",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Long-lasting protection against leaf spot"
+            },
+            {
+              "day": "7",
+              "chemical_treatment": "Propiconazole",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Effective against systemic fungal infections"
+            },
+            {
+              "day": "9",
+              "chemical_treatment": "Carbendazim",
+              "application_method": "Soil and foliar application",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Broad-spectrum fungicide for severe outbreaks"
+            },
+            {
+              "day": "11",
+              "chemical_treatment": "Fenhexamid",
+              "application_method": "Targeted foliar application",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Specifically targets leaf spot pathogens"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Powdery Mildew",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Neem oil",
+              "application_method": "Foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Mild antifungal properties to reduce initial infection"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Potassium bicarbonate",
+              "application_method": "Foliar spray",
+              "dosage": "3 g per liter of water",
+              "target_prevention": "Suppresses fungal growth on leaf surfaces"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Bacillus subtilis",
+              "application_method": "Soil drench",
+              "dosage": "10 ml per liter of water",
+              "target_prevention": "Promotes beneficial microbial activity in the soil"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Copper hydroxide fungicide",
+              "application_method": "Full coverage foliar spray",
+              "dosage": "4 ml per liter of water",
+              "target_prevention": "Broad-spectrum control against fungal pathogens"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Chlorothalonil",
+              "application_method": "Preventive foliar application",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Provides protective barrier against fungal spores"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "-Fosetyl-Aluminum (Aliette)",
+              "application_method": "Systemic foliar application",
+              "dosage": "2 g per liter of water",
+              "target_prevention": "Enhances plant resistance to diseases"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "-Mefenoxam",
+              "application_method": ".Soil drench",
+              "dosage": ".75 ml per liter of water",
+              "target_prevention": ".Effective against root and foliar infections"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "-Daconil fungicide",
+              "application_method": ".Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Controls various fungal diseases effectively"
+            }
+          ]
+        },
+        "High": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "-Triadimefon",
+              "application_method": "Foliar spray",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Effective control against powdery mildew"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Propiconazole",
+              "application_method": "Foliar application",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Long-lasting protection against powdery mildew"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Myclobutanil",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Broad-spectrum fungicide for severe outbreaks"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Hexaconazole",
+              "application_method": "Targeted foliar application",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Specifically targets powdery mildew pathogens"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Penconazole",
+              "application_method": "Soil and foliar application",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Effective against systemic fungal infections"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Fenhexamid",
+              "application_method": "Targeted foliar application",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Specifically targets powdery mildew pathogens"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "RedRot disease",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Thiophanate methyl",
+              "application_method": "Sett treatment",
+              "dosage": "0.1% solution",
+              "target_prevention": "Prevents sett-borne infections"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Bordeaux mixture",
+              "application_method": "Dip treatment for setts",
+              "dosage": "1% solution",
+              "target_prevention": "Initial protection against fungal infection"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Trichoderma spp.",
+              "application_method": "Soil and sett treatment",
+              "dosage": "20 kg TMC/ha",
+              "target_prevention": "Enhances soil health and reduces disease incidence"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Azoxystrobin + Difenoconazole (Amistar Top)",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Broad-spectrum control against red rot"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Carbendazim",
+              "application_method": "Sett dip treatment",
+              "dosage": ".25% suspension for 30-60 min",
+              "target_prevention": "Controls primary source of red rot from setts"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "-Fosetyl-Aluminum (Aliette)",
+              "application_method": ".Systemic foliar application",
+              "dosage": "2 g per liter of water",
+              "target_prevention": "Enhances plant resistance to diseases"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "-Mefenoxam",
+              "application_method": "Soil drench",
+              "dosage": "0.75 ml per liter of water",
+              "target_prevention": "Effective against root and foliar infections"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "-Daconil fungicide",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Controls various fungal diseases effectively"
+            }
+          ]
+        },
+        "High": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "-Propiconazole",
+              "application_method": "Foliar application",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Long-lasting protection against red rot"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Myclobutanil",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Broad-spectrum fungicide for severe outbreaks"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Penconazole",
+              "application_method": "Soil and foliar application",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Effective against systemic fungal infections"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Fenhexamid",
+              "application_method": "Targeted foliar application",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Specifically targets red rot pathogens"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Trichoderma spp.",
+              "application_method": "Soil and sett treatment",
+              "dosage": "20 kg TMC/ha",
+              "target_prevention": "Enhances soil health and reduces disease incidence"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Chlorothalonil",
+              "application_method": "Preventive foliar application",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Provides protective barrier against fungal spores"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Sooty Mould",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Soapy water solution",
+              "application_method": "Damp cloth or sponge application",
+              "dosage": "1 tablespoon of liquid detergent per gallon of water",
+              "target_prevention": "Wipe off initial sooty coating from leaves"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Neem oil",
+              "application_method": "Foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Reduces pest populations that produce honeydew"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Bordeaux mixture",
+              "application_method": "Spray application",
+              "dosage": "1% solution",
+              "target_prevention": "Initial protection against fungal infections"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Horticultural oil (e.g., EarthCare White Oil)",
+              "application_method": "Foliar spray",
+              "dosage": ".5% solution",
+              "target_prevention": "Controls sap-sucking insects that secrete honeydew"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "-Fosetyl-Aluminum (Aliette)",
+              "application_method": ".Systemic foliar application",
+              "dosage": "2 g per liter of water",
+              "target_prevention": "Enhances plant resistance to diseases"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "-Mefenoxam",
+              "application_method": "Soil drench",
+              "dosage": "0.75 ml per liter of water",
+              "target_prevention": "Effective against root and foliar infections"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "-Daconil fungicide",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Controls various fungal diseases effectively"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "-Azoxystrobin + Difenoconazole (Amistar Top)",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Broad-spectrum control against sooty mould"
+            }
+          ]
+        },
+        "High": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "-Propiconazole",
+              "application_method": "Foliar application",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Long-lasting protection against sooty mould"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Myclobutanil",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Broad-spectrum fungicide for severe outbreaks"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Penconazole",
+              "application_method": "Soil and foliar application",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Effective against systemic fungal infections"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Fenhexamid",
+              "application_method": "Targeted foliar application",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Specifically targets sooty mould pathogens"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Chlorothalonil",
+              "application_method": "Preventive foliar application",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Provides protective barrier against fungal spores"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Insecticidal soap or oil",
+              "application_method": "Spray application on affected areas",
+              "dosage": "Follow label instructions for dilution",
+              "target_prevention": "Controls sap-sucking insects that cause honeydew production"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Target Spot",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Soapy water solution",
+              "application_method": "Damp cloth or sponge application",
+              "dosage": "1 tablespoon of liquid detergent per gallon of water",
+              "target_prevention": "Wipe off initial sooty coating from leaves"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Neem oil",
+              "application_method": "Foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Reduces pest populations that produce honeydew"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Bordeaux mixture",
+              "application_method": "Spray application",
+              "dosage": "1% solution",
+              "target_prevention": "Initial protection against fungal infections"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Azoxystrobin (e.g. Quadris)",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Broad-spectrum control against target spot"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Mancozeb (e.g. Manzate Pro Stick)",
+              "application_method": "Foliar spray",
+              "dosage": ".25% suspension for 30-60 min",
+              "target_prevention": "Controls primary source of target spot from setts"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "-Fosetyl-Aluminum (Aliette)",
+              "application_method": ".Systemic foliar application",
+              "dosage": "2 g per liter of water",
+              "target_prevention": "Enhances plant resistance to diseases"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "-Mefenoxam",
+              "application_method": "Soil drench",
+              "dosage": "0.75 ml per liter of water",
+              "target_prevention": "Effective against root and foliar infections"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "-Chlorothalonil",
+              "application_method": "Preventive foliar application",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Provides protective barrier against fungal spores"
+            }
+          ]
+        },
+        "High": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "-Propiconazole",
+              "application_method": "Foliar application",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Long-lasting protection against target spot"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Myclobutanil",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Broad-spectrum fungicide for severe outbreaks"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Penconazole",
+              "application_method": "Soil and foliar application",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Effective against systemic fungal infections"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Fenhexamid",
+              "application_method": "Targeted foliar application",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Specifically targets target spot pathogens"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Azoxystrobin + Difenoconazole (Amistar Top)",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Broad-spectrum control against target spot"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Insecticidal soap or oil",
+              "application_method": "Spray application on affected areas",
+              "dosage": "Follow label instructions for dilution",
+              "target_prevention": "Controls sap-sucking insects that can exacerbate the disease"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Yellow Disease",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Neem oil",
+              "application_method": "Foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Reduces pest populations that may carry the virus"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Soapy water solution",
+              "application_method": "Damp cloth or sponge application",
+              "dosage": "1 tablespoon of liquid detergent per gallon of water",
+              "target_prevention": "Wipe off initial contamination from tools and surfaces"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Bordeaux mixture",
+              "application_method": "Spray application",
+              "dosage": "1% solution",
+              "target_prevention": "Initial protection against fungal infections"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "-Fosetyl-Aluminum (Aliette)",
+              "application_method": ".Systemic foliar application",
+              "dosage": "2 g per liter of water",
+              "target_prevention": "Enhances plant resistance to diseases"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "-Mefenoxam",
+              "application_method": "Soil drench",
+              "dosage": "0.75 ml per liter of water",
+              "target_prevention": "Effective against root and foliar infections"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "-Azoxystrobin + Difenoconazole (Amistar Top)",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Broad-spectrum control against yellow Sigatoka"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "-Chlorothalonil",
+              "application_method": "Preventive foliar application",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Provides protective barrier against fungal spores"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "-Mancozeb",
+              "application_method": "Foliar spray",
+              "dosage": "2 g per liter of water",
+              "target_prevention": "Controls primary source of yellow Sigatoka from setts"
+            }
+          ]
+        },
+        "High": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "-Propiconazole",
+              "application_method": "Foliar application",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Long-lasting protection against yellow Sigatoka"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Myclobutanil",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Broad-spectrum fungicide for severe outbreaks"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Penconazole",
+              "application_method": "Soil and foliar application",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Effective against systemic fungal infections"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Fenhexamid",
+              "application_method": "Targeted foliar application",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Specifically targets yellow Sigatoka pathogens"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Insecticidal soap or oil",
+              "application_method": "Spray application on affected areas",
+              "dosage": "Follow label instructions for dilution",
+              "target_prevention": "Controls sap-sucking insects that can exacerbate the disease"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Deleafing infected leaves",
+              "application_method": "Manual removal and disposal",
+              "dosage": "N/A",
+              "target_prevention": "Reduces disease inoculum levels in the field"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Yellow Sigatoka",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Neem oil",
+              "application_method": "Foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Reduces pest populations that may carry the virus"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Soapy water solution",
+              "application_method": "Damp cloth or sponge application",
+              "dosage": "1 tablespoon of liquid detergent per gallon of water",
+              "target_prevention": "Wipe off initial contamination from tools and surfaces"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Bordeaux mixture",
+              "application_method": "Spray application",
+              "dosage": "1% solution",
+              "target_prevention": "Initial protection against fungal infections"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Carbendazim + Mancozeb",
+              "application_method": "Foliar spray",
+              "dosage": "300-400 grams per acre",
+              "target_prevention": "Controls early symptoms of yellow Sigatoka"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "-Fosetyl-Aluminum (Aliette)",
+              "application_method": ".Systemic foliar application",
+              "dosage": "2 g per liter of water",
+              "target_prevention": "Enhances plant resistance to diseases"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "-Propiconazole",
+              "application_method": ".Foliar application",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Long-lasting protection against yellow Sigatoka"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "-Chlorothalonil",
+              "application_method": "Preventive foliar application",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Provides protective barrier against fungal spores"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "-Mancozeb",
+              "application_method": "Foliar spray",
+              "dosage": "2 g per liter of water",
+              "target_prevention": "Controls primary source of yellow Sigatoka from setts"
+            }
+          ]
+        },
+        "High": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "-Myclobutanil",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Broad-spectrum fungicide for severe outbreaks"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Penconazole",
+              "application_method": "Soil and foliar application",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Effective against systemic fungal infections"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Fenhexamid",
+              "application_method": "Targeted foliar application",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Specifically targets yellow Sigatoka pathogens"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Insecticidal soap or oil",
+              "application_method": "Spray application on affected areas",
+              "dosage": "Follow label instructions for dilution",
+              "target_prevention": "Controls sap-sucking insects that can exacerbate the disease"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Deleafing infected leaves",
+              "application_method": "Manual removal and disposal",
+              "dosage": "N/A",
+              "target_prevention": "Reduces disease inoculum levels in the field"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Corn Smut",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Plant resistant corn varieties",
+              "application_method": "Seed selection",
+              "dosage": "N/A",
+              "target_prevention": "Choose varieties like Ambrosia, Apache Gold, and Cup that exhibit resistance to corn smut"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Balanced nitrogen fertilization",
+              "application_method": "Soil amendment",
+              "dosage": "Based on soil test recommendations",
+              "target_prevention": "Avoid high nitrogen levels which can increase susceptibility"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Deep-plowing of corn stalks",
+              "application_method": "Soil management practice",
+              "dosage": "N/A",
+              "target_prevention": "Reduces inoculum by burying infected tissue"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Remove and destroy infected plants",
+              "application_method": "Manual removal",
+              "dosage": "N/A",
+              "target_prevention": "Cut out smut galls before they burst to prevent spore spread"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "-Fungicide application (if necessary)",
+              "application_method": ".Foliar spray",
+              "dosage": "Follow label instructions",
+              "target_prevention": "May help in severe cases, but generally not effective against established infections"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "-Crop rotation",
+              "application_method": ".Field management practice",
+              "dosage": "N/A",
+              "target_prevention": "Rotate corn with non-host crops to reduce disease pressure"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "-Avoid mechanical injury to plants",
+              "application_method": ".Cultural practice",
+              "dosage": "N/A",
+              "target_prevention": "Reduce entry points for the fungus by careful cultivation"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "-Insect control measures",
+              "application_method": ".Pesticide application",
+              "dosage": "Follow label instructions",
+              "target_prevention": "Prevent damage from pests that can create wounds for infection"
+            }
+          ]
+        },
+        "High": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "-Remove and burn infected plant debris",
+              "application_method": "Field sanitation",
+              "dosage": "N/A",
+              "target_prevention": "Eliminate overwintering spores and reduce future infections"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Fungicide seed treatment (optional)",
+              "application_method": "Seed treatment before planting",
+              "dosage": "Follow label instructions",
+              "target_prevention": "May provide some level of protection during early growth"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Monitor environmental conditions",
+              "application_method": "Field observation",
+              "dosage": "N/A",
+              "target_prevention": "Identify conditions that favor disease development, such as high humidity and drought stress"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Regular field scouting for symptoms",
+              "application_method": "Visual inspection",
+              "dosage": "N/A",
+              "target_prevention": "Early detection of symptoms allows for timely management actions"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Coordinate control efforts with neighbors",
+              "application_method": "Community engagement",
+              "dosage": "N/A",
+              "target_prevention": "Collective action can significantly reduce disease spread in the area"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Educate on proper disposal methods for infected plants",
+              "application_method": "Community workshops or materials",
+              "dosage": "N/A",
+              "target_prevention": "Prevent spore spread by ensuring proper disposal practices are followed"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Downy Mildew",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Neem oil",
+              "application_method": "Foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Reduces pest populations that may carry the disease"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Soapy water solution",
+              "application_method": "Damp cloth or sponge application",
+              "dosage": "1 tablespoon of liquid detergent per gallon of water",
+              "target_prevention": "Wipe off initial contamination from tools and surfaces"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Bordeaux mixture",
+              "application_method": "Spray application",
+              "dosage": "1% solution",
+              "target_prevention": "Initial protection against fungal infections"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "-Fosetyl-Aluminum (Aliette)",
+              "application_method": ".Systemic foliar application",
+              "dosage": "2 g per liter of water",
+              "target_prevention": "Enhances plant resistance to diseases"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "-Copper fungicides",
+              "application_method": ".Foliar spray",
+              "dosage": "Follow label instructions",
+              "target_prevention": "Provides protective barrier against downy mildew"
+            },
+            {
+              "day": 6,
+              "chemical_treatment": "-Azoxystrobin + Difenoconazole (Amistar Top)",
+              "application_method": "Foliar spray",
+              "dosage": "1 ml per liter of water",
+              "target_prevention": "Broad-spectrum control against downy mildew"
+            },
+            {
+              "day": 8,
+              "chemical_treatment": "-Mancozeb",
+              "application_method": "Foliar spray",
+              "dosage": "2 g per liter of water",
+              "target_prevention": "Controls primary source of downy mildew from infected plants"
+            },
+            {
+              "day": 10,
+              "chemical_treatment": "-Drip irrigation system",
+              "application_method": "Irrigation setup",
+              "dosage": "N/A",
+              "target_prevention": "Keeps foliage dry to reduce humidity and disease spread"
+            }
+          ]
+        },
+        "High": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "-Remove and destroy infected plants",
+              "application_method": "Manual removal",
+              "dosage": "N/A",
+              "target_prevention": "Eliminates sources of infection and prevents spread"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Regular scouting for symptoms",
+              "application_method": "Visual inspection",
+              "dosage": "N/A",
+              "target_prevention": "Early detection allows for timely management actions"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Fungicide application (if necessary)",
+              "application_method": "Foliar spray",
+              "dosage": "Follow label instructions",
+              "target_prevention": "May help in severe cases, but generally not effective against established infections"
+            },
+            {
+              "day": 7,
+              "chemical_treatment": "Improve air circulation around plants",
+              "application_method": "Pruning and staking plants",
+              "dosage": "N/A",
+              "target_prevention": "Reduces humidity and creates unfavorable conditions for the pathogen"
+            },
+            {
+              "day": 9,
+              "chemical_treatment": "Quarantine new plants before introduction",
+              "application_method": "Isolation period in a separate area",
+              "dosage": "14 days recommended",
+              "target_prevention": "Prevents introduction of infected plants into the garden"
+            },
+            {
+              "day": 11,
+              "chemical_treatment": "Maintain garden hygiene by removing debris",
+              "application_method": "Cleanup after harvest or season end",
+              "dosage": "N/A",
+              "target_prevention": "Prevents overwintering of spores and reduces future infections"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "disease_name": "Tomato Mosaic Virus",
+      "prevention_plan": {
+        "Low": {
+          "severity_level": "Low",
+          "measures": [
+            {
+              "day": 1,
+              "chemical_treatment": "Neem oil solution",
+              "application_method": "Foliar spray",
+              "dosage": "5 ml per liter of water",
+              "target_prevention": "Natural insect repellent and mild antifungal"
+            },
+            {
+              "day": 3,
+              "chemical_treatment": "Copper-based fungicide",
+              "application_method": "Soil drench",
+              "dosage": "2 ml per liter of water",
+              "target_prevention": "Initial suppression of viral spread"
+            },
+            {
+              "day": 5,
+              "chemical_treatment": "Hydrogen peroxide solution",
+              "application_method": "Foliar spray",
+              "dosage": "1.5 ml per liter of water",
+              "target_prevention": "Surface disinfection and pathogen reduction"
+            }
+          ]
+        },
+        "Rising": {
+          "severity_level": "Rising",
+          "measures": [
+            {
+              "day": 2,
+              "chemical_treatment": "Chlorothalonil fungicide",
+              "application_method": "Preventive foliar spray",
+              "dosage": "2.5 ml per liter of water",
+              "target_prevention": "Broad-spectrum control against fungal pathogens"
+            },
+            {
+              "day": 4,
+              "chemical_treatment": "Potassium phosphite",
+              "application_method": "Soil and foliar application",
+              "dosage": "$4 ml per liter of water$",
+              "target_prevention":"Enhances plant defense mechanisms"
+            },
+            {
+              "day":"6", 
+               "chemical_treatment":"Fosetyl-Al fungicide", 
+               "application_method":"Soil drench", 
+               "dosage":"3 ml per liter of water", 
+               "target_prevention":"Systemic protection against root pathogens"
+             },
+             {
+               "day":"8", 
+               "chemical_treatment":"Sodium hypochlorite solution", 
+               "application_method":"Seed treatment", 
+               "dosage":"1% solution for 10 minutes", 
+               "target_prevention":"Surface sterilization of seeds"
+             },
+             {
+               "day":"10", 
+               "chemical_treatment":"Myclobutanil fungicide", 
+               "application_method":"Foliar application", 
+               "dosage":"4 ml per liter of water", 
+               "target_prevention":"Eradicates established viral infections"
+             }
+          ]
+        },
+        "Alert": {
+          "severity_level": "Alert",
+          "measures": [
+            {
+              "day":"1", 
+               "chemical_treatment":"Daconil fungicide", 
+               "application_method":"Intensive foliar spray", 
+               "dosage":"5 ml per liter of water", 
+               "target_prevention":"Comprehensive control against viral diseases"
+             },
+             {
+               "day":"3", 
+               "chemical_treatment":"Azoxystrobin fungicide", 
+               "application_method":"Preventive application", 
+               "dosage":"4.5 ml per liter of water", 
+               "target_prevention":"Systemic protection against multiple pathogens"
+             },
+             {
+               "day":"5", 
+               "chemical_treatment":"Chlorine dioxide solution", 
+               "application_method":"Surface treatment and soil drench", 
+               "dosage":"5 ml per liter of water", 
+               "target_prevention":"Aggressive pathogen elimination"
+             },
+             {
+               "day":"7", 
+               "chemical_treatment":"Copper sulfate solution", 
+               "application_method":"Intensive foliar spray", 
+               "dosage":"6 ml per liter of water", 
+               "target_prevention":"Comprehensive fungal growth suppression"
+             },
+             {
+               "day":"9", 
+               "chemical_treatment":"Fungicidal soap solution", 
+               "application_method":"Foliar spray and soil drench", 
+               "dosage":"6 ml per liter of water", 
+               "target_prevention":"Effective against surface pathogens and spores"
+             },
+             {
+               "day":"11", 
+               "chemical_treatment":"Multi-mineral plant protectant", 
+               "application_method":"Comprehensive soil and foliar application", 
+               "dosage":"5 ml per liter of water", 
+               "target_prevention":"Boosts overall plant immunity"
+             },
+             {
+               "day":"13", 
+               "chemical_treatment":"Biological control agents (e.g., Trichoderma spp.)", 
+               "application_method":"Soil application", 
+               "dosage":"10 grams per liter of water", 
+               "target_prevention":"Enhances beneficial microbial activity in soil"
+             }
+           ]
+         }
+       }
+    }
+  ]
+  

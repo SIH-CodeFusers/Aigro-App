@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <title>sugarcane</title>
+  <g id="sugarcane-layer" data-name="Layer 1">
+    <rect x="10" y="2" width="4" height="20" style="fill: #a1d76a" />
+    <rect x="10.5" y="2.5" width="3" height="19" style="fill: #7cbf48" />
+    <path d="M12,5h5c-1.5,3-1.5,6-3,7" style="fill: none; stroke: #4c9c1d; stroke-width: 0.8" />
+    <path d="M12,10h-5c1.5,3,1.5,6,3,7" style="fill: none; stroke: #4c9c1d; stroke-width: 0.8" />
+    <circle cx="12" cy="22" r="1" style="fill: #4c9c1d" />
+  </g>
+</svg>

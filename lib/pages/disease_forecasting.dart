@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:aigro/local_db/db.dart';
 import 'package:aigro/pages/crop_details.dart';
+import 'package:aigro/pages/forecast_management.dart';
 import 'package:aigro/secret.dart';
 import 'package:aigro/utils/translate.dart';
 import 'package:aigro/widgets/voice_icon.dart';
@@ -277,7 +278,7 @@ class _DiseaseForecastingState extends State<DiseaseForecasting> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CropDetails(disease: selectedDisease),
+                                  builder: (context) => ForecastManagement(diseaseName: selectedDisease['diseaseName']?.trim(), count : dis['count']),
                                 ),
                               );
                             } else {

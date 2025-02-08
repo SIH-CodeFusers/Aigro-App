@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <title>cotton</title>
+  <g id="cotton-layer" data-name="Layer 1">
+    <circle cx="8" cy="12" r="3.5" style="fill: #ffffff; stroke: #cccccc; stroke-width: 0.5" />
+    <circle cx="16" cy="12" r="3.5" style="fill: #ffffff; stroke: #cccccc; stroke-width: 0.5" />
+    <circle cx="12" cy="8" r="4" style="fill: #ffffff; stroke: #cccccc; stroke-width: 0.5" />
+    <path d="M12,15a4,4,0,0,1,4-4h0" style="fill: none; stroke: #a08060; stroke-width: 1" />
+    <path d="M12,15a4,4,0,0,0-4-4h0" style="fill: none; stroke: #a08060; stroke-width: 1" />
+    <rect x="11.5" y="15" width="1" height="7" style="fill: #a08060" />
+  </g>
+</svg>

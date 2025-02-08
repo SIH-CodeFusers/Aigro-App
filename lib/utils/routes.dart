@@ -20,4 +20,5 @@ class Myroutes{
   static String schemesRoute = "/schemes";
   static String disManRoute = "/disMan";
   static String grpHomeRoute = "/grpHomeRoute";
+  static String forecastManagement = "/forecastmanagement";
 }

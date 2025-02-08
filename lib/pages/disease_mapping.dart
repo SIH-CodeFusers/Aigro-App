@@ -7,6 +7,7 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -23,6 +24,11 @@ class DiseaseMapping extends StatefulWidget {
 }
 
 class _DiseaseMappingState extends State<DiseaseMapping> {
+
+  String capitalize(String input) {
+    if (input.isEmpty) return input; // Handle empty strings
+    return input[0].toUpperCase() + input.substring(1).toLowerCase();
+  }
 
    Map<String, Object> data = {
     "success": true,
@@ -129,8 +135,8 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
   List<Marker> nearbyMarkers = []; 
   List<Marker> shopMarkers = [];
 
-  late double lat=22.6420903;
-  late double long=88.7436287;
+  double lat = 51.50; 
+  double lon = 0.12;
   bool isLoading = true;
 
   final infobox = Hive.box("BasicInfo-db");
@@ -181,8 +187,9 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
     else{
       ldb.loadLang();
     }
-    getLatLongFromPincode(bdb.userPin);
-    getNearbyAlerts(bdb.userPin);
+    getLatLong(bdb.userPin).then((_) {
+      getNearbyAlerts(bdb.userPin);
+    });
     addShopMarkers();
   }
 
@@ -205,7 +212,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
       body: jsonEncode({
         "pincode": pincode,
         "lat": lat, 
-        "long": long, 
+        "long": lon, 
         "range": "100"
       }),
     );
@@ -224,52 +231,84 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
         String diseaseName = '';
         String diseaseLevel = '';
         
-        if (alert['diseaseDetails'] != null && alert['diseaseDetails'].isNotEmpty) {
-          diseaseName = alert['diseaseDetails'][0]['diseaseName'] ?? 'Unknown Disease';
-          diseaseLevel = alert['diseaseDetails'][0]['alertLevel'] ?? 'Unknown Level';
+        if (alert != null && alert.isNotEmpty) {
+          diseaseName = alert['diseaseName'] ?? 'Unknown Disease';
+          diseaseLevel = alert['alertLevel'] ?? 'Unknown Level';
         }
 
         fetchedMarkers.add(
           Marker(
+            height: 105,
+            width: 105,
             point: LatLng(alertLat, alertLong),
-            width: 80,
-            height: 80,
-            child: Container(
-              decoration: BoxDecoration(
-                color: context.theme.hintColor,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    cropName,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12,
+            child: SizedBox(
+              width: 100, 
+              height: 100,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: context.theme.highlightColor,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      spreadRadius: 2,
+                      offset: Offset(2, 4),
                     ),
-                  ),
-                  if (diseaseName.isNotEmpty)
-                    Text(
-                      diseaseName,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                      ),
+                  ],
+                ),
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      "assets/images/${cropName.toLowerCase()}.svg",
+                      width: 30,
+                      height: 30,
                     ),
-                  Text(
-                    'Level: $diseaseLevel',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
+                    Row(
+                      children: [
+                        // Text Content
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                cropName,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 10,
+                                ),
+                              ),
+                              if (diseaseName.isNotEmpty)
+                                Text(
+                                  diseaseName,
+                                  style: const TextStyle(
+                                    color: Color.fromARGB(255, 255, 0, 0),
+                                    fontSize: 8,
+                                  ),
+                                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                                ),
+                              Text(
+                                'Level: Low',
+                                style: const TextStyle(
+                                  color: Color.fromARGB(255, 9, 9, 9),
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
+          )
         );
       }
       setState(() {
@@ -432,7 +471,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
   }
 
 
-  Future<void> getLatLongFromPincode(String pincode) async {
+  Future<void> getLatLong(String pincode) async {
     final String apiUrl =
         'http://api.openweathermap.org/geo/1.0/zip?zip=$pincode,IN&appid=$OPEN_WEATHER_API_KEY';
     
@@ -446,9 +485,9 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
 
         setState(() {
           lat = newLat;
-          long = newLong;
+          lon = newLong;
           customMarker = Marker(
-            point: LatLng(lat, long),
+            point: LatLng(lat, lon),
             width: 60,
             height: 60,
             child: Container(
@@ -499,7 +538,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
           FlutterMap(
             mapController: _mapController,
             options: MapOptions(
-              initialCenter: LatLng(lat, long),
+              initialCenter: LatLng(lat, lon),
               initialZoom: 11.0,
             ),
             children: [
@@ -522,7 +561,7 @@ class _DiseaseMappingState extends State<DiseaseMapping> {
             right: 10,
             child: GestureDetector(
               onTap: (){
-                moveToNearestShop(data, lat, long, _mapController);
+                moveToNearestShop(data, lat, lon, _mapController);
               },
               child: Container(
                 width: double.infinity,

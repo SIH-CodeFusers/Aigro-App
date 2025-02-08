@@ -524,8 +524,13 @@ class _ImageAnalysisState extends State<ImageAnalysis> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      diseaseName!="Invalid Image"?
                       Expanded(
                         child: translateHelperOverflow("$diseaseName in $cropName", const TextStyle(fontSize: 18), ldb.language,maxLines: 1)
+                      )
+                      :
+                      Expanded(
+                        child: translateHelperOverflow("$diseaseName", const TextStyle(fontSize: 18), ldb.language,maxLines: 1)
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),

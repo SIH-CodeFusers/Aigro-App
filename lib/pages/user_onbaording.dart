@@ -76,7 +76,7 @@ class _UserOnboardingState extends State<UserOnboarding> {
   };
 
   List<String> crops = [
-    "Tomato", "Corn", "Rice", "Mango", "Apple", "Tea", "Banana","Cotton","Sugarcane","Jute"
+    "Tomato", "Mango", "Apple", "Banana","Sugarcane",
   ];
 
   List<String> selectedCrops = [];

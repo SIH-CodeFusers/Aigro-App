@@ -124,20 +124,20 @@ class _HomePageState extends State<HomePage> {
       'route': Myroutes.diseaseForecastRoute,
       'voice':'In disease forecasting, you will get alerts about current diseases that are spreading your area.'
     },
-        {
+    {
       'color': const Color.fromRGBO(255, 204, 187,1),
       'text': 'Government Schemes',
       'image': 'assets/images/gv.png',
       'route': Myroutes.schemesRoute,
       'voice':'Get live updates about different government schemes that are currently available and take the complete benefits.'
     },
-    {
-      'color': const Color.fromRGBO(232, 213, 207,1),
-      'text': 'Offline Model',
-      'image': 'assets/images/offline.png',
-      'route': Myroutes.offlineDetectionRoute,
-      'voice':'No Internet ? No worry. You can still use our offline model to detect diseases on the go.'
-    },
+    // {
+    //   'color': const Color.fromRGBO(232, 213, 207,1),
+    //   'text': 'Offline Model',
+    //   'image': 'assets/images/offline.png',
+    //   'route': Myroutes.offlineDetectionRoute,
+    //   'voice':'No Internet ? No worry. You can still use our offline model to detect diseases on the go.'
+    // },
     {
       'color': const Color.fromRGBO(201, 223, 221,1),
       'text': 'Disease Mapping',
